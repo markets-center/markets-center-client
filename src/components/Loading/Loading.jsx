@@ -1,6 +1,6 @@
-import image from './Error2.gif'
+import image from './Loading.gif'
 
-export default function Error(){
+export default function Loading(){
     return (
         <div>
             <img src={image} alt="Error"/>

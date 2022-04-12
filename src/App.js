@@ -6,11 +6,13 @@ import Home from '../src/pages/Home/Home'
 import Carrito from '../src/pages/Carrito/Carrito'
 import Register from '../src/pages/Register/Register'
 import Error from '../src/components/Error/Error'
+import NavBar from '../src/components/NavBar/NavBar'
 import Footer from '../src/components/Footer/Footer'
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/Carrito" element={<Carrito />} />
