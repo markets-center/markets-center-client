@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-export default function CardProduct(/*nombre, precio, delivery, */){ //deberia recibir props para renderizar segun los productos
-    const [hover,setHover] = useState(false);
+import Typography from '@mui/material/Typography';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { IconButton } from "@mui/material";
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import s from './Card.module.css'
+
+
+export default function CardProduct(name, price,image, description){ //deberia recibir props para renderizar segun los productos
+   
+    const [hover,setHover] = useState(false); 
 
     function moreInfo(e){
         setHover(true)
@@ -10,27 +18,34 @@ export default function CardProduct(/*nombre, precio, delivery, */){ //deberia r
     }
     function addToCart(){
         //funcion que agrega el producto al carrito
+        console.log('agregado')
     }
     return (
-        <div onMouseEnter={moreInfo} onMouseLeave={lessInfo}>
-            <div>
-                <img src="https://ferreira.vteximg.com.br/arquivos/ids/226134-588-588/to_21871.jpg?v=636615531533330000" width="200px" alt="producto"/>
+        <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
+            <div className={s.img}>
+                <img src={image} width="200px" alt="producto"/>
             </div>
-            <div> Nombre </div>
-            <div> Precio </div>
-            <div>
-                <button onClick={addToCart}>
-                    <img src="" alt="carrito"/> {/* boton que agrega el producto al carrito */}
-                </button> 
+            <div className={s.infoContainer}>
+                <Typography variant="h6" >
+                   {name}
+                </Typography>
+                <div className={s.priceAndButton}>
+                    <Typography variant="subtitle1" className={s.price}>
+                        {price}
+                    </Typography>  
+                    <div className={s.icons}> 
+                        <IconButton color="primary" size="small" onClick={addToCart} > 
+                            <AddShoppingCartIcon fontSize="medium" variant="contained"/>
+                        </IconButton>
+                        <IconButton  color="info" size="small"> 
+                            <DeliveryDiningIcon fontSize="medum"/>
+                        </IconButton>
+                    </div>
+                </div>
+                {hover?<div> 
+                    <Typography variant="body2" className={s.description}>{description} </Typography>
+                    </div>:""}
             </div>
-            <div>
-                <img src="" alt="delivery" />
-            </div>
-            {hover?<div>
-                <div> Vendedor </div>
-                <div> Descripcion del producto </div>
-                <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Error laudantium corporis qui sapiente ipsam quam sequi tempore temporibus. Repellendus, beatae dolorum ex unde sed eius mollitia repellat quisquam aliquam numquam! </div>
-                 </div>:""}
         </div>
         
 
