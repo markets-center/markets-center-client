@@ -27,7 +27,7 @@ export default function Footer() {
         <Container maxWidth="xs">
           <Typography variant="body2" color="text.secondary">
             {"Copyright © "}
-            <Link color="inherit" href="/home">
+            <Link color="inherit" href="/">
               Markets Center
             </Link>
             {" "}
