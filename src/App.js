@@ -6,6 +6,7 @@ import Home from '../src/pages/Home/Home'
 import Carrito from '../src/pages/Carrito/Carrito'
 import Register from '../src/pages/Register/Register'
 import Error from '../src/components/Error/Error'
+import Footer from '../src/components/Footer/Footer'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/*" element={<Error />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
