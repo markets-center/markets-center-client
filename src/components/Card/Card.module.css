@@ -1,0 +1,49 @@
+.container{
+    border: 1px solid #d8d8d8;
+    max-width: 250px;
+    border-radius: 5px;
+    padding: 5px;
+    transition: .2s;
+}
+.container:hover {
+    
+    cursor: hand;
+    cursor: pointer;
+    transform: scale(1.005); 
+    box-shadow: 0px 10px 10px -6px rgb(83, 83, 83);
+  }
+.img{
+    margin: 10px 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.priceAndButton{
+    min-width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+.price{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.icons{
+    display: flex;
+    align-items: center;
+    padding-right: 4px;
+
+}
+.priceAndButton div {
+    display: flex;
+    align-items: flex-end;
+}
+.description{
+    padding-left: 10px;
+    padding-right: 3px;
+}
