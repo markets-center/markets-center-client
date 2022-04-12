@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import s from './Card.module.css'
 export default function CardProduct(/*nombre, precio, delivery, */){ //deberia recibir props para renderizar segun los productos
     const [hover,setHover] = useState(false);
 
@@ -9,15 +8,20 @@ export default function CardProduct(/*nombre, precio, delivery, */){ //deberia r
     function lessInfo(e){
         setHover(false)
     }
+    function addToCart(){
+        //funcion que agrega el producto al carrito
+    }
     return (
-        <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
+        <div onMouseEnter={moreInfo} onMouseLeave={lessInfo}>
             <div>
                 <img src="https://ferreira.vteximg.com.br/arquivos/ids/226134-588-588/to_21871.jpg?v=636615531533330000" width="200px" alt="producto"/>
             </div>
             <div> Nombre </div>
             <div> Precio </div>
             <div>
-                <img src="" alt="carrito"/>
+                <button onClick={addToCart}>
+                    <img src="" alt="carrito"/> {/* boton que agrega el producto al carrito */}
+                </button> 
             </div>
             <div>
                 <img src="" alt="delivery" />
