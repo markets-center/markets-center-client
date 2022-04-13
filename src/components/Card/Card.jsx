@@ -23,7 +23,7 @@ const style = {
 };
 
 
-export default function CardProduct(name, price,image, description, stock,){ //deberia recibir props para renderizar segun los productos
+export default function Card(name, price,image, description, stock,){ //deberia recibir props para renderizar segun los productos
    
     const [hover,setHover] = useState(false); 
     const [open, setOpen] = useState(false);
