@@ -6,7 +6,7 @@ export default function Carrito(){
 
     return (
         <div>
-            <NavBar />
+            <NavBar searchBar1={false}/>
         </div>
     )
 }
