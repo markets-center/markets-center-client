@@ -9,7 +9,7 @@ export default function Footer() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
+        minHeight: "10vh",
       }}
     >
       <Box
@@ -17,7 +17,7 @@ export default function Footer() {
         sx={{
           py: 3,
           px: 3,
-          mt: "auto",
+          mt: 0,
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[200]
@@ -27,7 +27,7 @@ export default function Footer() {
         <Container maxWidth="xs">
           <Typography variant="body2" color="text.secondary">
             {"Copyright © "}
-            <Link color="inherit" href="/">
+            <Link color="inherit" href="/home">
               Markets Center
             </Link>
             {" "}
