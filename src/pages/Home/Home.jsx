@@ -7,6 +7,7 @@ export default function Home (){
     return (
         <div>
             <NavBar searchBar1={true}/>
+            <div>divv</div>
         </div>
     )
 }
