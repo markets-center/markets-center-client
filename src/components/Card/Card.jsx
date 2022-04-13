@@ -43,15 +43,15 @@ export default function CardProduct(name, price,image, description, stock,){ //d
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div className={s.img}>
-                <img src="https://ferreira.vteximg.com.br/arquivos/ids/226134-588-588/to_21871.jpg?v=636615531533330000" width="200px" alt="producto"/>
+                <img src={image} width="200px" alt="producto"/>
             </div>
             <div className={s.infoContainer}>
                 <Typography variant="h6" >
-                   Zapatilla topper
+                   {name}
                 </Typography>
                 <div className={s.priceAndButton}>
                     <Typography variant="subtitle1" className={s.price}>
-                        1000
+                        ${price}
                     </Typography>  
                     <div className={s.icons}> 
                         <IconButton color="primary" size="small" onClick={addToCart} > 
@@ -64,9 +64,9 @@ export default function CardProduct(name, price,image, description, stock,){ //d
                 </div>
                 {hover?<div> 
                             <div>
-                            <Typography variant="body2" className={s.description}>Stock: 3 </Typography>
+                            <Typography variant="body2" className={s.description}>Stock: {stock}ud. </Typography>
                             </div>
-                            <Typography variant="body2" className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. </Typography>
+                            <Typography variant="body2" className={s.description}>{description}</Typography>
                             <div className={s.masinfo}>
                                 <Button  variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
                             </div>
