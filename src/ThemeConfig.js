@@ -9,6 +9,9 @@ export const theme = createTheme({
         secondary: {
           main: '#E2001A',
         },
+        white:{
+          main: '#F8F9FA'
+        },
         background: {
           default: '#F8F9FA',
         },
