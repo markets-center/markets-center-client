@@ -8,6 +8,7 @@ import Register from '../src/pages/Register/Register'
 import Error from '../src/components/Error/Error'
 import NavBar from '../src/components/NavBar/NavBar'
 import Footer from '../src/components/Footer/Footer'
+import Vendedor from '../src/pages/Vendedor/Vendedor'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/Carrito" element={<Carrito />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/Profile" element={<Vendedor />} />
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer/>
