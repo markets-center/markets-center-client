@@ -1,6 +1,7 @@
 .container{
     border: 1px solid #d8d8d8;
     max-width: 250px;
+    width: 250px;
     border-radius: 5px;
     padding: 5px;
     transition: .2s;
