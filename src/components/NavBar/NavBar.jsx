@@ -23,7 +23,7 @@ export default function NavBar(){
                     <IconButton cursor="pointer" onClick={() => navigate('/')}>
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
-
+                    
                     <SearchBar />
 
                 <Stack direction="row">
