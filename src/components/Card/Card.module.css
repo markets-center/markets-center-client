@@ -1,6 +1,7 @@
 .container{
     border: 1px solid #d8d8d8;
     max-width: 250px;
+    width: 250px;
     border-radius: 5px;
     padding: 5px;
     transition: .2s;
@@ -46,5 +47,8 @@
 .description{
     padding-left: 10px;
     padding-right: 3px;
+    padding-bottom: 10px;
+}
+.masinfo{
     padding-left: 10px;
 }
