@@ -12,7 +12,7 @@ import {ShoppingCart, AccountCircle } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom'
 
 
-export default function NavBar(){
+export default function NavBar({searchBar1}){
     const navigate = useNavigate()
 
     return (
@@ -23,8 +23,10 @@ export default function NavBar(){
                     <IconButton cursor="pointer" onClick={() => navigate('/')}>
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
-
-                    <SearchBar />
+                    {
+                        searchBar1 &&
+                        <SearchBar />
+                    }
 
                 <Stack direction="row">
                     <IconButton

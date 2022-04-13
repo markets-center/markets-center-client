@@ -1,7 +1,12 @@
+import React from 'react';
+import NavBar from '../../components/NavBar/NavBar.jsx'
+import SearchBar from '../../components/NavBar/SearchBar.jsx'
+
+
 export default function Home (){
     return (
         <div>
-            <h1>Hola</h1>
+            <NavBar searchBar1={true}/>
         </div>
     )
 }
