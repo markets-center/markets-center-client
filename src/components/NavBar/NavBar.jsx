@@ -27,7 +27,7 @@ export default function NavBar(){
                 <Stack direction="row">
                     <IconButton
                         variant="contained"
-                        color="secondary"
+                        color="white"
                         to="/usuer"
                     >
                         <AccountCircle fontSize="large"/>
@@ -35,7 +35,7 @@ export default function NavBar(){
 
                     <IconButton
                         variant="contained"
-                        color="secondary"
+                        color="white"
                         to="/usuer"
                     >
                         <ShoppingCart fontSize="large"/>
