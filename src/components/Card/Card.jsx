@@ -23,7 +23,7 @@ const style = {
 };
 
 
-export default function Card(name, price,image, description, stock,){ //deberia recibir props para renderizar segun los productos
+export default function Card({name, price,image, description, stock}){ //deberia recibir props para renderizar segun los productos
    
     const [hover,setHover] = useState(false); 
     const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function Card(name, price,image, description, stock,){ //deberia 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div className={s.img}>
-                <img src={image} width="200px" alt="producto"/>
+                <img src={image} width="200px" height="200px" alt="producto"/>
             </div>
             <div className={s.infoContainer}>
                 <Typography variant="h6" >
@@ -58,7 +58,7 @@ export default function Card(name, price,image, description, stock,){ //deberia 
                             <AddShoppingCartIcon fontSize="medium" variant="contained"/>
                         </IconButton>
                         <IconButton  color="info" size="small"> 
-                            <DeliveryDiningIcon fontSize="medum"/>
+                            <DeliveryDiningIcon fontSize="medium"/>
                         </IconButton>
                     </div>
                 </div>

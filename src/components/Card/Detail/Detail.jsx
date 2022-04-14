@@ -5,7 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import s from './Detail.module.css'
 
-export default function Detail(name, price,image, description, stock) {
+export default function Detail({name, price,image, description, stock}) {
     function addToCart(){
         //funcion que agrega el producto al carrito
         console.log('agregado')
