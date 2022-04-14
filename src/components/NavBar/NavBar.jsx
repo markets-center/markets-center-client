@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
 import Logo from '../../images/MC-Full.png'
+//
+import Filters from '../Filters/Filters.jsx';
+//
 
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import { IconButton, Stack } from '@mui/material/'
-import {ShoppingCart, AccountCircle } from '@mui/icons-material';
+import {ShoppingCart, AccountCircle, } from '@mui/icons-material';
 
 import { useNavigate } from 'react-router-dom'
 
@@ -16,7 +19,7 @@ export default function NavBar({searchBar1}){
     const navigate = useNavigate()
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" >
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
 
@@ -47,6 +50,9 @@ export default function NavBar({searchBar1}){
                 </Stack>
                 </Toolbar>
             </Container>
+            
+            <Filters />
+            
         </AppBar>
     )
 }
