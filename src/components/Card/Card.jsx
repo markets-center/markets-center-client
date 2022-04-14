@@ -58,13 +58,13 @@ export default function Card({name, price,image, description, stock}){ //deberia
                             <AddShoppingCartIcon fontSize="medium" variant="contained"/>
                         </IconButton>
                         <IconButton  color="info" size="small"> 
-                            <DeliveryDiningIcon fontSize="medium"/>
+                            <DeliveryDiningIcon fontSize=""/>
                         </IconButton>
                     </div>
                 </div>
-                {hover?<div> 
+                {hover?<div className={s.hoverInfo}> 
                             <div>
-                            <Typography variant="body2" className={s.description}>Stock: {stock}ud. </Typography>
+                            {<Typography variant="body2" className={s.description}>Stock: {stock}ud. </Typography>}
                             </div>
                             <Typography variant="body2" className={s.description}>{description}</Typography>
                             <div className={s.masinfo}>
