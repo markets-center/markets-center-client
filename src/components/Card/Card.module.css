@@ -1,7 +1,7 @@
 .container{
     border: 1px solid #d8d8d8;
     max-width: 250px;
-    width: 200px;
+     width: 200px;
     border-radius: 5px;
     padding: 5px;
     transition: .4s;
@@ -28,7 +28,7 @@
 
 }
 .priceAndButton{
-    min-width: 200px;
+     min-width: 200px;
     display: flex;
     justify-content: space-between;
 }
@@ -48,7 +48,7 @@
     align-items: flex-end;
 }
 .description{
-    max-width: 200px;
+     max-width: 200px;
     padding-left: 12px;
     padding-right: 3px;
     padding-bottom: 10px;
@@ -56,5 +56,5 @@
 }
 .masinfo{
     padding-left: 10px;
-    min-width: 200px;
+     min-width: 200px;
 }
