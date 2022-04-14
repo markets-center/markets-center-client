@@ -13,7 +13,7 @@ export default function Detail({name, price,image, description, stock}) {
     return (
         <div className={s.container}>
             <div className={s.image}>
-                <img src={image} width="400px" alt="producto"/>
+                <img src={image} width="400px" height='400px' alt="producto"/>
             </div>
             <div className={s.info}>
                 <Typography variant="h5" className={s.name}>{name}<DeliveryDiningIcon fontSize="medium" color="info" className={s.delivery}/></Typography>
@@ -22,10 +22,13 @@ export default function Detail({name, price,image, description, stock}) {
                 <div className={s.description}>
                     <Typography variant="" >{description}</Typography>
                 </div>
-                <div className={s.buttons}>
+                {/* <div className={s.buttons}>
+                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={addToCart}> agregar</Button>
+                </div> */}
+            </div>
+            <div className={s.buttons}>
                     <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={addToCart}> agregar</Button>
                 </div>
-            </div>
         </div>
     );
 }

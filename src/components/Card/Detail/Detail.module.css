@@ -5,7 +5,7 @@
 }
 .image{
     border-right: 1px solid rgb(212, 212, 212);
-
+    max-height: 400px;  
 }
 .info{
     margin-left: 10px;
@@ -14,8 +14,8 @@
 }
 .name{
     display: flex;
-    align-items: flex-end;
-
+    display: flex;
+    align-items: center;
 }
 .price{
     margin-top: 15px;
@@ -28,16 +28,19 @@
 }
 .description{
     padding: 10px 0px 0px 5px;
+    word-wrap: break-word;
 }
 .buttons{
-
-    min-height: 150px;
+    position: absolute;
     display: flex;
     justify-content: end;
     align-items:flex-end;
+    margin-left: 680px;
+    margin-top: 370px;
+
 }
 
 .delivery{
-
+    margin-top: 2px;
     margin-left: 10px;
 }
