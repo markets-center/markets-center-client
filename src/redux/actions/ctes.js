@@ -1,0 +1,19 @@
+export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+export const GET_PROTUCT_BY_NAME = 'GET_PROTUCT_BY_NAME';
+export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
+
+export const GET_ALL_SELLERS = 'GET_ALL_SELLERS';
+export const POST_PRODUCT = 'POST_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
+
+export const ERRORS = 'ERRORS';
+export const MESSAGE = 'MESSAGE';
+
+export const ADMIN_UPDATE_ADD_CATEGORY  = 'ADMIN_UPDATE_CATEGORY';
+
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const UPDATE_USER = 'POST_UPDATE_USER';
+
+export const POST_ORDER = 'POST_ORDER'
