@@ -1,0 +1,50 @@
+import axios from "axios";
+import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID } from "./ctes";
+
+
+export function getAllProducts(){
+    return function async (dispatch) {
+        try {
+            const products = await axios.get('http://localhost:5000/api/public/products');
+            dispatch({type: MESSAGE, payload: products.msg})
+            dispatch({type: GET_ALL_PRODUCTS, payload: products.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload:err.msg})
+        }
+    }
+}
+
+export function getProductByName(name) {
+    return function async (dispatch) {
+        try {
+            const products = await axios.get(`http://localhost:5000/api/public/products&name=${name}`);
+            dispatch({type: MESSAGE, payload: products.msg});
+            dispatch({type: GET_PROTUCT_BY_NAME, payload: products.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function getProductById (id) {
+    return function async (dispatch) {
+        try {
+            const product = await axios.get(`http://localhost:5000/api/public/product/${id}`);
+            dispatch({type: MESSAGE, payload:product.msg});
+            dispatch({type: GET_PRODUCT_BY_ID, payload: product.data});
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg});
+        }
+    }
+}
+
+export function deleteProduct (id) {
+    return function async (dispatch) {
+        try {
+            const result = await axios.delete(`http://localhost:5000/api/public/product/${id}`);
+            dispatch({type: MESSAGE, payload: result.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
