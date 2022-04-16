@@ -3,7 +3,7 @@ import axios from 'axios';
 import {ERRORS, MESSAGE, UPDATE_USER} from './ctes';
 
 export function postNewUser (user) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const response = await axios.post(`http://localhost:5000/api/private/users/add`, user);
             dispatch({type: MESSAGE, payload:response.msg});
@@ -14,7 +14,7 @@ export function postNewUser (user) {
 }
 
 export function uptadeUser (user) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const newUser = await axios.put(`http://localhost:5000/api/private/users/update`);
             dispatch({type: MESSAGE, payload: newUser.msg});
