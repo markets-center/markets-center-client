@@ -3,7 +3,7 @@ import axios from 'axios';
 import {ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, ERRORS, MESSAGE} from './ctes'
 
 export function adminUpdateCategory (id, category) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const newCategory = await axios.put(`http://localhost:5000/api/admin/categories/${id}`, category);
             dispatch({type: MESSAGE, payload: newCategory.msg});
@@ -15,7 +15,7 @@ export function adminUpdateCategory (id, category) {
 }
 
 export function adminAddCategory (category) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const newCategory = await axios.post('http://localhost:5000/api/admin/category', category);
             dispatch({type: MESSAGE, payload: newCategory.msg})
@@ -27,7 +27,7 @@ export function adminAddCategory (category) {
 }
 
 export function adminDeleteCategory (id) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const response = await axios.delete(`http://localhost:5000/api/admin/categories/${id}`);
             dispatch({type: MESSAGE, payload: response.msg})
@@ -38,7 +38,7 @@ export function adminDeleteCategory (id) {
 }
 
 export function getAllUsers(){
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const users = await axios.get('http://localhost:5000/api/private/users');
             dispatch({type: MESSAGE, payload: users.msg})

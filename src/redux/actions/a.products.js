@@ -3,7 +3,7 @@ import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_
 
 
 export function getAllProducts(){
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const products = await axios.get('http://localhost:5000/api/public/products');
             dispatch({type: MESSAGE, payload: products.msg})
@@ -15,7 +15,7 @@ export function getAllProducts(){
 }
 
 export function getProductByName(name) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const products = await axios.get(`http://localhost:5000/api/public/products&name=${name}`);
             dispatch({type: MESSAGE, payload: products.msg});
@@ -27,7 +27,7 @@ export function getProductByName(name) {
 }
 
 export function getProductById (id) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const product = await axios.get(`http://localhost:5000/api/public/product/${id}`);
             dispatch({type: MESSAGE, payload:product.msg});
@@ -39,7 +39,7 @@ export function getProductById (id) {
 }
 
 export function deleteProduct (id) {
-    return function async (dispatch) {
+    return async function (dispatch) {
         try {
             const result = await axios.delete(`http://localhost:5000/api/public/product/${id}`);
             dispatch({type: MESSAGE, payload: result.msg})
