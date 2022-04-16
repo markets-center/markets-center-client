@@ -6,10 +6,10 @@ export function postOrder(order) {
     return async function (dispatch) {
         try {
             const newOrder = await axios.post('http://localhost:5000/api/private/addOrder', order);
-            dispatch({type: MESSAGE, payload: newOrder.msg});
-            dispatch({type: POST_ORDER, payload: newOrder.data})
+            dispatch({type: MESSAGE, payload: newOrder.data.msg});
+            dispatch({type: POST_ORDER, payload: newOrder.data.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
@@ -19,10 +19,10 @@ export function getOrderById (id) {
     return async function (dispatch){
         try {
             const newOrder = await axios.get(`http://localhost:5000/api/private/sendOrder/${id}`);
-            dispatch({type: MESSAGE, payload: newOrder.msg});
-            dispatch({type: POST_ORDER, payload: newOrder.data})
+            dispatch({type: MESSAGE, payload: newOrder.data.msg});
+            dispatch({type: POST_ORDER, payload: newOrder.data.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
