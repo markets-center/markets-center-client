@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from '@mui/material';
 import Carousel from 'react-elastic-carousel'
-import Card from '../../components/Card/Card.jsx';
+import Card from '../Card/Card.jsx';
 import './Slider.css'
 
 
