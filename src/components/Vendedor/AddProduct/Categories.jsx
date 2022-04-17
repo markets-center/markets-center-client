@@ -1,39 +1,82 @@
-import React, {useState, useEffect} from "react";
+import React, {useState } from "react";
 // import styles from "./AddProduct.module.css";
-import { getAllCategories } from '../../../redux/actions/a.category.js'
 import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 
-export default function Categories(props) {
-    const dispatch = useDispatch()
-    const [category, setCategory] = useState('');
+export default function Categories({ Validation, setError, error, setInput, input }) {
+    
     const categories = useSelector(state => state.allCategories)
+    const [selectedCat, setSelectedCat] = useState( [] );
+    let filtered = categories.filter( el => el._id === selectedCat.find( element =>  el._id === element ) )
 
-    useEffect(()=> {
-        dispatch(getAllCategories());
-    },[dispatch])
-    console.log(categories.data)
     function handleChange(event){
-        setCategory( event.target.value );
+        setInput({
+            ...input,
+            category: [...input.category, event.target.value]
+        })
+        setError(Validation({
+            ...input,
+            category: [...input.category, event.target.value]
+        }))
+        setSelectedCat(
+            [ ...selectedCat, event.target.value ]
+        )
     };
     
     return (
-        <FormControl style={{ minWidth: "200px", margin: "5px" }}>
-            <InputLabel id="demo-simple-select-helper-label">Categorias</InputLabel>
-                <Select
-                    id="categoySelect"
-                    value={category}
-                    label="Catgorias"
-                    onChange={handleChange}
-                >
-                    {
-                    categories.length > 0 && categories.data.map(element => {
-                        return (<MenuItem value={element.name}>{element.name}</MenuItem>)
-                    })
-                    };
-            </Select>
-        </FormControl>
+        <div>
+            <select onChange={ handleChange }>
+                {categories.map((cat) => {
+                    return (
+                    <option key={cat._id} label={cat.name} value={cat._id} />
+                    
+                )})}
+            </select>
+            <div>
+            {
+                filtered ? filtered.map( element => {
+                    return (
+                        <div key={element._id}>
+                            <h2>{element.name}</h2>
+                            <div id={element._id}>X</div>
+                        </div>
+                    )
+                }) : ""
+            }
+            </div>
+        </div>
     );
 }
+
+// return (
+//     <FormControl style={{ minWidth: "200px", margin: "5px" }} >
+//         <InputLabel id="demo-simple-select-helper-label">{input.category.length === 0 ? "Select a Category" : `${input.category.length} selected`}</InputLabel>
+//             <Select
+//                 error={error.category ? true : false}
+//                 id="category"
+//                 value={categoryId ? categoryId : ''}
+//                 // name={categoryName ? categoryName : ''}
+//                 onChange={handleChange}
+//             >
+//                 {
+//                 categories?.map(element => {
+//                     return (<MenuItem value={element._id} key={element._id} onClick={pruebaName}>{element.name}</MenuItem>)
+//                 })
+//                 };
+//         </Select>
+//         <div>
+//         {
+//             selectedCat ? selectedCat.map( element => {
+//                 return (
+//                     <div key={element.id}>
+//                         <h2>{element.name}</h2>
+//                         <div id={element.id}>X</div>
+//                     </div>
+//                 )
+//             }) : ""
+//         }
+//         </div>
+//     </FormControl>
+// );
