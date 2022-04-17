@@ -9,7 +9,7 @@ export function postOrder(order) {
             dispatch({type: MESSAGE, payload: newOrder.msg});
             dispatch({type: POST_ORDER, payload: newOrder.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
@@ -22,7 +22,7 @@ export function getOrderById (id) {
             dispatch({type: MESSAGE, payload: newOrder.msg});
             dispatch({type: POST_ORDER, payload: newOrder.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }

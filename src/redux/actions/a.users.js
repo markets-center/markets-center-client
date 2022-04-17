@@ -8,7 +8,7 @@ export function postNewUser (user) {
             const response = await axios.post(`http://localhost:4000/api/private/users/add`, user);
             dispatch({type: MESSAGE, payload:response.msg});
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg});
+            dispatch({type: ERRORS, payload: err.data.msg});
         }
     }
 }
@@ -20,7 +20,7 @@ export function uptadeUser (user) {
             dispatch({type: MESSAGE, payload: newUser.msg});
             dispatch({type: UPDATE_USER, payload: newUser.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }

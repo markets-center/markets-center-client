@@ -9,7 +9,7 @@ export function getAllSellers() {
             dispatch({type: MESSAGE, payload: sellers.msg})
             dispatch({type: GET_ALL_SELLERS, payload: sellers.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
@@ -22,7 +22,7 @@ export function postProduct(product) {
             dispatch({type: MESSAGE, payload: response.msg})
             dispatch({type: POST_PRODUCT, payload: response.data})
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
@@ -34,7 +34,7 @@ export function updateProduct (product, id) {
             dispatch({type: MESSAGE, payload: response.msg});
             dispatch({type: UPDATE_PRODUCT, payload: response.data});
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({type: ERRORS, payload: err.data.msg})
         }
     }
 }
