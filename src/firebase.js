@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
 
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,5 +10,17 @@ const app = firebase.initializeApp({
     appId: process.env.REACT_APP_FIREBASE_APP_ID
   
 })
+
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBd565mZOzZapUa9YW7NrpptMFQU3X897E",
+//     authDomain: "mc-pg-c9041.firebaseapp.com",
+//     projectId: "mc-pg-c9041",
+//     storageBucket: "mc-pg-c9041.appspot.com",
+//     messagingSenderId: "421323402906",
+//     appId: "1:421323402906:web:a3b8eb274456032f96f923"
+//   };
+
+//   const app = firebase.initializeApp(firebaseConfig)
+
 export const auth = app.auth();
 export default app;
