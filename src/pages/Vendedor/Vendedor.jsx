@@ -71,7 +71,8 @@ export default function Vendedor(){
                 overflow: 'auto',
                 borderRadius: '10px',
             }}>
-                {productos.length ? productos.map(producto => <CardVendedor 
+                {productos.length ? productos.map((producto, idx) => <CardVendedor 
+                                            key={idx}
                                             nombre={producto.nombre}
                                             marca={producto.marca}
                                             urlImg={producto.urlImg}

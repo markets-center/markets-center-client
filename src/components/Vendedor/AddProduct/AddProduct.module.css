@@ -1,23 +1,13 @@
-.modal{
+.mainDiv{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
     text-align: center;
 }
-.box{
-    position: absolute;
-    top: '50%';
-    left: '50%';
-    transform: 'translate(-50%, -50%)';
-    width: 1000;
-    height: 500;
-    background-color: 'background.paper';
-    border: '1px solid #000';
-    border-radius: 6;
-    box-shadow: 24;
-    padding: 4;
-    display: "flex";
-    flex-direction: 'row';
-    text-align: center
+.middleDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .modalLeft{
     display: flex;
@@ -27,5 +17,9 @@
 .modalRight{
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+}
+img{
+    max-width: 200px;
+    padding: 7px
 }

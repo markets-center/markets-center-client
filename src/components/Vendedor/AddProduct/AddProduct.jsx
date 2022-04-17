@@ -1,48 +1,113 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { getAllCategories } from '../../../redux/actions/a.category.js'
+
 import styles from "./AddProduct.module.css";
-import Categories from './Categories.jsx'
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
 import { AddAPhoto, Publish } from '@mui/icons-material/';
+
+import Categories from './Categories.jsx'
 
 const Input = styled('input')({
     display: 'none',
 });
 
 export default function AddProduct(props) {
-    // const style = {
-    //     position: 'absolute',
-    //     top: '50%',
-    //     left: '50%',
-    //     transform: 'translate(-50%, -50%)',
-    //     width: 1000,
-    //     height: 500,
-    //     bgcolor: 'background.paper',
-    //     border: '1px solid #000',
-    //     borderRadius: 6,
-    //     boxShadow: 24,
-    //     p: 4,
-    //     display: "flex",
-    //     flexDirection: 'row',
-    //     // text-align: center,
-    // };
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 1000,
+        height: 500,
+        bgcolor: 'background.paper',
+        border: '1px solid #000',
+        borderRadius: 6,
+        boxShadow: 24,
+        p: 4,
+        display: "flex",
+        flexDirection: 'row',
+        // text-align: center,
+    };
+    //
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllCategories());
+    }, [dispatch])
+    
     const [input, setInput] = useState({
         name: "",
         description: "",
         image: "",
-        stock: 3,
-        discount: 0,
-        category: ["6255aa9a351a9ea80e5af836","6255d99ba2e6d5a6702ac752"],
-        price: 8000,
+        stock: "",
+        category: [],
+        price: "",
         userId: ""
     });
-    const [fileInputState, setFileInputState] = useState();
+
+    const [error, setError] = useState({
+        name: "Error",
+        description: "Error",
+        image: "Error",
+        stock: "Error",
+        category: "Error",
+        price: "Error"
+    })
+
+    const handleChange = (e) => {
+        setInput({
+            ...input,
+            [e.target.id]: e.target.value
+        });
+        setError(Validation({
+            ...input,
+            [e.target.id]: e.target.value
+        }))
+    }
+
+    const Validation = (input) => {
+        let errorData = {
+            name: "Error",
+            description: "Error",
+            image: "Error",
+            stock: "Error",
+            category: "Error",
+            price: "Error"
+        }
+        if (/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(input.name) && input.name.length > 0) delete errorData.name;
+        if (input.description.length > 0) delete errorData.description;
+        if (typeof parseInt(input.image) === 'string' && input.image.length > 0) delete errorData.image;
+        if (typeof parseInt(input.stock) === 'number' && input.stock >= 0 && input.stock.length > 0) delete errorData.stock;
+        if (input.category.length > 0) delete errorData.category;
+        if (typeof parseInt(input.price) === 'number' && input.price >= 0 && input.price.length > 0) delete errorData.price
+        return errorData;
+    }
+
     function handleImageChange(e) {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
-            setFileInputState(reader.result);
+            setInput({
+                ...input,
+                image: reader.result
+            });
+            setError(Validation({
+                ...input,
+                image: reader.result
+            }))
         };
     }
+    //
+    // const [fileInputState, setFileInputState] = useState();
+    // function handleImageChange(e) {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(e.target.files[0]);
+    //     reader.onloadend = () => {
+    //         setFileInputState(reader.result);
+    //     };
+    // }
     
     
     return (
@@ -50,20 +115,24 @@ export default function AddProduct(props) {
         className={styles.modal}
         open={props.open}
         onClose={props.handleClose}
-        // aria-labelledby="modal-modal-title"
-        // aria-describedby="modal-modal-description"
     >
-        <Box className={styles.box} component="form">
-            <Typography variant="h4" gutterBottom component="div" style={{ position: "absolute" }}>
+        <Box sx={{ ...style}} component="form">
+        <div className={styles.mainDiv}>
+            <Typography variant="h4" gutterBottom component="div">
                 Agregar un producto:
             </Typography>
+            <div className={styles.middleDiv}>
             <div className={styles.modalLeft}>
-                <TextField id="name" label="Nombre" variant="standard" style={{ width: "300px", margin: "5px" }}/>
-                <TextField id="price" label="Precio" variant="standard" style={{ width: "300px", margin: "5px" }}/>
-                <TextField id="stock" label="Stock" variant="standard" style={{ width: "300px", margin: "5px" }}/>
+                <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={input.name} style={{ width: "300px", margin: "5px" }} />
+                <TextField error={error.price ? true : false} id="price" label="Precio" variant="standard" onChange={handleChange} value={input.price} style={{ width: "300px", margin: "5px" }} />
+                <TextField error={error.stock ? true : false} id="stock" label="Stock" variant="standard" onChange={handleChange} value={input.stock} style={{ width: "300px", margin: "5px" }} />
+                <Categories Validation={Validation} setError={setError} error={error} setInput={setInput} input={input} />
             </div>
             <div className={styles.modalRight}>
-                <TextField id="description" label="Descripción" variant="standard" style={{ width: "300px", margin: "5px" }} multiline rows={4}/>
+                <TextField error={error.description ? true : false} id="description" label="Descripción" variant="standard" onChange={handleChange} value={input.description} style={{ width: "300px", margin: "5px" }} multiline rows={4} />
+                    {
+                        input.image ? <img src={input.image} alt='prueba' /> : <img src='https://www.gfpropiedades.com.ar/themes/inmokey_t1/img/nophoto.png' alt='prueba' />
+                    }
                 <label htmlFor="contained-button-file">
                     <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleImageChange}/>
                     <Button 
@@ -73,7 +142,7 @@ export default function AddProduct(props) {
                         startIcon={<AddAPhoto />}
                     >Imagen</Button>
                 </label>
-                <Categories />
+            </div>
             </div>
             <Button 
                 variant="contained" 
@@ -81,9 +150,7 @@ export default function AddProduct(props) {
                 style={{ width: "100%", margin: "5px" }}
                 startIcon={<Publish />}
                 >Publicar</Button>
-            {
-                fileInputState && <img src={fileInputState} alt='prueba' />
-            }
+        </div>
         </Box>
     </Modal>
     );
