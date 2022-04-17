@@ -1,0 +1,30 @@
+.rec.rec-arrow {
+    background-color: #005BAA;
+    color: white
+}
+
+.rec.rec-arrow:hover{
+    background-color: white;
+    color: #005BAA;
+}
+
+.rec.rec-arrow:focus:enabled{
+    background-color: #005BAA;
+    color: white;
+}
+.rec.rec-arrow:hover:enabled{
+    background-color: white;
+    color: #005BAA;
+}
+
+.rec.rec-dot_active{
+    background-color: #005baa69;
+    box-shadow: 0 0 1px 3px #005BAA;
+}
+.rec.rec-dot:hover{
+    box-shadow: 0 0 1px 3px #005BAA;
+}
+
+.Card_container__blTJs:hover{
+    margin: 5px;
+}
