@@ -1,9 +1,13 @@
 import React from "react";
 import "./Carrito.css";
 import NavBar from "../../components/NavBar/NavBar.jsx";
-import { Grid, Typography, Avatar } from "@mui/material";
+import { Grid, Typography, Avatar, Button } from "@mui/material";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
 export default function Carrito() {
+  const onClickChange = () => {
+    console.log("hay me tocaste");
+  };
   return (
     <div>
       <NavBar searchBar1={false} />
@@ -29,18 +33,35 @@ export default function Carrito() {
                   </div>
                 </div>
                 <div className="detail item-count">
-                  <button>-</button>
-                  <label>{1}</label>
-                  <button>+</button>
+                  <button className="btn btn-add" onClick={onClickChange}>
+                    -
+                  </button>
+                  <button className="btn lb-count" disabled={true}>
+                    {1}
+                  </button>
+                  <button className="btn btn-res" onClick={onClickChange}>
+                    +
+                  </button>
                 </div>
               </div>
             </Grid>
             <Grid item xs={2}>
-              <div className="item btn-remove"></div>
+              <div className="item btn-remove">
+                <DeleteForeverRoundedIcon color="error" />
+              </div>
             </Grid>
           </Grid>
         </div>
-        <div className="pay-content">pay</div>
+        <div className="pay-container">
+          <div className="content-pay tittle-pay">
+          <Typography variant="caption">Sub Total: {"00.0"} </Typography>
+          <Typography variant="caption">Iva</Typography>
+          <Typography variant="caption">Total</Typography>
+          </div>
+          <div className="content-pay btn-pay">
+          <Button variant="outlined" size="small">PAGAR</Button>
+          </div>
+        </div>
       </div>
     </div>
   );
