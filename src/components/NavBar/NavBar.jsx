@@ -11,12 +11,19 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import { IconButton, Stack } from '@mui/material/'
 import {ShoppingCart, AccountCircle, } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { useNavigate } from 'react-router-dom'
-
+import {useAuth} from '../../context/AuthContext'
 
 export default function NavBar({searchBar1}){
     const navigate = useNavigate()
+    const {logout} = useAuth();
+
+    async function logoutHandler(){
+        await logout();
+        navigate('/')
+    }
 
     return (
         <AppBar position="static" >
@@ -35,9 +42,16 @@ export default function NavBar({searchBar1}){
                     <IconButton
                         variant="contained"
                         color="white"
-                        onClick={() => navigate('/User')}
+                        onClick={() => navigate('/Login')}
                     >
                         <AccountCircle fontSize="large"/>
+                    </IconButton>
+                    <IconButton
+                        variant="contained"
+                        color="white"
+                        onClick={logoutHandler}
+                    >
+                        <LogoutIcon fontSize="large"/>
                     </IconButton>
 
                     <IconButton
