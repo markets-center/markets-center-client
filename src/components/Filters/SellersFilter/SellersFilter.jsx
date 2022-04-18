@@ -6,7 +6,6 @@ import { getAllSellers } from '../../../redux/actions/a.seller';
 function SellersFilter() {
     const dispatch = useDispatch();
     const allSellers = useSelector((state) => state.allSellers);
-    const SellersData = allSellers.data
 
     useEffect(() =>{
         dispatch(getAllSellers())
@@ -26,7 +25,7 @@ function SellersFilter() {
             justifyContent: 'space-around',
             cursor: 'pointer'
         }}>
-            {SellersData && SellersData.map(d => <div onClick={handleSelect} value={d.value}><SellerCard name={d.name.slice(0,10)} image={d.image} /></div>)
+            {allSellers && allSellers.map(d => <div onClick={handleSelect} value={d.value}><SellerCard name={d.name.slice(0,10)} image={d.image} /></div>)
             }
         </Container>
     );
