@@ -45,7 +45,8 @@ export default function AddProduct(props) {
         image: "",
         stock: "",
         category: [],
-        price: ""
+        price: "",
+        userId: currentUser.uid
     });
     const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
@@ -55,7 +56,6 @@ export default function AddProduct(props) {
         stock: "Error",
         category: "Error",
         price: "Error",
-        userId: currentUser.uid
     })
 
     const handleChange = (e) => {
