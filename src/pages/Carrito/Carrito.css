@@ -1,0 +1,49 @@
+.car-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 100px;
+}
+
+.items-content {
+  width: 60%;
+  border-radius: 15px;
+  border: 1px solid rgb(6, 94, 149);
+}
+
+.pay-content {
+  width: 20%;
+}
+
+.content-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-item {
+  width: 100%;
+  height: auto;
+  border-radius: 50px;
+}
+@supports (object-fit: cover) {
+  .img-item {
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.content-des {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: center;
+}
+.tittle-item {
+  width: 100%;
+}
+.des-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
