@@ -15,7 +15,8 @@ import Footer from "../src/components/Footer/Footer";
 import Vendedor from "../src/pages/Vendedor/Vendedor";
 import SellerForm from './pages/UserData/SellerForm'
 import BuyerForm from './pages/UserData/BuyerForm'
-import Login from './pages/Login/Login'
+import Login from './pages/Login/Login';
+import OlvidoPass from './pages/ForgotPass/OlvidoPass'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/OlvidoPass" element={<OlvidoPass />} />
           <Route path="/Login" element={
             <LoginButton>
               <Login />
