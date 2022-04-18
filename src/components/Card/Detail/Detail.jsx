@@ -13,7 +13,7 @@ export default function Detail({name, price,image, description, stock}) {
     return (
         <div className={s.container}>
             <div className={s.image}>
-                <img src={image} width="400px" height='400px' alt="producto"/>
+                <img src={image} width="400px" height='400px' alt="producto" className={s.img}/>
             </div>
             <div className={s.info}>
                 <Typography variant="h5" className={s.name}>{name}<DeliveryDiningIcon fontSize="medium" color="info" className={s.delivery}/></Typography>
