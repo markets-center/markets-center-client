@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Carrito.css";
 import NavBar from '../../components/NavBar/NavBar.jsx'
 
 
