@@ -78,7 +78,7 @@ export default function rootReducer(state = initialState, action){
         case UPDATE_USER:
             return {
                 ...state,
-                oneUser: action.payload
+                oneUser: {...action.payload[0]}
             }
         case POST_ORDER:
             return {

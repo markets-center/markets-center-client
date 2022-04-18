@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { getAllCategories } from '../../../redux/actions/a.category.js'
 import { postProduct } from '../../../redux/actions/a.seller.js'
+import { useAuth } from "../../../context/AuthContext";
 
 import styles from "./AddProduct.module.css";
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
@@ -31,8 +32,8 @@ export default function AddProduct(props) {
         display: "flex",
         flexDirection: 'row',
     };
+    const { currentUser } = useAuth();
     
-    const message = useSelector(state => state.message)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllCategories());
@@ -44,7 +45,8 @@ export default function AddProduct(props) {
         image: "",
         stock: "",
         category: [],
-        price: ""
+        price: "",
+        userId: currentUser.uid
     });
     const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
@@ -53,7 +55,7 @@ export default function AddProduct(props) {
         image: "Error",
         stock: "Error",
         category: "Error",
-        price: "Error"
+        price: "Error",
     })
 
     const handleChange = (e) => {
@@ -115,7 +117,6 @@ export default function AddProduct(props) {
     function handleSubmit(e){
         e.preventDefault();
         dispatch(postProduct(input))
-        alert(message)
         navigate('/Profile')
     }
     
