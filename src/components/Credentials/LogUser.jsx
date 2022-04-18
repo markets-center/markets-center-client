@@ -128,7 +128,7 @@ export default function LogUser() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/OlvidoPass" variant="body2">
                   ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
