@@ -19,19 +19,24 @@ export default function Carrito() {
                 />
               </div>
             </Grid>
-            <Grid item xs={7}>
-              <div className="item content-des">
-                <div className="tittle-item">
+            <Grid item xs={8}>
+              <div className="item content-detail">
+                <div className="detail item-tittle">
                   <Typography variant="subtitle1">Name</Typography>
+                  <div className="desc-item">
+                    <Typography variant="caption">description</Typography>
+                    <Typography variant="caption">Price</Typography>
+                  </div>
                 </div>
-                <div className="des-item">
-                  <Typography variant="caption">description</Typography>
-                  <Typography variant="subtitle1">Price</Typography>
+                <div className="detail item-count">
+                  <button>-</button>
+                  <label>{1}</label>
+                  <button>+</button>
                 </div>
               </div>
             </Grid>
-            <Grid item xs={3}>
-              <div className="item content-btn">button</div>
+            <Grid item xs={2}>
+              <div className="item btn-remove"></div>
             </Grid>
           </Grid>
         </div>
