@@ -23,3 +23,29 @@ img{
     max-width: 200px;
     padding: 7px
 }
+.selectedDisplay{
+    max-width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.selectCard{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 12px;
+}
+.titleCard{
+    padding: 5px;
+}
+.buttonCard{
+    cursor: pointer;
+    padding: 5px;
+    color: red;
+    border: none;
+    background-color: transparent;
+}

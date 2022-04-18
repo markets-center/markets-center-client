@@ -18,7 +18,7 @@ export function getAllSellers() {
 export function postProduct(product) {
     return async function (dispatch) {
         try {
-            const response = await axios.post('http://localhost:4000/api/private/', product);
+            const response = await axios.post('http://localhost:4000/api/private/product', product);
             dispatch({type: MESSAGE, payload: response.msg})
             dispatch({type: POST_PRODUCT, payload: response.data})
         } catch (err) {
