@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import { getAllCategories } from '../../../redux/actions/a.category.js'
+import { postProduct } from '../../../redux/actions/a.seller.js'
 
 import styles from "./AddProduct.module.css";
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
@@ -28,11 +30,10 @@ export default function AddProduct(props) {
         p: 4,
         display: "flex",
         flexDirection: 'row',
-        // text-align: center,
     };
-    //
+    
+    const message = useSelector(state => state.message)
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(getAllCategories());
     }, [dispatch])
@@ -43,10 +44,9 @@ export default function AddProduct(props) {
         image: "",
         stock: "",
         category: [],
-        price: "",
-        userId: ""
+        price: ""
     });
-
+    const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
         name: "Error",
         description: "Error",
@@ -76,15 +76,16 @@ export default function AddProduct(props) {
             category: "Error",
             price: "Error"
         }
-        if (/^[a-zA-Z\ áéíóúÁÉÍÓÚñÑ\s]*$/.test(input.name) && input.name.length > 0) delete errorData.name;
+        if (/^[a-zA-Z áéíóúÁÉÍÓÚñÑ\s]*$/.test(input.name) && input.name.length > 0) delete errorData.name;
         if (input.description.length > 0) delete errorData.description;
-        if (typeof parseInt(input.image) === 'string' && input.image.length > 0) delete errorData.image;
+        if (typeof input.image === 'string' && input.image.length > 0) delete errorData.image;
         if (typeof parseInt(input.stock) === 'number' && input.stock >= 0 && input.stock.length > 0) delete errorData.stock;
         if (input.category.length > 0) delete errorData.category;
         if (typeof parseInt(input.price) === 'number' && input.price >= 0 && input.price.length > 0) delete errorData.price
         return errorData;
     }
 
+    const navigate = useNavigate()
     function handleImageChange(e) {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
@@ -108,7 +109,15 @@ export default function AddProduct(props) {
     //         setFileInputState(reader.result);
     //     };
     // }
-    
+    useEffect(()=>{
+        Object.keys(error).length > 0 ? setDisabled( true ) : setDisabled( false )
+    }, [error])
+    function handleSubmit(e){
+        e.preventDefault();
+        dispatch(postProduct(input))
+        alert(message)
+        navigate('/Profile')
+    }
     
     return (
     <Modal
@@ -145,6 +154,8 @@ export default function AddProduct(props) {
             </div>
             </div>
             <Button 
+                onClick={handleSubmit}
+                disabled={disabled}
                 variant="contained" 
                 component="span" 
                 style={{ width: "100%", margin: "5px" }}
