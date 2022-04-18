@@ -8,6 +8,7 @@ import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter
 
 
 
+
 export default function Home (){
 
     return (
@@ -15,9 +16,7 @@ export default function Home (){
             <NavBar searchBar1={true}/>
             {/* <Filters /> */}
             <SellerFilter />
-            <Sliders />
-            
-            {/* <Slider2 /> */}
+            <Slider2 />
         </div>
     )
 }
