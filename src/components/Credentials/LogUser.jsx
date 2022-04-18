@@ -133,7 +133,7 @@ export default function LogUser() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/Register" variant="body2">
                   {"¿No tienes cuanta? Registrate"}
                 </Link>
               </Grid>

@@ -4,8 +4,7 @@ import NavBar from '../../components/NavBar/NavBar.jsx'
 import SearchBar from '../../components/NavBar/SearchBar.jsx'
 import Sliders from '../../components/Sliders/Sliders.jsx';
 //import Slider2 from '../../components/Sliders/Slider2.jsx';
-
-
+import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter'
 
 
 
@@ -15,7 +14,9 @@ export default function Home (){
         <div>
             <NavBar searchBar1={true}/>
             {/* <Filters /> */}
+            <SellerFilter />
             <Sliders />
+            
             {/* <Slider2 /> */}
         </div>
     )
