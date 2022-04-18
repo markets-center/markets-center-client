@@ -167,7 +167,7 @@ function SellerForm() {
               variant="inline"
               inputVariant="outlined"
               label="Fecha de Nacimiento"
-              inputFormat="dd/MM/YYY"
+              inputFormat="dd/MM/yyyy"
               value={selectedDate}
               renderInput={(props) => (
                 <TextField {...props} />
