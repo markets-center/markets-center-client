@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import PrivateRoute from './pages/PrivateRoute/PrivateRoute'
+import PrivateRoute from './pages/MiddlewareRoute/PrivateRoute'
+import LoginButton from './pages/MiddlewareRoute/LoginButton'
 
 import Home from "../src/pages/Home/Home";
 import Carrito from "../src/pages/Carrito/Carrito";
@@ -24,7 +25,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={
+            <LoginButton>
+              <Login />
+            </LoginButton>
+          } />
           <Route path="/Profile" element={<Vendedor />} />
           <Route 
           path="/sellerForm" 
@@ -34,7 +39,11 @@ function App() {
             </PrivateRoute>
           } 
           />
-          <Route path="/buyerForm" element={<BuyerForm />} />
+          <Route path="/buyerForm" element={
+            <PrivateRoute>
+              <BuyerForm />
+            </PrivateRoute>
+          } />
           <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />

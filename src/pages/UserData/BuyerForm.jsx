@@ -50,8 +50,10 @@ function BuyerForm() {
         uploadImg= false
         img=currentUser.photoURL
     } else {
+      if(fileInputState){
         uploadImg = true
         img = fileInputState
+      }
     }
     let userData = {
       isAdmin: false,
@@ -134,7 +136,7 @@ function BuyerForm() {
               name="address"
               autoFocus
             />
-            {!currentUser.picture && (
+            {!currentUser.photoURL && (
               <>
                 <label htmlFor="contained-button-file">
                   <Input
