@@ -8,7 +8,7 @@ import './Slider.css'
 
 export default function Sliders() {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.allProducts.data)
+    const products = useSelector(state => state.allProducts)
    useEffect(() => {
        dispatch(getAllProducts())
    }, [dispatch]);
@@ -25,17 +25,17 @@ export default function Sliders() {
     <Container sx={{
         height: '400px',
     }}>
-       <Carousel breakPoints={breakPoints} >
+    <Carousel breakPoints={breakPoints} >
            {products?.map(producto => (
-               <Card 
-               name={producto.name}
-               price={producto.price}
-               image={producto.image}
-               description={producto.description}
-               stock={producto.stock}
-               />
-           ))}
-       </Carousel>
+                <Card 
+                name={producto.name}
+                price={producto.price}
+                image={producto.image}
+                description={producto.description}
+                stock={producto.stock}
+                />
+        ))}
+    </Carousel>
         
     </Container>
 
