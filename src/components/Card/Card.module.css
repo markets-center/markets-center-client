@@ -57,4 +57,12 @@
     padding-bottom: 10px;
     word-wrap: break-word;
 }
+.sinStock{
+    filter: blur(2px) grayscale(0.9);
 
+}
+.containerSinStock{
+  position:relative;
+  overflow:hidden;
+
+}

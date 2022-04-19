@@ -13,7 +13,6 @@ export default function Sliders() {
        dispatch(getAllProducts())
    }, [dispatch]);
 
-   console.log(products)
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 768, itemsToShow: 3 },
