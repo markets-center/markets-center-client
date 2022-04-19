@@ -41,7 +41,7 @@ export function getProductById (id) {
 export function productBySeller (id) {
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`http://localhost:4000/api/public/filter/bySeller/${id}`);
+            const result = await axios.get(`http://localhost:4000/api/public/filter/bySeller/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
             dispatch({type: GET_PRODUCT_BY_SELLER, payload: result.data.data})
         } catch (err) {
