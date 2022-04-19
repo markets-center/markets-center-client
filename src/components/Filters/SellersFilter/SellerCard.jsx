@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import { Container } from '@mui/material';
+import s from './SellerCard.module.css'
 
 const SellerCard = ({ image, name }) => {
     return (
@@ -13,14 +14,15 @@ const SellerCard = ({ image, name }) => {
             justifyContent: 'space-around',
             cursor: 'pointer',
             flexDirection: 'column'
-        }}>
+        }}
+        className={s.container}>
             <Avatar
                 alt=''
                 src={image? image : '/broken-image.jpg'}
                 sx={{ width: 80, height: 80 }}
              />
             <Typography variant="body2" sx={{
-                    textAlign: 'center'
+                    textAlign: 'center',
             }}>
                    {name}
                 </Typography>

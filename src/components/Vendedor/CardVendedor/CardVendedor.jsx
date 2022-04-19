@@ -1,6 +1,6 @@
 import { Container, Button, Box, Typography } from "@mui/material";
 
-export default function CardVendedor({ nombre, image, stock, precio }){
+export default function CardVendedor({ nombre, id, image, stock, precio, removeProduct }){
     return (
         <Container sx={{
             height: '100px',
@@ -45,7 +45,11 @@ export default function CardVendedor({ nombre, image, stock, precio }){
                 }}>
                 Reponer
                 </Button>
-                <Button variant="contained" color="secondary" sx={{
+                <Button 
+                onClick={() => removeProduct(id)}
+                variant="contained" 
+                color="secondary" 
+                sx={{
                     margin: '2px'
                 }}>
                 Eliminar

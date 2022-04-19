@@ -13,7 +13,6 @@ export default function Sliders() {
        dispatch(getAllProducts())
    }, [dispatch]);
 
-
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 768, itemsToShow: 3 },
@@ -25,17 +24,19 @@ export default function Sliders() {
     <Container sx={{
         height: '400px',
     }}>
-    <Carousel breakPoints={breakPoints} >
-           {products?.map(producto => (
-                <Card 
-                name={producto.name}
-                price={producto.price}
-                image={producto.image}
-                description={producto.description}
-                stock={producto.stock}
-                />
-        ))}
-    </Carousel>
+       <Carousel breakPoints={breakPoints} >
+           {products?.map((producto,idx) => (
+               <Card 
+               key={idx}
+               name={producto.name}
+               price={producto.price}
+               image={producto.image}
+               description={producto.description}
+               stock={producto.stock}
+               category={producto.category.map(c => c.name)}
+               />
+           ))}
+       </Carousel>
         
     </Container>
 

@@ -57,7 +57,7 @@ function BuyerForm() {
     }
     let userData = {
       isAdmin: false,
-      isSeller: true,
+      isSeller: false,
       uploadImg,
       name: currentUser.displayName || data.name,
       userId: currentUser.uid,
