@@ -23,13 +23,13 @@ const style = {
 };
 
 
-export default function Card({name, price,image, description, stock}){ //deberia recibir props para renderizar segun los productos
+export default function Card({name, price,image, description, stock, category}){ //deberia recibir props para renderizar segun los productos
    
     const [hover,setHover] = useState(false); 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
+
     function moreInfo(e){
         setHover(true)
     }
@@ -43,34 +43,35 @@ export default function Card({name, price,image, description, stock}){ //deberia
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div className={s.img}>
-                <img src={image} width="200px" height="200px" alt="producto"/>
+                {stock > 0?<img src={image} width="200px" height="200px" alt="producto"/>:
+                    <img src={image} width="200px" height="200px" alt="producto" className={s.sinStock}/> }
             </div>
             <div className={s.infoContainer}>
                 <Typography variant="h6" >
                    {name}
                 </Typography>
                 <div className={s.priceAndButton}>
-                    <Typography variant="subtitle1" className={s.price}>
-                        ${price}
-                    </Typography>  
+                    {hover? <div className={s.masinfo}>
+                                <Button  variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
+                            </div>:
+                            <Typography variant="subtitle1" className={s.price}>
+                                ${price}
+                            </Typography>  }
                     <div className={s.icons}> 
-                        <IconButton color="primary" size="small" onClick={addToCart} > 
-                            <AddShoppingCartIcon fontSize="medium" variant="contained"/>
-                        </IconButton>
-                        <IconButton  color="info" size="small"> 
-                            <DeliveryDiningIcon fontSize=""/>
-                        </IconButton>
+                        {stock > 0?<IconButton color="primary" size="small" onClick={addToCart} > 
+                                        <AddShoppingCartIcon fontSize="medium" variant="contained"/>
+                                    </IconButton>:
+                                    <IconButton size="small" disabled > 
+                                        <AddShoppingCartIcon fontSize="medium" variant="contained"/>
+                                    </IconButton>}
+                        {stock > 0?<IconButton  color="info" size="small"> 
+                                        <DeliveryDiningIcon fontSize=""/>
+                                    </IconButton>:
+                                    <IconButton  color="disable" size="small"> 
+                                        <DeliveryDiningIcon fontSize=""/>
+                                    </IconButton>}
                     </div>
                 </div>
-                {hover?<div className={s.hoverInfo}> 
-                            <div>
-                            {<Typography variant="body2" className={s.description}>Stock: {stock}ud. </Typography>}
-                            </div>
-                            <Typography variant="body2" className={s.description}>{description}</Typography>
-                            <div className={s.masinfo}>
-                                <Button  variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
-                            </div>
-                       </div>:""}
             </div>
             <div>
                 
@@ -81,7 +82,7 @@ export default function Card({name, price,image, description, stock}){ //deberia
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail name={name} price={price} image={image} stock={stock} description={description}/>
+                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} />
                     </Box>
                 </Modal>
             </div>

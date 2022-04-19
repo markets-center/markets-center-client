@@ -33,6 +33,7 @@ export default function Sliders() {
                image={producto.image}
                description={producto.description}
                stock={producto.stock}
+               category={producto.category.map(c => c.name)}
                />
            ))}
        </Carousel>

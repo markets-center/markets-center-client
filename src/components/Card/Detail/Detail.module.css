@@ -12,6 +12,11 @@
     object-fit:contain;
     min-width: 400px;
 }
+.imgSinStock{
+    filter: grayscale(0.9);
+    object-fit:contain;
+    min-width: 400px;
+}
 .info{
     margin-left: 10px;
     min-width: 350px;
