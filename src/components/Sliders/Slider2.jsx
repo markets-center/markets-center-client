@@ -25,8 +25,9 @@ export default function Sliders() {
         height: '400px',
     }}>
        <Carousel breakPoints={breakPoints} >
-           {products?.map(producto => (
+           {products?.map((producto,idx) => (
                <Card 
+               key={idx}
                name={producto.name}
                price={producto.price}
                image={producto.image}
