@@ -23,13 +23,13 @@ const style = {
 };
 
 
-export default function Card({name, price,image, description, stock}){ //deberia recibir props para renderizar segun los productos
+export default function Card({name, price,image, description, stock, category}){ //deberia recibir props para renderizar segun los productos
    
     const [hover,setHover] = useState(false); 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
+    console.log(category)
     function moreInfo(e){
         setHover(true)
     }
@@ -50,9 +50,12 @@ export default function Card({name, price,image, description, stock}){ //deberia
                    {name}
                 </Typography>
                 <div className={s.priceAndButton}>
-                    <Typography variant="subtitle1" className={s.price}>
-                        ${price}
-                    </Typography>  
+                    {hover? <div className={s.masinfo}>
+                                <Button  variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
+                            </div>:
+                            <Typography variant="subtitle1" className={s.price}>
+                                ${price}
+                            </Typography>  }
                     <div className={s.icons}> 
                         <IconButton color="primary" size="small" onClick={addToCart} > 
                             <AddShoppingCartIcon fontSize="medium" variant="contained"/>
@@ -62,15 +65,6 @@ export default function Card({name, price,image, description, stock}){ //deberia
                         </IconButton>
                     </div>
                 </div>
-                {hover?<div className={s.hoverInfo}> 
-                            <div>
-                            {<Typography variant="body2" className={s.description}>Stock: {stock}ud. </Typography>}
-                            </div>
-                            <Typography variant="body2" className={s.description}>{description}</Typography>
-                            <div className={s.masinfo}>
-                                <Button  variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
-                            </div>
-                       </div>:""}
             </div>
             <div>
                 
