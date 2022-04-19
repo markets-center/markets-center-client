@@ -17,3 +17,5 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const UPDATE_USER = 'POST_UPDATE_USER';
 
 export const POST_ORDER = 'POST_ORDER'
+
+export const GET_PRODUCT_BY_SELLER = 'GET_PRODUCT_BY_SELLER';

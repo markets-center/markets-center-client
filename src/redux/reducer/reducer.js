@@ -1,4 +1,4 @@
-import {ERRORS, GET_ALL_PRODUCTS, GET_ALL_SELLERS, GET_ALL_CATEGORIES, MESSAGE, POST_PRODUCT, UPDATE_PRODUCT, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, UPDATE_USER, POST_ORDER} from '../actions/ctes'
+import {ERRORS, GET_ALL_PRODUCTS, GET_ALL_SELLERS, GET_ALL_CATEGORIES, MESSAGE, POST_PRODUCT, UPDATE_PRODUCT, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, UPDATE_USER, POST_ORDER, GET_PRODUCT_BY_SELLER} from '../actions/ctes'
 
 const initialState = {
     allProducts: [], //aqui van los productos con todos los detalles
@@ -40,6 +40,11 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 searchedProducts: action.payload
             }
+        case GET_PRODUCT_BY_SELLER:
+            return {
+                ...state,
+                searchedProducts: action.payload
+            }
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
@@ -73,7 +78,7 @@ export default function rootReducer(state = initialState, action){
         case UPDATE_USER:
             return {
                 ...state,
-                oneUser: action.payload
+                oneUser: {...action.payload[0]}
             }
         case POST_ORDER:
             return {

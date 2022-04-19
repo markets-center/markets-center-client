@@ -140,7 +140,7 @@ function SellerForm() {
               name="address"
               autoFocus
             />
-            {!currentUser.picture && (
+            {!currentUser.photoURL && (
               <>
                 <label htmlFor="contained-button-file">
                   <Input

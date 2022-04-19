@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import PrivateRoute from './pages/PrivateRoute/PrivateRoute'
+import PrivateRoute from './pages/MiddlewareRoute/PrivateRoute'
+import LoginButton from './pages/MiddlewareRoute/LoginButton'
 
 import Home from "../src/pages/Home/Home";
 import Carrito from "../src/pages/Carrito/Carrito";
@@ -14,7 +15,8 @@ import Footer from "../src/components/Footer/Footer";
 import Vendedor from "../src/pages/Vendedor/Vendedor";
 import SellerForm from './pages/UserData/SellerForm'
 import BuyerForm from './pages/UserData/BuyerForm'
-import Login from './pages/Login/Login'
+import Login from './pages/Login/Login';
+import OlvidoPass from './pages/ForgotPass/OlvidoPass'
 
 function App() {
   return (
@@ -24,7 +26,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/OlvidoPass" element={<OlvidoPass />} />
+          <Route path="/Login" element={
+            <LoginButton>
+              <Login />
+            </LoginButton>
+          } />
           <Route path="/Profile" element={<Vendedor />} />
           <Route 
           path="/sellerForm" 
@@ -34,7 +41,11 @@ function App() {
             </PrivateRoute>
           } 
           />
-          <Route path="/buyerForm" element={<BuyerForm />} />
+          <Route path="/buyerForm" element={
+            <PrivateRoute>
+              <BuyerForm />
+            </PrivateRoute>
+          } />
           <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />
