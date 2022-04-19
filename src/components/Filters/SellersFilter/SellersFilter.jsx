@@ -25,7 +25,7 @@ function SellersFilter() {
             alignItem: 'center',
             justifyContent: 'space-around',
         }}>
-            {allSellers && allSellers.map(d => <div onClick={handleSelect} value={d.value}><SellerCard name={d.name.slice(0,10)} image={d.image} /></div>)
+            {allSellers && allSellers.map(d => <div onClick={handleSelect} value={d.value} key={d.name}><SellerCard name={d.name.slice(0,10)} image={d.image} /></div>)
             }
         </Container>
     );
