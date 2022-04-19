@@ -16,7 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom'
 import {useAuth} from '../../context/AuthContext'
 
-export default function NavBar({searchBar1}){
+export default function NavBar({ searchBar, home, admin, value, setValue }){
     const navigate = useNavigate()
     const {logout} = useAuth();
 
@@ -34,7 +34,7 @@ export default function NavBar({searchBar1}){
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
                     {
-                        searchBar1 &&
+                        searchBar &&
                         <SearchBar />
                     }
 
@@ -65,7 +65,7 @@ export default function NavBar({searchBar1}){
                 </Toolbar>
             </Container>
             
-            <Filters />
+            <Filters home={home} admin={admin} value={value} setValue={setValue}/>
             
         </AppBar>
     )
