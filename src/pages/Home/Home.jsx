@@ -16,7 +16,7 @@ export default function Home (){
             <NavBar searchBar1={true}/>
             {/* <Filters /> */}
             <SellerFilter />
-            <Slider2 />
+            {/* <Slider2 /> */}
         </div>
     )
 }
