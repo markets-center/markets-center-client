@@ -19,7 +19,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Menu } from '@mui/material'
 import { Divider, ListItemIcon, MenuItem } from '@material-ui/core';
 
-export default function NavBar({ searchBar1 }) {
+export default function NavBar({ searchBar, home, admin, value, setValue }){
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
     console.log(currentUser);
@@ -47,7 +47,7 @@ export default function NavBar({ searchBar1 }) {
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
                     {
-                        searchBar1 &&
+                        searchBar &&
                         <SearchBar />
                     }
 
@@ -133,7 +133,8 @@ export default function NavBar({ searchBar1 }) {
                     </Stack>
                 </Toolbar>
             </Container>
-            <Filters />
+
+            <Filters home={home} admin={admin} value={value} setValue={setValue}/>
         </AppBar>
     )
 }
