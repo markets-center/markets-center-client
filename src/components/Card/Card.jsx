@@ -10,18 +10,17 @@ import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderRadius: '10px',
-  boxShadow: 24,
-  p: 4,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    borderRadius: '10px',
+    boxShadow: 24,
+    p: 4,
 };
-
 
 export default function Card({name, price,image, description, stock, category}){ //deberia recibir props para renderizar segun los productos
    
@@ -29,7 +28,7 @@ export default function Card({name, price,image, description, stock, category}){
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+  
     function moreInfo(e){
         setHover(true)
     }
@@ -48,7 +47,7 @@ export default function Card({name, price,image, description, stock, category}){
             </div>
             <div className={s.infoContainer}>
                 <Typography variant="h6" >
-                   {name}
+                    {name}
                 </Typography>
                 <div className={s.priceAndButton}>
                     {hover? <div className={s.masinfo}>

@@ -17,7 +17,7 @@ export function getAllProducts(){
 export function getProductByName(name) {
     return async function (dispatch) {
         try {
-            const products = await axios.get(`http://localhost:4000/api/public/products&name=${name}`);
+            const products = await axios.get(`http://localhost:4000/api/public/products?name=${name}`);
             dispatch({type: MESSAGE, payload: products.data.msg});
             dispatch({type: GET_PROTUCT_BY_NAME, payload: products.data.data})
         } catch (err) {
