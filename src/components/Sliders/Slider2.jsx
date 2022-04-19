@@ -8,11 +8,10 @@ import './Slider.css'
 
 export default function Sliders() {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.allProducts.data)
+    const products = useSelector(state => state.allProducts)
    useEffect(() => {
        dispatch(getAllProducts())
    }, [dispatch]);
-
 
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
@@ -26,13 +25,15 @@ export default function Sliders() {
         height: '400px',
     }}>
        <Carousel breakPoints={breakPoints} >
-           {products?.map(producto => (
+           {products?.map((producto,idx) => (
                <Card 
+               key={idx}
                name={producto.name}
                price={producto.price}
                image={producto.image}
                description={producto.description}
                stock={producto.stock}
+               category={producto.category.map(c => c.name)}
                />
            ))}
        </Carousel>
