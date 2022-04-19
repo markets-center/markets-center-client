@@ -8,12 +8,12 @@ import './Slider.css'
 
 export default function Sliders() {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.allProducts.data)
+    const products = useSelector(state => state.allProducts)
    useEffect(() => {
        dispatch(getAllProducts())
    }, [dispatch]);
 
-
+   console.log(products)
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 768, itemsToShow: 3 },
@@ -33,6 +33,7 @@ export default function Sliders() {
                image={producto.image}
                description={producto.description}
                stock={producto.stock}
+               category={producto.category.map(c => c.name)}
                />
            ))}
        </Carousel>
