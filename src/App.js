@@ -17,6 +17,7 @@ import SellerForm from './pages/UserData/SellerForm'
 import BuyerForm from './pages/UserData/BuyerForm'
 import Login from './pages/Login/Login';
 import OlvidoPass from './pages/ForgotPass/OlvidoPass'
+import Comprador from './pages/Comprador/Comprador'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             </LoginButton>
           } />
           <Route path="/Profile" element={<Vendedor />} />
+          <Route path="/User" element={<Comprador />} />
           <Route 
           path="/sellerForm" 
           element={

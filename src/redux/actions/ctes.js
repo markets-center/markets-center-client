@@ -14,7 +14,8 @@ export const MESSAGE = 'MESSAGE';
 export const ADMIN_UPDATE_ADD_CATEGORY  = 'ADMIN_UPDATE_CATEGORY';
 
 export const GET_ALL_USERS = 'GET_ALL_USERS';
-export const UPDATE_USER = 'POST_UPDATE_USER';
+
+export const UPDATE_USER = 'UPDATE_USER';
 
 export const POST_ORDER = 'POST_ORDER'
 
