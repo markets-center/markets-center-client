@@ -10,8 +10,9 @@
     align-items: center;
 }
 .item img{
-    max-width: 70px;
-    max-height: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 .left{
     display: flex;

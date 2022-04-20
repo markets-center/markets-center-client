@@ -122,9 +122,9 @@ export default function Filters({home, admin, value, setValue}){
     </Tabs>
     }
     {   
-       admin &&
-       <Select value={value} setValue={setValue} />
+      admin &&
+      <Select value={value} setValue={setValue} />
     }
-   </>
+    </>
   )
 }

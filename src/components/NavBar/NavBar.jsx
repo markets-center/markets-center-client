@@ -37,13 +37,14 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
         navigate('/');
         dispatch(resetSliders())
     }
-  
+    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(event.target);
+        console.log("Holla soy el click")
     };
-  
+    
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -110,7 +111,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
                                             right: 14,
                                             width: 10,
                                             height: 10,
-                                            bgcolor: 'background.paper',
+                                            bgColor: 'background.paper',
                                             transform: 'translateY(-50%) rotate(45deg)',
                                             zIndex: 0,
                                         },
