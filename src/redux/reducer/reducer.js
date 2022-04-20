@@ -21,8 +21,9 @@ import {
 
 const initialState = {
     allProducts: [], //aqui van los productos con todos los detalles
-    addedProduct: {},
-    searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts // Esta Perfecto :D
+    addedProduct:{},
+    searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
+    productsBySeller: [],
     allCategories: [],
     newCategory: {},
     allSellers: [],
@@ -63,7 +64,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_PRODUCT_BY_SELLER:
             return {
                 ...state,
-                searchedProducts: action.payload
+                productsBySeller: action.payload
             }
         case GET_ALL_CATEGORIES:
             return {
