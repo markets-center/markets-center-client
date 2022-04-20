@@ -21,11 +21,8 @@ export default function Vendedor(){
         dispatch(productBySeller(oneUser._id))
     },[oneUser._id,dispatch])
     
-    const products = useSelector(state => state.searchedProducts)
+    const products = useSelector(state => state.productsBySeller)
     const [listProducts, setListProducts] = useState(products);
-
-    console.log(oneUser)
-    console.log(oneUser.image)
     
     const removeProduct = (id) => {
         const products = listProducts.filter(product => product._id !== id)
