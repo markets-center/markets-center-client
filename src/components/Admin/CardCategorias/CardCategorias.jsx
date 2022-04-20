@@ -10,12 +10,12 @@ import styles from './CardCategorias.module.css';
 import { IconButton } from '@mui/material'
 import { Delete, BorderColor } from '@mui/icons-material/';
 
-export default function CardCategorias ({handleOpen, handleClose, input, setInput, id, setId, handleSubmit}){
-    const categories = useSelector(state => state.allCategories)
+export default function CardCategorias ({categories, handleOpen, handleClose, input, setInput, id, setId, handleSubmit}){
+    // const categories = useSelector(state => state.allCategories)
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getAllCategories());
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getAllCategories());
+    // }, [dispatch])
     function handleDelete(e){
         dispatch(adminDeleteCategory(e.currentTarget.value))
     }

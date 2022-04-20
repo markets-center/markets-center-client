@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Categorias.module.css'
 import { Button } from '@mui/material'
 import { AddBox } from '@mui/icons-material'
@@ -6,12 +6,20 @@ import CardCategorias from '../CardCategorias/CardCategorias.jsx'
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'
 
 //
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategories } from '../../../redux/actions/a.category.js'
 import { adminAddCategory } from '../../../redux/actions/a.admin.js'
 import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 //
 
 export default function Categorias(){
+    // READ CATEGORIES
+    const categories = useSelector(state => state.allCategories)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAllCategories());
+    }, [dispatch])
+    // CREATE & UPDATE CATEGORIES
     const [input, setInput] = useState({
         name: "",
         image: ""
@@ -26,8 +34,9 @@ export default function Categorias(){
             image: ""
         })
         setOpen(false)
+        dispatch(getAllCategories());
     }
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     function handleSubmit(e){
         e.preventDefault();
         id ? dispatch(adminUpdateCategory(id, input)) :
@@ -39,7 +48,7 @@ export default function Categorias(){
                 <h3>Lista de categorias</h3>
                 <Button variant="contained" color="info" startIcon={<AddBox />} onClick={handleOpen}> Agregar una categoria</Button>
             </div>
-            <CardCategorias handleOpen={handleOpen} handleClose={handleClose} input={input} setInput={setInput} id={id} setId={setId} handleSubmit={handleSubmit}/>
+            <CardCategorias categories={categories} handleOpen={handleOpen} handleClose={handleClose} input={input} setInput={setInput} id={id} setId={setId} handleSubmit={handleSubmit}/>
             <AddCategorie open={open} handleClose={handleClose} input={input} setInput={setInput} id={id} handleSubmit={handleSubmit}/>
         </div>
     )
