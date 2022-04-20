@@ -13,7 +13,7 @@ const Input = styled('input')({
 });
 
 export default function AddCategorie({open, handleClose, input, setInput, id, handleSubmit}) {
-    console.log(id)
+    
     const style = {
         position: 'absolute',
         top: '50%',
@@ -63,10 +63,6 @@ export default function AddCategorie({open, handleClose, input, setInput, id, ha
                 ...input,
                 image: reader.result
             });
-            setError(Validation({
-                ...input,
-                image: reader.result
-            }))
         };
     }
     useEffect(()=>{
