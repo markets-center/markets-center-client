@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs, Tab } from '@mui/material/';
+import Select from '../../components/Admin/Select/Select.jsx'
 import { MenuItem } from "@mui/material";
 import { getAllCategories } from '../../redux/actions/a.category';
 import Box from '@mui/material/Box';
@@ -11,14 +11,18 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 
-
-export default function Filters() {
+export default function Filters({home, admin, value, setValue}){
+//const [value2, setValue2] = useState('one');
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const [categories, setCategories] = useState('');
   const [selected, setSelected] = useState('')
   const allCategories = useSelector(state => state.allCategories)
   const open = Boolean(anchorEl);
+  
+//  function handleChange2(event, newValue){
+//        setValue2(newValue);
+//    };
 
   const handleClick = (event) => {
     setAnchorEl(event.target);
@@ -45,6 +49,9 @@ export default function Filters() {
   }, [])
 
   return (
+    <>
+        {
+            home &&
     <Tabs
       textColor="inherit"
       indicatorColor="secondary"
@@ -113,5 +120,11 @@ export default function Filters() {
       <Tab value={allCategories[1]?.name} label={allCategories[1]?.name} />
       <Tab value={allCategories[2]?.name} label={allCategories[2]?.name} />
     </Tabs>
+    }
+    {   
+       admin &&
+       <Select value={value} setValue={setValue} />
+    }
+   </>
   )
 }

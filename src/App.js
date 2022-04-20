@@ -9,6 +9,7 @@ import LoginButton from './pages/MiddlewareRoute/LoginButton'
 
 import Home from "../src/pages/Home/Home";
 import Carrito from "../src/pages/Carrito/Carrito";
+import Admin from "../src/pages/Admin/Admin.jsx";
 import Register from "../src/pages/Register/Register";
 import Error from "../src/components/Error/Error";
 import Footer from "../src/components/Footer/Footer";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path="/OlvidoPass" element={<OlvidoPass />} />
           <Route path="/Login" element={
             <LoginButton>
