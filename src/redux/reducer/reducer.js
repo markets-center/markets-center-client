@@ -1,20 +1,36 @@
-import {ERRORS, GET_ALL_PRODUCTS, GET_ALL_SELLERS, GET_ALL_CATEGORIES, MESSAGE, POST_PRODUCT, UPDATE_PRODUCT, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, UPDATE_USER, POST_ORDER, GET_PRODUCT_BY_SELLER, RESET_SLIDERS} from '../actions/ctes'
+import {
+    ERRORS,
+    GET_ALL_PRODUCTS,
+    GET_ALL_SELLERS,
+    GET_ALL_CATEGORIES,
+    MESSAGE, POST_PRODUCT,
+    UPDATE_PRODUCT,
+    GET_PROTUCT_BY_NAME,
+    GET_PRODUCT_BY_ID,
+    ADMIN_UPDATE_ADD_CATEGORY,
+    GET_ALL_USERS,
+    UPDATE_USER,
+    POST_ORDER,
+    GET_PRODUCT_BY_SELLER,
+    RESET_SLIDERS,
+    GET_PRODUCT_BY_CATEGORY
+} from '../actions/ctes'
 
 const initialState = {
     allProducts: [], //aqui van los productos con todos los detalles
-    addedProduct:{},
+    addedProduct: {},
     searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
     allCategories: [],
-    newCategory:{},
+    newCategory: {},
     allSellers: [],
-    allUsers:[],
-    oneUser:{},
-    newOrder:{},
+    allUsers: [],
+    oneUser: {},
+    newOrder: {},
     errors: '',
     message: ''
 }
-export default function rootReducer(state = initialState, action){
-    switch(action.type){
+export default function rootReducer(state = initialState, action) {
+    switch (action.type) {
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
@@ -55,6 +71,11 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 allSellers: action.payload
             }
+        case GET_PRODUCT_BY_CATEGORY:
+            return {
+                ...state,
+                searchedProducts: action.payload
+            }
         case ERRORS:
             return {
                 ...state,
@@ -78,12 +99,12 @@ export default function rootReducer(state = initialState, action){
         case UPDATE_USER:
             return {
                 ...state,
-                oneUser: {...action.payload}
+                oneUser: { ...action.payload }
             }
         case POST_ORDER:
             return {
                 ...state,
-               newOrder: action.payload 
+                newOrder: action.payload
             }
         case RESET_SLIDERS:
             return {
@@ -95,4 +116,4 @@ export default function rootReducer(state = initialState, action){
                 ...state
             }
     }
- }
+}
