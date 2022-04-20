@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { Container, Box, Typography, Button,TextField } from "@mui/material";
 import {useAuth} from '../../context/AuthContext';
-import {useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,7 +8,6 @@ function ResetPass({ name, email, image, handleClosePass }) {
     const[state, setState] = useState({pass:'', passConfirm:''})
     const [error, setError] = useState('');
     const {updatePassword} = useAuth();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
   
     function handleChange(e){
