@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
 import Logo from '../../images/MC-Full.png'
-import Avatar from '@mui/material/Avatar';
-import Person from '@mui/icons-material/Person';
 //
 import Filters from '../Filters/Filters.jsx';
 //
@@ -11,15 +9,26 @@ import Filters from '../Filters/Filters.jsx';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import { IconButton, Stack, Box } from '@mui/material/'
-import { Logout } from '@mui/icons-material';
+import { resetSliders } from '../../redux/actions/a.products'
+import { useDispatch } from 'react-redux';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { Menu } from '@mui/material'
-import { Divider, ListItemIcon, MenuItem } from '@material-ui/core';
 
-export default function NavBar({ searchBar, home, admin, value, setValue }){
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Logout from '@mui/icons-material/Logout';
+import Stack from '@mui/material/Stack';
+import { Person } from '@mui/icons-material';
+
+export default function NavBar({ searchBar, home, admin, value, setValue }) {
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
     console.log(currentUser);
@@ -29,11 +38,17 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
         navigate('/')
     }
 
+    function handleSelect() {
+        navigate('/');
+        dispatch(resetSliders())
+    }
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -43,7 +58,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
 
-                    <IconButton cursor="pointer" onClick={() => navigate('/')}>
+                    <IconButton cursor="pointer" onClick={handleSelect}>
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
                     {
@@ -52,30 +67,32 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
                     }
 
                     <Stack direction="row">
-                        <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-                            <IconButton
-                                size="small"
-                                sx={{ ml: 2 }}
-                                variant="contained"
-                                color="white"
-                                onClick={() => navigate('/Carrito')}
-                            >
-                                <LocalGroceryStoreOutlinedIcon sx={{ width: 33, height: 33, cursor: 'pointer' }} />
-                            </IconButton>
-                            <IconButton variant="contained"
-                                size="small"
-                                sx={{ ml: 2 }}
-                                aria-controls={open ? 'account-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                                onClick={handleClick}>
-                                <Avatar
-                                    src={oneUser.image ? oneUser.image : '/broken-image.jpg'}
-                                    sx={{ width: 33, height: 33, cursor: 'pointer' }}
-                                />
-                            </IconButton>
-
-                            <Menu anchorEl={anchorEl}
+                        <React.Fragment>
+                            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                                <Tooltip title="Carrito de compras">
+                                    <IconButton
+                                        onClick={() => navigate('/Carrito')}
+                                        size="small"
+                                        sx={{ ml: 2 }}
+                                        color="white">
+                                        <LocalGroceryStoreOutlinedIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Cuenta">
+                                    <IconButton
+                                        onClick={handleClick}
+                                        size="small"
+                                        sx={{ ml: 2 }}
+                                        aria-controls={open ? 'account-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                    >
+                                        <Avatar src={oneUser.image ? oneUser.image : '/broken-image.jpg'} sx={{ width: 32, height: 32, objectFit: 'cover' }}></Avatar>
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                            <Menu
+                                anchorEl={anchorEl}
                                 id="account-menu"
                                 open={open}
                                 onClose={handleClose}
@@ -107,34 +124,34 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
                                     },
                                 }}
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
                                 <MenuItem onClick={() => navigate('/Login')}>
                                     <ListItemIcon>
-                                        <Person fontSize="small" />
+                                        <Person />
                                     </ListItemIcon>
                                     Profile
                                 </MenuItem>
                                 {
                                     currentUser === null ? undefined :
-                                        <>
-                                            <Divider />
-                                            <MenuItem onClick={logoutHandler}>
-                                                <ListItemIcon>
-                                                    <Logout fontSize="small" />
-                                                </ListItemIcon>
-                                                Cerrar sesión
-                                            </MenuItem>
-                                        </>
+                                        (
+                                            <>
+                                                <Divider />
+                                                <MenuItem onClick={logoutHandler}>
+                                                    <ListItemIcon>
+                                                        <Logout />
+                                                    </ListItemIcon>Cerrar sesión
 
+                                                </MenuItem>
+                                            </>
+                                        )
                                 }
-
                             </Menu>
-                        </Box>
+                        </React.Fragment>
                     </Stack>
                 </Toolbar>
             </Container>
-
-            <Filters home={home} admin={admin} value={value} setValue={setValue}/>
+            <Filters home={home} admin={admin} value={value} setValue={setValue} />
         </AppBar>
     )
 }

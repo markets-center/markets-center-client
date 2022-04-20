@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import NavBar from '../../components/NavBar/NavBar.jsx'
+
 import Slider2 from '../../components/Sliders/Slider2.jsx';
 import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter';
 import RenderBusquedas from '../../components/RenderBusquedas/RenderBusquedas.jsx';
+
 
 
 
@@ -20,7 +22,7 @@ export default function Home (){
         if(productsSearched.length === initialProducts.length){
             setRender(false)
         }
-    }, 200);
+    }, 10);
     
 
     return (
