@@ -1,6 +1,6 @@
 import { Container, Button, Box, Typography } from "@mui/material";
 
-export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
+export default function CardVendedor({ nombre, id, image, stock, precio, removeProduct }){
     return (
         <Container sx={{
             height: '100px',
@@ -15,7 +15,7 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
             <Box sx={{
                 height: 'max-content',
             }}>
-                <img src={urlImg} alt="pic" width='60px'/>
+                <img src={image} alt="pic" width='60px'/>
             </Box>
 
             <Box sx={{
@@ -26,7 +26,7 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
                 <Typography component='span' sx={{
                     margin: '10px 0px'
                 }}>
-                    {`${nombre} ${marca}`}
+                    {`${nombre}`}
                 </Typography>
                 <Typography component='span' sx={{
                     margin: '10px 0px'
@@ -45,7 +45,11 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
                 }}>
                 Reponer
                 </Button>
-                <Button variant="contained" color="secondary" sx={{
+                <Button 
+                onClick={() => removeProduct(id)}
+                variant="contained" 
+                color="secondary" 
+                sx={{
                     margin: '2px'
                 }}>
                 Eliminar

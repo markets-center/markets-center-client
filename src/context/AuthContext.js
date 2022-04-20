@@ -29,13 +29,25 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
 
+  function updateEmail(email) {
+    return currentUser.updateEmail(email);
+  }
+
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
+  function updatePassword(password) {
+    return currentUser.updatePassword(password);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       console.log(user);
+      currentUser?.uid && dispatch(userById(currentUser.uid))
       setLoading(false);
     });
-    currentUser?.uid && dispatch(userById(currentUser.uid))
     
     return unsubscribe;
   }, [currentUser?.uid, dispatch]);
@@ -43,9 +55,9 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     oneUser,
-    // resetPassword,
-    // updateEmail,
-    // updatePassword,
+    resetPassword,
+    updateEmail,
+    updatePassword,
     logout,
     signup,
   };
