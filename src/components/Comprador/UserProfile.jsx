@@ -7,28 +7,16 @@ import {Dialog, DialogTitle, DialogContent, DialogContentText} from '@mui/materi
 import {ListItem, ListItemAvatar, ListItemText} from '@mui/material';
 import HistoryItems from './HistoryItems';
 import logo from '../../images/MarketsCenter.png'
-// import Modal from '@mui/material/Modal';
-// import {getProductById} from '../../redux/actions/a.products'
 
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '550px',
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderRadius: '10px',
-  boxShadow: 24,
-  p: 4,
-};
 
 function UserProfile() {
   const dispatch = useDispatch();
   const history = useSelector(state => state.history)
   const {oneUser} = useAuth()
   const [openMore, setOpenMore] = useState(false);
+  // const [delMsg, setDelMsg] = useState('');
+  // const [openDelete, setOpenDelete] = useState(false);
   const [detail, setDetail] = useState('');
   function handleOpenMore(items){
     setDetail(items.products)
@@ -36,6 +24,17 @@ function UserProfile() {
   }
   const handleCloseMore = () => setOpenMore(false);
 
+  // function handleOpenCancel(item){
+  //   if(item.status === 'Pendiente') {
+  //     setDelMsg('Su orden será cancelada. Recibirá un aviso por mail')
+  //   } else if (item.status === 'Aceptada') {
+  //     setDelMsg('Su orden ya fue aceptada')
+  //   } else {
+  //     setDelMsg('algo para mostrar')
+  //   }
+  //   setOpenDelete(true)
+  // }
+  // const handleCloseCancel = () => setOpenDelete(false);
 
   useEffect(()=>{
     dispatch(userHistory(oneUser._id))
@@ -47,11 +46,41 @@ function UserProfile() {
             Historial de Compras
           </Typography>
           <List sx={{display: 'block'}} dense={false}>
-            {!history.length ? "No existen compras realizadas":
-              history.map(item => <HistoryItems handleOpenMore={handleOpenMore} key={item._id} item={item} />)
+            {!history.length ? <Typography sx={{ mt: 4, mb: 2, display:'block' }} variant="h4" component="div">
+            Historial de compras vacío
+          </Typography>:
+              history.map(item => <HistoryItems  handleOpenMore={handleOpenMore} key={item._id} item={item} />)
             }
           </List>
       </Container>
+
+      {/* <Dialog
+        open={openDelete}
+        onClose={handleCloseCancel}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{minwidth: '500px'}}
+      >
+        <DialogTitle sx={{display:'flex', justifyContent: 'center', alignItems: 'center'}} id="alert-dialog-title">
+          <img  src={logo}
+                alt=""
+                style={{ padding: "10px", width: "40px" }}
+                />
+          {"Cancelación de compra"}
+        </DialogTitle>
+        <DialogContent>
+        <DialogContentText 
+          sx={{display: 'block'}}
+          id="alert-dialog-description">
+            {delMsg}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseCancel} autoFocus>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog> */}
 
       <Dialog
         open={openMore}
@@ -68,15 +97,8 @@ function UserProfile() {
           {"Detalle de la compra"}
         </DialogTitle>
         <DialogContent>
-        {/* <ListItem>
-              <ListItemAvatar>
-              </ListItemAvatar>
-              <ListItemText sx={{padding: '20px'}} primary={`NOMBRE`} />
-              <ListItemText sx={{padding: '20px'}} primary={`P.UNITARIO`} />
-              <ListItemText sx={{padding: '20px'}} primary={`CANTIDAD`} />
-            </ListItem> */}
           {detail.length>0 && detail.map(p=> <DialogContentText 
-          ket={p.productId._id}
+          key={p.productId._id}
           sx={{display: 'block'}}
           id="alert-dialog-description">
             <ListItem>
@@ -98,6 +120,7 @@ function UserProfile() {
           </Button>
         </DialogActions>
       </Dialog>
+
     </div>
   );
 }

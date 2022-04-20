@@ -5,9 +5,9 @@ import {GET_ALL_CATEGORIES, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, ERRORS, ME
 export function adminUpdateCategory (id, category) {
     return async function (dispatch) {
         try {
-            const newCategory = await axios.put(`http://localhost:4000/api/admin/categories/${id}`, category);
-            dispatch({type: MESSAGE, payload: newCategory.data.msg});
-            dispatch({type: ADMIN_UPDATE_ADD_CATEGORY, payload: newCategory.data.data})
+            const allCategories = await axios.put(`http://localhost:4000/api/admin/categories/${id}`, category);
+            dispatch({type: MESSAGE, payload: allCategories.data.msg});
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -17,9 +17,9 @@ export function adminUpdateCategory (id, category) {
 export function adminAddCategory (category) {
     return async function (dispatch) {
         try {
-            const newCategory = await axios.post('http://localhost:4000/api/admin/category', category);
-            dispatch({type: MESSAGE, payload: newCategory.data.msg})
-            dispatch({type: ADMIN_UPDATE_ADD_CATEGORY, payload: newCategory.data.data})
+            const allCategories = await axios.post('http://localhost:4000/api/admin/category', category);
+            dispatch({type: MESSAGE, payload: allCategories.data.msg})
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
