@@ -111,6 +111,25 @@ export default function Carrito() {
       updatedAt: "2022-04-19T17:13:52.589Z",
       __v: 0,
     },
+    {
+      _id: "625ebee4b6d3124f0d79bdd5",
+      name: "Cangrejo",
+      description: "ay mi cangrejo",
+      image:
+        "http://res.cloudinary.com/markets-center/image/upload/v1650376420/fr88ahdpuvtjrlghyjyn.jpg",
+      category: [
+        {
+          _id: "625e18528435e20ed2b70f6c",
+          name: "Pesacados y mariscales",
+        },
+      ],
+      stock: 195,
+      price: 3400,
+      userId: "625c8bf646bd1097c3076bfd",
+      createdAt: "2022-04-19T13:53:40.657Z",
+      updatedAt: "2022-04-19T17:13:52.589Z",
+      __v: 0,
+    }
   ];
 
   const [total, setTotal] = useState(0);

@@ -22,7 +22,8 @@ import Comprador from './pages/Comprador/Comprador'
 
 function App() {
   return (
-    <AuthProvider>
+    <div className="app-container">
+      <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -55,6 +56,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </AuthProvider>
+    </div>
   );
 }
 
