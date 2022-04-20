@@ -17,8 +17,8 @@ function ComponenteGracias() {
         <div className={s.supremeContainer}>
             <div className={s.container}>
             <div className={s.containerCheck}>
-            <input type="checkbox" id="check" checked={checked}/>
-                <label for="check">
+            <input type="checkbox" id="check" checked={checked} className={s.input}/>
+                <label className={s.label} for="check">
                     <div className={s.checkIcon}></div>
                 </label>
             </div>    

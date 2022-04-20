@@ -58,7 +58,7 @@
   background: transparent;
   margin-top: 2vh;
 }
-label{
+.label{
     margin-top: 30px;
   position: relative;
   height: 105px;
@@ -80,10 +80,10 @@ label{
     transform: rotate(360deg);
   }
 }
-label .checkIcon{
+.label .checkIcon{
   display: none;
 }
-label .checkIcon:after{
+.label .checkIcon:after{
   position: absolute;
   content: "";
   top: 50%;
@@ -118,13 +118,13 @@ label .checkIcon:after{
     opacity: 1;
   }
 }
-input{
+.input{
   display: none; 
 }
-input:checked ~ label .checkIcon{
+.input:checked ~ .label .checkIcon{
   display: block;
 }
-input:checked ~ label{
+.input:checked ~ .label{
   animation: none;
   border-color: #5cb85c;
   transition: border 0.5s ease-out;
