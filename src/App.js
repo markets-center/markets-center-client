@@ -19,15 +19,18 @@ import BuyerForm from './pages/UserData/BuyerForm'
 import Login from './pages/Login/Login';
 import OlvidoPass from './pages/ForgotPass/OlvidoPass'
 import Comprador from './pages/Comprador/Comprador'
+import GraciasPage from './pages/GraciasPage/GraciasPage'
 
 function App() {
   return (
-    <AuthProvider>
+    <div className="app-container">
+      <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Carrito" element={<Carrito />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Thanks" element={<GraciasPage />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/OlvidoPass" element={<OlvidoPass />} />
           <Route path="/Login" element={
@@ -55,6 +58,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </AuthProvider>
+    </div>
   );
 }
 

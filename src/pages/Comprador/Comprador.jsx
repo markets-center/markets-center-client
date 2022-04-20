@@ -8,7 +8,7 @@ export default function Comprador(){
 
     return (
         <div>
-            <NavBar />
+            <NavBar searchBar1={true} />
             <UserData />
             <UserProfile/>
         </div>
