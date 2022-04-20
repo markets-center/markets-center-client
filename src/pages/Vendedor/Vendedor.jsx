@@ -18,13 +18,14 @@ export default function Vendedor(){
     const { oneUser } = useAuth()
 
     useEffect(() => {
-        dispatch(productBySeller(/* oneUser._id */))
-    },[dispatch])
+        dispatch(productBySeller(oneUser._id))
+    },[oneUser._id,dispatch])
     
     const products = useSelector(state => state.searchedProducts)
     const [listProducts, setListProducts] = useState(products);
 
-    console.log(products)
+    console.log(oneUser)
+    console.log(oneUser.image)
     
     const removeProduct = (id) => {
         const products = listProducts.filter(product => product._id !== id)
@@ -39,7 +40,14 @@ export default function Vendedor(){
             display: 'flex',
             flexDirection: 'column'
         }}>
-            <DatosVendedor />
+            <DatosVendedor 
+                        name={oneUser.name}
+                        address={oneUser.address}
+                        email={oneUser.email}
+                        delivery={oneUser.delivery}
+                        phone={oneUser.phone}
+                        image={oneUser.image}
+                        />
             <Container sx={{
                 height: '500px',
                 display: 'flex',

@@ -1,6 +1,6 @@
 import { Container, Box, Typography } from "@mui/material";
 
-export default function DatosVendedor(){
+export default function DatosVendedor({ name, address, email, delivery, phone, image }){
     return (
         <Container sx={{
             height: '250px',
@@ -17,14 +17,13 @@ export default function DatosVendedor(){
                 alignItems: 'center',
             }}>
                 <Box sx={{
-                    marginBottom: '25px'
                 }}>
                     <Typography variant='h6'>
-                        {"SUPERMERCADO"}
+                        {name}
                     </Typography>
                 </Box>
                 <Box>
-                    <img src="https://e7.pngegg.com/pngimages/798/436/png-clipart-computer-icons-user-profile-avatar-profile-heroes-black.png" alt="" style={{padding: "10px",width: "100px"}}/>
+                    <img src={image} alt="" style={{padding: "10px",width: "150px",borderRadius: "50%"}}/>
                 </Box>
             </Container>
             <Container sx={{
@@ -42,12 +41,12 @@ export default function DatosVendedor(){
             }}>
                 <Box>
                     <Typography>
-                        {`Dirección: `}
+                        {`Dirección: ${address}`}
                     </Typography>
                 </Box>
                 <Box>
                     <Typography>
-                        {`Lo que sea: `}
+                        {`Mail: ${email}`}
                     </Typography>
                 </Box>
             </Container>
@@ -60,12 +59,12 @@ export default function DatosVendedor(){
 
                 <Box>
                     <Typography>
-                        {`Datos: `}
+                        {`Phone: ${phone}`}
                     </Typography>
                 </Box>
                 <Box>
                     <Typography>
-                        {`Delivery: `}
+                        {`Delivery: ${delivery}`}
                     </Typography>
                 </Box>
             </Container>
