@@ -3,7 +3,8 @@ import {
     GET_ALL_PRODUCTS,
     GET_ALL_SELLERS,
     GET_ALL_CATEGORIES,
-    MESSAGE, POST_PRODUCT,
+    MESSAGE,
+    POST_PRODUCT,
     UPDATE_PRODUCT,
     GET_PROTUCT_BY_NAME,
     GET_PRODUCT_BY_ID,
@@ -13,19 +14,22 @@ import {
     POST_ORDER,
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
-    GET_PRODUCT_BY_CATEGORY
+    GET_PRODUCT_BY_CATEGORY,
+    GET_USER_HISTORY
 } from '../actions/ctes'
+
 
 const initialState = {
     allProducts: [], //aqui van los productos con todos los detalles
     addedProduct: {},
-    searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
+    searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts // Esta Perfecto :D
     allCategories: [],
     newCategory: {},
     allSellers: [],
-    allUsers: [],
-    oneUser: {},
-    newOrder: {},
+    allUsers:[],
+    oneUser:{},
+    history:[],
+    newOrder:{},
     errors: '',
     message: ''
 }
@@ -106,10 +110,17 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 newOrder: action.payload
             }
+
+        case GET_USER_HISTORY:
+            return {
+                ...state,
+                history: action.payload
+            }
         case RESET_SLIDERS:
             return {
                 ...state,
                 searchedProducts: state.allProducts
+
             }
         default:
             return {
