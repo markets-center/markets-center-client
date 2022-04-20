@@ -1,0 +1,14 @@
+.supremeContainer{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+
+}
+.container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    width: 80vw;
+    max-width: 80vw;
+}
