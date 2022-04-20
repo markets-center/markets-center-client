@@ -11,6 +11,9 @@ import Filters from '../Filters/Filters.jsx';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
+import {ShoppingCart, AccountCircle, } from '@mui/icons-material';
+import { resetSliders } from '../../redux/actions/a.products'
+import { useDispatch } from 'react-redux';
 import { IconButton, Stack, Box } from '@mui/material/'
 import { Logout } from '@mui/icons-material';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
@@ -20,6 +23,7 @@ import { Menu } from '@mui/material'
 import { Divider, ListItemIcon, MenuItem } from '@material-ui/core';
 
 export default function NavBar({ searchBar, home, admin, value, setValue }){
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
     console.log(currentUser);
@@ -29,11 +33,17 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
         navigate('/')
     }
 
+    function handleSelect(){
+        navigate('/');
+        dispatch(resetSliders())
+    }
+  
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+  
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -43,7 +53,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }){
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
 
-                    <IconButton cursor="pointer" onClick={() => navigate('/')}>
+                    <IconButton cursor="pointer" onClick={handleSelect}>
                         <img src={Logo} alt="Logo" className={styles.logo} />
                     </IconButton>
                     {
