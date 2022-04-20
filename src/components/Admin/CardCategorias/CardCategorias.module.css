@@ -1,0 +1,25 @@
+.mainDiv{
+    width: 100%;
+}
+.item{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.item img{
+    max-width: 70px;
+    max-height: auto;
+}
+.left{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+.right{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+}
