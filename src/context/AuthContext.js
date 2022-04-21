@@ -49,7 +49,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      console.log(user);
       currentUser?.uid && dispatch(userById(currentUser.uid))
       setLoading(false);
     });

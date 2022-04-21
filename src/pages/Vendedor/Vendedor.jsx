@@ -58,7 +58,7 @@ export default function Vendedor(){
             setLoading(false)
         }, 500);
     },[oneUser._id,dispatch])
-    const products = useSelector(state => state.productsBySeller)
+    let products = useSelector(state => state.productsBySeller)
     //const [listProducts, setListProducts] = useState(products);
     //console.log(listProducts)
     // Solo se borra hasta que se recarga la pagina (No de la DB)

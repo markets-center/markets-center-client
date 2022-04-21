@@ -10,7 +10,6 @@ import defaultImage from '../../../images/defaultUser.png';
 export default function CardCategorias (){
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.allUsers)
-    console.table(allUsers)
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch])
