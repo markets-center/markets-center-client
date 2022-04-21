@@ -12,6 +12,7 @@
 .left{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .left img{
     width: 70px;
