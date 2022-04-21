@@ -5,7 +5,7 @@ import {ERRORS, MESSAGE, POST_ORDER} from './ctes';
 export function postOrder(order) {
     return async function (dispatch) {
         try {
-            const newOrder = await axios.post('http://localhost:4000/api/private/addOrder', order);
+            const newOrder = await axios.post('/api/private/addOrder', order);
             dispatch({type: MESSAGE, payload: newOrder.data.msg});
             dispatch({type: POST_ORDER, payload: newOrder.data.data})
         } catch (err) {
@@ -18,7 +18,7 @@ export function postOrder(order) {
 export function getOrderById (id) {
     return async function (dispatch){
         try {
-            const newOrder = await axios.get(`http://localhost:4000/api/private/sendOrder/${id}`);
+            const newOrder = await axios.get(`/api/private/sendOrder/${id}`);
             dispatch({type: MESSAGE, payload: newOrder.data.msg});
             dispatch({type: POST_ORDER, payload: newOrder.data.data})
         } catch (err) {

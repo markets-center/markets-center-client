@@ -5,7 +5,7 @@ import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_
 export function getAllProducts(){
     return async function (dispatch) {
         try {
-            const products = await axios.get('http://localhost:4000/api/public/products');
+            const products = await axios.get('/api/public/products');
             dispatch({type: MESSAGE, payload: products.data.msg})
             dispatch({type: GET_ALL_PRODUCTS, payload: products.data.data})
         } catch (err) {
@@ -17,7 +17,7 @@ export function getAllProducts(){
 export function getProductByName(name) {
     return async function (dispatch) {
         try {
-            const products = await axios.get(`http://localhost:4000/api/public/products?name=${name}`);
+            const products = await axios.get(`/api/public/products?name=${name}`);
             dispatch({type: MESSAGE, payload: products.data.msg});
             dispatch({type: GET_PROTUCT_BY_NAME, payload: products.data.data})
         } catch (err) {
@@ -29,7 +29,7 @@ export function getProductByName(name) {
 export function getProductById (id) {
     return async function (dispatch) {
         try {
-            const product = await axios.get(`http://localhost:4000/api/public/product/${id}`);
+            const product = await axios.get(`/api/public/product/${id}`);
             dispatch({type: MESSAGE, payload:product.data.msg});
             dispatch({type: GET_PRODUCT_BY_ID, payload: product.data.data});
         } catch (err) {
@@ -41,7 +41,7 @@ export function getProductById (id) {
 export function productBySeller (id) {
     return async function (dispatch) {
         try {
-            const result = await axios.get(`http://localhost:4000/api/public/filter/bySeller/${id}`);
+            const result = await axios.get(`/api/public/filter/bySeller/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
             dispatch({type: GET_PRODUCT_BY_SELLER, payload: result.data.data})
         } catch (err) {
@@ -53,7 +53,7 @@ export function productBySeller (id) {
 export function deleteProduct (id) {
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`http://localhost:4000/api/public/product/${id}`);
+            const result = await axios.delete(`/api/public/product/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})

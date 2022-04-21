@@ -9,6 +9,10 @@ import store from './redux/store/store'
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './ThemeConfig';
 
+import axios from 'axios'
+
+axios.defaults.baseURL = process.env.REACT_APP_API;
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
