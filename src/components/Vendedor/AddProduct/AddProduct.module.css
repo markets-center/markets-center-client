@@ -1,35 +1,41 @@
-.mainDiv{
+.mainDiv {
     display: flex;
     flex-direction: column;
     width: 100%;
     text-align: center;
 }
-.middleDiv{
+
+.middleDiv {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.modalLeft{
+
+.modalLeft {
     display: flex;
     flex-direction: column;
-    
+
 }
-.modalRight{
+
+.modalRight {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-img{
+
+.img {
     max-width: 200px;
     padding: 7px
 }
-.selectedDisplay{
+
+.selectedDisplay {
     max-width: 90%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.selectCard{
+
+.selectCard {
     display: flex;
     align-items: center;
     width: fit-content;
@@ -39,10 +45,12 @@ img{
     margin: 5px;
     font-size: 12px;
 }
-.titleCard{
+
+.titleCard {
     padding: 5px;
 }
-.buttonCard{
+
+.buttonCard {
     cursor: pointer;
     padding: 5px;
     color: red;
