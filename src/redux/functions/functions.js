@@ -44,3 +44,29 @@ export function orderByAlph(payload,state){
             })
     return sortedArr
 }
+
+export function filterByPrice(payload,state){
+    let filter= [];
+
+    if(payload === '0-500'){
+        filter = state.filter(s=> s.price >= '0' && s.price < '500');
+        return filter;
+    }
+    if(payload === '500-1500'){
+        filter = state.filter(s=> s.price >= '500' && s.price < '1500');
+        return filter;
+    }
+    if(payload === '1500-3000'){
+        filter = state.filter(s=> s.price >= '1500' && s.price < '3000');
+        return filter;
+    }
+    if(payload === '>3000'){
+        filter = state.filter(s=> s.price >= '3000');
+        return filter;
+    }
+    return state;
+
+    
+
+    
+}

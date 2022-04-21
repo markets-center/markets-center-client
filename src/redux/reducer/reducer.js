@@ -17,10 +17,11 @@ import {
     GET_PRODUCT_BY_CATEGORY,
     GET_USER_HISTORY,
     ORDER_BY_PRICE,
-    ORDER_BY_ALPH
+    ORDER_BY_ALPH,
+    FILTER_BY_PRICE
 } from '../actions/ctes'
 
-import { orderByPrice, orderByAlph } from '../functions/functions'
+import { orderByPrice, orderByAlph, filterByPrice } from '../functions/functions'
 
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
     addedProduct:{},
     searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
     productsBySeller: [],
+    filteredByPrice: [],
     allCategories: [],
     newCategory: {},
     allSellers: [],
@@ -140,6 +142,12 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 searchedProducts: ordenAlph
+            }
+        case FILTER_BY_PRICE:
+            let filter =  filterByPrice(action.payload,state.searchedProducts)
+            return{
+                ...state,
+                filteredByPrice: filter
             }
         default:
             return {
