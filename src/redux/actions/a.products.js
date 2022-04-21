@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER, RESET_SLIDERS, ORDER_BY_PRICE } from "./ctes";
+import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER, RESET_SLIDERS, ORDER_BY_PRICE, ORDER_BY_ALPH } from "./ctes";
 
 
 export function getAllProducts(){
@@ -76,6 +76,16 @@ export function orderByPrice (payload) {
         try {
             dispatch({type: MESSAGE})
             dispatch({type: ORDER_BY_PRICE, payload})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+export function orderByAlph (payload) {
+    return async function (dispatch) {
+        try {
+            dispatch({type: MESSAGE})
+            dispatch({type: ORDER_BY_ALPH, payload})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

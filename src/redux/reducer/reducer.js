@@ -15,8 +15,12 @@ import {
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
-    GET_USER_HISTORY
+    GET_USER_HISTORY,
+    ORDER_BY_PRICE,
+    ORDER_BY_ALPH
 } from '../actions/ctes'
+
+import { orderByPrice, orderByAlph } from '../functions/functions'
 
 
 const initialState = {
@@ -122,6 +126,20 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 searchedProducts: state.allProducts
 
+            }
+        case ORDER_BY_PRICE:
+            let orden = orderByPrice(action.payload, state.searchedProducts);
+            console.log(orden)
+            return{
+                ...state,
+                searchedProducts: orden
+            }
+        case ORDER_BY_ALPH:
+            let ordenAlph = orderByAlph(action.payload, state.searchedProducts);
+            console.log(ordenAlph)
+            return{
+                ...state,
+                searchedProducts: ordenAlph
             }
         default:
             return {
