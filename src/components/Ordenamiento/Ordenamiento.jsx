@@ -8,18 +8,20 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, orderByAlph } from '../../redux/actions/a.products'
+import { orderByPrice, orderByAlph, filterByPrice } from '../../redux/actions/a.products'
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+
 
 function Ordenamiento() {
     const dispatch = useDispatch();
     const [order, setOrder] = React.useState('');
     const [alph, setAlph] = React.useState('');
-    const [value, setValue] = React.useState([0, 3000]);
+    const [radio, setRadio] = React.useState('');
 
-    const handleChange2 = (event, newValue) => {
-      setValue(newValue);
-      console.log(value)
-    };    
+ 
     const handleChange = (event) => {
         event.preventDefault();
         setOrder(event.target.value);
@@ -30,6 +32,13 @@ function Ordenamiento() {
         setAlph(event.target.value);
         dispatch(orderByAlph(event.target.value));
     };
+
+    const handleChangeRadio = (event) => {
+      setRadio(event.target.value);
+      console.log(event.target.value)
+      dispatch(filterByPrice(event.target.value))
+    };
+  
   
   
     return (
@@ -41,19 +50,21 @@ function Ordenamiento() {
         }}>
 
             <Box sx={{ width: 190, paddingTop: "40px"}}>
-                <Typography variant="subtitle1">
-                    Precio
-                </Typography>
-                <Slider
-                    getAriaLabel={() => 'Precio'}
-                    value={value}
-                    onChange={handleChange2}
-                    valueLabelDisplay="auto"
-                    size="medium"
-                    min={0}
-                    max={5000} 
-                    step={100}
-                />
+            <FormControl>
+            <FormLabel >Precio</FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue=""
+                    name="precio"
+                    value={radio}
+                    onChange={handleChangeRadio}
+                >
+                    <FormControlLabel value="0-500" control={<Radio />} label="$0-$500" />
+                    <FormControlLabel value="500-1500" control={<Radio />} label="$500-$1500" />
+                    <FormControlLabel value="1500-3000" control={<Radio />} label="$1500-$3000" />
+                    <FormControlLabel value=">3000" control={<Radio />} label=">$3000" />
+                </RadioGroup>
+            </FormControl>
             </Box>
             <FormControl variant="standard" sx={{ m: 2, minWidth: 200 }}>
                 <InputLabel>Ordenar</InputLabel>
