@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { productBySeller, deleteProduct } from '../../redux/actions/a.products.js';
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
+import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
 
 import { useAuth } from '../../context/AuthContext'
@@ -14,6 +15,7 @@ import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch()
     const { oneUser, currentUser } = useAuth()
     // Form Modal 
@@ -52,6 +54,9 @@ export default function Vendedor(){
     // Products by User
     useEffect(() => {
         dispatch(productBySeller(oneUser._id))
+        setTimeout(() => {
+            setLoading(false)
+        }, 500);
     },[oneUser._id,dispatch])
     const products = useSelector(state => state.productsBySeller)
     //const [listProducts, setListProducts] = useState(products);
@@ -125,7 +130,7 @@ console.log('ProductId: ', prodId)
                 overflow: 'auto',
                 borderRadius: '10px'
             }}>
-                {products.length ? products.map((producto, id) => <CardVendedor 
+                {loading ? <img src={spinner} alt="" style={{width: '150px', height: 'max-content'}} /> : products.length ? products.map((producto, id) => <CardVendedor 
                                             key={id}
                                             id={producto._id}
                                             nombre={producto.name}
