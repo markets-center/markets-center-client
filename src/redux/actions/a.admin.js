@@ -44,7 +44,6 @@ export function getAllUsers(){
             const users = await axios.get('http://localhost:4000/api/private/users');
             dispatch({type: MESSAGE, payload: users.data.msg})
             dispatch({type: GET_ALL_USERS, payload: users.data.data})
-
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -57,6 +56,7 @@ export function deleteUser(id) {
         try {
             const result = await axios.delete(`http://localhost:4000/api/admin/userDelete/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
+            dispatch({type: GET_ALL_USERS, payload: result.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -68,6 +68,7 @@ export function upgradeUser(id){
         try {
             const result = await axios.put(`http://localhost:4000/api/admin/userAdmin/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
+            dispatch({type: GET_ALL_USERS, payload: result.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

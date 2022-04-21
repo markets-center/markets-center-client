@@ -42,9 +42,8 @@ export function AuthProvider({ children }) {
 
   function blockPass(){
     const newPass = '85tjoec5&%$&3ckfvpd964VDFBY67&/%(/';
-    return currentUser.updatePassword(newPass)
-    .then(currentUser.sendPasswordResetEmail(currentUser.email))
-    
+    currentUser.updatePassword(newPass)
+    currentUser.sendPasswordResetEmail(currentUser.email)
   }
 
   useEffect(() => {
