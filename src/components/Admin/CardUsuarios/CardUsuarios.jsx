@@ -1,19 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../../redux/actions/a.admin.js';
-
+import { getAllUsers, upgradeUser, deleteUser } from '../../../redux/actions/a.admin.js';
+import { useAuth } from '../../../context/AuthContext.js'
 import { IconButton } from '@mui/material';
 import styles from './CardUsuarios.module.css';
-import { Delete, BorderColor } from '@mui/icons-material/';
+import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached } from '@mui/icons-material/';
 import defaultImage from '../../../images/defaultUser.png';
 
 export default function CardCategorias (){
-    const allUsers = useSelector(state => state.allUsers)
     const dispatch = useDispatch();
+    const allUsers = useSelector(state => state.allUsers)
+    console.table(allUsers)
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch])
-    console.log(allUsers)
+    const { blockPass } = useAuth();
+    async function handlePasswordReset(event){
+        event.preventDefault()
+        await blockPass()
+        
+    }
+    function handleUserToAdmin(event){
+        dispatch(upgradeUser(event.currentTarget.getAttribute('id')))
+    }
+    function handleUserdelete(event){
+        dispatch(deleteUser(event.currentTarget.getAttribute('id')))
+    }
+    
     return (
         <div className={styles.mainDiv}>
             {
@@ -27,12 +40,28 @@ export default function CardCategorias (){
                                         e.target.onerror = null
                                         e.target.src = defaultImage}} />
                                 <h4>{category.name}</h4>
+                                {
+                                    category.isAdmin ? <AdminPanelSettings />   : (
+                                        category.isSeller ? <Storefront /> : <PersonOutline />
+                                    )
+                                }
                             </div>
                             <div className={styles.right}>
-                                <IconButton>
-                                    <BorderColor />
+                                <IconButton 
+                                    onClick={handlePasswordReset}
+                                >
+                                    <Cached />
                                 </IconButton>
-                                <IconButton>
+                                <IconButton
+                                    id={category._id}
+                                    onClick={handleUserToAdmin}
+                                >
+                                    <SupervisorAccount />
+                                </IconButton>
+                                <IconButton
+                                    id={category._id}
+                                    onClick={handleUserdelete}
+                                >
                                     <Delete />
                                 </IconButton>
                             </div>
@@ -40,6 +69,7 @@ export default function CardCategorias (){
                     )
                 })
             }
+            {/* <Menu open={open}/> */}
         </div>
     )
 }

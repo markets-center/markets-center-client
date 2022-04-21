@@ -10,7 +10,6 @@ export default function Usuarios(){
         <div>
             <div className={styles.header}>
                 <h3>Lista de Usuarios</h3>
-                <Button variant="contained" color="info" startIcon={<AddBox />} > Agregar una categoria</Button>
             </div>
             <CardUsuarios />
         </div>
