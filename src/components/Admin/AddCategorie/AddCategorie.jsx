@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
-import { getAllCategories } from '../../../redux/actions/a.category.js'
-import { postProduct } from '../../../redux/actions/a.seller.js'
-import { useAuth } from "../../../context/AuthContext";
+// import { useDispatch } from 'react-redux';
+// import { adminAddCategory } from '../../../redux/actions/a.admin.js'
+// import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 
-import styles from "./AddProduct.module.css";
+import styles from './AddCategori.module.css'
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
 import { AddAPhoto, Publish } from '@mui/icons-material/';
 
-import Categories from './Categories.jsx'
 
 const Input = styled('input')({
     display: 'none',
 });
 
-export default function AddProduct({input, setInput, handleClose, open, prodId, handleSubmit}) {
+export default function AddCategorie({open, handleClose, input, setInput, id, handleSubmit}) {
+    
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 1000,
-        height: 500,
+        width: 400,
+        height: 400,
         bgcolor: 'background.paper',
         border: '1px solid #000',
         borderRadius: 6,
@@ -31,30 +29,11 @@ export default function AddProduct({input, setInput, handleClose, open, prodId, 
         display: "flex",
         flexDirection: 'row',
     };
-    // const { currentUser } = useAuth();
     
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getAllCategories());
-    }, [dispatch])
-    
-    // const [input, setInput] = useState({
-    //     name: "",
-    //     description: "",
-    //     image: "",
-    //     stock: "",
-    //     category: [],
-    //     price: "",
-    //     userId: currentUser.uid
-    // });
+    // const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
-        name: "Error",
-        description: "Error",
-        image: "Error",
-        stock: "Error",
-        category: "Error",
-        price: "Error",
+        name: "Error"
     })
 
     const handleChange = (e) => {
@@ -71,22 +50,11 @@ export default function AddProduct({input, setInput, handleClose, open, prodId, 
     const Validation = (input) => {
         let errorData = {
             name: "Error",
-            description: "Error",
-            image: "Error",
-            stock: "Error",
-            category: "Error",
-            price: "Error"
         }
         if (/^[a-zA-Z áéíóúÁÉÍÓÚñÑ\s]*$/.test(input.name) && input.name.length > 0) delete errorData.name;
-        if (input.description.length > 0) delete errorData.description;
-        if (typeof input.image === 'string' && input.image.length > 0) delete errorData.image;
-        if (typeof parseInt(input.stock) === 'number' && input.stock >= 0 && input.stock.length > 0) delete errorData.stock;
-        if (input.category.length > 0) delete errorData.category;
-        if (typeof parseInt(input.price) === 'number' && input.price >= 0 && input.price.length > 0) delete errorData.price
         return errorData;
     }
 
-    const navigate = useNavigate()
     function handleImageChange(e) {
         const reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
@@ -95,10 +63,6 @@ export default function AddProduct({input, setInput, handleClose, open, prodId, 
                 ...input,
                 image: reader.result
             });
-            setError(Validation({
-                ...input,
-                image: reader.result
-            }))
         };
     }
     useEffect(()=>{
@@ -106,30 +70,21 @@ export default function AddProduct({input, setInput, handleClose, open, prodId, 
     }, [error])
     // function handleSubmit(e){
     //     e.preventDefault();
-    //     dispatch(postProduct(input))
-    //     navigate('/Profile')
+    //     id ? dispatch(adminUpdateCategory(id, input)) :
+    //     dispatch(adminAddCategory(input))
     // }
     
     return (
     <Modal
-        className={styles.modal}
         open={open}
         onClose={handleClose}
     >
         <Box sx={{ ...style}} component="form">
-        <div className={styles.mainDiv}>
+        <div className={styles.mainDiv} >
             <Typography variant="h4" gutterBottom component="div">
-                Agregar un producto:
+                Agregar una categoria:
             </Typography>
-            <div className={styles.middleDiv}>
-            <div className={styles.modalLeft}>
                 <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={input.name} style={{ width: "300px", margin: "5px" }} />
-                <TextField error={error.price ? true : false} id="price" label="Precio" variant="standard" onChange={handleChange} value={input.price} style={{ width: "300px", margin: "5px" }} />
-                <TextField error={error.stock ? true : false} id="stock" label="Stock" variant="standard" onChange={handleChange} value={input.stock} style={{ width: "300px", margin: "5px" }} />
-                <Categories Validation={Validation} setError={setError} error={error} setInput={setInput} input={input} />
-            </div>
-            <div className={styles.modalRight}>
-                <TextField error={error.description ? true : false} id="description" label="Descripción" variant="standard" onChange={handleChange} value={input.description} style={{ width: "300px", margin: "5px" }} multiline rows={4} />
                     {
                         input.image ? <img src={input.image} alt='prueba' /> : <img src='https://www.gfpropiedades.com.ar/themes/inmokey_t1/img/nophoto.png' alt='prueba' />
                     }
@@ -142,14 +97,12 @@ export default function AddProduct({input, setInput, handleClose, open, prodId, 
                         startIcon={<AddAPhoto />}
                     >Imagen</Button>
                 </label>
-            </div>
-            </div>
             <Button 
                 onClick={handleSubmit}
                 disabled={disabled}
                 variant="contained" 
                 component="span" 
-                style={{ width: "100%", margin: "5px" }}
+                style={{ width: "70%", margin: "5px" }}
                 startIcon={<Publish />}
                 >Publicar</Button>
         </div>

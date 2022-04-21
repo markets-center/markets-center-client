@@ -23,6 +23,10 @@ export const theme = createTheme({
           main: '#a5a5a5',
           contrastText: "#fff"
         },
+        buttonGracias:{
+          main: '#5cb85c',
+          contrastText: "#fff"
+        }
       },
 });
 

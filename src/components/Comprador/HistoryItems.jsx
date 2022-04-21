@@ -1,9 +1,9 @@
 import React from "react";
 import { ListItem, ListItemText, Avatar } from "@mui/material";
 import { IconButton, ListItemAvatar } from "@mui/material";
-import { ShoppingBasket, Delete, ExpandMore } from "@mui/icons-material";
+import { ShoppingBasket, ExpandMore } from "@mui/icons-material";
 
-function HistoryItems({item, handleOpenMore}) {
+function HistoryItems({item, handleOpenMore, handleOpenCancel}) {
   return (
     <div>
       <ListItem
@@ -12,9 +12,9 @@ function HistoryItems({item, handleOpenMore}) {
             <IconButton onClick={()=>handleOpenMore(item)} sx={{ padding: "20px" }} edge="end" aria-label="delete">
               <ExpandMore />
             </IconButton>
-            <IconButton sx={{ padding: "20px" }} edge="end" aria-label="delete">
+            {/* <IconButton onClick={()=>handleOpenCancel(item)} sx={{ padding: "20px" }} edge="end" aria-label="delete">
               <Delete />
-            </IconButton>
+            </IconButton> */}
           </>
         }
       >

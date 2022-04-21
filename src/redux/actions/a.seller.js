@@ -30,7 +30,7 @@ export function postProduct(product) {
 export function updateProduct (product, id) {
     return async function (dispatch) {
         try {
-            const response = await axios.put(`http://localhost:4000/api/private/${id}`, product);
+            const response = await axios.put(`http://localhost:4000/api/private/product/${id}`, product);
             dispatch({type: MESSAGE, payload: response.data.msg});
             dispatch({type: UPDATE_PRODUCT, payload: response.data.data});
         } catch (err) {

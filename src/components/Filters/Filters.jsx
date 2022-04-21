@@ -43,7 +43,7 @@ export default function Filters({ home, admin, value, setValue }) {
 
   useEffect(() => {
     dispatch(getAllCategories())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function Filters({ home, admin, value, setValue }) {
         >
           <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-              <Tooltip title="Account settings">
+              <Tooltip title="Categorías">
                 <IconButton
                   onClick={handleClick}
                   size="small"

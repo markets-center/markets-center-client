@@ -2,6 +2,9 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { productBySeller } from '../../redux/actions/a.products.js';
+import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
+// import { postProduct } from '../../../redux/actions/a.seller.js'
+
 import { useAuth } from '../../context/AuthContext'
 
 import NavBar from '../../components/NavBar/NavBar'
@@ -11,27 +14,55 @@ import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
+    const dispatch = useDispatch()
+    const { oneUser, currentUser } = useAuth()
+    // Form Modal 
+    const [prodId, setProdId] = useState(null)
+    const [input, setInput] = useState({
+        name: "",
+        description: "",
+        image: "",
+        stock: "",
+        category: [],
+        price: "",
+        userId: currentUser.uid
+    });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false)
-    const dispatch = useDispatch()
-    const { oneUser } = useAuth()
-
+    const handleClose = () => {
+        setProdId(null)
+        setInput({
+            name: "",
+            description: "",
+            image: "",
+            stock: "",
+            category: [],
+            price: "",
+            userId: currentUser.uid
+        })
+        setOpen(false)
+    }
+    console.log(prodId)
+    function handleSubmit(e){
+        e.preventDefault();
+        prodId === null ?
+        dispatch(postProduct(input))
+        : dispatch(updateProduct(input, prodId))
+    }
+    // Products by User
     useEffect(() => {
         dispatch(productBySeller(oneUser._id))
     },[oneUser._id,dispatch])
-    
-    const products = useSelector(state => state.searchedProducts)
+    const products = useSelector(state => state.productsBySeller)
     const [listProducts, setListProducts] = useState(products);
-
-    console.log(oneUser)
-    console.log(oneUser.image)
-    
+    console.log(listProducts)
+    // Solo se borra hasta que se recarga la pagina (No de la DB)
     const removeProduct = (id) => {
         const products = listProducts.filter(product => product._id !== id)
         setListProducts(products)
     }
-
+console.log('Input: ', input)
+console.log('ProductId: ', prodId)
     return (
         <>
         <NavBar />
@@ -77,8 +108,12 @@ export default function Vendedor(){
                         Agregar
                     </Button>
                     <AddProduct 
+                        prodId={prodId}
+                        input={input}
+                        setInput={setInput}
                         open={open}
                         handleClose={handleClose}
+                        handleSubmit={handleSubmit}
                     />
                 </Container>
                 <Container sx={{
@@ -87,7 +122,7 @@ export default function Vendedor(){
                 flexWrap: 'wrap',
                 justifyContent: 'space-around',
                 overflow: 'auto',
-                borderRadius: '10px',
+                borderRadius: '10px'
             }}>
                 {listProducts.length ? listProducts.map((producto, id) => <CardVendedor 
                                             key={id}
@@ -96,7 +131,16 @@ export default function Vendedor(){
                                             image={producto.image}
                                             stock={producto.stock || "Sin Stock"}
                                             precio={producto.price}
+                                            category={producto.category}
+                                            description={producto.description}
+                                            handleClose={handleClose}
+                                            handleOpen={handleOpen}
+                                            handleSubmit={handleSubmit}
                                             removeProduct={removeProduct}
+                                            input={input}
+                                            setInput={setInput}
+                                            prodId={prodId}
+                                            setProdId={setProdId}
                                             />) : <Typography variant='h5' sx={{margin: 'auto'}}>
                                                     NO HAY PRODUCTOS
                                                 </Typography>}
