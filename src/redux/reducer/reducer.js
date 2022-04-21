@@ -64,7 +64,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_PRODUCT_BY_SELLER:
             return {
                 ...state,
-                productsBySeller: action.payload
+                searchedProducts: action.payload
             }
         case GET_ALL_CATEGORIES:
             return {
