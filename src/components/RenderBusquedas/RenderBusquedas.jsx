@@ -6,7 +6,7 @@ import s from './RenderBusquedas.module.css';
 function RenderBusquedas() {
     const products = useSelector(state => state.searchedProducts)
     return (
-        <div className={s.supremeContainer}>
+
             <div className={s.container}>
                 {products && products.map(p => <Card 
                 key={p.name}
@@ -18,7 +18,7 @@ function RenderBusquedas() {
                 category={p.category.map(c => c.name)}
                 />)}
             </div>
-        </div>
+
     );
 }
 
