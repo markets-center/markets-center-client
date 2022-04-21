@@ -5,7 +5,7 @@ import {GET_ALL_CATEGORIES, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, ERRORS, ME
 export function adminUpdateCategory (id, category) {
     return async function (dispatch) {
         try {
-            const allCategories = await axios.put(`http://localhost:4000/api/admin/categories/${id}`, category);
+            const allCategories = await axios.put(`/api/admin/categories/${id}`, category);
             dispatch({type: MESSAGE, payload: allCategories.data.msg});
             dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
@@ -17,7 +17,7 @@ export function adminUpdateCategory (id, category) {
 export function adminAddCategory (category) {
     return async function (dispatch) {
         try {
-            const allCategories = await axios.post('http://localhost:4000/api/admin/category', category);
+            const allCategories = await axios.post('/api/admin/category', category);
             dispatch({type: MESSAGE, payload: allCategories.data.msg})
             dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
@@ -29,7 +29,7 @@ export function adminAddCategory (category) {
 export function adminDeleteCategory (id) {
     return async function (dispatch) {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/admin/categories/${id}`);
+            const response = await axios.delete(`/api/admin/categories/${id}`);
             dispatch({type:GET_ALL_CATEGORIES, payload:response.data.data})
             dispatch({type: MESSAGE, payload: response.data.msg})
         } catch (err) {
@@ -41,7 +41,7 @@ export function adminDeleteCategory (id) {
 export function getAllUsers(){
     return async function (dispatch) {
         try {
-            const users = await axios.get('http://localhost:4000/api/private/users');
+            const users = await axios.get('/api/private/users');
             dispatch({type: MESSAGE, payload: users.data.msg})
             dispatch({type: GET_ALL_USERS, payload: users.data.data})
 
@@ -55,7 +55,7 @@ export function getAllUsers(){
 export function deleteUser(id) {
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`http://localhost:4000/api/admin/userDelete/${id}`);
+            const result = await axios.delete(`/api/admin/userDelete/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
@@ -66,7 +66,7 @@ export function deleteUser(id) {
 export function upgradeUser(id){
     return async function (dispatch) {
         try {
-            const result = await axios.put(`http://localhost:4000/api/admin/userAdmin/${id}`);
+            const result = await axios.put(`/api/admin/userAdmin/${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
