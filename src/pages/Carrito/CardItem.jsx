@@ -9,31 +9,19 @@ import {
 } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
-const CardItem = ({item}) => {
+const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem}) => {
 
-  const [itemCar, setItemcar] = useState(1);
   const [active, setActive] = useState(true);
-
-  const handleAddItemToCart = () => {
-    setItemcar(itemCar + 1);
-  };
-
-  const handleResItemToCart = () => {
-    setItemcar(itemCar - 1);
-  };
-
-  const removeItem = (id) => {
-    console.log("eliminado")
-  }
+  const [counter, setCounter] = useState(1);
   
   useEffect(() => {
-    itemCar > 1 ? setActive(false) : setActive(true)  
-  }, [itemCar])
+    counter > 1 ? setActive(false) : setActive(true)  
+  }, [counter])
   
   return (
     <div>
       {
-        <Grid container visibility={true}>
+        <Grid container visibility={true} >
           <Grid item xs={2}>
             <div className="item content-img">
               <Avatar
@@ -48,7 +36,6 @@ const CardItem = ({item}) => {
               <div className="detail item-tittle">
                 <Typography variant="subtitle1">{item.name}</Typography>
                 <div className="desc-item">
-                  {/* <Typography variant="caption">{item.userId}</Typography> */}
                   <Typography variant="caption">${item.price}</Typography>
                 </div>
               </div>
@@ -56,20 +43,26 @@ const CardItem = ({item}) => {
                 <button
                   disabled={active}
                   className="btn btn-add"
-                  onClick={handleResItemToCart}
+                  onClick={() => {
+                    setCounter(counter - 1);
+                    eventClickCountRes(item.price)
+                  }}
                 >
                   -
                 </button>
                 <input
-                  type="text"
+                  type="numer"
                   className="btn lb-count"
-                  defaultValue={1}
-                  value={itemCar}
+                  onChange={() =>{}}
+                  value={counter}
                   disabled={true}
                 />
                 <button
                   className="btn btn-res"
-                  onClick={handleAddItemToCart}
+                  onClick={() => {
+                    setCounter(counter + 1);
+                    eventClickCountAdd(item.price)
+                  }}
                 >
                   +
                 </button>
@@ -78,8 +71,8 @@ const CardItem = ({item}) => {
           </Grid>
           <Grid item xs={2}>
             <div className="item btn-remove">
-              <IconButton edge="end">
-                <DeleteForeverRoundedIcon color="error" onClick={removeItem}/>
+              <IconButton edge="end" onClick={() => eventClickRemoveItem(item._id)}>
+                <DeleteForeverRoundedIcon color="error"/>
               </IconButton>
             </div>
           </Grid>
