@@ -50,3 +50,26 @@ export function getAllUsers(){
         }
     }
 }
+
+
+export function deleteUser(id) {
+    return async function (dispatch) {
+        try {
+            const result = await axios.delete(`http://localhost:4000/api/admin/userDelete/${id}`);
+            dispatch({type: MESSAGE, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function upgradeUser(id){
+    return async function (dispatch) {
+        try {
+            const result = await axios.put(`http://localhost:4000/api/admin/userAdmin/${id}`);
+            dispatch({type: MESSAGE, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
