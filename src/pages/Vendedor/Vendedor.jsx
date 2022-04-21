@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productBySeller } from '../../redux/actions/a.products.js';
+import { productBySeller, deleteProduct } from '../../redux/actions/a.products.js';
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
 
@@ -54,12 +54,13 @@ export default function Vendedor(){
         dispatch(productBySeller(oneUser._id))
     },[oneUser._id,dispatch])
     const products = useSelector(state => state.productsBySeller)
-    const [listProducts, setListProducts] = useState(products);
-    console.log(listProducts)
+    //const [listProducts, setListProducts] = useState(products);
+    //console.log(listProducts)
     // Solo se borra hasta que se recarga la pagina (No de la DB)
     const removeProduct = (id) => {
-        const products = listProducts.filter(product => product._id !== id)
-        setListProducts(products)
+        dispatch(deleteProduct(id))
+        dispatch(productBySeller(oneUser._id))
+        return products = products.filter(product => product._id !== id)
     }
 console.log('Input: ', input)
 console.log('ProductId: ', prodId)
@@ -124,7 +125,7 @@ console.log('ProductId: ', prodId)
                 overflow: 'auto',
                 borderRadius: '10px'
             }}>
-                {listProducts.length ? listProducts.map((producto, id) => <CardVendedor 
+                {products.length ? products.map((producto, id) => <CardVendedor 
                                             key={id}
                                             id={producto._id}
                                             nombre={producto.name}
