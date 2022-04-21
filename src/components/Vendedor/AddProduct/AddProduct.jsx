@@ -15,8 +15,7 @@ const Input = styled('input')({
     display: 'none',
 });
 
-export default function AddProduct(props) {
-
+export default function AddProduct({input, setInput, handleClose, open, prodId, handleSubmit}) {
     const style = {
         position: 'absolute',
         top: '50%',
@@ -32,22 +31,22 @@ export default function AddProduct(props) {
         display: "flex",
         flexDirection: 'row',
     };
-    const { currentUser } = useAuth();
+    // const { currentUser } = useAuth();
     
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllCategories());
     }, [dispatch])
     
-    const [input, setInput] = useState({
-        name: "",
-        description: "",
-        image: "",
-        stock: "",
-        category: [],
-        price: "",
-        userId: currentUser.uid
-    });
+    // const [input, setInput] = useState({
+    //     name: "",
+    //     description: "",
+    //     image: "",
+    //     stock: "",
+    //     category: [],
+    //     price: "",
+    //     userId: currentUser.uid
+    // });
     const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
         name: "Error",
@@ -102,29 +101,20 @@ export default function AddProduct(props) {
             }))
         };
     }
-    //
-    // const [fileInputState, setFileInputState] = useState();
-    // function handleImageChange(e) {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(e.target.files[0]);
-    //     reader.onloadend = () => {
-    //         setFileInputState(reader.result);
-    //     };
-    // }
     useEffect(()=>{
         Object.keys(error).length > 0 ? setDisabled( true ) : setDisabled( false )
     }, [error])
-    function handleSubmit(e){
-        e.preventDefault();
-        dispatch(postProduct(input))
-        navigate('/Profile')
-    }
+    // function handleSubmit(e){
+    //     e.preventDefault();
+    //     dispatch(postProduct(input))
+    //     navigate('/Profile')
+    // }
     
     return (
     <Modal
         className={styles.modal}
-        open={props.open}
-        onClose={props.handleClose}
+        open={open}
+        onClose={handleClose}
     >
         <Box sx={{ ...style}} component="form">
         <div className={styles.mainDiv}>
