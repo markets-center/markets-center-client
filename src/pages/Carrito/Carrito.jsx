@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Carrito.css";
 import NavBar from "../../components/NavBar/NavBar.jsx";
-// import CardList from "./CardList";
 import CardItem from "./CardItem";
-
 
 import {
   Typography,
@@ -28,7 +26,7 @@ export default function Carrito() {
         },
       ],
       stock: 45,
-      price: 500,
+      price: 20,
       userId: "625c8bf646bd1097c3076bfd",
       createdAt: "2022-04-19T02:05:30.520Z",
       updatedAt: "2022-04-19T17:12:46.901Z",
@@ -48,7 +46,7 @@ export default function Carrito() {
         },
       ],
       stock: 18,
-      price: 2000,
+      price: 30,
       userId: "625c8bf646bd1097c3076bfd",
       createdAt: "2022-04-19T02:08:08.839Z",
       updatedAt: "2022-04-19T17:15:18.094Z",
@@ -67,7 +65,7 @@ export default function Carrito() {
         },
       ],
       stock: 0,
-      price: 2500,
+      price: 40,
       userId: "625c8c174166ea24dca8c4e6",
       createdAt: "2022-04-19T03:31:08.887Z",
       updatedAt: "2022-04-19T03:31:08.887Z",
@@ -86,14 +84,14 @@ export default function Carrito() {
         },
       ],
       stock: 195,
-      price: 2000,
+      price: 50,
       userId: "625c8bf646bd1097c3076bfd",
       createdAt: "2022-04-19T13:53:40.657Z",
       updatedAt: "2022-04-19T17:13:52.589Z",
       __v: 0,
     },
     {
-      _id: "625ebee4b6d3124f0d79bdd5",
+      _id: "625ebee4b6d3124f0d79bhi8",
       name: "Cangrejo",
       description: "ay mi cangrejo",
       image:
@@ -105,61 +103,67 @@ export default function Carrito() {
         },
       ],
       stock: 195,
-      price: 3400,
+      price: 60,
       userId: "625c8bf646bd1097c3076bfd",
       createdAt: "2022-04-19T13:53:40.657Z",
       updatedAt: "2022-04-19T17:13:52.589Z",
       __v: 0,
     },
-    {
-      _id: "625ebee4b6d3124f0d79bdd5",
-      name: "Cangrejo",
-      description: "ay mi cangrejo",
-      image:
-        "http://res.cloudinary.com/markets-center/image/upload/v1650376420/fr88ahdpuvtjrlghyjyn.jpg",
-      category: [
-        {
-          _id: "625e18528435e20ed2b70f6c",
-          name: "Pesacados y mariscales",
-        },
-      ],
-      stock: 195,
-      price: 3400,
-      userId: "625c8bf646bd1097c3076bfd",
-      createdAt: "2022-04-19T13:53:40.657Z",
-      updatedAt: "2022-04-19T17:13:52.589Z",
-      __v: 0,
-    }
   ];
 
+  const [itemCar, setItemcar] = useState([]);
   const [total, setTotal] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [iva, setIva] = useState(0);
+  const [add, setAdd] = useState(0);
 
-  const findTotal = products.reduce((sum, item) => sum + item.price, 0);
+  const findTotal = itemCar.reduce((sum, item) => sum + item.price, 0);
 
-  useEffect(() => {
-    const st = (findTotal / 1.18);
-    const igv = (findTotal - st);
-    setSubtotal(st);
-    setIva(igv);
-    setTotal(findTotal);
+  const eventClickCountAdd = (price) => {
+    setAdd((prev) => prev + price)
+  }
+
+  const eventClickCountRes = (price) => { 
+    setAdd((prev) => prev - price)
+  }
+  const eventClickRemoveItem = (id) => {
+    const fil = itemCar.filter((p) => p._id !== id)
+    const st = fil.reduce((sum, item) => sum + item.price, 0);
+    setItemcar(fil);
+    setTotal(st);
+    setAdd(0);
+  }
+
+  useEffect(() => 
+  {
+    setItemcar(products)
   },[]);
+
+  useEffect(() => 
+  {
+    const subT = (total/1.18);
+    const i = (total - subT)
+    setIva(i)
+    setSubtotal(subT);
+    setTotal(findTotal + add);
+  },[add, findTotal, total, subtotal, iva]);
 
   return (
     <div>
       <NavBar searchBar1={false} />
       <div className="car-container">
         <div className="items-content">
-          {products?.map((item) => {
+          {itemCar?.map((item) => {
             return (
-              <>
+              <div key={item._id}>
                 <CardItem
                   item={item}
-                  total={total}
+                  eventClickCountAdd={eventClickCountAdd}
+                  eventClickCountRes={eventClickCountRes}
+                  eventClickRemoveItem={eventClickRemoveItem}
                 />
                 <Divider/>
-              </>
+              </div>
             );
           })}
         </div>
