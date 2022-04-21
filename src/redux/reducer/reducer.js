@@ -143,12 +143,12 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 searchedProducts: ordenAlph
             }
-        case FILTER_BY_PRICE:
-            let filter =  filterByPrice(action.payload,state.searchedProducts)
+/*         case FILTER_BY_PRICE:
+            let filter = filterByPrice(action.payload,state.searchedProducts)
             return{
                 ...state,
                 filteredByPrice: filter
-            }
+            } */                                                                  //SOLUCIONAR
         default:
             return {
                 ...state
