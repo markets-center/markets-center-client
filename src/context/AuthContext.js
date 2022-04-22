@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+
 import { useDispatch, useSelector } from "react-redux";
 import {userById} from '../redux/actions/a.users'
 
@@ -40,12 +41,6 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   }
 
-  function blockPass(){
-    const newPass = '85tjoec5&%$&3ckfvpd964VDFBY67&/%(/';
-    currentUser.updatePassword(newPass)
-    currentUser.sendPasswordResetEmail(currentUser.email)
-  }
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -58,7 +53,6 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
-    blockPass,
     oneUser,
     resetPassword,
     updateEmail,

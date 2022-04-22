@@ -4,7 +4,7 @@ import NavBar from '../../components/NavBar/NavBar.jsx'
 
 import Slider2 from '../../components/Sliders/Slider2.jsx';
 import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter';
-import RenderBusquedas from '../../components/RenderBusquedas/RenderBusquedas.jsx';
+import Shop from '../../components/Shop/Shop';
 
 
 
@@ -29,7 +29,7 @@ export default function Home (){
         <div>
             <NavBar searchBar={true} home={true}/>
             <SellerFilter />
-            {render?<RenderBusquedas />:<Slider2 />}
+            {render?<Shop />:<Slider2 />}
         </div>
     )
 }

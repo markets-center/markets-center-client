@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { Container } from '@mui/material';
 import s from './SellerCard.module.css'
 import { useDispatch } from 'react-redux';
-import { productBySeller } from '../../../redux/actions/a.products';
+import { filterBySellerAndCategories, idActiveSeller} from '../../../redux/actions/a.products';
 
 const SellerCard = ({ image, name, id }) => {
 
@@ -14,7 +14,9 @@ const SellerCard = ({ image, name, id }) => {
     function handleSelect(e){
         e.preventDefault();
         console.log(id)
-        dispatch(productBySeller(id))
+        dispatch(filterBySellerAndCategories(id,""))
+        dispatch(idActiveSeller(id))
+        
 
     }
 

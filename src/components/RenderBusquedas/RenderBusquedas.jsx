@@ -5,10 +5,11 @@ import s from './RenderBusquedas.module.css';
 
 function RenderBusquedas() {
     const products = useSelector(state => state.searchedProducts)
+    const filtered = useSelector(state => state.filteredByPrice)
     return (
-        <div className={s.supremeContainer}>
+
             <div className={s.container}>
-                {products && products.map(p => <Card 
+                {filtered.length > 0?filtered.map(p => <Card 
                 key={p.name}
                 name={p.name}
                 price={p.price}
@@ -16,9 +17,17 @@ function RenderBusquedas() {
                 description={p.description}
                 stock={p.stock}
                 category={p.category.map(c => c.name)}
-                />)}
+                />):products.map(p => <Card 
+                    key={p.name}
+                    name={p.name}
+                    price={p.price}
+                    image={p.image}
+                    description={p.description}
+                    stock={p.stock}
+                    category={p.category.map(c => c.name)}
+                    />)}
             </div>
-        </div>
+
     );
 }
 

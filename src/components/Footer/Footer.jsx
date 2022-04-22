@@ -11,8 +11,7 @@ export default function Footer() {
       <Box
       sx={{
         display: "flex",
-        flexDirection: "column",
-        minHeight: "10vh",
+        flexDirection: "column"
       }}
     >
       <Box

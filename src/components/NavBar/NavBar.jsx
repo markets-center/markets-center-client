@@ -9,7 +9,7 @@ import Filters from '../Filters/Filters.jsx';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import { resetSliders } from '../../redux/actions/a.products'
+import { resetSliders, idActiveSeller,idActiveCategory } from '../../redux/actions/a.products'
 import { useDispatch } from 'react-redux';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import { useNavigate } from 'react-router-dom'
@@ -40,6 +40,8 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     function handleSelect() {
         navigate('/');
         dispatch(resetSliders())
+        dispatch(idActiveSeller())
+        dispatch(idActiveCategory())
     }
 
     const [anchorEl, setAnchorEl] = React.useState(null);
