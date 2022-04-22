@@ -1,15 +1,30 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Typography from '@mui/material/Typography';
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import s from './Detail.module.css'
+import {addOrderCar} from '../../../redux/actions/a.order.js';
+import Tooltip from '@mui/material/Tooltip';
 
-export default function Detail({name, price,image, description, stock, category}) {
-    function addToCart(){
-        //funcion que agrega el producto al carrito
-        console.log('agregado')
+export default function Detail({name, price,image, description, stock, category, id}) {
+    
+    const items = useSelector((state) => state.addOrdercar);
+    const dispatch = useDispatch();
+
+    const [tooltip , setTooltip] = useState(false);
+    
+    const findItem = items.find((f) => f.id === id);
+    
+    function addToCar(id, price, name, image){
+        const obj = {id,name,price, image, quanty: 1, amount:price};
+        if(findItem){ 
+            return setTooltip(true);
+        }  
+        dispatch(addOrderCar(obj));
     }
+
     return (
         <div className={s.container}>
             <div className={s.image}>
@@ -31,9 +46,11 @@ export default function Detail({name, price,image, description, stock, category}
                 </div> */}
             </div>
             <div className={s.buttons}>
-                    {stock > 0?<Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={addToCart}> agregar</Button>:
-                               <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button> }
-                </div>
+                    {stock > 0?<Tooltip title={!tooltip?"Add":"Added to cart"} arrow placement="top">
+                                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id,price,name,image)}> agregar</Button>
+                                </Tooltip>:
+                                <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button> 
+                }</div>
         </div>
     );
 }

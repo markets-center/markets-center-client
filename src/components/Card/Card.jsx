@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -31,27 +31,28 @@ export default function Card({name, price,image, description, stock, category, i
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [count, setCount] = useState(0);
     const [tooltip , setTooltip] = useState(false);
+    
     const dispatch = useDispatch();
     const items = useSelector((state) => state.addOrdercar);
-
+    
     function moreInfo(e){
         setHover(true)
     }
     function lessInfo(e){
         setHover(false)
     }
+    
+    const findItem = items.find((f) => f.id === id)
+    
     function addToCar(id, price, name, image){
         const obj = {id,name,price, image, quanty: 1, amount:price}
-        const findItem = items.find((f) => f.id === id)
         if(findItem){ 
             return setTooltip(true) 
         }  
         dispatch(addOrderCar(obj))
     }
 
-    console.log("ITEMS: ", items)
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div className={s.img}>
@@ -102,7 +103,7 @@ export default function Card({name, price,image, description, stock, category, i
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} />
+                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} id={id}/>
                     </Box>
                 </Modal>
             </div>
