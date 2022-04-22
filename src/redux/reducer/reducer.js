@@ -12,16 +12,18 @@ import {
     GET_ALL_USERS,
     UPDATE_USER,
     POST_ORDER,
-    GET_PRODUCT_BY_SELLER,
+    GET_PRODUCT_BY_SELLER_AND_CAT,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
     GET_USER_HISTORY,
-    ORDER_BY_PRICE,
-    ORDER_BY_ALPH,
-    FILTER_BY_PRICE
+    ORDER,
+    ACTIVE_SELLER,
+    ACTIVE_CATEGORY,
+    FILTER_BY_PRICE,
+    RESET_FILTER_BY_PRICE
 } from '../actions/ctes'
 
-import { orderByPrice, orderByAlph, filterByPrice } from '../functions/functions'
+import { orderByPrice, order, filterByPrice } from '../functions/functions'
 
 
 const initialState = {
@@ -37,6 +39,8 @@ const initialState = {
     oneUser:{},
     history:[],
     newOrder:{},
+    activeSeller: '',
+    activeCategory: '',
     errors: '',
     message: ''
 }
@@ -67,7 +71,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 searchedProducts: action.payload
             }
-        case GET_PRODUCT_BY_SELLER:
+        case GET_PRODUCT_BY_SELLER_AND_CAT:
             return {
                 ...state,
                 productsBySeller: action.payload,
@@ -130,26 +134,34 @@ export default function rootReducer(state = initialState, action) {
                 searchedProducts: state.allProducts
 
             }
-        case ORDER_BY_PRICE:
-            let orden = orderByPrice(action.payload, state.searchedProducts);
-            console.log(orden)
+        case ORDER:
+            let orden = order(action.payload, state.searchedProducts);
             return{
                 ...state,
                 searchedProducts: orden
             }
-        case ORDER_BY_ALPH:
-            let ordenAlph = orderByAlph(action.payload, state.searchedProducts);
-            console.log(ordenAlph)
-            return{
-                ...state,
-                searchedProducts: ordenAlph
-            }
-/*         case FILTER_BY_PRICE:
+         case FILTER_BY_PRICE:
             let filter = filterByPrice(action.payload,state.searchedProducts)
             return{
                 ...state,
                 filteredByPrice: filter
-            } */                                                                  //SOLUCIONAR
+            }                    
+        case RESET_FILTER_BY_PRICE:
+            return{
+                ...state,
+                filteredByPrice: []
+            }    
+        case ACTIVE_SELLER:
+            return{
+                ...state,
+                activeSeller: action.payload
+            }
+        case ACTIVE_CATEGORY:
+            return{
+                ...state,
+                activeCategory: action.payload
+            }
+        
         default:
             return {
                 ...state

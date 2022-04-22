@@ -20,7 +20,7 @@ function SellersFilter() {
             alignItem: 'center',
             justifyContent: 'space-around',
         }}>
-            {allSellers && allSellers.map(d => <SellerCard name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
+            {allSellers && allSellers.map(d => <SellerCard key={d._id} name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
             }
         </Container>
     );

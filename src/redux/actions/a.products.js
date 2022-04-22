@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER, RESET_SLIDERS, ORDER_BY_PRICE, ORDER_BY_ALPH, FILTER_BY_PRICE } from "./ctes";
+import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY } from "./ctes";
 
 
 export function getAllProducts(){
@@ -38,12 +38,12 @@ export function getProductById (id) {
     }
 }
 
-export function productBySeller (id) {
+export function filterBySellerAndCategories (id, idcategories) {
     return async function (dispatch) {
         try {
-            const result = await axios.get(`/api/public/filter/bySeller/${id}`);
+            const result = await axios.get(`/api/public/filter?id=${id}&categories=${idcategories}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
-            dispatch({type: GET_PRODUCT_BY_SELLER, payload: result.data.data})
+            dispatch({type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: result.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -71,21 +71,11 @@ export function resetSliders () {
         }
     }
 }
-export function orderByPrice (payload) {
+export function ordenamientos (payload) {
     return async function (dispatch) {
         try {
             dispatch({type: MESSAGE})
-            dispatch({type: ORDER_BY_PRICE, payload})
-        } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
-        }
-    }
-}
-export function orderByAlph (payload) {
-    return async function (dispatch) {
-        try {
-            dispatch({type: MESSAGE})
-            dispatch({type: ORDER_BY_ALPH, payload})
+            dispatch({type: ORDER, payload})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -96,6 +86,36 @@ export function filterByPrice (payload) {
         try {
             dispatch({type: MESSAGE})
             dispatch({type: FILTER_BY_PRICE, payload})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+export function resetFilterByPrice (){
+    return async function (dispatch){
+        try {
+            dispatch({type: MESSAGE})
+            dispatch({type: RESET_FILTER_BY_PRICE})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+export function idActiveSeller(id){
+    return async function (dispatch){
+        try {
+            dispatch({type: MESSAGE})
+            dispatch({type: ACTIVE_SELLER, payload: id})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+export function idActiveCategory(id){
+    return async function (dispatch){
+        try {
+            dispatch({type: MESSAGE})
+            dispatch({type: ACTIVE_CATEGORY, payload: id})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

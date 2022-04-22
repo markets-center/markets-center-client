@@ -1,36 +1,37 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, orderByAlph, filterByPrice } from '../../redux/actions/a.products'
+import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory} from '../../redux/actions/a.products'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import Button from '@mui/material/Button';
+import CachedIcon from '@mui/icons-material/Cached';
 
 
 function Ordenamiento() {
     const dispatch = useDispatch();
-    const [order, setOrder] = React.useState('');
-    const [alph, setAlph] = React.useState('');
+    const idSeller = useSelector(state => state.activeSeller);
+    const idCategory = useSelector(state => state.activeCategory);
+    const [order, setOrder] = React.useState('')
     const [radio, setRadio] = React.useState('');
 
  
     const handleChange = (event) => {
         event.preventDefault();
-        setOrder(event.target.value);
-        dispatch(orderByPrice(event.target.value));
-    };
-    const handleChangeAlph = (event) => {
-        event.preventDefault();
-        setAlph(event.target.value);
-        dispatch(orderByAlph(event.target.value));
+        if(event.target.value !== '-'){
+            dispatch(ordenamientos(event.target.value));
+        }else{
+            dispatch(filterBySellerAndCategories(idSeller,""))
+        }
+        
     };
 
     const handleChangeRadio = (event) => {
@@ -38,6 +39,11 @@ function Ordenamiento() {
       console.log(event.target.value)
       dispatch(filterByPrice(event.target.value))
     };
+    const handleReset = () => {
+        dispatch(resetFilterByPrice())
+        dispatch(filterBySellerAndCategories(idSeller,""))
+
+    }
   
   
   
@@ -65,6 +71,9 @@ function Ordenamiento() {
                     <FormControlLabel value=">3000" control={<Radio />} label=">$3000" />
                 </RadioGroup>
             </FormControl>
+            <Button variant="outlined" size='small' startIcon={<CachedIcon />} sx={{marginTop: "10px"}} onClick={handleReset}>
+                reset
+            </Button>
             </Box>
             <FormControl variant="standard" sx={{ m: 2, minWidth: 200 }}>
                 <InputLabel>Ordenar</InputLabel>
@@ -73,23 +82,9 @@ function Ordenamiento() {
                 onChange={handleChange}
                 label="Ordenar"
                 >
-                <MenuItem >
-                    <em>-</em>
-                </MenuItem>
+                    <MenuItem value={'-'}>-</MenuItem>
                     <MenuItem value={'high'}>Mayor Precio</MenuItem>
                     <MenuItem value={'low'}>Menor Precio</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl variant="standard" sx={{ m: 2, minWidth: 200 }}>
-                <InputLabel>Alfabético</InputLabel>
-                <Select
-                value={alph}
-                onChange={handleChangeAlph}
-                label="Alfabetico"
-                >
-                <MenuItem >
-                    <em>-</em>
-                </MenuItem>
                     <MenuItem value={'a-z'}>A-Z</MenuItem>
                     <MenuItem value={'z-a'}>Z-A</MenuItem>
                 </Select>
