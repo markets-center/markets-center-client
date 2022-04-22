@@ -74,3 +74,14 @@ export function upgradeUser(id){
         }
     }
 }
+
+export function blockPass(id){
+    return async function (dispatch) {
+        try {
+            const result = await axios.get(`/api/admin/blockPass/${id}`);
+            dispatch({type: MESSAGE, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
