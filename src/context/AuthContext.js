@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, admin } from "../firebase";
-// import firebase from "firebase/compat/app";
+import { auth } from "../firebase";
 
 import { useDispatch, useSelector } from "react-redux";
 import {userById} from '../redux/actions/a.users'
@@ -42,19 +41,6 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   }
 
-  async function delUser(email) {
-    const user = await admin.auth().getUserByEmail(email)
-     await admin.auth().deleteUser(user.uid)
-  }
-
-  async function blockPass(email){
-    const newPass = '85tjoec5&%$&3ckfvpd964VDFBY67&/%(/';
-    let user = await admin.auth().getUserByEmail(email);
-    user.password=newPass
-    await admin.auth().updateUser(user.uid, user)
-    return await admin.auth().generatePasswordResetLink()
-  }
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -68,8 +54,6 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
-    delUser,
-    blockPass,
     oneUser,
     resetPassword,
     updateEmail,

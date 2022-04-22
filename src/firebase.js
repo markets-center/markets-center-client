@@ -1,8 +1,6 @@
 import firebase from "firebase/compat/app";
 import 'firebase/compat/auth';
-import { initializeApp as initializeAppAdmin } from 'firebase-admin';
 
-const serviceAccount = require("./serviceAccountKey.json");
 
 
 const app = firebase.initializeApp({
@@ -26,10 +24,6 @@ const app = firebase.initializeApp({
 
 //   const app = firebase.initializeApp(firebaseConfig)
 
-const admin = initializeAppAdmin({
-    credential: initializeAppAdmin.credential.cert(serviceAccount)
-  });
 
-const auth = app.auth();
-export {admin, auth}
+export const auth = app.auth();
 export default app;
