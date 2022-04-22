@@ -129,7 +129,7 @@ export default function AddProduct({ input, setInput, handleClose, open, prodId,
                         <div className={styles.modalRight}>
                             <TextField error={error.description ? true : false} id="description" label="Descripción" variant="standard" onChange={handleChange} value={input.description} style={{ width: "300px", margin: "5px" }} multiline rows={4} />
                             {
-                                input.image ? <img className="img" src={input.image} alt='prueba' /> : <img className="img" src='https://www.gfpropiedades.com.ar/themes/inmokey_t1/img/nophoto.png' alt='prueba' />
+                                input.image ? <img className={styles.img} src={input.image} alt='prueba' /> : <img className={styles.img} src='https://www.gfpropiedades.com.ar/themes/inmokey_t1/img/nophoto.png' alt='prueba' />
                             }
                             <label htmlFor="contained-button-file">
                                 <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleImageChange} />
