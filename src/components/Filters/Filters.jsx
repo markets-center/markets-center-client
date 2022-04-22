@@ -5,7 +5,7 @@ import { Tabs, Tab } from '@mui/material/';
 import Select from '../../components/Admin/Select/Select.jsx'
 import { MenuItem } from "@mui/material";
 import { getAllCategories } from '../../redux/actions/a.category';
-import { productByCategory } from '../../redux/actions/a.filters'
+import { filterBySellerAndCategories, idActiveCategory, idActiveSeller } from '../../redux/actions/a.products'
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
@@ -20,6 +20,7 @@ export default function Filters({ home, admin, value, setValue }) {
   const [selected, setSelected] = useState('')
   const allCategories = useSelector(state => state.allCategories)
   const open = Boolean(anchorEl);
+  const idSeller = useSelector(state => state.activeSeller);
 
   //  function handleChange2(event, newValue){
   //        setValue2(newValue);
@@ -38,7 +39,14 @@ export default function Filters({ home, admin, value, setValue }) {
     // let category = categories.length === 0 ? e.target.textContent : '-' + e.target.textContent
     // setCategories((prev) => prev + e.target.textContent);
     // setSelected(newValue);
-    dispatch(productByCategory(e.target.textContent));
+    dispatch(idActiveCategory(e.target.textContent))
+    if(idSeller){
+      dispatch(filterBySellerAndCategories(idSeller, e.target.textContent));
+    }else{
+      dispatch(filterBySellerAndCategories("", e.target.textContent));
+      dispatch(idActiveSeller())
+    }
+    
   };
 
   useEffect(() => {
