@@ -15,7 +15,9 @@ import {
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
-    GET_USER_HISTORY
+    GET_USER_HISTORY,
+    ADD_ORDER_CAR,
+    DELETE_ORDER_CAR
 } from '../actions/ctes'
 
 
@@ -32,7 +34,8 @@ const initialState = {
     history:[],
     newOrder:{},
     errors: '',
-    message: ''
+    message: '',
+    addOrdercar:[]
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -123,6 +126,17 @@ export default function rootReducer(state = initialState, action) {
                 searchedProducts: state.allProducts
 
             }
+        case ADD_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: [...state.addOrdercar, action.payload]
+            }
+        case DELETE_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: state.addOrdercar.filter((f) => f.id !== action.payload)
+            }    
+            
         default:
             return {
                 ...state

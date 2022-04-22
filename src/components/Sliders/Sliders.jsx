@@ -65,6 +65,7 @@ export default function Sliders() {
                                                 image={producto.image}
                                                 description={producto.description}
                                                 stock={producto.stock}
+                                                id={producto._id}
                                                 />) : <Typography variant='h5' sx={{margin: 'auto'}}>
                                                         NO HAY PRODUCTOS
                                                     </Typography>}

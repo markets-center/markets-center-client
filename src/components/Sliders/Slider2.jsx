@@ -34,6 +34,7 @@ export default function Sliders() {
                description={producto.description}
                stock={producto.stock}
                category={producto.category.map(c => c.name)}
+               id={producto._id}
                />
            ))}
        </Carousel>

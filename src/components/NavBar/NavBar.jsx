@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
 import Logo from '../../images/MC-Full.png'
@@ -26,13 +27,13 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
 import { Person } from '@mui/icons-material';
+import Badge from '@mui/material/Badge';
 
 export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
-    console.log(currentUser);
-
+    const countItemsCar = useSelector(state => state.addOrdercar)
     async function logoutHandler() {
         await logout();
         navigate('/')
@@ -76,7 +77,9 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                         size="small"
                                         sx={{ ml: 2 }}
                                         color="white">
-                                        <LocalGroceryStoreOutlinedIcon />
+                                        <Badge color="secondary" badgeContent={countItemsCar.length}>
+                                            <LocalGroceryStoreOutlinedIcon />
+                                        </Badge>
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Cuenta">
