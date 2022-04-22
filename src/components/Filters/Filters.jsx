@@ -17,7 +17,7 @@ export default function Filters({ home, admin, value, setValue }) {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const [categories, setCategories] = useState('');
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = useState(0)
   const allCategories = useSelector(state => state.allCategories)
   const open = Boolean(anchorEl);
   const idSeller = useSelector(state => state.activeSeller);
@@ -46,7 +46,6 @@ export default function Filters({ home, admin, value, setValue }) {
       dispatch(filterBySellerAndCategories("", e.target.textContent));
       dispatch(idActiveSeller())
     }
-    
   };
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function Filters({ home, admin, value, setValue }) {
           onChange={handleChange}
           value={selected}
         >
-          <React.Fragment>
+          <div>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
               <Tooltip title="Categorías">
                 <IconButton
@@ -120,7 +119,7 @@ export default function Filters({ home, admin, value, setValue }) {
                 })
               }
             </Menu>
-          </React.Fragment>
+          </div>
           <Tab value={allCategories[0]?.name} label={allCategories[0]?.name} />
           <Tab value={allCategories[1]?.name} label={allCategories[1]?.name} />
           <Tab value={allCategories[2]?.name} label={allCategories[2]?.name} />
