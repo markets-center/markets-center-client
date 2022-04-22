@@ -16,7 +16,7 @@ export default function CardVendedor({ nombre, id, image, stock, precio, categor
         })
         handleOpen()
     }
-    console.log(input.category)
+    
     return (
         <Container sx={{
             height: '100px',
