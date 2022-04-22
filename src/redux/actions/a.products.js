@@ -41,7 +41,9 @@ export function getProductById (id) {
 export function filterBySellerAndCategories (id, idcategories) {
     return async function (dispatch) {
         try {
-            const result = await axios.get(`/api/public/filter?id=${id}&categories=${idcategories}`);
+            let result
+            idcategories ? result = await axios.get(`/api/public/filter?id=${id}&categories=${idcategories}`) :
+            result = await axios.get(`/api/public/filter?id=${id}`);
             dispatch({type: MESSAGE, payload: result.data.msg})
             dispatch({type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: result.data.data})
         } catch (err) {

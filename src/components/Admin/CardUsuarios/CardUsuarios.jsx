@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, upgradeUser, deleteUser } from '../../../redux/actions/a.admin.js';
+import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/actions/a.admin.js';
 import { useAuth } from '../../../context/AuthContext.js'
 import { IconButton } from '@mui/material';
 import styles from './CardUsuarios.module.css';
@@ -13,11 +13,9 @@ export default function CardCategorias (){
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch])
-    const { blockPass } = useAuth();
     async function handlePasswordReset(event){
         event.preventDefault()
-        await blockPass()
-        
+        dispatch(blockPass(event.currentTarget.getAttribute('id')))
     }
     function handleUserToAdmin(event){
         dispatch(upgradeUser(event.currentTarget.getAttribute('id')))
@@ -47,6 +45,7 @@ export default function CardCategorias (){
                             </div>
                             <div className={styles.right}>
                                 <IconButton 
+                                    id={category.userId}
                                     onClick={handlePasswordReset}
                                 >
                                     <Cached />
@@ -58,7 +57,7 @@ export default function CardCategorias (){
                                     <SupervisorAccount />
                                 </IconButton>
                                 <IconButton
-                                    id={category._id}
+                                    id={category.userId}
                                     onClick={handleUserdelete}
                                 >
                                     <Delete />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productBySeller, deleteProduct } from '../../redux/actions/a.products.js';
+import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
@@ -52,7 +52,7 @@ export default function Vendedor(){
     }
     // Products by User
     useEffect(() => {
-        dispatch(productBySeller(oneUser._id))
+        dispatch(filterBySellerAndCategories(oneUser._id))
         setTimeout(() => {
             setLoading(false)
         }, 500);
@@ -60,7 +60,8 @@ export default function Vendedor(){
     const products = useSelector(state => state.productsBySeller)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id))
-        dispatch(productBySeller(oneUser._id))
+        dispatch(filterBySellerAndCategories(oneUser._id))
+        return products = products.filter(product => product._id !== id)
     }
     console.log(input)
     console.log(prodId)

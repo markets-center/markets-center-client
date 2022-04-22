@@ -140,7 +140,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 searchedProducts: orden
             }
-         case FILTER_BY_PRICE:
+        case FILTER_BY_PRICE:
             let filter = filterByPrice(action.payload,state.searchedProducts)
             return{
                 ...state,
