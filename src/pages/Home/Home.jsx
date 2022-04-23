@@ -6,10 +6,6 @@ import Slider2 from '../../components/Sliders/Slider2.jsx';
 import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter';
 import RenderBusquedas from '../../components/RenderBusquedas/RenderBusquedas.jsx';
 
-
-
-
-
 export default function Home (){
     const [render, setRender] = useState(false)
     const productsSearched = useSelector(state => state.searchedProducts);

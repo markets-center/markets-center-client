@@ -15,7 +15,20 @@ import {
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
+<<<<<<< Updated upstream
     GET_USER_HISTORY
+=======
+    GET_USER_HISTORY,
+    ORDER,
+    ACTIVE_SELLER,
+    ACTIVE_CATEGORY,
+    FILTER_BY_PRICE,
+    RESET_FILTER_BY_PRICE,
+    ADD_ORDER_CAR,
+    DELETE_ORDER_CAR,
+    LOADING
+  
+>>>>>>> Stashed changes
 } from '../actions/ctes'
 
 
@@ -31,54 +44,79 @@ const initialState = {
     history:[],
     newOrder:{},
     errors: '',
+<<<<<<< Updated upstream
     message: ''
+=======
+    message: '',
+    addOrdercar:[],
+    loading: false
+>>>>>>> Stashed changes
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload
+                allProducts: action.payload,
+                loading: false
             }
         case POST_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload
+                addedProduct: action.payload,
+                loading: false
             }
         case UPDATE_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload
+                addedProduct: action.payload,
+                loading: false
             }
         case GET_PROTUCT_BY_NAME:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_ID:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_SELLER:
             return {
                 ...state,
+<<<<<<< Updated upstream
                 searchedProducts: action.payload
+=======
+                productsBySeller: action.payload,
+                searchedProducts: action.payload,
+                loading: false
+>>>>>>> Stashed changes
             }
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                allCategories: action.payload
+                allCategories: action.payload,
+                loading: false
             }
         case GET_ALL_SELLERS:
             return {
                 ...state,
-                allSellers: action.payload
+                allSellers: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_CATEGORY:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case ERRORS:
             return {
@@ -98,7 +136,8 @@ export default function rootReducer(state = initialState, action) {
         case GET_ALL_USERS:
             return {
                 ...state,
-                allUsers: action.payload
+                allUsers: action.payload,
+                loading: false
             }
         case UPDATE_USER:
             return {
@@ -114,14 +153,57 @@ export default function rootReducer(state = initialState, action) {
         case GET_USER_HISTORY:
             return {
                 ...state,
-                history: action.payload
+                history: action.payload,
+                loading: false
             }
         case RESET_SLIDERS:
             return {
                 ...state,
-                searchedProducts: state.allProducts
-
+                searchedProducts: state.allProducts,
+                loading: false
             }
+<<<<<<< Updated upstream
+=======
+        case ADD_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: [...state.addOrdercar, action.payload]
+            }
+        case DELETE_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: state.addOrdercar.filter((f) => f.id !== action.payload)
+            }
+        case ORDER:
+            let orden = order(action.payload, state.searchedProducts);
+            return{
+                ...state,
+                searchedProducts: orden
+            }
+        case FILTER_BY_PRICE:
+            let filter = filterByPrice(action.payload,state.searchedProducts)
+            return{
+                ...state,
+                filteredByPrice: filter,
+                loading: false
+            }                    
+        case RESET_FILTER_BY_PRICE:
+            return{
+                ...state,
+                filteredByPrice: [],
+                loading: false
+            }    
+        case ACTIVE_SELLER:
+            return{
+                ...state,
+                activeSeller: action.payload
+            }
+        case ACTIVE_CATEGORY:
+            return{
+                ...state,
+                activeCategory: action.payload
+            }
+>>>>>>> Stashed changes
         default:
             return {
                 ...state
