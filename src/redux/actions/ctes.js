@@ -36,3 +36,4 @@ export const ADD_ORDER_CAR = 'ADD_ORDER_CAR';
 export const DELETE_ORDER_CAR = 'DELETE_ORDER_CAR';
 
 export const POST_REVIEW = 'POST_REVIEW';
+export const LOADING = 'LOADING';
