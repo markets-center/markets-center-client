@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { IconButton } from "@mui/material";
@@ -8,6 +9,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
+import {addOrderCar} from '../../redux/actions/a.order.js'
+import Tooltip from '@mui/material/Tooltip';
 
 const style = {
     position: 'absolute',
@@ -22,23 +25,34 @@ const style = {
     p: 4,
 };
 
-export default function Card({name, price,image, description, stock, category}){ //deberia recibir props para renderizar segun los productos
+export default function Card({name, price,image, description, stock, category, id}){ //deberia recibir props para renderizar segun los productos
    
     const [hover,setHover] = useState(false); 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
+    const [tooltip , setTooltip] = useState(false);
+    
+    const dispatch = useDispatch();
+    const items = useSelector((state) => state.addOrdercar);
+    
     function moreInfo(e){
         setHover(true)
     }
     function lessInfo(e){
         setHover(false)
     }
-    function addToCart(){
-        //funcion que agrega el producto al carrito
-        console.log('agregado')
+    
+    const findItem = items.find((f) => f.id === id)
+    
+    function addToCar(id, price, name, image){
+        const obj = {id,name,price, image, quanty: 1, amount:price}
+        if(findItem){ 
+            return setTooltip(true) 
+        }  
+        dispatch(addOrderCar(obj))
     }
+
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div className={s.img}>
@@ -57,18 +71,26 @@ export default function Card({name, price,image, description, stock, category}){
                                 ${price}
                             </Typography>  }
                     <div className={s.icons}> 
-                        {stock > 0?<IconButton color="primary" size="small" onClick={addToCart} > 
-                                        <AddShoppingCartIcon fontSize="medium" variant="contained"/>
+                        {stock > 0?<IconButton color="primary" size="small" onClick={() =>{
+                            addToCar(id,price,name,image)
+                        }} > 
+                                        <Tooltip title={!tooltip?"Add":"Added to cart"} arrow placement="top">
+                                            <AddShoppingCartIcon fontSize="medium" variant="contained"/>    
+                                        </Tooltip>
                                     </IconButton>:
                                     <IconButton size="small" disabled > 
                                         <AddShoppingCartIcon fontSize="medium" variant="contained"/>
-                                    </IconButton>}
-                        {stock > 0?<IconButton  color="info" size="small"> 
+                                    </IconButton>
+                                    
+                        }
+                        {stock > 0?<IconButton  color="info" size="small">
+                                         
                                         <DeliveryDiningIcon fontSize=""/>
                                     </IconButton>:
                                     <IconButton  color="disable" size="small"> 
                                         <DeliveryDiningIcon fontSize=""/>
-                                    </IconButton>}
+                                    </IconButton>
+                                    }
                     </div>
                 </div>
             </div>
@@ -81,7 +103,7 @@ export default function Card({name, price,image, description, stock, category}){
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} />
+                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} id={id}/>
                     </Box>
                 </Modal>
             </div>

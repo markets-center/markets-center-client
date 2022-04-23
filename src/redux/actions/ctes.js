@@ -27,4 +27,9 @@ export const ORDER = 'ORDER';
 export const ACTIVE_SELLER = 'ACTIVE_SELLER'
 export const ACTIVE_CATEGORY = 'ACTIVE_CATEGORY'
 export const FILTER_BY_PRICE = 'FILTER_BY_PRICE';
+
 export const GET_PRODUCT_BY_CATEGORY = 'GET_PRODUCT_BY_CATEGORY';
+
+export const ADD_ORDER_CAR = 'ADD_ORDER_CAR';
+
+export const DELETE_ORDER_CAR = 'DELETE_ORDER_CAR';

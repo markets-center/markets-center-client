@@ -36,7 +36,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
               <div className="detail item-tittle">
                 <Typography variant="subtitle1">{item.name}</Typography>
                 <div className="desc-item">
-                  <Typography variant="caption">${item.price}</Typography>
+                  <Typography variant="caption">${item.amount}</Typography>
                 </div>
               </div>
               <div className="detail item-count">
@@ -44,7 +44,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   disabled={active}
                   className="btn btn-add"
                   onClick={() => {
-                    setCounter(counter - 1);
+                    setCounter(counter - item.quanty);
                     eventClickCountRes(item.price)
                   }}
                 >
@@ -60,7 +60,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                 <button
                   className="btn btn-res"
                   onClick={() => {
-                    setCounter(counter + 1);
+                    setCounter(counter + item.quanty);
                     eventClickCountAdd(item.price)
                   }}
                 >
@@ -71,7 +71,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
           </Grid>
           <Grid item xs={2}>
             <div className="item btn-remove">
-              <IconButton edge="end" onClick={() => eventClickRemoveItem(item._id)}>
+              <IconButton edge="end" onClick={() => eventClickRemoveItem(item.id)}>
                 <DeleteForeverRoundedIcon color="error"/>
               </IconButton>
             </div>
