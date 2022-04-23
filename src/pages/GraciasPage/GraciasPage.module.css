@@ -40,11 +40,15 @@
     align-items: flex-end;
 }
 .invisible{
-    height: 7.83vh
+    height: 7.8vh
 }
 .containerButton{
 
   margin-top: 20%;
+}
+.imgCarritoThanks{
+  margin-left: 3px;
+  padding-bottom: 2px;
 }
 
 
