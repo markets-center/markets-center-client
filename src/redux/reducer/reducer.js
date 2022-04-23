@@ -147,7 +147,8 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 addOrdercar: state.addOrdercar.filter((f) => f.id !== action.payload)
-            }        case ORDER:
+            }
+        case ORDER:
             let orden = order(action.payload, state.searchedProducts);
             return{
                 ...state,
