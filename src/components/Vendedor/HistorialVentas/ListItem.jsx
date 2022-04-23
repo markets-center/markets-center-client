@@ -7,9 +7,9 @@ export default function ListItem(){
     const {oneUser} = useAuth()
     const history = useSelector(state => state.history)
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(ordersBySeller(oneUser._id))
-    })
+    // useEffect(() => {
+    //     dispatch(ordersBySeller(oneUser._id))
+    // })
     console.log(history)
     return (
         <div>
