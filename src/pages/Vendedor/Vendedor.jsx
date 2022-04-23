@@ -12,6 +12,7 @@ import NavBar from '../../components/NavBar/NavBar'
 import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor'
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
+import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
@@ -68,6 +69,7 @@ export default function Vendedor(){
     return (
         <>
         <NavBar />
+        <ListItem />
         <Container sx={{
             height: '100vh',
             display: 'flex',
