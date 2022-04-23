@@ -35,7 +35,6 @@ export default function NavBar(){
         dispatch(getProductByName(search))
     }, [dispatch, search])
 
-    console.log('Respuesta de la busqueda -->',searchedProducts)
     return (
         <FormControl onSubmit={onSubmit}>
             <Stack spacing={1} direction="row" size="large">

@@ -12,13 +12,21 @@ import {
     GET_ALL_USERS,
     UPDATE_USER,
     POST_ORDER,
-    GET_PRODUCT_BY_SELLER,
+    GET_PRODUCT_BY_SELLER_AND_CAT,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
     GET_USER_HISTORY,
+    ORDER,
+    ACTIVE_SELLER,
+    ACTIVE_CATEGORY,
+    FILTER_BY_PRICE,
+    RESET_FILTER_BY_PRICE,
     ADD_ORDER_CAR,
     DELETE_ORDER_CAR
+  
 } from '../actions/ctes'
+
+import { orderByPrice, order, filterByPrice } from '../functions/functions'
 
 
 const initialState = {
@@ -26,6 +34,7 @@ const initialState = {
     addedProduct:{},
     searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
     productsBySeller: [],
+    filteredByPrice: [],
     allCategories: [],
     newCategory: {},
     allSellers: [],
@@ -33,6 +42,8 @@ const initialState = {
     oneUser:{},
     history:[],
     newOrder:{},
+    activeSeller: '',
+    activeCategory: '',
     errors: '',
     message: '',
     addOrdercar:[]
@@ -64,10 +75,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 searchedProducts: action.payload
             }
-        case GET_PRODUCT_BY_SELLER:
+        case GET_PRODUCT_BY_SELLER_AND_CAT:
             return {
                 ...state,
-                productsBySeller: action.payload
+                productsBySeller: action.payload,
+                searchedProducts: action.payload
             }
         case GET_ALL_CATEGORIES:
             return {
@@ -135,11 +147,38 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 addOrdercar: state.addOrdercar.filter((f) => f.id !== action.payload)
+            }        case ORDER:
+            let orden = order(action.payload, state.searchedProducts);
+            return{
+                ...state,
+                searchedProducts: orden
+            }
+        case FILTER_BY_PRICE:
+            let filter = filterByPrice(action.payload,state.searchedProducts)
+            return{
+                ...state,
+                filteredByPrice: filter
+            }                    
+        case RESET_FILTER_BY_PRICE:
+            return{
+                ...state,
+                filteredByPrice: []
             }    
-            
+        case ACTIVE_SELLER:
+            return{
+                ...state,
+                activeSeller: action.payload
+            }
+        case ACTIVE_CATEGORY:
+            return{
+                ...state,
+                activeCategory: action.payload
+            }
         default:
             return {
                 ...state
             }
     }
 }
+
+        

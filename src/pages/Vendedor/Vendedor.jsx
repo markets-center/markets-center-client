@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productBySeller, deleteProduct } from '../../redux/actions/a.products.js';
+import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
@@ -15,8 +15,8 @@ import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
-    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true);
     const { oneUser, currentUser } = useAuth()
     // Form Modal 
     const [prodId, setProdId] = useState(null)
@@ -44,7 +44,6 @@ export default function Vendedor(){
         })
         setOpen(false)
     }
-    console.log(prodId)
     function handleSubmit(e){
         e.preventDefault();
         prodId === null ?
@@ -53,22 +52,19 @@ export default function Vendedor(){
     }
     // Products by User
     useEffect(() => {
-        dispatch(productBySeller(oneUser._id))
+        dispatch(filterBySellerAndCategories(oneUser._id))
         setTimeout(() => {
             setLoading(false)
         }, 500);
     },[oneUser._id,dispatch])
     const products = useSelector(state => state.productsBySeller)
-    //const [listProducts, setListProducts] = useState(products);
-    //console.log(listProducts)
-    // Solo se borra hasta que se recarga la pagina (No de la DB)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id))
-        dispatch(productBySeller(oneUser._id))
+        dispatch(filterBySellerAndCategories(oneUser._id))
         return products = products.filter(product => product._id !== id)
     }
-console.log('Input: ', input)
-console.log('ProductId: ', prodId)
+    console.log(input)
+    console.log(prodId)
     return (
         <>
         <NavBar />

@@ -60,6 +60,7 @@ export default function Sliders() {
                 <ChevronLeft fontSize="large" />
             </Button>
             {items.length ? items.map(producto => <Card 
+                                                key={producto._id}
                                                 name={producto.name}
                                                 price={producto.price}
                                                 image={producto.image}
