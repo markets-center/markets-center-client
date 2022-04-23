@@ -52,10 +52,13 @@ function Ordenamiento() {
             width: "10vw",
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
+            marginTop: '35px',
+            paddingTop: '10px',
+            height: '350px',
         }}>
 
-            <Box sx={{ width: 190, paddingTop: "40px"}}>
+            <Box sx={{ width: 200}}>
             <FormControl>
             <FormLabel >Precio</FormLabel>
                 <RadioGroup
@@ -75,7 +78,7 @@ function Ordenamiento() {
                 reset
             </Button>
             </Box>
-            <FormControl variant="standard" sx={{ m: 2, minWidth: 200 }}>
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 190 }}>
                 <InputLabel>Ordenar</InputLabel>
                 <Select
                 value={order}
