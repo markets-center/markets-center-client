@@ -15,9 +15,6 @@ import {
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
-<<<<<<< Updated upstream
-    GET_USER_HISTORY
-=======
     GET_USER_HISTORY,
     ORDER,
     ACTIVE_SELLER,
@@ -27,8 +24,6 @@ import {
     ADD_ORDER_CAR,
     DELETE_ORDER_CAR,
     LOADING
-  
->>>>>>> Stashed changes
 } from '../actions/ctes'
 
 
@@ -44,13 +39,9 @@ const initialState = {
     history:[],
     newOrder:{},
     errors: '',
-<<<<<<< Updated upstream
-    message: ''
-=======
     message: '',
     addOrdercar:[],
     loading: false
->>>>>>> Stashed changes
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -92,13 +83,10 @@ export default function rootReducer(state = initialState, action) {
         case GET_PRODUCT_BY_SELLER:
             return {
                 ...state,
-<<<<<<< Updated upstream
-                searchedProducts: action.payload
-=======
+                searchedProducts: action.payload,
                 productsBySeller: action.payload,
                 searchedProducts: action.payload,
                 loading: false
->>>>>>> Stashed changes
             }
         case GET_ALL_CATEGORIES:
             return {
@@ -162,8 +150,6 @@ export default function rootReducer(state = initialState, action) {
                 searchedProducts: state.allProducts,
                 loading: false
             }
-<<<<<<< Updated upstream
-=======
         case ADD_ORDER_CAR:
             return {
                 ...state,
@@ -203,7 +189,6 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 activeCategory: action.payload
             }
->>>>>>> Stashed changes
         default:
             return {
                 ...state

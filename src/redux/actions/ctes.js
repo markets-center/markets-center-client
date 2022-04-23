@@ -23,9 +23,6 @@ export const GET_PRODUCT_BY_SELLER = 'GET_PRODUCT_BY_SELLER';
 
 export const RESET_SLIDERS = 'RESET_SLIDERS';
 
-<<<<<<< Updated upstream
-export const GET_PRODUCT_BY_CATEGORY = 'GET_PRODUCT_BY_CATEGORY';
-=======
 export const GET_PRODUCT_BY_CATEGORY = 'GET_PRODUCT_BY_CATEGORY';
 
 export const ADD_ORDER_CAR = 'ADD_ORDER_CAR';
@@ -35,4 +32,3 @@ export const DELETE_ORDER_CAR = 'DELETE_ORDER_CAR';
 export const POST_REVIEW = 'POST_REVIEW';
 
 export const LOADING = 'LOADING';
->>>>>>> Stashed changes

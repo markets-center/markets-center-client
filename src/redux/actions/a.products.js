@@ -1,26 +1,16 @@
 import axios from "axios";
-<<<<<<< Updated upstream
-import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER, RESET_SLIDERS } from "./ctes";
-=======
 import { GET_ALL_PRODUCTS, LOADING, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW } from "./ctes";
->>>>>>> Stashed changes
 
 
-export function getAllProducts(){
+export function getAllProducts() {
     return async function (dispatch) {
         try {
-<<<<<<< Updated upstream
-            const products = await axios.get('http://localhost:4000/api/public/products');
-            dispatch({type: MESSAGE, payload: products.data.msg})
-            dispatch({type: GET_ALL_PRODUCTS, payload: products.data.data})
-=======
             dispatch({type: LOADING});
             const products = await axios.get('/api/public/products');
             dispatch({ type: MESSAGE, payload: products.data.msg })
             dispatch({ type: GET_ALL_PRODUCTS, payload: products.data.data })
->>>>>>> Stashed changes
         } catch (err) {
-            dispatch({type: ERRORS, payload:err.msg})
+            dispatch({ type: ERRORS, payload: err.msg })
         }
     }
 }
@@ -28,90 +18,64 @@ export function getAllProducts(){
 export function getProductByName(name) {
     return async function (dispatch) {
         try {
-<<<<<<< Updated upstream
-            const products = await axios.get(`http://localhost:4000/api/public/products?name=${name}`);
-            dispatch({type: MESSAGE, payload: products.data.msg});
-            dispatch({type: GET_PROTUCT_BY_NAME, payload: products.data.data})
-=======
             dispatch({type: LOADING});
             const products = await axios.get(`/api/public/products?name=${name}`);
             dispatch({ type: MESSAGE, payload: products.data.msg });
             dispatch({ type: GET_PROTUCT_BY_NAME, payload: products.data.data })
->>>>>>> Stashed changes
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({ type: ERRORS, payload: err.msg })
         }
     }
 }
 
-export function getProductById (id) {
+export function getProductById(id) {
     return async function (dispatch) {
         try {
-<<<<<<< Updated upstream
-            const product = await axios.get(`http://localhost:4000/api/public/product/${id}`);
-            dispatch({type: MESSAGE, payload:product.data.msg});
-            dispatch({type: GET_PRODUCT_BY_ID, payload: product.data.data});
-=======
             dispatch({type: LOADING});
             const product = await axios.get(`/api/public/product/${id}`);
             dispatch({ type: MESSAGE, payload: product.data.msg });
             dispatch({ type: GET_PRODUCT_BY_ID, payload: product.data.data });
->>>>>>> Stashed changes
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg});
+            dispatch({ type: ERRORS, payload: err.msg });
         }
     }
 }
 
-export function productBySeller (id) {
+export function filterBySellerAndCategories(id, idcategories) {
     return async function (dispatch) {
         try {
-<<<<<<< Updated upstream
-            const result = await axios.get(`http://localhost:4000/api/public/filter/bySeller/${id}`);
-            dispatch({type: MESSAGE, payload: result.data.msg})
-            dispatch({type: GET_PRODUCT_BY_SELLER, payload: result.data.data})
-=======
             dispatch({type: LOADING});
             let result
             idcategories ? result = await axios.get(`/api/public/filter?id=${id}&categories=${idcategories}`) :
                 result = await axios.get(`/api/public/filter?id=${id}`);
             dispatch({ type: MESSAGE, payload: result.data.msg })
             dispatch({ type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: result.data.data })
->>>>>>> Stashed changes
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({ type: ERRORS, payload: err.msg })
         }
     }
 }
 
-export function deleteProduct (id) {
+export function deleteProduct(id) {
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`http://localhost:4000/api/public/product/${id}`);
-            dispatch({type: MESSAGE, payload: result.data.msg})
+            const result = await axios.delete(`/api/public/product/${id}`);
+            dispatch({ type: MESSAGE, payload: result.data.msg })
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({ type: ERRORS, payload: err.msg })
         }
     }
 }
 
-export function resetSliders () {
+export function resetSliders() {
     return async function (dispatch) {
         try {
-<<<<<<< Updated upstream
-            dispatch({type: MESSAGE})
-            dispatch({type: RESET_SLIDERS})
-=======
-            dispatch({type: LOADING});
             dispatch({ type: MESSAGE })
             dispatch({ type: RESET_SLIDERS })
->>>>>>> Stashed changes
         } catch (err) {
-            dispatch({type: ERRORS, payload: err.msg})
+            dispatch({ type: ERRORS, payload: err.msg })
         }
     }
-<<<<<<< Updated upstream
-=======
 }
 export function ordenamientos(payload) {
     return async function (dispatch) {
@@ -149,6 +113,7 @@ export function resetFilterByPrice() {
 export function idActiveSeller(id) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING});
             dispatch({ type: MESSAGE })
             dispatch({ type: ACTIVE_SELLER, payload: id })
         } catch (err) {
@@ -159,6 +124,7 @@ export function idActiveSeller(id) {
 export function idActiveCategory(id) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING});
             dispatch({ type: MESSAGE })
             dispatch({ type: ACTIVE_CATEGORY, payload: id })
         } catch (err) {
@@ -170,6 +136,7 @@ export function idActiveCategory(id) {
 export function createProductReview(productId, review) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING});
             const response = axios.post(`/api/public/product/${productId}/review/add`, review);
             dispatch({ type: MESSAGE, payload: response.data.msg })
             dispatch({ type: POST_REVIEW, payload: response.data.data })
@@ -178,5 +145,4 @@ export function createProductReview(productId, review) {
         }
 
     }
->>>>>>> Stashed changes
 }
