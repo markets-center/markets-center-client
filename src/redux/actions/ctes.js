@@ -11,6 +11,8 @@ export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 
 export const ERRORS = 'ERRORS';
 export const MESSAGE = 'MESSAGE';
+export const SET_ALERT = 'SET_ALERT';
+export const DEL_ALERT = 'DEL_ALERT';
 
 export const ADMIN_UPDATE_ADD_CATEGORY = 'ADMIN_UPDATE_CATEGORY';
 
