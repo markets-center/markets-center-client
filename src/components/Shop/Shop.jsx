@@ -20,6 +20,7 @@ function Shop(props) {
             <Container maxWidth="xl" sx={{
 
                 display: "flex",
+                marginTop: '50px',
                 
             }}>
                 <Ordenamiento />

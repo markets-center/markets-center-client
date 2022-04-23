@@ -21,7 +21,9 @@ import {
     ACTIVE_CATEGORY,
     FILTER_BY_PRICE,
     RESET_FILTER_BY_PRICE,
-    GET_ALL_ORDERS_OF_SELLER
+    GET_ALL_ORDERS_OF_SELLER,
+    ADD_ORDER_CAR,
+    DELETE_ORDER_CAR
 } from '../actions/ctes'
 
 import { orderByPrice, order, filterByPrice } from '../functions/functions'
@@ -43,7 +45,8 @@ const initialState = {
     activeSeller: '',
     activeCategory: '',
     errors: '',
-    message: ''
+    message: '',
+    addOrdercar:[]
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -140,6 +143,16 @@ export default function rootReducer(state = initialState, action) {
                 searchedProducts: state.allProducts
 
             }
+        case ADD_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: [...state.addOrdercar, action.payload]
+            }
+        case DELETE_ORDER_CAR:
+            return {
+                ...state,
+                addOrdercar: state.addOrdercar.filter((f) => f.id !== action.payload)
+            }
         case ORDER:
             let orden = order(action.payload, state.searchedProducts);
             return{
@@ -167,10 +180,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 activeCategory: action.payload
             }
-        
         default:
             return {
                 ...state
             }
     }
 }
+
+        

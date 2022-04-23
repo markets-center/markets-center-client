@@ -31,7 +31,7 @@ function ComponenteGracias() {
                     <div className={s.containerButton}>
                         <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/">Volver</Button></div>
                         <Typography variant="body2" className={s.textMarket}>
-                            Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc"/>
+                            Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc" className={s.imgCarritoThanks}/>
                         </Typography>
                     </div>
 

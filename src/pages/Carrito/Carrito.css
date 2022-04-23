@@ -61,9 +61,9 @@
 }
 
 .btn{
-  border: 1px solid rgb(6, 94, 149);
+  border: 1px solid #7FACD4;
   text-align: center;
-  color: rgb(19, 77, 149);
+  color: #005BAA;
   width: 25px;
   height: 31px;
   font-weight: bold;
@@ -115,9 +115,22 @@
   flex-direction: column;
   align-items: end;
   align-content: end;
+  margin-top: 2px;
 }
+
+.MuiTypography-body2{
+  padding-top: 3px;
+  font-weight: bolder;
+}
+
+.MuiTypography-body1{
+  color: #005BAA;
+  font-weight: 900;
+}
+
 hr{
   width: 80%;
+  border-color: #7FACD4;
 }
 
 .MuiDivider-root{
@@ -132,4 +145,17 @@ hr{
     margin-top: 100px;
     margin-bottom: 100px;
   }
+}
+
+/* ---Loader--- */
+.MuiTypography-h4{
+  color: #005BAA;
+}
+
+.MuiTypography-subtitle1{
+  color: #043c6d;
+}
+
+.MuiTypography-caption{
+  color: #3c3d3d;
 }
