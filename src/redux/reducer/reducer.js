@@ -20,7 +20,8 @@ import {
     ACTIVE_SELLER,
     ACTIVE_CATEGORY,
     FILTER_BY_PRICE,
-    RESET_FILTER_BY_PRICE
+    RESET_FILTER_BY_PRICE,
+    GET_ALL_ORDERS_OF_SELLER
 } from '../actions/ctes'
 
 import { orderByPrice, order, filterByPrice } from '../functions/functions'
@@ -124,6 +125,11 @@ export default function rootReducer(state = initialState, action) {
             }
 
         case GET_USER_HISTORY:
+            return {
+                ...state,
+                history: action.payload
+            }
+        case GET_ALL_ORDERS_OF_SELLER:
             return {
                 ...state,
                 history: action.payload

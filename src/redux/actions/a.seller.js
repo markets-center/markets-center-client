@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_ALL_SELLERS, POST_PRODUCT, UPDATE_PRODUCT, ERRORS, MESSAGE} from './ctes'
+import {GET_ALL_SELLERS, POST_PRODUCT, UPDATE_PRODUCT, ERRORS, MESSAGE, GET_ALL_ORDERS_OF_SELLER} from './ctes'
 
 export function getAllSellers() {
     return async function (dispatch) {
@@ -33,6 +33,18 @@ export function updateProduct (product, id) {
             const response = await axios.put(`/api/private/product/${id}`, product);
             dispatch({type: MESSAGE, payload: response.data.msg});
             dispatch({type: UPDATE_PRODUCT, payload: response.data.data});
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function ordersBySeller(id) {
+    return async function (dispatch) {
+        try {
+            const orders = await axios.get(`/api/private/orderSellers/${id}`);
+            dispatch({type: MESSAGE, payload: orders.data.msg})
+            dispatch({type: GET_ALL_ORDERS_OF_SELLER, payload: orders.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
