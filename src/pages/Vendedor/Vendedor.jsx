@@ -16,8 +16,8 @@ import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
-    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true);
     const { oneUser, currentUser } = useAuth()
     // Form Modal 
     const [prodId, setProdId] = useState(null)
@@ -45,7 +45,6 @@ export default function Vendedor(){
         })
         setOpen(false)
     }
-    console.log(prodId)
     function handleSubmit(e){
         e.preventDefault();
         prodId === null ?
@@ -60,16 +59,13 @@ export default function Vendedor(){
         }, 500);
     },[oneUser._id,dispatch])
     const products = useSelector(state => state.productsBySeller)
-    //const [listProducts, setListProducts] = useState(products);
-    //console.log(listProducts)
-    // Solo se borra hasta que se recarga la pagina (No de la DB)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id))
         dispatch(filterBySellerAndCategories(oneUser._id))
         return products = products.filter(product => product._id !== id)
     }
-console.log('Input: ', input)
-console.log('ProductId: ', prodId)
+    console.log(input)
+    console.log(prodId)
     return (
         <>
         <NavBar />
