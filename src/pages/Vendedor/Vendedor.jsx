@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
+import {delAlert} from '../../redux/actions/a.alert'
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
@@ -53,6 +54,10 @@ export default function Vendedor(){
         dispatch(postProduct(input))
         : dispatch(updateProduct(input, prodId))
     }
+    function handleCloseAlert(){
+        dispatch(delAlert())
+    }
+
     // Products by User
     useEffect(() => {
         dispatch(filterBySellerAndCategories(oneUser._id))
@@ -164,6 +169,15 @@ export default function Vendedor(){
                 </Container>
             </Container>
         </Container>
+        <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleCloseAlert} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleCloseAlert} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
+
         </>
     )
 }

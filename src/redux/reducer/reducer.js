@@ -24,7 +24,9 @@ import {
     GET_ALL_ORDERS_OF_SELLER,
     ADD_ORDER_CAR,
     DELETE_ORDER_CAR,
-    LOADING
+    LOADING,
+    SET_ALERT,
+    DEL_ALERT
 } from '../actions/ctes'
 
 import { orderByPrice, order, filterByPrice } from '../functions/functions'
@@ -48,7 +50,9 @@ const initialState = {
     errors: '',
     message: '',
     addOrdercar:[],
-    loading: false
+    loading: false,
+    alert:'',
+    addOrdercar:[]
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -165,7 +169,8 @@ export default function rootReducer(state = initialState, action) {
         case ADD_ORDER_CAR:
             return {
                 ...state,
-                addOrdercar: [...state.addOrdercar, action.payload]
+                addOrdercar: [...state.addOrdercar, action.payload],
+                alert: 'Producto agregado correctamente'
             }
         case DELETE_ORDER_CAR:
             return {
@@ -199,6 +204,16 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 activeCategory: action.payload
+            }
+        case DEL_ALERT:
+            return {
+                ...state,
+                alert: ''
+            }
+        case SET_ALERT:
+            return {
+                ...state,
+                alert: action.payload
             }
         default:
             return {

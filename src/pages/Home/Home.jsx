@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import NavBar from '../../components/NavBar/NavBar.jsx'
+import {delAlert} from '../../redux/actions/a.alert'
 
 import Slider2 from '../../components/Sliders/Slider2.jsx';
 import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter';
 import Shop from '../../components/Shop/Shop';
+import {Snackbar} from '@mui/material';
+import {SnackbarAlert} from '../../components/Alert/success';
 
 
 
@@ -12,8 +15,14 @@ import Shop from '../../components/Shop/Shop';
 
 export default function Home (){
     const [render, setRender] = useState(false)
+    const dispatch = useDispatch()
     const productsSearched = useSelector(state => state.searchedProducts);
     const initialProducts = useSelector(state => state.allProducts);
+    const alert = useSelector((state) => state.alert);
+
+    function handleClose(){
+        dispatch(delAlert())
+    }
 
     setTimeout(function(){
         if(productsSearched.length < initialProducts.length){
@@ -30,6 +39,17 @@ export default function Home (){
             <NavBar searchBar={true} home={true}/>
             <SellerFilter />
             {render?<Shop />:<Slider2 />}
+            {/* {msg!=='' && <Alert onClose={() => {}}>{msg}</Alert>} */}
+
+            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleClose} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
+            
         </div>
     )
 }
