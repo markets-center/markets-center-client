@@ -1,9 +1,29 @@
 .container{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    border: 0.1px solid ;
+    margin: 17px;
+    border-radius: 7px;
 }
 .image{
-    width: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+    margin: 0px 10px 0px 20px;
+}
+.left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px 30px 0px 0px;
+}
+.right p{
+    margin: 0px 10px 0px 10px
 }
