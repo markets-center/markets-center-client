@@ -9,8 +9,7 @@ export default function Loading() {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            style={{ minHeight: '50vh' }}
-        >
+            style={{ minHeight: '50vh' }}>
             <Grid item xs={3}>
                 <img src={loading} alt='Loading'/>
             </Grid>

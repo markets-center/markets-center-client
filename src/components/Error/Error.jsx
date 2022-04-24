@@ -2,7 +2,7 @@ import image from './Error2.gif'
 import MarketsCenterMistake from '../../images/MarketsCenterMistake.gif'
 import Grid from '@mui/material/Grid';
 
-export default function Error({message, mistake}){
+export default function Error({ message, mistake }){
     return (
         <Grid
             container
