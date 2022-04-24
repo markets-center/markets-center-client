@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/actions/a.admin.js';
-import { useAuth } from '../../../context/AuthContext.js'
 import { IconButton } from '@mui/material';
 import styles from './CardUsuarios.module.css';
 import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached } from '@mui/icons-material/';

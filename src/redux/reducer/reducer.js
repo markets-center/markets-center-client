@@ -29,7 +29,7 @@ import {
     DEL_ALERT
 } from '../actions/ctes'
 
-import { orderByPrice, order, filterByPrice } from '../functions/functions'
+import { order, filterByPrice } from '../functions/functions'
 
 
 const initialState = {

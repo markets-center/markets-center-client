@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_ALL_CATEGORIES, ADMIN_UPDATE_ADD_CATEGORY, GET_ALL_USERS, ERRORS, MESSAGE} from './ctes'
+import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, MESSAGE} from './ctes'
 
 export function adminUpdateCategory (id, category) {
     return async function (dispatch) {

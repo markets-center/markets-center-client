@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Typography, Button, IconButton } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
 import Card from '../../components/Card/Card.jsx';
 import NavigateNext from '@mui/icons-material/NavigateNext';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
