@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom'
 import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
 import {delAlert} from '../../redux/actions/a.alert'
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
@@ -13,13 +14,11 @@ import NavBar from '../../components/NavBar/NavBar'
 import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor'
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
-import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
-import { Container, Typography, Button, Snackbar } from '@mui/material'
-import {SnackbarAlert} from '../../components/Alert/success'
+// import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
+import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
-    const alert = useSelector((state) => state.alert);
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
     const { oneUser, currentUser } = useAuth()
@@ -77,7 +76,7 @@ export default function Vendedor(){
     return (
         <>
         <NavBar />
-        <ListItem />
+        {/* <HistoryHome /> */}
         <Container sx={{
             height: '100vh',
             display: 'flex',
@@ -109,11 +108,22 @@ export default function Vendedor(){
                         TUS PRODUCTOS
                     </Typography>
                     <Button 
+                        onClick={() => navigate('/orderHistory')}
+                        variant="contained" 
+                        color="primary" 
+                        sx={{
+                            left: '700px',
+                            fontWeight: '600',
+                        }}
+                    >
+                        Ventas
+                    </Button>
+                    <Button 
                         onClick={handleOpen}
                         variant="contained" 
                         color="info" 
                         sx={{
-                            left: '760px',
+                            left: '720px',
                             fontWeight: '600',
                         }}
                     >

@@ -18,6 +18,7 @@ import SellerForm from './pages/UserData/SellerForm'
 import BuyerForm from './pages/UserData/BuyerForm'
 import Login from './pages/Login/Login';
 import OlvidoPass from './pages/ForgotPass/OlvidoPass'
+import HistoryHome from "./components/Vendedor/HistorialVentas/HistoryHome";
 import Comprador from './pages/Comprador/Comprador'
 import GraciasPage from './pages/GraciasPage/GraciasPage'
 
@@ -39,6 +40,9 @@ function App() {
             </LoginButton>
           } />
           <Route path="/Profile" element={<Vendedor />} />
+          {/* Provisorio */}
+          <Route path="/orderHistory" element={<HistoryHome />} />
+          {/* Provisorio */}
           <Route path="/User" element={<Comprador />} />
           <Route 
           path="/sellerForm" 

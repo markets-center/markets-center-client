@@ -1,19 +1,39 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ordersBySeller } from '../../../redux/actions/a.seller.js'
-import { useAuth } from '../../../context/AuthContext.js'
+import React from 'react';
 
-export default function ListItem(){
-    const {oneUser} = useAuth()
-    const history = useSelector(state => state.history)
-    const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(ordersBySeller(oneUser._id))
-    // })
-    console.log(history)
+
+import styles from './ListItem.module.css'
+import DefaultUser from '../../../images/defaultUser.png'
+import { IconButton } from '@mui/material'
+import { AddBox } from '@mui/icons-material'
+
+export default function ListItem({element}){
+    console.log(element)
+    const clientName = element.userId
+    // console.log(clientName)
     return (
-        <div>
-            
+        <div className={styles.container}>
+            <div className={styles.left}>
+                <img 
+                src={clientName.image} 
+                alt='Client' 
+                className={styles.image}
+                onError={(e)=>{
+                    e.target.onerror = null
+                    e.target.src = DefaultUser}}
+                />
+                <div>
+                    <h3>{clientName.name}</h3>
+                    <p>Mail: {clientName.email}</p>
+                    <p>Tel: {clientName.phone}</p>
+                </div>
+            </div>
+            <div className={styles.right}>
+                <p>{`Estado: ${element.status}`}</p>
+                <p>{`Total: $${element.amount}`}</p>
+                <IconButton>
+                    <AddBox />
+                </IconButton>
+            </div>
         </div>
     )
 }
