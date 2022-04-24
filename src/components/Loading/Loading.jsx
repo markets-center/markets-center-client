@@ -14,7 +14,6 @@ export default function Loading() {
             <Grid item xs={3}>
                 <img src={loading} alt='Loading'/>
             </Grid>
-
         </Grid>
     )
 }
