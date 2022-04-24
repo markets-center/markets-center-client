@@ -15,6 +15,7 @@ import {
     GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
+<<<<<<< HEAD
     GET_USER_HISTORY,
     ORDER,
     ACTIVE_SELLER,
@@ -24,6 +25,9 @@ import {
     ADD_ORDER_CAR,
     DELETE_ORDER_CAR,
     LOADING
+=======
+    GET_USER_HISTORY
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component
 } from '../actions/ctes'
 
 
@@ -39,72 +43,67 @@ const initialState = {
     history:[],
     newOrder:{},
     errors: '',
+<<<<<<< HEAD
     message: '',
     addOrdercar:[],
     loading: false
+=======
+    message: ''
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case LOADING:
-            return {
-                ...state,
-                loading: true
-            }
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload,
-                loading: false
+                allProducts: action.payload
             }
         case POST_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload,
-                loading: false
+                addedProduct: action.payload
             }
         case UPDATE_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload,
-                loading: false
+                addedProduct: action.payload
             }
         case GET_PROTUCT_BY_NAME:
             return {
                 ...state,
-                searchedProducts: action.payload,
-                loading: false
+                searchedProducts: action.payload
             }
         case GET_PRODUCT_BY_ID:
             return {
                 ...state,
-                searchedProducts: action.payload,
-                loading: false
+                searchedProducts: action.payload
             }
         case GET_PRODUCT_BY_SELLER:
             return {
                 ...state,
+<<<<<<< HEAD
                 searchedProducts: action.payload,
                 productsBySeller: action.payload,
                 searchedProducts: action.payload,
                 loading: false
+=======
+                searchedProducts: action.payload
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component
             }
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                allCategories: action.payload,
-                loading: false
+                allCategories: action.payload
             }
         case GET_ALL_SELLERS:
             return {
                 ...state,
-                allSellers: action.payload,
-                loading: false
+                allSellers: action.payload
             }
         case GET_PRODUCT_BY_CATEGORY:
             return {
                 ...state,
-                searchedProducts: action.payload,
-                loading: false
+                searchedProducts: action.payload
             }
         case ERRORS:
             return {
@@ -124,8 +123,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_ALL_USERS:
             return {
                 ...state,
-                allUsers: action.payload,
-                loading: false
+                allUsers: action.payload
             }
         case UPDATE_USER:
             return {
@@ -141,12 +139,12 @@ export default function rootReducer(state = initialState, action) {
         case GET_USER_HISTORY:
             return {
                 ...state,
-                history: action.payload,
-                loading: false
+                history: action.payload
             }
         case RESET_SLIDERS:
             return {
                 ...state,
+<<<<<<< HEAD
                 searchedProducts: state.allProducts,
                 loading: false
             }
@@ -188,6 +186,10 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 activeCategory: action.payload
+=======
+                searchedProducts: state.allProducts
+
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component
             }
         default:
             return {

@@ -5,6 +5,7 @@ import Carousel from 'react-elastic-carousel'
 import Card from '../Card/Card.jsx';
 import { getAllProducts } from '../../redux/actions/a.products.js';
 import './Slider.css'
+<<<<<<< HEAD
 import Typography from '@mui/material/Typography';
 import Mc from '../../images/MarketsCenter.png'
 import s from './Slider2.module.css'
@@ -15,6 +16,11 @@ import Loading from '../../components/Loading/Loading';
 export default function Sliders() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.loading)
+=======
+
+export default function Sliders() {
+    const dispatch = useDispatch()
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component
     const products = useSelector(state => state.allProducts)
     useEffect(() => {
         dispatch(getAllProducts())
@@ -30,6 +36,7 @@ export default function Sliders() {
 
     const cereales = products.filter(p => p.category[0].name === 'Cereales y derivados');
 
+<<<<<<< HEAD
 
     return (
         <Container>
@@ -118,3 +125,26 @@ export default function Sliders() {
 
     )
 }
+=======
+  return (
+    <Container sx={{
+        height: '400px',
+    }}>
+       <Carousel breakPoints={breakPoints} >
+           {products?.map((producto,idx) => (
+               <Card 
+               key={idx}
+               name={producto.name}
+               price={producto.price}
+               image={producto.image}
+               description={producto.description}
+               stock={producto.stock}
+               category={producto.category.map(c => c.name)}
+               />
+           ))}
+       </Carousel>
+        
+    </Container>
+
+)}
+>>>>>>> parent of bd7eb33... Changes at Loading and Error component

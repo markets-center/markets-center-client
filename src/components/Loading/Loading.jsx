@@ -1,24 +1,10 @@
-import loading from '../../images/MarketsCenterLoading.gif'
-import { Container } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import image from './Loading.gif'
 
-export default function Loading() {
+export default function Loading(){
     return (
         <div>
-            <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-                style={{ minHeight: '50vh' }}
-            >
-                <Grid item xs={3}>
-                <Container>
-                <img src={loading} alt="Loading" />
-            </Container>
-                </Grid>
-            </Grid>
+            <img src={image} alt="Error"/>
+            <h4>Se rompio todo</h4>
         </div>
     )
 }
