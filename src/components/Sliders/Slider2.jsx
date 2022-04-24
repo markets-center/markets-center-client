@@ -111,7 +111,7 @@ export default function Sliders() {
                             </Carousel>
                         </Container>
                     </Container>
-                    :
+                    : products.length && !loading &&
                     <Error message='No se encontraron los productos' mistake={false} />
             }
         </Container>
