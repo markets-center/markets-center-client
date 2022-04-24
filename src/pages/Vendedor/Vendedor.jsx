@@ -1,35 +1,96 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
+import {delAlert} from '../../redux/actions/a.alert'
+import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
+import spinner from '../../spinner.gif'
+// import { postProduct } from '../../../redux/actions/a.seller.js'
+
+import { useAuth } from '../../context/AuthContext'
 
 import NavBar from '../../components/NavBar/NavBar'
 import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor'
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
-import { Container, Typography, Button } from '@mui/material'
-
-const productos = [{nombre:'Leche',marca:'La Serenisima',urlImg:'https://www.casa-segal.com/wp-content/uploads/2020/04/leche-3-porciento-la-serenisima-sachet-rojo-1-lt-lacteos-casa-segal-mendoza.png',precio:'150'},
-{nombre:'Harina',marca:'Pureza',urlImg:'https://depotexpress.com.ar/tienda/wp-content/uploads/2020/06/HARINA-DE-TRIGO-PUREZA-0000-X-1.png',stock:'30', precio:'100'},
-{nombre:'Fideos Tallarines',marca:'Terrabusi',urlImg:'https://www.modomarket.com/26299-home_default/fideo-terrabusi-tallarin-x-500-gr.jpg',stock:'35',precio:'110'},
-{nombre:'Arroz',marca:'Gallo Oro',urlImg:'http://d3ugyf2ht6aenh.cloudfront.net/stores/001/219/229/products/2411-60543d41464f3ddd5515988782714569-640-0.jpg',stock:'50',precio:'110'},
-{nombre:'Azucar',marca:'Ledesma',urlImg:'https://www.conradomarket.com.ar/images/000000000000100164048ALMACEN-Azucar-Ledesma-x-1-kg1.jpg',stock:'10',precio:'100'},
-{nombre:'Yerba',marca:'Taragüi',urlImg:'https://http2.mlstatic.com/D_NQ_NP_794896-MLA44134710145_112020-O.jpg',stock:'20',precio:'190'},
-{nombre:'Azucar',marca:'Ledesma',urlImg:'https://www.conradomarket.com.ar/images/000000000000100164048ALMACEN-Azucar-Ledesma-x-1-kg1.jpg',stock:'10',precio:'100'},
-{nombre:'Yerba',marca:'Taragüi',urlImg:'https://http2.mlstatic.com/D_NQ_NP_794896-MLA44134710145_112020-O.jpg',stock:'20',precio:'190'}]
+import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
+import { Container, Typography, Button, Snackbar } from '@mui/material'
+import {SnackbarAlert} from '../../components/Alert/success'
 
 export default function Vendedor(){
+    const alert = useSelector((state) => state.alert);
+
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true);
+    const { oneUser, currentUser } = useAuth()
+    // Form Modal 
+    const [prodId, setProdId] = useState(null)
+    const [input, setInput] = useState({
+        name: "",
+        description: "",
+        image: "",
+        stock: "",
+        category: [],
+        price: "",
+        userId: currentUser.uid
+    });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setProdId(null)
+        setInput({
+            name: "",
+            description: "",
+            image: "",
+            stock: "",
+            category: [],
+            price: "",
+            userId: currentUser.uid
+        })
+        setOpen(false)
+    }
+    function handleSubmit(e){
+        e.preventDefault();
+        prodId === null ?
+        dispatch(postProduct(input))
+        : dispatch(updateProduct(input, prodId))
+    }
+    function handleCloseAlert(){
+        dispatch(delAlert())
+    }
 
+    // Products by User
+    useEffect(() => {
+        dispatch(filterBySellerAndCategories(oneUser._id))
+        setTimeout(() => {
+            setLoading(false)
+        }, 500);
+    },[oneUser._id,dispatch])
+    const products = useSelector(state => state.productsBySeller)
+    const removeProduct = (id) => {
+        dispatch(deleteProduct(id))
+        dispatch(filterBySellerAndCategories(oneUser._id))
+        return products = products.filter(product => product._id !== id)
+    }
+    console.log(input)
+    console.log(prodId)
     return (
         <>
         <NavBar />
+        <ListItem />
         <Container sx={{
             height: '100vh',
             display: 'flex',
             flexDirection: 'column'
         }}>
-            <DatosVendedor />
+            <DatosVendedor 
+                        name={oneUser.name}
+                        address={oneUser.address}
+                        email={oneUser.email}
+                        delivery={oneUser.delivery}
+                        phone={oneUser.phone}
+                        image={oneUser.image}
+                        />
             <Container sx={{
                 height: '500px',
                 display: 'flex',
@@ -59,8 +120,12 @@ export default function Vendedor(){
                         Agregar
                     </Button>
                     <AddProduct 
+                        prodId={prodId}
+                        input={input}
+                        setInput={setInput}
                         open={open}
                         handleClose={handleClose}
+                        handleSubmit={handleSubmit}
                     />
                 </Container>
                 <Container sx={{
@@ -69,21 +134,40 @@ export default function Vendedor(){
                 flexWrap: 'wrap',
                 justifyContent: 'space-around',
                 overflow: 'auto',
-                borderRadius: '10px',
+                borderRadius: '10px'
             }}>
-                {productos.length ? productos.map((producto, idx) => <CardVendedor 
-                                            key={idx}
-                                            nombre={producto.nombre}
-                                            marca={producto.marca}
-                                            urlImg={producto.urlImg}
+                {loading ? <img src={spinner} alt="" style={{width: '150px', height: 'max-content'}} /> : products.length ? products.map((producto, id) => <CardVendedor 
+                                            key={id}
+                                            id={producto._id}
+                                            nombre={producto.name}
+                                            image={producto.image}
                                             stock={producto.stock || "Sin Stock"}
-                                            precio={producto.precio}
+                                            precio={producto.price}
+                                            category={producto.category}
+                                            description={producto.description}
+                                            handleClose={handleClose}
+                                            handleOpen={handleOpen}
+                                            handleSubmit={handleSubmit}
+                                            removeProduct={removeProduct}
+                                            input={input}
+                                            setInput={setInput}
+                                            prodId={prodId}
+                                            setProdId={setProdId}
                                             />) : <Typography variant='h5' sx={{margin: 'auto'}}>
                                                     NO HAY PRODUCTOS
                                                 </Typography>}
                 </Container>
             </Container>
         </Container>
+        <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleCloseAlert} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleCloseAlert} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
+
         </>
     )
 }

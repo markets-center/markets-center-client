@@ -19,6 +19,14 @@ export const theme = createTheme({
           main: '#2ad833',
           contrastText: "#fff"
         },
+        disable: {
+          main: '#a5a5a5',
+          contrastText: "#fff"
+        },
+        buttonGracias:{
+          main: '#5cb85c',
+          contrastText: "#fff"
+        }
       },
 });
 

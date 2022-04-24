@@ -1,44 +1,120 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import Carousel from 'react-elastic-carousel'
 import Card from '../Card/Card.jsx';
+import { getAllProducts } from '../../redux/actions/a.products.js';
 import './Slider.css'
-
+import Typography from '@mui/material/Typography';
+import Mc from '../../images/MarketsCenter.png'
+import s from './Slider2.module.css'
+import Error from '../Error/Error'
+import Loading from '../../components/Loading/Loading';
 
 
 export default function Sliders() {
-    const productos = [{nombre:'Leche',marca:'La Serenisima',urlImg:'https://www.casa-segal.com/wp-content/uploads/2020/04/leche-3-porciento-la-serenisima-sachet-rojo-1-lt-lacteos-casa-segal-mendoza.png',precio:'150'},
-    {nombre:'Harina',marca:'Pureza',urlImg:'https://depotexpress.com.ar/tienda/wp-content/uploads/2020/06/HARINA-DE-TRIGO-PUREZA-0000-X-1.png',stock:'30', precio:'100'},
-    {nombre:'Fideos Tallarines',marca:'Terrabusi',urlImg:'https://www.modomarket.com/26299-home_default/fideo-terrabusi-tallarin-x-500-gr.jpg',stock:'35',precio:'110'},
-    {nombre:'Arroz',marca:'Gallo Oro',urlImg:'http://d3ugyf2ht6aenh.cloudfront.net/stores/001/219/229/products/2411-60543d41464f3ddd5515988782714569-640-0.jpg',stock:'50',precio:'110'},
-    {nombre:'Azucar',marca:'Ledesma',urlImg:'https://www.conradomarket.com.ar/images/000000000000100164048ALMACEN-Azucar-Ledesma-x-1-kg1.jpg',stock:'10',precio:'100'},
-    {nombre:'Yerba',marca:'Taragüi',urlImg:'https://http2.mlstatic.com/D_NQ_NP_794896-MLA44134710145_112020-O.jpg',stock:'20',precio:'190'},
-    {nombre:'Azucar',marca:'Ledesma',urlImg:'https://www.conradomarket.com.ar/images/000000000000100164048ALMACEN-Azucar-Ledesma-x-1-kg1.jpg',stock:'10',precio:'100'},
-{nombre:'Yerba',marca:'Taragüi',urlImg:'https://http2.mlstatic.com/D_NQ_NP_794896-MLA44134710145_112020-O.jpg',stock:'20',precio:'190'}]
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.loading)
+    const products = useSelector(state => state.allProducts)
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, [dispatch]);
 
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
-        { width: 768, itemsToShow: 3 },
+        { width: 768, itemsToShow: 4 },
         { width: 1200, itemsToShow: 4 }
     ];
 
+    const bebidas = products.filter(p => p.category[0].name === 'Bebidas alcohólicas');
 
-  return (
-    <Container sx={{
-        height: '400px',
-    }}>
-       <Carousel breakPoints={breakPoints} >
-           {productos.map(producto => (
-               <Card 
-               name={producto.nombre}
-               price={producto.precio}
-               image={producto.urlImg}
-               description={producto.marca}
-               stock={producto.stock}
-               />
-           ))}
-       </Carousel>
-        
-    </Container>
+    const cereales = products.filter(p => p.category[0].name === 'Cereales y derivados');
 
-)}
+
+    return (
+        <Container>
+            {loading ? <Loading /> :
+                products.length ?
+                    <Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Destacados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {products?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider} >
+                                Bebidas<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {bebidas?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Cereales y derivados<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {cereales?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+                        </Container>
+                    </Container>
+                    :
+                    <Error message='No se encontraron los productos' mistake={false} />
+            }
+        </Container>
+
+    )
+}

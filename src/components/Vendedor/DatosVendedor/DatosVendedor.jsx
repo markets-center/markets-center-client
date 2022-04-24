@@ -1,12 +1,16 @@
 import { Container, Box, Typography } from "@mui/material";
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import BlockIcon from '@mui/icons-material/Block';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 
-export default function DatosVendedor(){
+export default function DatosVendedor({ name, address, email, delivery, phone, image }){
     return (
         <Container sx={{
             height: '250px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            marginTop: '10px',
             borderBottom: '2px solid black'
         }}>
             <Container sx={{
@@ -17,14 +21,15 @@ export default function DatosVendedor(){
                 alignItems: 'center',
             }}>
                 <Box sx={{
-                    marginBottom: '25px'
                 }}>
-                    <Typography variant='h6'>
-                        {"SUPERMERCADO"}
+                    <Typography variant='h6' sx={{
+                        fontWeight: 'bold'
+                    }}>
+                        {name}
                     </Typography>
                 </Box>
                 <Box>
-                    <img src="https://e7.pngegg.com/pngimages/798/436/png-clipart-computer-icons-user-profile-avatar-profile-heroes-black.png" alt="" style={{padding: "10px",width: "100px"}}/>
+                    <img src={image} alt="" style={{width: "150px",borderRadius: "50%"}}/>
                 </Box>
             </Container>
             <Container sx={{
@@ -40,14 +45,16 @@ export default function DatosVendedor(){
                 flexDirection: 'column',
                 justifyContent: 'space-evenly'
             }}>
-                <Box>
+                <Box sx={{
+                    width: '275px'
+                }}>
                     <Typography>
-                        {`Dirección: `}
+                        <span style={{fontWeight: 'bold'}}>Dirección</span> {address}
                     </Typography>
                 </Box>
                 <Box>
                     <Typography>
-                        {`Lo que sea: `}
+                    <span style={{fontWeight: 'bold'}}>Mail</span> {email}
                     </Typography>
                 </Box>
             </Container>
@@ -58,15 +65,18 @@ export default function DatosVendedor(){
                 justifyContent: 'space-evenly'
             }}>
 
-                <Box>
+                <Box sx={{
+                    width: '275px'
+                }}>
                     <Typography>
-                        {`Datos: `}
+                    <span style={{fontWeight: 'bold'}}>Teléfono</span> {phone}
                     </Typography>
                 </Box>
-                <Box>
-                    <Typography>
-                        {`Delivery: `}
-                    </Typography>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center'
+                }}>
+                    {delivery ? <><DeliveryDiningIcon style={{position: 'relative',left: '10px',color: 'green', fontSize: '40px'}} /> <PanoramaFishEyeIcon style={{position: 'relative', right: '39px', fontSize: '60px', color: 'green'}} /></> : <><DeliveryDiningIcon style={{position: 'relative',left: '10px',color: 'red', fontSize: '40px'}} /> <BlockIcon style={{position: 'relative', right: '39px', fontSize: '60px', color: 'red'}}/></>}
                 </Box>
             </Container>
             </Container>

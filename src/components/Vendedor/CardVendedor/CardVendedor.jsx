@@ -1,6 +1,22 @@
 import { Container, Button, Box, Typography } from "@mui/material";
+import AddProduct from '../AddProduct/AddProduct.jsx'
 
-export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
+
+export default function CardVendedor({ nombre, id, image, stock, precio, category, description, removeProduct, input, setInput, prodId, setProdId, handleClose, handleOpen, handleSubmit }){
+
+    function handleUpdate(event){
+        setProdId(event.currentTarget.getAttribute("id"))
+        setInput({
+            name: event.currentTarget.getAttribute('name'),
+            description: event.currentTarget.getAttribute('description'),
+            image: event.currentTarget.getAttribute('image'),
+            stock: event.currentTarget.getAttribute('stock'),
+            category: event.currentTarget.getAttribute('category').split(','),
+            price: event.currentTarget.getAttribute('price'),
+        })
+        handleOpen()
+    }
+    
     return (
         <Container sx={{
             height: '100px',
@@ -15,7 +31,7 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
             <Box sx={{
                 height: 'max-content',
             }}>
-                <img src={urlImg} alt="pic" width='60px'/>
+                <img src={image} alt="pic" width='60px'/>
             </Box>
 
             <Box sx={{
@@ -26,7 +42,7 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
                 <Typography component='span' sx={{
                     margin: '10px 0px'
                 }}>
-                    {`${nombre} ${marca}`}
+                    {`${nombre}`}
                 </Typography>
                 <Typography component='span' sx={{
                     margin: '10px 0px'
@@ -39,18 +55,41 @@ export default function CardVendedor({ nombre, marca, urlImg, stock, precio }){
                 display: 'flex',
                 flexDirection: 'column',
             }}>
-                <Button variant="contained" color="info" sx={{
-                    margin: '2px',
-                    fontWeight: '600',
-                }}>
+                <Button 
+                    name={nombre}
+                    description={description}
+                    image={image}
+                    stock={stock}
+                    category={category}
+                    price={precio}
+                    onClick={handleUpdate}
+                    id={id}
+                    variant="contained" 
+                    color="info" 
+                    sx={{
+                        margin: '2px',
+                        fontWeight: '600',
+                    }}
+                >
                 Reponer
                 </Button>
-                <Button variant="contained" color="secondary" sx={{
+                <Button 
+                onClick={() => removeProduct(id)}
+                variant="contained" 
+                color="secondary" 
+                sx={{
                     margin: '2px'
                 }}>
                 Eliminar
                 </Button>
             </Box>
+            <AddProduct 
+            prodId={prodId}
+            input={input}
+            setInput={setInput}
+            handleClose={handleClose}
+            handleSubmit={handleSubmit}
+            />
         </Container>
     )
 }

@@ -3,13 +3,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 
+import "./Footer.css";
+
 export default function Footer() {
   return (
-    <Box
+    <div className="footer-container">
+      <Box
       sx={{
         display: "flex",
-        flexDirection: "column",
-        minHeight: "10vh",
+        flexDirection: "column"
       }}
     >
       <Box
@@ -27,7 +29,7 @@ export default function Footer() {
         <Container maxWidth="xs">
           <Typography variant="body2" color="text.secondary">
             {"Copyright © "}
-            <Link color="inherit" href="/home">
+            <Link color="inherit" href="/">
               Markets Center
             </Link>
             {" "}
@@ -37,5 +39,6 @@ export default function Footer() {
         </Container>
       </Box>
     </Box>
+    </div>
   );
 }

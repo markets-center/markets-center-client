@@ -1,65 +1,65 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductByName } from '../../redux/actions/a.products.js'
 
 import { Stack, TextField, IconButton, Paper } from '@mui/material';
-import { outlinedInputClasses, styled } from "@mui/material";
+import { outlinedInputClasses, styled, FormControl } from "@mui/material";
 import { Search } from '@mui/icons-material';
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
-      borderColor: "white"
+        borderColor: "white"
     },
     [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
-      borderColor: "white"
+        borderColor: "white"
     },
-  });
+});
 
-  export default function NavBar(){
+export default function NavBar(){
+    const searchedProducts = useSelector(state => state.searchedProducts)
     const [search, setSearch] = useState("")
     const dispatch = useDispatch()
-
-    function onSubmit(e){
-        e.preventDefault()
-        // dispatch(nombreDeLaFunction(search))
-    }
-
+    
     function onImputChange(e){
         e.preventDefault()
         setSearch(e.target.value)
     }
+
+    function onSubmit(e){
+        e.preventDefault()
+        dispatch(getProductByName(search))
+    }
     
     useEffect(() => {
-        // dispatch(nombreDeLaFunction(search))
+        dispatch(getProductByName(search))
     }, [dispatch, search])
 
     return (
-        <Stack spacing={1} direction="row" size="large">
-            <Paper
-                component="form"
-                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 700 }}
-            >
-            <StyledTextField  
-                onChange={onImputChange}
-                placeholder="Buscar por nombre..."
-                size='small' 
-                color="white"
-                style = {{width: 700}}
-                inputProps={{ style: { color: '#005BAA' } }}
-            />
-            <IconButton 
-                onSubmit={onSubmit}
-                variant='outlined' 
-                color='primary' 
-            >
-                <Search />
-            </IconButton>
+        <FormControl onSubmit={onSubmit}>
+            <Stack spacing={1} direction="row" size="large">
+                <Paper
+                    component="form"
+                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 700 }}
+                >
+                <StyledTextField  
+                    onChange={onImputChange}
+                    placeholder="Buscar por nombre..."
+                    size='small' 
+                    color="white"
+                    style = {{width: 700}}
+                    inputProps={{ style: { color: '#005BAA' } }}
+                />
+                <IconButton 
+                    type="submit"
+                    variant='outlined' 
+                    color='primary' 
+                >
+                    <Search />
+                </IconButton>
 
-    </Paper>
-        </Stack>
+                </Paper>
+            </Stack>
+        </FormControl>
     )
 }
-
-
-
-    

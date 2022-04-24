@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 
 export default function Categories({ Validation, setError, error, setInput, input }) {
-    
     const categories = useSelector(state => state.allCategories)
     let filtered = categories.filter( el => el._id === input.category.find( element =>  el._id === element ) )
     const [categoryId, setCategoryId] = useState('')

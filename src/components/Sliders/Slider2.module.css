@@ -1,0 +1,13 @@
+.titleSlider{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 50px;
+    margin-bottom: 30px;
+}
+.imgTitleSlider{
+    width: auto;
+    height: 40px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+}
