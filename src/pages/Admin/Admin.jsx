@@ -1,24 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {delAlert} from '../../redux/actions/a.alert'
 
 import NavBar from '../../components/NavBar/NavBar.jsx'
 import Categorias from '../../components/Admin/Categorias/Categorias.jsx'
 import Usuarios from '../../components/Admin/Usuarios/Usuarios.jsx'
-import {Snackbar} from '@mui/material';
-import {SnackbarAlert} from '../../components/Alert/success';
-
 
 
 export default function Admin(){
     const [value, setValue] = useState('Categorias');
-    const dispatch = useDispatch()
-    const alert = useSelector((state) => state.alert);
-
-    function handleClose(){
-        dispatch(delAlert())
-    }
-
     return (
         <div>
             <NavBar admin={true} value={value} setValue={setValue}/>
@@ -30,14 +18,6 @@ export default function Admin(){
                 value === "Categorias" &&
                 <Categorias />
             }
-            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right'
-            }}>
-                <SnackbarAlert onClose={handleClose} color='primary' variant='filled' severity='success'>
-                    {alert}
-                </SnackbarAlert>
-            </Snackbar>
         </div>
     )
 }

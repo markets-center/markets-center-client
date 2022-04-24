@@ -24,8 +24,7 @@ import {
     GET_ALL_ORDERS_OF_SELLER,
     ADD_ORDER_CAR,
     DELETE_ORDER_CAR,
-    SET_ALERT,
-    DEL_ALERT
+    LOADING
 } from '../actions/ctes'
 
 import { orderByPrice, order, filterByPrice } from '../functions/functions'
@@ -48,56 +47,70 @@ const initialState = {
     activeCategory: '',
     errors: '',
     message: '',
-    alert:'',
-    addOrdercar:[]
+    addOrdercar:[],
+    loading: false
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                allProducts: action.payload
+                allProducts: action.payload,
+                loading: false
             }
         case POST_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload
+                addedProduct: action.payload,
+                loading: false
             }
         case UPDATE_PRODUCT:
             return {
                 ...state,
-                addedProduct: action.payload
+                addedProduct: action.payload,
+                loading: false
             }
         case GET_PROTUCT_BY_NAME:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_ID:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_SELLER_AND_CAT:
             return {
                 ...state,
                 productsBySeller: action.payload,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case GET_ALL_CATEGORIES:
             return {
                 ...state,
-                allCategories: action.payload
+                allCategories: action.payload,
+                loading: false
             }
         case GET_ALL_SELLERS:
             return {
                 ...state,
-                allSellers: action.payload
+                allSellers: action.payload,
+                loading: false
             }
         case GET_PRODUCT_BY_CATEGORY:
             return {
                 ...state,
-                searchedProducts: action.payload
+                searchedProducts: action.payload,
+                loading: false
             }
         case ERRORS:
             return {
@@ -117,7 +130,8 @@ export default function rootReducer(state = initialState, action) {
         case GET_ALL_USERS:
             return {
                 ...state,
-                allUsers: action.payload
+                allUsers: action.payload,
+                loading: false
             }
         case UPDATE_USER:
             return {
@@ -133,12 +147,14 @@ export default function rootReducer(state = initialState, action) {
         case GET_USER_HISTORY:
             return {
                 ...state,
-                history: action.payload
+                history: action.payload,
+                loading: false
             }
         case GET_ALL_ORDERS_OF_SELLER:
             return {
                 ...state,
-                history: action.payload
+                history: action.payload,
+                loading: false
             }
         case RESET_SLIDERS:
             return {
@@ -149,8 +165,7 @@ export default function rootReducer(state = initialState, action) {
         case ADD_ORDER_CAR:
             return {
                 ...state,
-                addOrdercar: [...state.addOrdercar, action.payload],
-                alert: 'Producto agregado correctamente'
+                addOrdercar: [...state.addOrdercar, action.payload]
             }
         case DELETE_ORDER_CAR:
             return {
@@ -161,7 +176,8 @@ export default function rootReducer(state = initialState, action) {
             let orden = order(action.payload, state.searchedProducts);
             return{
                 ...state,
-                searchedProducts: orden
+                searchedProducts: orden,
+                loading: false
             }
         case FILTER_BY_PRICE:
             let filter = filterByPrice(action.payload,state.searchedProducts)
@@ -183,16 +199,6 @@ export default function rootReducer(state = initialState, action) {
             return{
                 ...state,
                 activeCategory: action.payload
-            }
-        case DEL_ALERT:
-            return {
-                ...state,
-                alert: ''
-            }
-        case SET_ALERT:
-            return {
-                ...state,
-                alert: action.payload
             }
         default:
             return {

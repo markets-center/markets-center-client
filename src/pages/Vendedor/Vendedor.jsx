@@ -2,7 +2,6 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
-import {delAlert} from '../../redux/actions/a.alert'
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
@@ -14,12 +13,9 @@ import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
-import { Container, Typography, Button, Snackbar } from '@mui/material'
-import {SnackbarAlert} from '../../components/Alert/success'
+import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
-    const alert = useSelector((state) => state.alert);
-
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
     const { oneUser, currentUser } = useAuth()
@@ -55,10 +51,6 @@ export default function Vendedor(){
         dispatch(postProduct(input))
         : dispatch(updateProduct(input, prodId))
     }
-    function handleCloseAlert(){
-        dispatch(delAlert())
-    }
-
     // Products by User
     useEffect(() => {
         dispatch(filterBySellerAndCategories(oneUser._id))
@@ -159,15 +151,6 @@ export default function Vendedor(){
                 </Container>
             </Container>
         </Container>
-        <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleCloseAlert} anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right'
-            }}>
-                <SnackbarAlert onClose={handleCloseAlert} color='primary' variant='filled' severity='success'>
-                    {alert}
-                </SnackbarAlert>
-            </Snackbar>
-
         </>
     )
 }

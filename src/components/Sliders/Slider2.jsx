@@ -8,14 +8,17 @@ import './Slider.css'
 import Typography from '@mui/material/Typography';
 import Mc from '../../images/MarketsCenter.png'
 import s from './Slider2.module.css'
+import Error from '../Error/Error'
+import Loading from '../../components/Loading/Loading';
 
 
 export default function Sliders() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
-   useEffect(() => {
-       dispatch(getAllProducts())
-   }, [dispatch]);
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, [dispatch]);
 
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
@@ -23,88 +26,95 @@ export default function Sliders() {
         { width: 1200, itemsToShow: 4 }
     ];
 
-    const bebidas = products.filter(p=> p.category[0].name === 'Bebidas alcohólicas');
+    const bebidas = products.filter(p => p.category[0].name === 'Bebidas alcohólicas');
 
-    const cereales = products.filter(p=> p.category[0].name === 'Cereales y derivados');
+    const cereales = products.filter(p => p.category[0].name === 'Cereales y derivados');
 
 
     return (
         <Container>
-          <Container sx={{
-              marginTop: '60px',
-              marginBottom: '60px'
-          }}>
-              <Typography variant="h4" className={s.titleSlider}>
-                             Destacados<img src={Mc}   alt="mc" className={s.imgTitleSlider}/>
-                          </Typography>
-              <Carousel breakPoints={breakPoints} >
-                  {products?.map((producto,idx) => (
-                      <Card 
-                      key={idx}
-                      name={producto.name}
-                      price={producto.price}
-                      image={producto.image}
-                      description={producto.description}
-                      stock={producto.stock}
-                      category={producto.category.map(c => c.name)}
-                      id={producto._id}
-                      rating={producto.rating}
-                      numReviews={producto.numReviews}
-                      />
-                  ))}
-              </Carousel>
-          
-          </Container>
-          <Container sx={{
-                  marginTop: '60px',
-                  marginBottom: '60px'
-          }}>
-               <Typography variant="h4" className={s.titleSlider} >
-                             Bebidas<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider}/>
-                          </Typography>
-              <Carousel breakPoints={breakPoints} >
-                  {bebidas?.map((producto,idx) => (
-                      <Card 
-                      key={idx}
-                      name={producto.name}
-                      price={producto.price}
-                      image={producto.image}
-                      description={producto.description}
-                      stock={producto.stock}
-                      category={producto.category.map(c => c.name)}
-                      id={producto._id}
-                      rating={producto.rating}
-                      numReviews={producto.numReviews}
-                      />
-                  ))}
-              </Carousel>
-          
-          </Container>
-          <Container sx={{
-                  marginTop: '60px',
-                  marginBottom: '60px'
-          }}>
-               <Typography variant="h4" className={s.titleSlider}>
-                             Cereales y derivados<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider}/>
-                          </Typography>
-              <Carousel breakPoints={breakPoints} >
-                  {cereales?.map((producto,idx) => (
-                      <Card 
-                      key={idx}
-                      name={producto.name}
-                      price={producto.price}
-                      image={producto.image}
-                      description={producto.description}
-                      stock={producto.stock}
-                      category={producto.category.map(c => c.name)}
-                      id={producto._id}
-                      rating={producto.rating}
-                      numReviews={producto.numReviews}
-                      />
-                  ))}
-              </Carousel>
-          
-          </Container>
-      </Container>
-  
-  )}
+            {loading ? <Loading /> :
+                products.length ?
+                    <Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Destacados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {products?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider} >
+                                Bebidas<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {bebidas?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Cereales y derivados<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {cereales?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+                        </Container>
+                    </Container>
+                    :
+                    <Error message='No se encontraron los productos' mistake={false} />
+            }
+        </Container>
+
+    )
+}
