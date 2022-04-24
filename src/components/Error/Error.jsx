@@ -13,7 +13,7 @@ export default function Error({message, mistake}){
             style={{ minHeight: '50vh' }}
         >
             <Grid item xs={3}>
-                <img src={mistake ? image : MarketsCenterMistake} alt='Loading'/>
+                <img src={mistake ? image : MarketsCenterMistake} alt='Error'/>
                 <h1>{message}</h1>
             </Grid>
 
