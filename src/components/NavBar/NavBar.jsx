@@ -72,17 +72,20 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                     <Stack direction="row">
                         <div>
                             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                                <Tooltip title="Carrito de compras">
-                                    <IconButton
-                                        onClick={() => navigate('/Carrito')}
-                                        size="small"
-                                        sx={{ ml: 2 }}
-                                        color="white">
-                                        <Badge color="secondary" badgeContent={countItemsCar.length}>
-                                            <LocalGroceryStoreOutlinedIcon />
-                                        </Badge>
-                                    </IconButton>
-                                </Tooltip>
+                                    {
+                                    home && (
+                                        <Tooltip title="Carrito de compras">
+                                            <IconButton
+                                                onClick={() => navigate('/Carrito')}
+                                                size="small"
+                                                sx={{ ml: 2 }}
+                                                color="white">
+                                                <Badge color="secondary" badgeContent={countItemsCar.length}>
+                                                    <LocalGroceryStoreOutlinedIcon />
+                                                </Badge>
+                                            </IconButton>
+                                        </Tooltip>)
+                                    }
                                 <Tooltip title="Cuenta">
                                     <IconButton
                                         onClick={handleClick}

@@ -13,6 +13,7 @@ import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
+import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
 import { Container, Typography, Button } from '@mui/material'
 
 export default function Vendedor(){
@@ -69,7 +70,7 @@ export default function Vendedor(){
     return (
         <>
         <NavBar />
-        <ListItem />
+        <HistoryHome />
         <Container sx={{
             height: '100vh',
             display: 'flex',
