@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './Usuario.module.css'
-import { Button } from '@mui/material'
-import { AddBox } from '@mui/icons-material'
 import CardUsuarios from '../CardUsuarios/CardUsuarios.jsx'
 
 export default function Usuarios(){

@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { getAllCategories } from '../../../redux/actions/a.category.js'
 import { adminDeleteCategory } from '../../../redux/actions/a.admin.js'
 
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'

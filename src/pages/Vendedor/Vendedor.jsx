@@ -16,6 +16,8 @@ import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 // import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
 import { Container, Typography, Button } from '@mui/material'
+import {Snackbar} from '@mui/material';
+import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
     const navigate = useNavigate()

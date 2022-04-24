@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { getAllCategories } from '../../../redux/actions/a.category.js'
 
 import styles from "./AddProduct.module.css";
