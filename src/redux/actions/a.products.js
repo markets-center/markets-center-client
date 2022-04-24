@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW } from "./ctes";
+import { GET_ALL_PRODUCTS, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW, SET_ALERT } from "./ctes";
 
 
 export function getAllProducts() {
@@ -56,7 +56,7 @@ export function deleteProduct(id) {
     return async function (dispatch) {
         try {
             const result = await axios.delete(`/api/public/product/${id}`);
-            dispatch({ type: MESSAGE, payload: result.data.msg })
+            dispatch({ type: SET_ALERT, payload: result.data.msg })
         } catch (err) {
             dispatch({ type: ERRORS, payload: err.msg })
         }
@@ -128,7 +128,7 @@ export function createProductReview(productId, review) {
     return async function (dispatch) {
         try {
             const response = axios.post(`/api/public/product/${productId}/review/add`, review);
-            dispatch({ type: MESSAGE, payload: response.data.msg })
+            dispatch({ type: SET_ALERT, payload: response.data.msg })
             dispatch({ type: POST_REVIEW, payload: response.data.data })
         } catch (err) {
             dispatch({ type: ERRORS, payload: err.msg })
