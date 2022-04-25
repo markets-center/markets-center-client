@@ -17,6 +17,7 @@ import {
     GET_PRODUCT_BY_CATEGORY,
     GET_USER_HISTORY,
     ORDER,
+    PAYMENT,
     ACTIVE_SELLER,
     ACTIVE_CATEGORY,
     FILTER_BY_PRICE,
@@ -52,7 +53,8 @@ const initialState = {
     addOrdercar:[],
     loading: false,
     alert:'',
-    addOrdercar:[]
+    addOrdercar:[],
+    payment:[]
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -146,6 +148,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 newOrder: action.payload
+            }
+
+        case PAYMENT:
+            return {
+                ...state,
+                payment: [...state.payment, action.payload]
             }
 
         case GET_USER_HISTORY:
