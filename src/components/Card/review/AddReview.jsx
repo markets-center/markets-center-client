@@ -1,9 +1,12 @@
 import {TextField} from "@material-ui/core";
-import {Box, Button, Rating} from "@mui/material";
+import {Box, Button, Rating, Snackbar} from "@mui/material";
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useAuth} from "../../../context/AuthContext";
 import {createProductReview} from "../../../redux/actions/a.products";
+import {Navigate} from "react-router-dom";
+import {SnackbarAlert} from "../../Alert/success";
+import {delAlert} from "../../../redux/actions/a.alert";
 
 function validate(input) {
     let errors = {};
@@ -11,10 +14,12 @@ function validate(input) {
     return errors;
 }
 
-export default function AddReview({id}) {
-    const {oneUser} = useAuth()
+export default function AddReview({id, children}) {
+    const {oneUser,currentUser} = useAuth();
+
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
+    const alert = useSelector((state) => state.alert);
 
     const [input, setInput] = useState({
         user: oneUser._id,
@@ -26,6 +31,9 @@ export default function AddReview({id}) {
         Object.keys(error).length > 0 ? setDisabled(true) : setDisabled(false)
 
     }, [error])
+    if(!currentUser){
+        return <Navigate to='/Login' replace />;
+    }
 
     function handleChange(e) {
         setError(validate({
@@ -44,6 +52,9 @@ export default function AddReview({id}) {
             rating: 0,
             comment: ""
         });
+    }
+    function handleClose(){
+        dispatch(delAlert())
     }
 
     return (
@@ -65,6 +76,15 @@ export default function AddReview({id}) {
             />
             <Button variant="contained" style={{width: "25%", marginTop: "10px"}} onClick={(e) => handleSubmit(e)}
                     disabled={disabled} component="span">Agregar</Button>
+
+            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleClose} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
         </Box>
     )
 }

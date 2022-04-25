@@ -31,7 +31,7 @@ export default function Home (){
         if(productsSearched.length === initialProducts.length){
             setRender(false)
         }
-    }, 10);
+    }, 1000);
     
 
     return (
@@ -39,7 +39,6 @@ export default function Home (){
             <NavBar searchBar={true} home={true}/>
             <SellerFilter />
             {render?<Shop />:<Slider2 />}
-            {/* {msg!=='' && <Alert onClose={() => {}}>{msg}</Alert>} */}
 
             <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',

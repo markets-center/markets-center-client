@@ -27,35 +27,35 @@ import {
     DELETE_ORDER_CAR,
     LOADING,
     SET_ALERT,
-    DEL_ALERT,
-    POST_REVIEW
+    DEL_ALERT, POST_REVIEW
+
 } from '../actions/ctes'
 
-import { order, filterByPrice } from '../functions/functions'
+import {order, filterByPrice} from '../functions/functions'
 
 
 const initialState = {
     allProducts: [], //aqui van los productos con todos los detalles
-    addedProduct:{},
+    addedProduct: {},
     searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
     productsBySeller: [],
     filteredByPrice: [],
     allCategories: [],
     newCategory: {},
     allSellers: [],
-    allUsers:[],
-    oneUser:{},
-    history:[],
-    newOrder:{},
+    allUsers: [],
+    oneUser: {},
+    history: [],
+    newOrder: {},
     activeSeller: '',
     activeCategory: '',
     errors: '',
     message: '',
-    addOrdercar:[],
+    addOrdercar: [],
     loading: false,
-    alert:'',
-    addOrdercar:[],
-    payment:[]
+    alert: '',
+    payment: [],
+    review: []
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -143,7 +143,7 @@ export default function rootReducer(state = initialState, action) {
         case UPDATE_USER:
             return {
                 ...state,
-                oneUser: { ...action.payload }
+                oneUser: {...action.payload}
             }
         case POST_ORDER:
             return {
@@ -188,30 +188,30 @@ export default function rootReducer(state = initialState, action) {
             }
         case ORDER:
             let orden = order(action.payload, state.searchedProducts);
-            return{
+            return {
                 ...state,
                 searchedProducts: orden,
                 loading: false
             }
         case FILTER_BY_PRICE:
-            let filter = filterByPrice(action.payload,state.searchedProducts)
-            return{
+            let filter = filterByPrice(action.payload, state.searchedProducts)
+            return {
                 ...state,
                 filteredByPrice: filter,
                 loading: false
             }                    
         case RESET_FILTER_BY_PRICE:
-            return{
+            return {
                 ...state,
                 filteredByPrice: []
-            }    
+            }
         case ACTIVE_SELLER:
-            return{
+            return {
                 ...state,
                 activeSeller: action.payload
             }
         case ACTIVE_CATEGORY:
-            return{
+            return {
                 ...state,
                 activeCategory: action.payload
             }
@@ -228,7 +228,9 @@ export default function rootReducer(state = initialState, action) {
         case POST_REVIEW:
             return {
                 ...state,
-                loading: false
+                loading: false,
+                review: action.payload,
+                alert: 'Reseña agregada correctamente'
             }
         default:
             return {

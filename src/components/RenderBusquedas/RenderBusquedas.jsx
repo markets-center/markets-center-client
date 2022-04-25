@@ -21,6 +21,8 @@ function RenderBusquedas() {
                 image={p.image}
                 description={p.description}
                 stock={p.stock}
+                rating={p.rating}
+                numReviews={p.numReviews}
                 category={p.category.map(c => c.name)}
                 id={p._id}
                 rating={p.rating}
