@@ -140,6 +140,7 @@ export function createProductReview(productId, review) {
             const response = await axios.post(`/api/public/product/${productId}/review/add`, review);
             dispatch({ type: MESSAGE, payload: response.data.msg })
             dispatch({ type: POST_REVIEW, payload: response.data.data })
+            dispatch({type: GET_ALL_PRODUCTS,payload: response.data.data})
         } catch (err) {
             dispatch({ type: ERRORS, payload: err.msg })
         }
