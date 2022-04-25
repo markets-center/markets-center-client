@@ -13,6 +13,9 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
 
   const [active, setActive] = useState(true);
   const [counter, setCounter] = useState(1);
+
+
+
   
   useEffect(() => {
     counter > 1 ? setActive(false) : setActive(true)  
@@ -71,7 +74,9 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
           </Grid>
           <Grid item xs={2}>
             <div className="item btn-remove">
-              <IconButton edge="end" onClick={() => eventClickRemoveItem(item.id)}>
+              <IconButton edge="end" onClick={() => {
+                eventClickRemoveItem(item.id);
+              }}>
                 <DeleteForeverRoundedIcon color="error"/>
               </IconButton>
             </div>

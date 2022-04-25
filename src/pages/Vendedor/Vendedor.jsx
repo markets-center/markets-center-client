@@ -20,6 +20,7 @@ import {Snackbar} from '@mui/material';
 import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
+    const alert = useSelector(state => state.alert)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
@@ -67,7 +68,7 @@ export default function Vendedor(){
             setLoading(false)
         }, 500);
     },[oneUser._id,dispatch])
-    const products = useSelector(state => state.productsBySeller)
+    let products = useSelector(state => state.productsBySeller)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id))
         dispatch(filterBySellerAndCategories(oneUser._id))

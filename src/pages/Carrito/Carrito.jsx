@@ -6,6 +6,8 @@ import CardItem from "./CardItem";
 import {deleteOrderCar} from "../../redux/actions/a.order.js";
 import CarLoader from "./CarLoader.js";
 import CheckoutComp from "../../components/Checkout2/CheckoutComp"
+import {Snackbar} from '@mui/material';
+import {SnackbarAlert} from '../../components/Alert/success';
 
 
 import {
@@ -21,9 +23,16 @@ export default function Carrito() {
   const products = useSelector((state) => state.addOrdercar);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  function handleCloseAlert(){
+    setAlert('');
+  }
+  function handleOpenAlert(msg){
+    setAlert(msg);
+  }
 
   
   const [total, setTotal] = useState(0);
@@ -34,12 +43,15 @@ export default function Carrito() {
   const findTotal = products.reduce((sum, item) => sum + item.price, 0);
 
   const eventClickCountAdd = (price) => {
+    handleOpenAlert('Cantidad modificada')
     setAdd((prev) => prev + price)
   }
   const eventClickCountRes = (price) => { 
+    handleOpenAlert('Cantidad modificada')
     setAdd((prev) => prev - price)
   }
   const eventClickRemoveItem = (id) => {
+    handleOpenAlert('Producto eliminado')
     setTotal(findTotal);
     setAdd(0);
     dispatch(deleteOrderCar(id))
@@ -104,6 +116,15 @@ export default function Carrito() {
           <CheckoutComp amount={total}/>
         </Box>
       </Modal>
+      <Snackbar open={!!alert} autoHideDuration={3000} onClose={handleCloseAlert} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleCloseAlert} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
+
     </div>
   );
 }
