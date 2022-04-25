@@ -5,17 +5,26 @@ import NavBar from "../../components/NavBar/NavBar.jsx";
 import CardItem from "./CardItem";
 import {deleteOrderCar} from "../../redux/actions/a.order.js";
 import CarLoader from "./CarLoader.js";
+import CheckoutComp from "../../components/Checkout2/CheckoutComp"
+
 
 import {
   Typography,
   Button,
-  Divider
+  Divider,
+  Modal,
+  Box
 } from "@mui/material";
 
 export default function Carrito() {
 
   const products = useSelector((state) => state.addOrdercar);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   
   const [total, setTotal] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
@@ -79,12 +88,22 @@ export default function Carrito() {
           </div>
           <hr />
           <div className="content-pay btn-pay">
-            <Button variant="outlined" size="small">
+            <Button variant="outlined" size="small" onClick={handleOpen}>
               PAGAR
             </Button>
           </div>
         </div>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <CheckoutComp amount={total}/>
+        </Box>
+      </Modal>
     </div>
   );
 }

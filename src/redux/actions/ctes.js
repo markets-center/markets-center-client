@@ -21,6 +21,7 @@ export const GET_USER_HISTORY = 'GET_USER_HISTORY'
 export const UPDATE_USER = 'UPDATE_USER';
 
 export const POST_ORDER = 'POST_ORDER'
+export const PAYMENT = 'PAYMENT'
 
 export const GET_PRODUCT_BY_SELLER_AND_CAT = 'GET_PRODUCT_BY_SELLER';
 

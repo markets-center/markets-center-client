@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {ERRORS, MESSAGE, POST_ORDER, ADD_ORDER_CAR, DELETE_ORDER_CAR} from './ctes';
+import {ERRORS, MESSAGE, POST_ORDER, ADD_ORDER_CAR, DELETE_ORDER_CAR, PAYMENT} from './ctes';
 
 export function postOrder(order) {
     return async function (dispatch) {
@@ -56,4 +56,11 @@ export function deleteOrderCar (id) {
     //         dispatch({type: ERRORS, payload: err.msg})
     //     }
     // }
+}
+
+export function payment(data){
+    return {
+        type: PAYMENT,
+        payload: data
+    }
 }
