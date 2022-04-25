@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/actions/a.admin.js';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import styles from './CardUsuarios.module.css';
 import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached } from '@mui/icons-material/';
 import defaultImage from '../../../images/defaultUser.png';
@@ -43,24 +43,30 @@ export default function CardCategorias (){
                                 }
                             </div>
                             <div className={styles.right}>
-                                <IconButton 
-                                    id={category.userId}
-                                    onClick={handlePasswordReset}
-                                >
-                                    <Cached />
-                                </IconButton>
-                                <IconButton
-                                    id={category._id}
-                                    onClick={handleUserToAdmin}
-                                >
-                                    <SupervisorAccount />
-                                </IconButton>
-                                <IconButton
-                                    id={category.userId}
-                                    onClick={handleUserdelete}
-                                >
-                                    <Delete />
-                                </IconButton>
+                                <Tooltip title="Reset contraseña" arrow>
+                                    <IconButton 
+                                        id={category.userId}
+                                        onClick={handlePasswordReset}
+                                    >
+                                        <Cached />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Covertir a Admin" arrow>
+                                    <IconButton
+                                        id={category._id}
+                                        onClick={handleUserToAdmin}
+                                    >
+                                        <SupervisorAccount />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Eliminar Usuario" arrow>
+                                    <IconButton
+                                        id={category.userId}
+                                        onClick={handleUserdelete}
+                                    >
+                                        <Delete />
+                                    </IconButton>
+                                </Tooltip>
                             </div>
                         </div>
                     )
