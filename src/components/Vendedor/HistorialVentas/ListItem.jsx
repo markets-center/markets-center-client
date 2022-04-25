@@ -6,10 +6,11 @@ import DefaultUser from '../../../images/defaultUser.png'
 import { IconButton } from '@mui/material'
 import { AddBox } from '@mui/icons-material'
 
-export default function ListItem({element}){
+export default function ListItem({element, openMore, detail, handleOpenMore, handleCloseMore}){
     console.log(element)
     const clientName = element.userId
     // console.log(clientName)
+    console.log(openMore)
     return (
         <div className={styles.container}>
             <div className={styles.left}>
@@ -30,7 +31,7 @@ export default function ListItem({element}){
             <div className={styles.right}>
                 <p>{`Estado: ${element.status}`}</p>
                 <p>{`Total: $${element.amount}`}</p>
-                <IconButton>
+                <IconButton onClick={()=>handleOpenMore(element)}>
                     <AddBox />
                 </IconButton>
             </div>
