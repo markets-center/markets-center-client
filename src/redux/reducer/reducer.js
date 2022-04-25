@@ -27,7 +27,8 @@ import {
     DELETE_ORDER_CAR,
     LOADING,
     SET_ALERT,
-    DEL_ALERT
+    DEL_ALERT,
+    POST_REVIEW
 } from '../actions/ctes'
 
 import { order, filterByPrice } from '../functions/functions'
@@ -223,6 +224,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 alert: action.payload
+            }
+        case POST_REVIEW:
+            return {
+                ...state,
+                loading: false
             }
         default:
             return {
