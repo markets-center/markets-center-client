@@ -196,8 +196,9 @@ export default function rootReducer(state = initialState, action) {
             let filter = filterByPrice(action.payload, state.searchedProducts)
             return {
                 ...state,
-                filteredByPrice: filter
-            }
+                filteredByPrice: filter,
+                loading: false
+            }                    
         case RESET_FILTER_BY_PRICE:
             return {
                 ...state,

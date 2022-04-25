@@ -53,28 +53,28 @@ export function filterByPrice(payload,state){
     let filter= [];
 
     if(payload === '0-500'){
-        filter = state.filter(s=> s.price >= '0' && s.price < '500');
+        filter = state.filter(s=> s.price >= '0' && s.price < '5');
         if(!filter.length){
             alert('No se encuentra productos con en este rango')
        }
         return filter;
     }
     if(payload === '500-1500'){
-        filter = state.filter(s=> s.price >= '500' && s.price < '1500');
+        filter = state.filter(s=> s.price >= '5' && s.price < '15');
         if(!filter.length){
             alert('No se encuentra productos con en este rango')
        }
         return filter;
     }
     if(payload === '1500-3000'){
-        filter = state.filter(s=> s.price >= '1500' && s.price < '3000');
+        filter = state.filter(s=> s.price >= '15' && s.price < '30');
         if(!filter.length){
             alert('No se encuentra productos con en este rango')
        }
         return filter;
     }
     if(payload === '>3000'){
-        filter = state.filter(s=> s.price >= '3000');
+        filter = state.filter(s=> s.price >= '30');
         if(!filter.length){
              alert('No se encuentra productos con en este rango')
         }
