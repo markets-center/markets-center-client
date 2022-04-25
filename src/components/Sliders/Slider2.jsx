@@ -26,9 +26,14 @@ export default function Sliders2() {
         { width: 1200, itemsToShow: 4 }
     ];
 
-    const bebidas = products.filter(p => p.category[0].name === 'Bebidas alcohólicas');
+    const bebidas = products.filter(p => p.category[0].name === 'Bebidas');
 
-    const cereales = products.filter(p => p.category[0].name === 'Cereales y derivados');
+    const almacen = products.filter(p => p.category[0].name === 'Almacen');
+
+    const lacteos = products.filter(p => p.category[0].name === 'Lacteos');
+
+    const mascotas = products.filter(p => p.category[0].name === 'Mascotas');
+
 
 
     return (
@@ -91,10 +96,10 @@ export default function Sliders2() {
                             marginBottom: '60px'
                         }}>
                             <Typography variant="h4" className={s.titleSlider}>
-                                Cereales y derivados<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
+                                Almacen<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {cereales?.map((producto, idx) => (
+                                {almacen?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -109,6 +114,56 @@ export default function Sliders2() {
                                     />
                                 ))}
                             </Carousel>
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Lacteos<img src={Mc} alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {lacteos?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Mascotas<img src={Mc} alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {mascotas?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
                         </Container>
                     </Container>
                     : products.length && !loading &&
