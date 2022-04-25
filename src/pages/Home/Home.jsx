@@ -39,7 +39,6 @@ export default function Home (){
             <NavBar searchBar={true} home={true}/>
             <SellerFilter />
             {render?<Shop />:<Slider2 />}
-            {/* {msg!=='' && <Alert onClose={() => {}}>{msg}</Alert>} */}
 
             <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',
