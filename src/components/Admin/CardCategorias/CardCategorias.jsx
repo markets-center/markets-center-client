@@ -6,7 +6,7 @@ import { adminDeleteCategory } from '../../../redux/actions/a.admin.js'
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'
 
 import styles from './CardCategorias.module.css';
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { Delete, BorderColor } from '@mui/icons-material/';
 
 export default function CardCategorias ({categories, handleOpen, handleClose, input, setInput, id, setId, handleSubmit}){
@@ -40,12 +40,16 @@ export default function CardCategorias ({categories, handleOpen, handleClose, in
                                 <h4>{category.name}</h4>
                             </div>
                             <div className={styles.right}>
-                                <IconButton name={category.name} image={category.image} id={category._id} onClick={handleUpdate}>
-                                    <BorderColor />
-                                </IconButton>
-                                <IconButton value={category._id} onClick={(e) => handleDelete(e)}>
-                                    <Delete />
-                                </IconButton>
+                                <Tooltip title="Editar" arrow>
+                                    <IconButton name={category.name} image={category.image} id={category._id} onClick={handleUpdate}>
+                                        <BorderColor />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Eliminar" arrow>
+                                    <IconButton value={category._id} onClick={(e) => handleDelete(e)}>
+                                        <Delete />
+                                    </IconButton>
+                                </Tooltip>
                             </div>
                             <AddCategorie handleClose={handleClose} input={input} setInput={setInput} id={id} handleSubmit={handleSubmit}/>
                         </div>

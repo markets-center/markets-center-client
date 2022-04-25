@@ -74,7 +74,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     {
                                     home && (
-                                        <Tooltip title="Carrito de compras">
+                                        <Tooltip title="Carrito de compras" >
                                             <IconButton
                                                 onClick={() => navigate('/Carrito')}
                                                 size="small"
