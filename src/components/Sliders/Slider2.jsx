@@ -26,7 +26,7 @@ export default function Sliders2() {
         { width: 1200, itemsToShow: 4 }
     ];
 
-    const bebidas = products.filter(p => p.category[0].name === 'Bebidas alcohólicas');
+    const bebidas = products.filter(p => p.category[0].name === 'Bebidas');
 
     const cereales = products.filter(p => p.category[0].name === 'Cereales y derivados');
 
