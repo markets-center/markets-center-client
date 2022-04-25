@@ -144,7 +144,7 @@ export default function SignUp() {
               Registrarse
             </Button>
             <Button
-              //   type="submit"
+              type="submit"
               fullWidth
               variant="contained"
               onClick={regWithGoogle}
