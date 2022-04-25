@@ -42,7 +42,7 @@ export default function Sliders2() {
     return (
         <Container>
             {loading ? <Loading /> :
-                products.length ?
+                products.length > 0?
                     <Container>
                         <Container sx={{
                             marginTop: '60px',

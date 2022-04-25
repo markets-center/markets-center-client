@@ -24,6 +24,9 @@ function RenderBusquedas() {
                 rating={p.rating}
                 numReviews={p.numReviews}
                 category={p.category.map(c => c.name)}
+                id={p._id}
+                rating={p.rating}
+                numReviews={p.numReviews}
                 />):products.map(p => <Card 
                     key={p.name}
                     name={p.name}
@@ -31,9 +34,11 @@ function RenderBusquedas() {
                     image={p.image}
                     description={p.description}
                     stock={p.stock}
+                    category={p.category.map(c => c.name)
+                    }
+                    id={p._id}
                     rating={p.rating}
                     numReviews={p.numReviews}
-                    category={p.category.map(c => c.name)}
                     />)
                     :
                     <Error message='El vendedor no tiene productos' mistake={false} />
