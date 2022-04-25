@@ -21,6 +21,8 @@ function RenderBusquedas() {
                 image={p.image}
                 description={p.description}
                 stock={p.stock}
+                rating={p.rating}
+                numReviews={p.numReviews}
                 category={p.category.map(c => c.name)}
                 />):products.map(p => <Card 
                     key={p.name}
@@ -29,6 +31,8 @@ function RenderBusquedas() {
                     image={p.image}
                     description={p.description}
                     stock={p.stock}
+                    rating={p.rating}
+                    numReviews={p.numReviews}
                     category={p.category.map(c => c.name)}
                     />)
                     :
