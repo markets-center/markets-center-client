@@ -30,10 +30,13 @@ export default function Sliders2() {
 
     const almacen = products.filter(p => p.category[0].name === 'Almacen');
 
+    const congelados = products.filter(p => p.category[0].name === 'Congelados');
+
     const lacteos = products.filter(p => p.category[0].name === 'Lacteos');
 
     const mascotas = products.filter(p => p.category[0].name === 'Mascotas');
 
+    const rating = products.filter(p => p.rating > 4);
 
 
     return (
@@ -49,7 +52,7 @@ export default function Sliders2() {
                                 Destacados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {products?.map((producto, idx) => (
+                                {rating?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -124,6 +127,31 @@ export default function Sliders2() {
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
                                 {lacteos?.map((producto, idx) => (
+                                    <Card
+                                        key={idx}
+                                        name={producto.name}
+                                        price={producto.price}
+                                        image={producto.image}
+                                        description={producto.description}
+                                        stock={producto.stock}
+                                        category={producto.category.map(c => c.name)}
+                                        id={producto._id}
+                                        rating={producto.rating}
+                                        numReviews={producto.numReviews}
+                                    />
+                                ))}
+                            </Carousel>
+
+                        </Container>
+                        <Container sx={{
+                            marginTop: '60px',
+                            marginBottom: '60px'
+                        }}>
+                            <Typography variant="h4" className={s.titleSlider}>
+                                Congelados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
+                            </Typography>
+                            <Carousel breakPoints={breakPoints} >
+                                {congelados?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
