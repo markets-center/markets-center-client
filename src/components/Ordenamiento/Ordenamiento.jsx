@@ -68,10 +68,10 @@ function Ordenamiento() {
                     value={radio}
                     onChange={handleChangeRadio}
                 >
-                    <FormControlLabel value="0-500" control={<Radio />} label="$0-$500" />
-                    <FormControlLabel value="500-1500" control={<Radio />} label="$500-$1500" />
-                    <FormControlLabel value="1500-3000" control={<Radio />} label="$1500-$3000" />
-                    <FormControlLabel value=">3000" control={<Radio />} label=">$3000" />
+                    <FormControlLabel value="0-500" control={<Radio />} label="$0-$5" />
+                    <FormControlLabel value="500-1500" control={<Radio />} label="$5-$15" />
+                    <FormControlLabel value="1500-3000" control={<Radio />} label="$15-$30" />
+                    <FormControlLabel value=">3000" control={<Radio />} label=">$30" />
                 </RadioGroup>
             </FormControl>
             <Button variant="outlined" size='small' startIcon={<CachedIcon />} sx={{marginTop: "10px"}} onClick={handleReset}>
