@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import firebase from "firebase/compat/app";
 import logo from '../../images/Markets Center.svg'
 import css from './SignUp.module.css';
 import GoogleIcon from '@mui/icons-material/Google';
-import image from '../../images/undraw_sign_in_re_o58h.svg'
+import image from '../../images/signIn.svg'
 
 import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../firebase";
-import { Button, Typography } from "@mui/material";
+import {Button, Input, Typography} from "@mui/material";
 
 export default function LogUser2() {
     const [user, setUser] = useState({
@@ -21,7 +21,7 @@ export default function LogUser2() {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    function handldeCange(e) {
+    function handleChange(e) {
         setUser({ ...user, [e.target.name]: e.target.value });
     }
 
@@ -58,7 +58,7 @@ export default function LogUser2() {
                 {/* <p className={css.text}>Ingrese al sistema si ya está registrado.</p> */}
                 <form onSubmit={handleSubmit}>
                     <label className={css.label} htmlFor="">Correo electrónico</label>
-                    <input
+                    <Input
                         className={css.input}
                         type="email"
                         required
@@ -67,7 +67,7 @@ export default function LogUser2() {
                         name="email"
                         autoComplete="email"
                         autoFocus
-                        onChange={handldeCange}
+                        onChange={handleChange}
                     />
                     {user.email === "" && (
                         <Typography component="p" variant="p">
@@ -75,14 +75,14 @@ export default function LogUser2() {
                         </Typography>
                     )}
                     <label className={css.label} htmlFor="">Contraseña</label>
-                    <input
+                    <Input
                         type="password"
                         className={css.input}
                         required
                         name="password"
                         label="Contraseña"
                         id="password"
-                        onChange={handldeCange}
+                        onChange={handleChange}
                     />
                     {user.password === "" && (
                         <Typography component="p" variant="p">

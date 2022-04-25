@@ -12,7 +12,7 @@ import Error from '../Error/Error'
 import Loading from '../../components/Loading/Loading';
 
 
-export default function Sliders() {
+export default function Sliders2() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
