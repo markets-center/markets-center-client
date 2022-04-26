@@ -27,7 +27,11 @@ import {
     DELETE_ORDER_CAR,
     LOADING,
     SET_ALERT,
-    DEL_ALERT, POST_REVIEW
+    DEL_ALERT,
+    POST_REVIEW,
+    UDPATE_ORDER,
+    EMPTY_CART,
+    GET_OR_UPDATE_CART
 
 } from '../actions/ctes'
 
@@ -231,6 +235,24 @@ export default function rootReducer(state = initialState, action) {
                 loading: false,
                 review: action.payload,
                 alert: 'Reseña agregada correctamente'
+            }
+        case UDPATE_ORDER:
+            return {
+                ...state,
+                loading: false,
+                newOrder: action.payload
+            }
+        case EMPTY_CART:
+            return {
+                ...state,
+                loading: false,
+                addOrdercar: action.payload
+            }
+        case GET_OR_UPDATE_CART:
+            return {
+                ...state,
+                loading: false,
+                addOrdercar: action.payload
             }
         default:
             return {
