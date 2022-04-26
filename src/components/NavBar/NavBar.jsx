@@ -34,6 +34,9 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
     const countItemsCar = useSelector(state => state.addOrdercar)
+    const temp = window.localStorage.getItem('products');
+    const countItemsCarTemp = JSON.parse(temp);
+
     async function logoutHandler() {
         await logout();
         navigate('/')
@@ -80,7 +83,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                                 size="small"
                                                 sx={{ ml: 2 }}
                                                 color="white">
-                                                <Badge color="secondary" badgeContent={countItemsCar.length}>
+                                                <Badge color="secondary" badgeContent={countItemsCar.length?countItemsCar.length:countItemsCarTemp.length}>
                                                     <LocalGroceryStoreOutlinedIcon />
                                                 </Badge>
                                             </IconButton>

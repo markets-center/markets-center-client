@@ -20,7 +20,7 @@ import {
 
 export default function Carrito() {
 
-  const products = useSelector((state) => state.addOrdercar);
+  const items = useSelector((state) => state.addOrdercar);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState('');
@@ -40,21 +40,49 @@ export default function Carrito() {
   const [iva, setIva] = useState(0);
   const [add, setAdd] = useState(0);
 
+  const getTemp = window.localStorage.getItem('products');
+  const products = JSON.parse(getTemp);
+
   const findTotal = products.reduce((sum, item) => sum + item.price, 0);
 
-  const eventClickCountAdd = (price) => {
+  const eventClickCountAdd = (price, id, counter) => {
     handleOpenAlert('Cantidad modificada')
+    console.log("Counter: ", counter)
+    const updateTemp = products.map((p) => {
+      if(p.id === id) {
+        p.quanty = counter
+        p.amount = price * counter
+      }
+      return p;
+    })
+    localStorage.setItem('products', JSON.stringify(updateTemp))
     setAdd((prev) => prev + price)
   }
-  const eventClickCountRes = (price) => { 
+  const eventClickCountRes = (price, id, counter) => { 
     handleOpenAlert('Cantidad modificada')
+    console.log("Counter: ", counter)
+    const updateTemp = products.map((p) => {
+      if(p.id === id) {
+        p.quanty = counter
+        p.amount = price * counter
+      }
+      return p;
+    })
+    localStorage.setItem('products', JSON.stringify(updateTemp))
     setAdd((prev) => prev - price)
   }
   const eventClickRemoveItem = (id) => {
     handleOpenAlert('Producto eliminado')
+    const filter = products.filter((f) => f.id !== id);
+    localStorage.setItem('products', JSON.stringify(filter));
+    dispatch(deleteOrderCar(id))
     setTotal(findTotal);
     setAdd(0);
-    dispatch(deleteOrderCar(id))
+  }
+
+  const removeCarTemp = () => {
+    localStorage.setItem('products', '[]');
+    window.location.reload();
   }
 
   useEffect(() => 
@@ -103,6 +131,11 @@ export default function Carrito() {
             <Button variant="outlined" size="small" onClick={handleOpen}>
               PAGAR
             </Button>
+          </div>
+          <div className="content-pay btn-pay">
+            <label htmlFor="" className="lbl-removeAllCar" onClick={removeCarTemp}>
+              Vaciar el Carrito
+            </label>
           </div>
         </div>
       </div>

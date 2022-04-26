@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
-const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem}) => {
+const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem, id}) => {
 
   const [active, setActive] = useState(true);
   const [counter, setCounter] = useState(1);
@@ -39,7 +39,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
               <div className="detail item-tittle">
                 <Typography variant="subtitle1">{item.name}</Typography>
                 <div className="desc-item">
-                  <Typography variant="caption">${item.amount}</Typography>
+                  <Typography variant="caption">${item.price}</Typography>
                 </div>
               </div>
               <div className="detail item-count">
@@ -47,8 +47,8 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   disabled={active}
                   className="btn btn-add"
                   onClick={() => {
-                    setCounter(counter - item.quanty);
-                    eventClickCountRes(item.price)
+                    setCounter(counter - 1);
+                    eventClickCountRes(item.price, id, (counter - 1))
                   }}
                 >
                   -
@@ -63,8 +63,8 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                 <button
                   className="btn btn-res"
                   onClick={() => {
-                    setCounter(counter + item.quanty);
-                    eventClickCountAdd(item.price)
+                    setCounter(counter + 1);
+                    eventClickCountAdd(item.price, id, (counter + 1))
                   }}
                 >
                   +

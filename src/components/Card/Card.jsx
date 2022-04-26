@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -11,6 +11,7 @@ import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
 import { addOrderCar } from '../../redux/actions/a.order.js'
 import Tooltip from '@mui/material/Tooltip';
+import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
 
 const style = {
     position: 'absolute',
@@ -35,6 +36,7 @@ export default function Card({ name, price, image, description, stock, category,
 
     const dispatch = useDispatch();
     const items = useSelector((state) => state.addOrdercar);
+    const [product, setProduct] = useLocalStorage("products", '');
 
     function moreInfo(e) {
         setHover(true)
@@ -52,6 +54,10 @@ export default function Card({ name, price, image, description, stock, category,
         }
         dispatch(addOrderCar(obj))
     }
+
+    useEffect(() => {
+        return items.length? setProduct(items) : product
+    }, [items])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
