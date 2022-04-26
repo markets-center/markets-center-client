@@ -8,7 +8,8 @@ import image from '../../images/signIn.svg'
 
 import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../firebase";
-import {Button, Input, Typography} from "@mui/material";
+import {Button, Input, Typography, Snackbar} from "@mui/material";
+import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function LogUser2() {
     const [user, setUser] = useState({
@@ -23,6 +24,11 @@ export default function LogUser2() {
 
     function handleChange(e) {
         setUser({ ...user, [e.target.name]: e.target.value });
+    }
+
+    function handleClose(){
+        setError('');
+        setErrorMail('')
     }
 
     async function handleSubmit(e) {
@@ -40,14 +46,18 @@ export default function LogUser2() {
             await login(user.email, user.password);
             navigate("/");
         } catch (error) {
-            setError("Failed to create an account");
+            setError("Credenciales invalidas");
         }
         setLoading(false);
     }
 
     async function regWithGoogle() {
-        await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-        navigate("/")
+        try {
+            await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+            navigate("/")
+        } catch (error) {
+            setError("Credenciales invalidas");
+        }
     }
 
     return (
@@ -102,6 +112,24 @@ export default function LogUser2() {
             <div className={css.content_image}>
                 <img className={css.image} src={image} alt='' />
             </div>
+            <Snackbar open={!!error} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleClose} variant='filled' severity='error'>
+                    {error}
+                </SnackbarAlert>
+            </Snackbar>
+            <Snackbar open={!!errorMail} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleClose} variant='filled' severity='error'>
+                    {errorMail}
+                </SnackbarAlert>
+            </Snackbar>
+
+
         </div>
     )
 
