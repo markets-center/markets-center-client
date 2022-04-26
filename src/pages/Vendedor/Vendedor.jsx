@@ -67,7 +67,7 @@ export default function Vendedor(){
         setTimeout(() => {
             setLoading(false)
         }, 500);
-    },[oneUser._id,dispatch])
+    },[oneUser,dispatch])
     let products = useSelector(state => state.productsBySeller)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id))
