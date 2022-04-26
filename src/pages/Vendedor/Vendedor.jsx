@@ -14,13 +14,12 @@ import NavBar from '../../components/NavBar/NavBar'
 import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor'
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
-// import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
-import { Container, Typography, Button } from '@mui/material'
-import {Snackbar} from '@mui/material';
-import {SnackbarAlert} from '../../components/Alert/success';
+import ListItem from '../../components/Vendedor/HistorialVentas/ListItem.jsx'
+import { Container, Typography, Button, Snackbar } from '@mui/material'
+import {SnackbarAlert} from '../../components/Alert/success'
 
 export default function Vendedor(){
-    const alert = useSelector(state => state.alert)
+    const alert = useSelector((state) => state.alert);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
