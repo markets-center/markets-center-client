@@ -13,10 +13,10 @@ export default function HistoryHome(){
 
     // 
     const [openMore, setOpenMore] = useState(false);
-    const [detail, setDetail] = useState('');
+    const [input, setInput] = useState('');
     function handleOpenMore(items){
-    setDetail(items.products)
-    setOpenMore(true)
+        setInput(items);
+        setOpenMore(true)
     }
     const handleCloseMore = () => setOpenMore(false);
     // 
@@ -27,6 +27,7 @@ export default function HistoryHome(){
     useEffect(() => {
         dispatch(ordersBySeller(oneUser._id))
     }, [dispatch, oneUser._id])
+    console.log(history)
     return (
         <div>
             <NavBar />
@@ -46,8 +47,8 @@ export default function HistoryHome(){
             history.map( order => {
                 return (
                     <>
-                        <ListItem element={order} openMore={openMore} detail={detail} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>
-                        <OrderDetail element={order} openMore={openMore} detail={detail} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>
+                        <ListItem key={order._id} element={order} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>
+                        {input && <OrderDetail input={input} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>}
                     </>
                 )
             })
