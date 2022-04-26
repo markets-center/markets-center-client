@@ -83,7 +83,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                                 size="small"
                                                 sx={{ ml: 2 }}
                                                 color="white">
-                                                <Badge color="secondary" badgeContent={countItemsCar.length || countItemsCarTemp.length}>
+                                                <Badge color="secondary" badgeContent={!countItemsCarTemp.length?0:countItemsCarTemp.length}>
                                                     <LocalGroceryStoreOutlinedIcon />
                                                 </Badge>
                                             </IconButton>
