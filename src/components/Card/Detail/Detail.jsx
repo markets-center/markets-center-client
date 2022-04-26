@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Typography from '@mui/material/Typography';
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Review from "../review/Review";
 import { Box, Modal } from "@mui/material";
 import AddReview from '../review/AddReview';
+import useLocalStorage from '../../../pages/Carrito/useLocalStorage.js';
 
 const style = {
     position: 'absolute',
@@ -29,10 +30,11 @@ export default function Detail({ name, price, image, description, stock, categor
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [tooltip, setTooltip] = useState(false);
+
     const items = useSelector((state) => state.addOrdercar);
     const dispatch = useDispatch();
-
-    const [tooltip, setTooltip] = useState(false);
+    const [product, setProduct] = useLocalStorage("products", '');
 
     const findItem = items.find((f) => f.id === id);
 
@@ -43,6 +45,10 @@ export default function Detail({ name, price, image, description, stock, categor
         }
         dispatch(addOrderCar(obj));
     }
+
+    useEffect(() => {
+        return !findItem? setProduct(items) : product
+    }, [items])
 
     return (
         <div className={s.container}>

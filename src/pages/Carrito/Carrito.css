@@ -159,3 +159,13 @@ hr{
 .MuiTypography-caption{
   color: #3c3d3d;
 }
+
+/* ---label car--- */
+
+.lbl-removeAllCar{
+  color: #005BAA;
+}
+.lbl-removeAllCar:hover{
+  color: #c5360a;
+  font-size: small;
+}
