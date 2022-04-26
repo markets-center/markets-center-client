@@ -81,8 +81,9 @@ export default function Carrito() {
   }
 
   const removeCarTemp = () => {
-    localStorage.setItem('products', '[]');
-    window.location.reload();
+    if(!products.length) return
+      localStorage.setItem('products', '[]')
+      window.location.reload(); 
   }
 
   useEffect(() => 
@@ -107,6 +108,7 @@ export default function Carrito() {
                   eventClickCountAdd={eventClickCountAdd}
                   eventClickCountRes={eventClickCountRes}
                   eventClickRemoveItem={eventClickRemoveItem}
+                  id={item.id}
                 />
                 <Divider/>
               </div>
