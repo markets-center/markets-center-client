@@ -25,8 +25,6 @@ function RenderBusquedas() {
                 numReviews={p.numReviews}
                 category={p.category.map(c => c.name)}
                 id={p._id}
-                rating={p.rating}
-                numReviews={p.numReviews}
                 />):products.map(p => <Card 
                     key={p.name}
                     name={p.name}
