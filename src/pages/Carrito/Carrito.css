@@ -145,11 +145,17 @@ hr{
     margin-top: 100px;
     margin-bottom: 100px;
   }
+
+  .pay-container{
+    width: 68%;
+    min-width: 340px;
+  }
 }
 
 /* ---Loader--- */
 .MuiTypography-h4{
   color: #005BAA;
+  padding: 10px;
 }
 
 .MuiTypography-subtitle1{
@@ -158,6 +164,10 @@ hr{
 
 .MuiTypography-caption{
   color: #3c3d3d;
+}
+
+.btn-return{
+  padding: 10px;
 }
 
 /* ---label car--- */
