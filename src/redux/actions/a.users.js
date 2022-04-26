@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-import {ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY} from './ctes';
+import {SET_ALERT, ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY} from './ctes';
 
 export function postNewUser (user) {
     return async function (dispatch) {
         try {
             const response = await axios.post(`/api/private/users/add`, user);
+            dispatch({type: UPDATE_USER, payload: response.data.data})
             dispatch({type: MESSAGE, payload:response.data.msg});
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg});
@@ -18,7 +19,7 @@ export function updateUser (user) {
         try {
             const newUser = await axios.put(`/api/private/users/update`, user);
             dispatch({type: UPDATE_USER, payload: newUser.data.data})
-            dispatch({type: MESSAGE, payload: newUser.data.msg});
+            dispatch({type: SET_ALERT, payload: newUser.data.msg});
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

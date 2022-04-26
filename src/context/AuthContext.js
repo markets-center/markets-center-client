@@ -22,7 +22,13 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    try {
+      const aaa = auth.signInWithEmailAndPassword(email, password);
+      console.log('aaa', aaa)
+      return aaa
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   function logout() {

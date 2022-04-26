@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-import {GET_ALL_SELLERS, POST_PRODUCT, UPDATE_PRODUCT, ERRORS, MESSAGE, GET_ALL_ORDERS_OF_SELLER, SET_ALERT} from './ctes'
+import {
+    GET_ALL_SELLERS,
+    UPDATE_PRODUCT,
+    ERRORS,
+    MESSAGE,
+    GET_ALL_ORDERS_OF_SELLER,
+    SET_ALERT,
+    GET_PRODUCT_BY_SELLER_AND_CAT
+} from './ctes'
 
 export function getAllSellers() {
     return async function (dispatch) {
@@ -20,7 +28,7 @@ export function postProduct(product) {
         try {
             const response = await axios.post('/api/private/product', product);
             dispatch({type: SET_ALERT, payload: response.data.msg})
-            dispatch({type: POST_PRODUCT, payload: response.data.data})
+            dispatch({type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: response.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

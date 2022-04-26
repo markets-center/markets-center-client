@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { payment } from '../../redux/actions/a.order'
 
 
-const stripePromise = loadStripe("pk_test_51KrNS9BcSGVJjPzhJcb9v599F0HLdJl9aAF87RBVZY1gIwHyC1zegNKiyvDXTjuAdH3hyn7eSsCE82Vw3blNIfx400EZ4eeSGc")
+const stripePromise = loadStripe("pk_test_51KsQsmK6Zz3L3Hm35H035USbURUpt7MaZrexNPhwHd3AMdHVtLA3gThyv87ep5gv8YM5xb3puFiSpsxxQaVixFqe00vqibvweT")
 
 const CARD_ELEMENTS_OPTIONS = {
   iconStyle: "solid",

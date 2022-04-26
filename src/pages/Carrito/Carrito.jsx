@@ -6,6 +6,8 @@ import CardItem from "./CardItem";
 import {deleteOrderCar} from "../../redux/actions/a.order.js";
 import CarLoader from "./CarLoader.js";
 import CheckoutComp from "../../components/Checkout2/CheckoutComp"
+import {Snackbar} from '@mui/material';
+import {SnackbarAlert} from '../../components/Alert/success';
 
 
 import {
@@ -18,12 +20,19 @@ import {
 
 export default function Carrito() {
 
-  const products = useSelector((state) => state.addOrdercar);
+  const items = useSelector((state) => state.addOrdercar);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  function handleCloseAlert(){
+    setAlert('');
+  }
+  function handleOpenAlert(msg){
+    setAlert(msg);
+  }
 
   
   const [total, setTotal] = useState(0);
@@ -31,18 +40,50 @@ export default function Carrito() {
   const [iva, setIva] = useState(0);
   const [add, setAdd] = useState(0);
 
+  const getTemp = window.localStorage.getItem('products');
+  const products = JSON.parse(getTemp);
+
   const findTotal = products.reduce((sum, item) => sum + item.price, 0);
 
-  const eventClickCountAdd = (price) => {
+  const eventClickCountAdd = (price, id, counter) => {
+    handleOpenAlert('Cantidad modificada')
+    console.log("Counter: ", counter)
+    const updateTemp = products.map((p) => {
+      if(p.id === id) {
+        p.quanty = counter
+        p.amount = price * counter
+      }
+      return p;
+    })
+    localStorage.setItem('products', JSON.stringify(updateTemp))
     setAdd((prev) => prev + price)
   }
-  const eventClickCountRes = (price) => { 
+  const eventClickCountRes = (price, id, counter) => { 
+    handleOpenAlert('Cantidad modificada')
+    console.log("Counter: ", counter)
+    const updateTemp = products.map((p) => {
+      if(p.id === id) {
+        p.quanty = counter
+        p.amount = price * counter
+      }
+      return p;
+    })
+    localStorage.setItem('products', JSON.stringify(updateTemp))
     setAdd((prev) => prev - price)
   }
   const eventClickRemoveItem = (id) => {
+    handleOpenAlert('Producto eliminado')
+    const filter = products.filter((f) => f.id !== id);
+    localStorage.setItem('products', JSON.stringify(filter));
+    dispatch(deleteOrderCar(id))
     setTotal(findTotal);
     setAdd(0);
-    dispatch(deleteOrderCar(id))
+  }
+
+  const removeCarTemp = () => {
+    if(!products.length) return
+      localStorage.setItem('products', '[]')
+      window.location.reload(); 
   }
 
   useEffect(() => 
@@ -67,6 +108,7 @@ export default function Carrito() {
                   eventClickCountAdd={eventClickCountAdd}
                   eventClickCountRes={eventClickCountRes}
                   eventClickRemoveItem={eventClickRemoveItem}
+                  id={item.id}
                 />
                 <Divider/>
               </div>
@@ -92,6 +134,11 @@ export default function Carrito() {
               PAGAR
             </Button>
           </div>
+          <div className="content-pay btn-pay">
+            <label htmlFor="" className="lbl-removeAllCar" onClick={removeCarTemp}>
+              Vaciar el Carrito
+            </label>
+          </div>
         </div>
       </div>
       <Modal
@@ -104,6 +151,15 @@ export default function Carrito() {
           <CheckoutComp amount={total}/>
         </Box>
       </Modal>
+      <Snackbar open={!!alert} autoHideDuration={3000} onClose={handleCloseAlert} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleCloseAlert} color='primary' variant='filled' severity='success'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
+
     </div>
   );
 }

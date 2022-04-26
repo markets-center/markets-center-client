@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import {ERRORS, MESSAGE, POST_ORDER, ADD_ORDER_CAR, DELETE_ORDER_CAR, PAYMENT} from './ctes';
+import {SET_ALERT, ERRORS, MESSAGE, POST_ORDER, ADD_ORDER_CAR, DELETE_ORDER_CAR, PAYMENT, UDPATE_ORDER} from './ctes';
 
 export function postOrder(order) {
     return async function (dispatch) {
         try {
             const newOrder = await axios.post('/api/private/addOrder', order);
-            dispatch({type: MESSAGE, payload: newOrder.data.msg});
+            dispatch({type: SET_ALERT, payload: newOrder.data.msg});
             dispatch({type: POST_ORDER, payload: newOrder.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
@@ -62,5 +62,17 @@ export function payment(data){
     return {
         type: PAYMENT,
         payload: data
+    }
+}
+
+export function UpdateOrder(cart) {
+    return async function (dispatch) {
+        try {
+            const response = await axios.put(`api/private/updateOrder`, cart);
+            dispatch({ type: UDPATE_ORDER, payload: response.data.data })
+        } catch (err) {
+            dispatch({ type: ERRORS, payload: err.msg })
+        }
+
     }
 }

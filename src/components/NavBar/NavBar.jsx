@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
@@ -33,7 +33,11 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
-    const countItemsCar = useSelector(state => state.addOrdercar)
+    
+    const temp = window.localStorage.getItem('products');
+    const countItemsCarTemp = temp && JSON.parse(temp);
+    let counter = countItemsCarTemp && countItemsCarTemp.length;
+    
     async function logoutHandler() {
         await logout();
         navigate('/')
@@ -55,6 +59,12 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    useEffect(() => {
+        if(!window.localStorage.getItem('products')){
+            window.localStorage.setItem('products', '[]')
+        }
+    },[])
 
     return (
         <AppBar position="static" >
@@ -74,13 +84,13 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     {
                                     home && (
-                                        <Tooltip title="Carrito de compras">
+                                        <Tooltip title="Carrito de compras" >
                                             <IconButton
                                                 onClick={() => navigate('/Carrito')}
                                                 size="small"
                                                 sx={{ ml: 2 }}
                                                 color="white">
-                                                <Badge color="secondary" badgeContent={countItemsCar.length}>
+                                                <Badge color="secondary" badgeContent={counter}>
                                                     <LocalGroceryStoreOutlinedIcon />
                                                 </Badge>
                                             </IconButton>

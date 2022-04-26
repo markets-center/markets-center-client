@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ordersBySeller } from '../../../redux/actions/a.seller.js'
 import {useNavigate} from 'react-router-dom'
@@ -7,9 +7,19 @@ import ListItem from './ListItem.jsx'
 
 import NavBar from '../../NavBar/NavBar.jsx'
 import {Button} from '@mui/material'
-
+import OrderDetail from './OrderDetail.jsx'
 
 export default function HistoryHome(){
+
+    // 
+    const [openMore, setOpenMore] = useState(false);
+    const [input, setInput] = useState('');
+    function handleOpenMore(items){
+        setInput(items);
+        setOpenMore(true)
+    }
+    const handleCloseMore = () => setOpenMore(false);
+    // 
     const navigate = useNavigate()
     const {oneUser} = useAuth()
     const history = useSelector(state => state.history)
@@ -17,6 +27,7 @@ export default function HistoryHome(){
     useEffect(() => {
         dispatch(ordersBySeller(oneUser._id))
     }, [dispatch, oneUser._id])
+    console.log(history)
     return (
         <div>
             <NavBar />
@@ -35,7 +46,10 @@ export default function HistoryHome(){
             {
             history.map( order => {
                 return (
-                    <ListItem element={order}/>
+                    <>
+                        <ListItem key={order._id} element={order} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>
+                        {input && <OrderDetail input={input} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>}
+                    </>
                 )
             })
             }
