@@ -55,7 +55,7 @@ export default function SignUp2() {
       setError("");
       setErrorMail("");
       setLoading(true);
-      await signup(user.email, user.password);
+      await signup(user.email, user.password, seller);
       seller ? navigate("/sellerForm") : navigate("/buyerForm");
     } catch (error) {
       setError("Error al crear una cuenta");

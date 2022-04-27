@@ -5,6 +5,7 @@ import logo from '../../images/Markets Center.svg'
 import css from './SignUp.module.css';
 import GoogleIcon from '@mui/icons-material/Google';
 import image from '../../images/signIn.svg'
+import axios from 'axios';
 
 import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../firebase";
@@ -53,8 +54,14 @@ export default function LogUser2() {
 
     async function regWithGoogle() {
         try {
-            await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-            navigate("/")
+            const user = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+            const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`)
+            if(userDB.lenght){
+                navigate("/")
+            }else {
+                navigate("/buyerForm");
+            }
+            
         } catch (error) {
             setError("Credenciales invalidas");
         }

@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+import axios from 'axios'
 
 import { useDispatch, useSelector } from "react-redux";
 import {userById} from '../redux/actions/a.users'
+import {delOneUser} from '../redux/actions/a.users'
 
 const AuthContext = React.createContext();
 
@@ -17,36 +19,43 @@ export function AuthProvider({ children }) {
   const oneUser = useSelector(store => store.oneUser)
 
 
-  function signup(email, password) {
+  function signup(email, password, seller) {
+    localStorage.setItem('isAdmin', false)
+    localStorage.setItem('isSeller', seller)
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  function login(email, password) {
+  async function login(email, password) {
     try {
-      const aaa = auth.signInWithEmailAndPassword(email, password);
-      console.log('aaa', aaa)
-      return aaa
+      const user = await auth.signInWithEmailAndPassword(email, password);
+      const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`)
+      localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+      localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
+      return user
     } catch (error) {
       console.log(error)
     }
   }
-
+  
   function logout() {
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('isSeller')
+    dispatch(delOneUser())
     return auth.signOut();
   }
-
+  
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
-
+  
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email);
   }
-
+  
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
-
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);

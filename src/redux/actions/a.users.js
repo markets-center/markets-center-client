@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {SET_ALERT, ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY} from './ctes';
+import {DEL_ONE_USER, SET_ALERT, ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY} from './ctes';
 
 export function postNewUser (user) {
     return async function (dispatch) {
@@ -49,3 +49,8 @@ export function userHistory(id){
         }
     }
 }
+
+export function delOneUser() {
+    return {type: DEL_ONE_USER, payload:''}
+}
+
