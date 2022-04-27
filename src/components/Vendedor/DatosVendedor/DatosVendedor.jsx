@@ -130,6 +130,7 @@ export default function DatosVendedor(){
                     IdDocument={oneUser.IdDocument}
                     phone={oneUser.phone}
                     address={oneUser.address}
+                    delivery={oneUser.delivery}
                     userId={oneUser.userId}
                     handleClose={handleClose}
                 />

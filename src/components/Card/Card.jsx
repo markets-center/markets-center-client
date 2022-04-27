@@ -46,10 +46,10 @@ export default function Card({ name, price, image, description, stock, category,
         setHover(false)
     }
 
-    const findItem = items.find((f) => f.id === id)
+    const findItem = product.find((f) => f.id === id)
 
-    function addToCar(id, price, name, image) {
-        const obj = { id, name, price, image, quanty: 1, amount: price }
+    function addToCar(id, price, name, image, stock) {
+        const obj = { id, name, price, image, quanty: 1, amount: price, stock}
         if (findItem) {
             return setTooltip(true)
         }
@@ -79,7 +79,7 @@ export default function Card({ name, price, image, description, stock, category,
                         </Typography>}
                     <div className={s.icons}>
                         {stock > 0 ? <IconButton color="primary" size="small" onClick={() => {
-                            addToCar(id, price, name, image)
+                            addToCar(id, price, name, image, stock)
                         }} >
                             <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
                                 <AddShoppingCartIcon fontSize="medium" variant="contained" />

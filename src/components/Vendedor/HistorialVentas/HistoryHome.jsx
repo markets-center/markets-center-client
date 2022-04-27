@@ -27,7 +27,6 @@ export default function HistoryHome(){
     useEffect(() => {
         dispatch(ordersBySeller(oneUser._id))
     }, [dispatch, oneUser._id])
-    console.log(history)
     return (
         <div>
             <NavBar />
@@ -46,10 +45,10 @@ export default function HistoryHome(){
             {
             history.map( order => {
                 return (
-                    <>
+                    <div key={order._id}>
                         <ListItem key={order._id} element={order} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>
                         {input && <OrderDetail input={input} openMore={openMore} handleOpenMore={handleOpenMore} handleCloseMore={handleCloseMore}/>}
-                    </>
+                    </div>
                 )
             })
             }

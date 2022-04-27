@@ -37,10 +37,10 @@ export default function Detail({ name, price, image, description, stock, categor
     const dispatch = useDispatch();
     const [product, setProduct] = useLocalStorage("products", '');
 
-    const findItem = items.find((f) => f.id === id);
+    const findItem = product.find((f) => f.id === id);
 
-    function addToCar(id, price, name, image) {
-        const obj = { id, name, price, image, quanty: 1, amount: price };
+    function addToCar(id, price, name, image, stock) {
+        const obj = { id, name, price, image, quanty: 1, amount: price, stock};
         if (findItem) {
             return setTooltip(true);
         }
@@ -48,7 +48,7 @@ export default function Detail({ name, price, image, description, stock, categor
     }
 
     useEffect(() => {
-        return !findItem? setProduct(items) : product
+        return items.length? setProduct(items) : product
     }, [items])
 
     return (
@@ -79,7 +79,7 @@ export default function Detail({ name, price, image, description, stock, categor
             </div>
             <div className={s.buttons}>
                 {stock > 0 ? <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
-                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image)}> agregar</Button>
+                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image, stock)}> agregar</Button>
                 </Tooltip> :
                     <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button>
                 }</div>
