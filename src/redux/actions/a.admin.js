@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT} from './ctes'
+import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE} from './ctes'
 
 export function adminUpdateCategory (id, category) {
     return async function (dispatch) {
@@ -42,7 +42,7 @@ export function getAllUsers(){
     return async function (dispatch) {
         try {
             const users = await axios.get('/api/private/users');
-            dispatch({type: SET_ALERT, payload: users.data.msg})
+            dispatch({type: MESSAGE, payload: users.data.msg})
             dispatch({type: GET_ALL_USERS, payload: users.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
