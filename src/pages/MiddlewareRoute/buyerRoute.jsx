@@ -7,7 +7,7 @@ export default function BuyerRoute ({children}) {
     const { currentUser} = useAuth();
 
     if(!currentUser){
-        <Navigate to='/Login' replace />
+        return <Navigate to='/Login' replace />
     }else {
         if(localStorage.getItem('isAdmin')==='true'){
             return <Navigate to='/Admin' replace />
