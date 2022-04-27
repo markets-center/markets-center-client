@@ -34,20 +34,21 @@ export default function Carrito() {
     setAlert(msg);
   }
 
+  const temp = localStorage.getItem('products');
+  const products = JSON.parse(temp);
+  const productsApi = useSelector((state) => state.allProducts);
   
-  const [total, setTotal] = useState(0);
-  const [subtotal, setSubtotal] = useState(0);
-  const [iva, setIva] = useState(0);
-  const [add, setAdd] = useState(0);
-
-  const getTemp = window.localStorage.getItem('products');
-  const products = JSON.parse(getTemp);
-
-  const findTotal = products.reduce((sum, item) => sum + item.price, 0);
+  for (const value of products) {
+    for (const iterator of productsApi) {
+      if(value.id === iterator._id){
+        value.price = iterator.price
+        localStorage.setItem('products', JSON.stringify(products))
+      } 
+    }
+  }
 
   const eventClickCountAdd = (price, id, counter) => {
     handleOpenAlert('Cantidad modificada')
-    console.log("Counter: ", counter)
     const updateTemp = products.map((p) => {
       if(p.id === id) {
         p.quanty = counter
@@ -56,11 +57,10 @@ export default function Carrito() {
       return p;
     })
     localStorage.setItem('products', JSON.stringify(updateTemp))
-    setAdd((prev) => prev + price)
   }
+
   const eventClickCountRes = (price, id, counter) => { 
     handleOpenAlert('Cantidad modificada')
-    console.log("Counter: ", counter)
     const updateTemp = products.map((p) => {
       if(p.id === id) {
         p.quanty = counter
@@ -69,15 +69,12 @@ export default function Carrito() {
       return p;
     })
     localStorage.setItem('products', JSON.stringify(updateTemp))
-    setAdd((prev) => prev - price)
   }
+
   const eventClickRemoveItem = (id) => {
     handleOpenAlert('Producto eliminado')
     const filter = products.filter((f) => f.id !== id);
     localStorage.setItem('products', JSON.stringify(filter));
-    dispatch(deleteOrderCar(id))
-    setTotal(findTotal);
-    setAdd(0);
   }
 
   const removeCarTemp = () => {
@@ -86,14 +83,9 @@ export default function Carrito() {
       window.location.reload(); 
   }
 
-  useEffect(() => 
-  {
-    const subT = (total/1.18);
-    const i = (total - subT)
-    setIva(i)
-    setSubtotal(subT);
-    setTotal(findTotal + add);
-  },[add, findTotal, total, subtotal, iva]);
+  const total = products.reduce((sum, item) => sum + item.amount,0);
+  const subTotal = (total/1.18);
+  const iva = (total-subTotal);
 
   return (
     <div>
@@ -109,6 +101,8 @@ export default function Carrito() {
                   eventClickCountRes={eventClickCountRes}
                   eventClickRemoveItem={eventClickRemoveItem}
                   id={item.id}
+                  quanty={item.quanty}
+                  stock={item.stock}
                 />
                 <Divider/>
               </div>
@@ -123,7 +117,7 @@ export default function Carrito() {
               <Typography variant="body1">Total:</Typography>
             </div>
             <div className="lb-content">
-              <Typography variant="body2">{`$. ${subtotal.toFixed(2)}`}</Typography>
+              <Typography variant="body2">{`$. ${subTotal.toFixed(2)}`}</Typography>
               <Typography variant="body2">{`$. ${iva.toFixed(2)}`}</Typography>
               <Typography variant="body2">{`$. ${total.toFixed(2)}`}</Typography>
             </div>
