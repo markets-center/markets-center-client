@@ -1,11 +1,30 @@
-.supremeContainer{
+.svg {
+    width: 110px;
+    display: block;
+    margin: auto;
+  }
+
+  .containerError{
     width: 99vw;
     height: 93vh;
-    background-color: #dfdfdf;
+    background-color: rgb(208,96,121);
     display: flex;
+  }
 
-}
-.container{
+  .pathCircle {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+    -webkit-animation: dash .9s ease-in-out;
+    animation: dash .9s ease-in-out;
+  }
+  .pathLine {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards;
+  }
+  .container{
     background-color: #F8F9FA;
     margin: auto;
     width: 50vw;
@@ -22,6 +41,10 @@
 .text{
     text-align: center;
     margin-top: 2vh;
+    padding-top: 20px;
+}
+.NavbarError{
+    height: 100px;
 }
 .textMarket{
     display: flex;
@@ -43,8 +66,9 @@
     height: 7.8vh
 }
 .containerButton{
-
-  margin-top: 20%;
+  position: absolute;
+  margin-left: 385px;
+  padding-top: 300px;
 }
 .imgCarritoThanks{
   margin-left: 3px;
@@ -55,7 +79,7 @@
 
 
 
-.containerCheck{
+.containerX{
   display: grid;
   height: 20vh;
   place-items: center;
@@ -73,63 +97,43 @@
   border-left-color: #5cb85c;
   animation: rotate 1.2s linear infinite;
 }
-@keyframes rotate {
-  50%{
-    border-left-color: #5cb85c;
+  
+
+  
+  
+  @-webkit-keyframes dash {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
-  75%{
-    border-left-color: #5cb85c;
+  
+  @keyframes dash {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
-  100%{
-    transform: rotate(360deg);
+  
+  @-webkit-keyframes dash-check {
+    0% {
+      stroke-dashoffset: -100;
+    }
+    100% {
+      stroke-dashoffset: 900;
+    }
   }
-}
-.label .checkIcon{
-  display: none;
-}
-.label .checkIcon:after{
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: 28px;
-  transform: scaleX(-1) rotate(135deg);
-  height: 40px;
-  width: 20px;
-  border-top: 4px solid #5cb85c;
-  border-right: 4px solid #5cb85c;
-  transform-origin: left top;
-  animation: checkIcon 0.8s ease;
-}
-@keyframes checkIcon {
-  0%{
-    height: 0;
-    width: 0;
-    opacity: 1;
+  
+  @keyframes dash-check {
+    0% {
+      stroke-dashoffset: -100;
+    }
+    100% {
+      stroke-dashoffset: 900;
+    }
   }
-  20%{
-    height: 0;
-    width: 20px;
-    opacity: 1;
-  }
-  40%{
-    height: 40px;
-    width: 20px;
-    opacity: 1;
-  }
-  100%{
-    height: 40px;
-    width: 20px;
-    opacity: 1;
-  }
-}
-.input{
-  display: none; 
-}
-.input:checked ~ .label .checkIcon{
-  display: block;
-}
-.input:checked ~ .label{
-  animation: none;
-  border-color: #5cb85c;
-  transition: border 0.5s ease-out;
-}
+  

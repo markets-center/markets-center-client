@@ -23,12 +23,12 @@ function ComponenteGracias() {
                 </label>
             </div>    
                 {checked?<div>
-                    <Typography variant="h4" className={s.title}>¡Gracias!</Typography>
+                    <Typography variant="h3" className={s.title}>¡Gracias!</Typography>
                     <Typography variant="h6" className={s.text}>
                         En breve el vendedor comenzará a preparar su pedido
                     </Typography>
                     </div>:<div className={s.invisible} />}
-                    <div className={s.containerButton} style={{marginTop: '50px'}}>
+                    <div className={s.containerButton} style={{marginTop: '160px'}}>
                         <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/">Volver</Button></div>
                         <Typography variant="body2" className={s.textMarket}>
                             Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc" className={s.imgCarritoThanks}/>
