@@ -8,6 +8,7 @@ import CarLoader from "./CarLoader.js";
 import CheckoutComp from "../../components/Checkout2/CheckoutComp"
 import {Snackbar} from '@mui/material';
 import {SnackbarAlert} from '../../components/Alert/success';
+import accounting from 'accounting'
 
 
 import {
@@ -117,9 +118,9 @@ export default function Carrito() {
               <Typography variant="body1">Total:</Typography>
             </div>
             <div className="lb-content">
-              <Typography variant="body2">{`$. ${subTotal.toFixed(2)}`}</Typography>
-              <Typography variant="body2">{`$. ${iva.toFixed(2)}`}</Typography>
-              <Typography variant="body2">{`$. ${total.toFixed(2)}`}</Typography>
+              <Typography variant="body2">{accounting.formatMoney(subtotal, '$')}</Typography>
+              <Typography variant="body2">{accounting.formatMoney(iva, '$')}</Typography>
+              <Typography variant="body2">{accounting.formatMoney(total, '$')}</Typography>
             </div>
           </div>
           <hr />
@@ -141,7 +142,7 @@ export default function Carrito() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <Box sx={{width: '500px', margin: 'auto'}}>
           <CheckoutComp amount={total}/>
         </Box>
       </Modal>

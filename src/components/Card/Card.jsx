@@ -12,6 +12,7 @@ import Detail from './Detail/Detail'
 import { addOrderCar } from '../../redux/actions/a.order.js'
 import Tooltip from '@mui/material/Tooltip';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
+import accounting from 'accounting'
 
 const style = {
     position: 'absolute',
@@ -74,7 +75,7 @@ export default function Card({ name, price, image, description, stock, category,
                         <Button variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
                     </div> :
                         <Typography variant="subtitle1" className={s.price}>
-                            ${price}
+                            {accounting.formatMoney(price, '$')}
                         </Typography>}
                     <div className={s.icons}>
                         {stock > 0 ? <IconButton color="primary" size="small" onClick={() => {

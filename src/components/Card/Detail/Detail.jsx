@@ -11,6 +11,7 @@ import Review from "../review/Review";
 import { Box, Modal } from "@mui/material";
 import AddReview from '../review/AddReview';
 import useLocalStorage from '../../../pages/Carrito/useLocalStorage.js';
+import accounting from 'accounting'
 
 const style = {
     position: 'absolute',
@@ -58,7 +59,7 @@ export default function Detail({ name, price, image, description, stock, categor
             </div>
             <div className={s.info}>
                 <Typography variant="h5" className={s.name}>{name}{stock > 0 ? <DeliveryDiningIcon fontSize="medium" color="info" className={s.delivery} /> : <DeliveryDiningIcon fontSize="medium" color="disable" className={s.delivery} />}</Typography>
-                <Typography variant="h6" className={s.price}> ${price}</Typography>
+                <Typography variant="h6" className={s.price}>{accounting.formatMoney(price,'$')}</Typography>
 
                 {stock > 0 ? <Typography variant="body2" className={s.stock}> Stock: {stock}ud.</Typography> :
                     <Typography variant="body2" className={s.stock} color="secondary" sx={{ fontWeight: '600' }}> SIN STOCK</Typography>}
