@@ -9,17 +9,15 @@ import {
 } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
-const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem, id}) => {
+const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem, id, quanty, stock}) => {
 
   const [active, setActive] = useState(true);
-  const [counter, setCounter] = useState(1);
-
-
-
+  const [activeStock, setActiveStock] = useState(false);
   
   useEffect(() => {
-    counter > 1 ? setActive(false) : setActive(true)  
-  }, [counter])
+    quanty >= stock ? setActiveStock(true) : setActiveStock(false)
+    quanty > 1 ? setActive(false) : setActive(true)  
+  }, [quanty])
   
   return (
     <div>
@@ -40,6 +38,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                 <Typography variant="subtitle1">{item.name}</Typography>
                 <div className="desc-item">
                   <Typography variant="caption">${item.price}</Typography>
+                  <Typography variant="caption">Stock: {item.stock}</Typography>
                 </div>
               </div>
               <div className="detail item-count">
@@ -47,8 +46,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   disabled={active}
                   className="btn btn-add"
                   onClick={() => {
-                    setCounter(counter - 1);
-                    eventClickCountRes(item.price, id, (counter - 1))
+                    eventClickCountRes(item.price, id, (quanty - 1))
                   }}
                 >
                   -
@@ -57,14 +55,14 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   type="numer"
                   className="btn lb-count"
                   onChange={() =>{}}
-                  value={counter}
+                  value={quanty}
                   disabled={true}
                 />
                 <button
+                  disabled={activeStock}
                   className="btn btn-res"
                   onClick={() => {
-                    setCounter(counter + 1);
-                    eventClickCountAdd(item.price, id, (counter + 1))
+                    eventClickCountAdd(item.price, id, (quanty + 1))
                   }}
                 >
                   +
