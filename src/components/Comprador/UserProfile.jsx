@@ -62,6 +62,7 @@ function UserProfile() {
               sx={{ mt: 4, mb: 2, display: "block" }}
               variant="h4"
               component="div"
+              color="secondary"
             >
               Historial de compras vacío
             </Typography>
@@ -186,7 +187,7 @@ function UserProfile() {
           }
         }}
       >
-        <Detail name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} />
+        <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} />
       </Dialog>
 
     </div>

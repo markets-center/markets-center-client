@@ -109,7 +109,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} />
+                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} />
                     </Box>
                 </Modal>
             </div>

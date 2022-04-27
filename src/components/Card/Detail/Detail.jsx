@@ -24,7 +24,7 @@ const style = {
     p: 4,
 };
 
-export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews }) {
+export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev }) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -69,9 +69,9 @@ export default function Detail({ name, price, image, description, stock, categor
                 <div className={s.description}>
                     <Review rating={rating} text={`${numReviews} reviews`} />
                 </div>
-                <div className={s.description}>
+                {viewRev && <div className={s.description}>
                     <Button variant="outlined" size="small" color="info" onClick={handleOpen} >Escribe una reseña</Button>
-                </div>
+                </div>}
                 {/* <div className={s.buttons}>
                     <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={addToCart}> agregar</Button>
                 </div> */}
