@@ -25,7 +25,8 @@ function BuyerForm() {
     const navigate = useNavigate();
   const theme = createTheme();
   const { currentUser } = useAuth();
-  const [fileInputState, setFileInputState] = useState();
+  const [disableForm, setDisableForm] = useState(true);
+  const [fileInputState, setFileInputState] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
   const [data, setData] = useState({ name:'', phone: "", IdDocument: "", address: "" });
 
@@ -40,6 +41,15 @@ function BuyerForm() {
 
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
+    let flagDisable = true
+    data.name!=='' && currentUser.displayName!=='' ? flagDisable=true : flagDisable=false
+    data.phone===''?flagDisable=true:flagDisable=false
+    data.IdDocument===''?flagDisable=true:flagDisable=false
+    data.address===''?flagDisable=true:flagDisable=false
+    setDisableForm(()=>flagDisable)
+  }
+
+  function validateForm(user){
   }
 
   function handleSubmit(e) {
@@ -69,6 +79,7 @@ function BuyerForm() {
       image: img,
       dateOfBirth: selectedDate
     };
+    validateForm(userData)
     dispatch(postNewUser(userData));
     navigate('/');
   }
@@ -173,6 +184,7 @@ function BuyerForm() {
             />
             </LocalizationProvider>
           <Button
+          disabled={disableForm}
               type="submit"
               fullWidth
               variant="contained"

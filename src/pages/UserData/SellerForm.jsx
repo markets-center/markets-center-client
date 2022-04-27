@@ -28,6 +28,7 @@ function SellerForm() {
   const { currentUser } = useAuth();
   const [fileInputState, setFileInputState] = useState();
   const [delivery, setDelivery] = useState(false);
+  const [disableForm, setDisableForm] = useState(true);
   const [selectedDate, handleDateChange] = useState(new Date());
   const [data, setData] = useState({ name:'', phone: "", IdDocument: "", address: "" });
 
@@ -45,6 +46,12 @@ function SellerForm() {
 
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
+    let flagDisable = true
+    data.name!=='' && currentUser.displayName!=='' ? flagDisable=true : flagDisable=false
+    data.phone===''?flagDisable=true:flagDisable=false
+    data.IdDocument===''?flagDisable=true:flagDisable=false
+    data.address===''?flagDisable=true:flagDisable=false
+    setDisableForm(()=>flagDisable)
   }
 
   function handleSubmit(e) {
@@ -187,6 +194,7 @@ function SellerForm() {
               }
             />
           <Button
+              disabled={disableForm}
               type="submit"
               fullWidth
               variant="contained"
