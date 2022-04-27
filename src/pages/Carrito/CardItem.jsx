@@ -1,6 +1,6 @@
 import React, {useEffect, useState}from "react";
 import "./Carrito.css";
-
+import accounting from 'accounting';
 import {
   Grid,
   Typography,
@@ -39,7 +39,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
               <div className="detail item-tittle">
                 <Typography variant="subtitle1">{item.name}</Typography>
                 <div className="desc-item">
-                  <Typography variant="caption">${item.price}</Typography>
+                  <Typography variant="caption">{accounting.formatMoney(item.price, '$')}</Typography>
                 </div>
               </div>
               <div className="detail item-count">
