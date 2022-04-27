@@ -42,7 +42,7 @@ export default function Sliders2() {
     return (
         <Container>
             {loading ? <Loading /> :
-                products.length > 0?
+                products ?
                     <Container>
                         <Container sx={{
                             marginTop: '60px',
@@ -52,7 +52,7 @@ export default function Sliders2() {
                                 Destacados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {rating?.map((producto, idx) => (
+                                {rating.length > 0 ? rating?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -65,7 +65,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
 
                         </Container>
@@ -77,7 +77,7 @@ export default function Sliders2() {
                                 Bebidas<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {bebidas?.map((producto, idx) => (
+                                {bebidas.length > 0 ?bebidas?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -90,7 +90,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
 
                         </Container>
@@ -102,7 +102,7 @@ export default function Sliders2() {
                                 Almacen<img src={Mc} width="30px" alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {almacen?.map((producto, idx) => (
+                                {almacen.length > 0 ? almacen?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -115,7 +115,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
                         </Container>
                         <Container sx={{
@@ -126,7 +126,7 @@ export default function Sliders2() {
                                 Lacteos<img src={Mc} alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {lacteos?.map((producto, idx) => (
+                                {lacteos.length > 0 ? lacteos?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -139,7 +139,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
 
                         </Container>
@@ -151,7 +151,7 @@ export default function Sliders2() {
                                 Congelados<img src={Mc} alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {congelados?.map((producto, idx) => (
+                                {congelados.length > 0 ? congelados?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -164,7 +164,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
 
                         </Container>
@@ -176,7 +176,7 @@ export default function Sliders2() {
                                 Mascotas<img src={Mc} alt="mc" className={s.imgTitleSlider} />
                             </Typography>
                             <Carousel breakPoints={breakPoints} >
-                                {mascotas?.map((producto, idx) => (
+                                {mascotas.length > 0 ? mascotas?.map((producto, idx) => (
                                     <Card
                                         key={idx}
                                         name={producto.name}
@@ -189,7 +189,7 @@ export default function Sliders2() {
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
                                     />
-                                ))}
+                                )): <Loading/>}
                             </Carousel>
 
                         </Container>

@@ -7,12 +7,15 @@ import {
     MESSAGE,
     GET_ALL_ORDERS_OF_SELLER,
     SET_ALERT,
-    GET_PRODUCT_BY_SELLER_AND_CAT
+    GET_PRODUCT_BY_SELLER_AND_CAT,
+    LOADING_ON,
+    LOADING_OFF
 } from './ctes'
 
 export function getAllSellers() {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING_ON})
             const sellers = await axios.get('/api/private/users/sellers');
             dispatch({type: MESSAGE, payload: sellers.data.msg})
             dispatch({type: GET_ALL_SELLERS, payload: sellers.data.data})
@@ -26,9 +29,11 @@ export function getAllSellers() {
 export function postProduct(product) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING_ON})
             const response = await axios.post('/api/private/product', product);
             dispatch({type: SET_ALERT, payload: response.data.msg})
             dispatch({type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: response.data.data})
+            dispatch({type: LOADING_OFF});
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -38,9 +43,11 @@ export function postProduct(product) {
 export function updateProduct (product, id) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING_ON})
             const response = await axios.put(`/api/private/product/${id}`, product);
             dispatch({type: SET_ALERT, payload: response.data.msg});
             dispatch({type: UPDATE_PRODUCT, payload: response.data.data});
+            dispatch({type: LOADING_OFF});
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
@@ -50,9 +57,11 @@ export function updateProduct (product, id) {
 export function ordersBySeller(id) {
     return async function (dispatch) {
         try {
+            dispatch({type: LOADING_ON})
             const orders = await axios.get(`/api/private/orderSellers/${id}`);
             dispatch({type: MESSAGE, payload: orders.data.msg})
             dispatch({type: GET_ALL_ORDERS_OF_SELLER, payload: orders.data.data})
+            dispatch({type: LOADING_OFF});
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
