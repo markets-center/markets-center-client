@@ -9,6 +9,8 @@ import {
     Box,
     Button,
     styled,
+    FormControlLabel,
+    Switch
   } from "@mui/material";
   import { Typography, TextField } from "@mui/material";
   import { AddAPhoto } from "@mui/icons-material/";
@@ -18,36 +20,38 @@ import {
     display: "none",
   });  
 
-function SellerForm({name, email, image, IdDocument, phone, address, userId, handleClose}) {
-    const [state, setState] = useState({name:name, email: email, image: image, IdDocument:IdDocument, phone:phone, address: address, userId: userId, uploadImg:false})
+function SellerForm({name, email, image, IdDocument, phone, address, userId, delivery, handleClose}) {
+  const [state, setState] = useState({name:name, email: email, image: image, IdDocument:IdDocument, phone:phone, address: address, userId: userId, uploadImg:false, delivery: delivery})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {updateEmail} = useAuth();
 
-
-    function handleChange(e){
-        setState({...state, [e.target.name]:e.target.value})
+  function handleUserType(e) {
+    setState({...state, delivery: !state.delivery})
+  }
+  function handleChange(e){
+    setState({...state, [e.target.name]:e.target.value})
+  }
+  
+  function handleImageChange (e){
+    setState({...state, uploadImg:true})
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onloadend = () => {
+      setState({...state, image: reader.result});
+    };
+  }
+  
+  function handleSubmit(e){
+    e.preventDefault();
+    if(email !== state.email) {
+      updateEmail(state.email)
     }
-
-    function handleImageChange (e){
-      setState({...state, uploadImg:true})
-        const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onloadend = () => {
-          setState({...state, image: reader.result});
-        };
-    }
-
-    function handleSubmit(e){
-        e.preventDefault();
-        if(email !== state.email) {
-          updateEmail(state.email)
-        }
-        dispatch(updateUser(state));
-        handleClose()
-        navigate('/Profile')
-    }
-
+    dispatch(updateUser(state));
+    handleClose()
+    navigate('/Profile')
+  }
+  
   return (
     <div>
       <Container component="main" maxWidth="md">
@@ -100,7 +104,7 @@ function SellerForm({name, email, image, IdDocument, phone, address, userId, han
                   </Button>
                 </label>
                       </Container>
-               <TextField
+              <TextField
               margin="normal"
               required
               fullWidth
@@ -155,6 +159,17 @@ function SellerForm({name, email, image, IdDocument, phone, address, userId, han
               value={state.address}
               autoFocus
             />
+            <FormControlLabel
+            label="Ofrece Delivery:  "
+            labelPlacement="start"
+            control={
+              <Switch
+              defaultChecked={state.delivery}
+                onChange={handleUserType}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+          />
           <Button
               type="submit"
               fullWidth

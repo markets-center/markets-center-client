@@ -34,7 +34,7 @@ export default function Vendedor(){
         stock: "",
         category: [],
         price: "",
-        userId: currentUser.uid
+        userId: currentUser?.uid
     });
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -53,9 +53,16 @@ export default function Vendedor(){
     }
     function handleSubmit(e){
         e.preventDefault();
-        prodId === null ?
-        dispatch(postProduct(input))
-        : dispatch(updateProduct(input, prodId))
+        if(prodId === null){
+            dispatch(postProduct(input))
+            handleClose()
+        }else{
+            dispatch(updateProduct(input, prodId))
+            handleClose()
+        }
+        // prodId === null ?
+        // dispatch(postProduct(input))
+        // : dispatch(updateProduct(input, prodId))
     }
     function handleCloseAlert(){
         dispatch(delAlert())
@@ -63,7 +70,7 @@ export default function Vendedor(){
 
     // Products by User
     useEffect(() => {
-        dispatch(filterBySellerAndCategories(oneUser._id))
+        dispatch(filterBySellerAndCategories(oneUser?._id))
         setTimeout(() => {
             setLoading(false)
         }, 500);
