@@ -1,15 +1,11 @@
 import * as React from 'react';
 import axios from 'axios'
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import {Button} from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux'
+import {Button, Grid, Typography} from '@mui/material';
+import { useSelector } from 'react-redux'
 import Review from './Review';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js';
 import { useNavigate } from "react-router-dom";
-import { payment } from '../../redux/actions/a.order'
 
 
 const stripePromise = loadStripe("pk_test_51KsQsmK6Zz3L3Hm35H035USbURUpt7MaZrexNPhwHd3AMdHVtLA3gThyv87ep5gv8YM5xb3puFiSpsxxQaVixFqe00vqibvweT")
@@ -41,7 +37,6 @@ const CheckoutForm = ({ back, next, amount }) => {
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate();
-  const dispatch = useDispatch()
 
 
   const handleSubmit = async(event) => {
@@ -52,17 +47,13 @@ const CheckoutForm = ({ back, next, amount }) => {
         card: elements.getElement(CardElement)
     })
 
-    dispatch(payment(paymentMethod))
-
   if(!error){
       try {
           const { data } = await axios.post("/api/private/payment", {
               id: paymentMethod.id,
               amount: amount * 100,
           })
-          console.log(data)
-          console.log(paymentMethod)
-          
+    
           elements.getElement(CardElement).clear()
           if(data.success) navigate('/Thanks')
       } catch (error) {

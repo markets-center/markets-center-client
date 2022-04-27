@@ -4,8 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import PrivateRoute from './pages/MiddlewareRoute/PrivateRoute'
-import LoginButton from './pages/MiddlewareRoute/LoginButton'
+//middlewares
+import AdminRoute from './pages/MiddlewareRoute/adminRoute'
+import CredentialRoute from './pages/MiddlewareRoute/credentialRoute'
+import BuyerRoute from './pages/MiddlewareRoute/buyerRoute'
+import SellerRoute from './pages/MiddlewareRoute/sellerRoute'
+import GuestBuyerRoute from './pages/MiddlewareRoute/guestBuyerRoute'
 
 import Home from "../src/pages/Home/Home";
 import Carrito from "../src/pages/Carrito/Carrito";
@@ -28,35 +32,82 @@ function App() {
       <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Carrito" element={<Carrito />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Thanks" element={<GraciasPage />} />
-          <Route path="/Admin" element={<Admin />} />
-          <Route path="/OlvidoPass" element={<OlvidoPass />} />
-          <Route path="/Login" element={
-            <LoginButton>
-              <Login />
-            </LoginButton>
+          <Route path="/" element={
+            <GuestBuyerRoute>
+              <Home />
+            </GuestBuyerRoute>
           } />
-          <Route path="/Profile" element={<Vendedor />} />
+          <Route path="/Carrito" element={
+            <GuestBuyerRoute>
+              <Carrito />
+            </GuestBuyerRoute>
+          } />
+
+          <Route path="/Register" element={
+            <CredentialRoute>
+              <Register />
+            </CredentialRoute>
+          } />
+
+          <Route path="/Thanks" element={
+            <BuyerRoute>
+              <GraciasPage />
+            </BuyerRoute>
+          } />
+
+          <Route path="/Admin" element={
+            <AdminRoute>
+              <Admin />
+            </AdminRoute>
+          } />
+
+          <Route path="/OlvidoPass" element={
+            <CredentialRoute>
+              <OlvidoPass />
+            </CredentialRoute>
+          } />
+
+          <Route path="/Login" element={
+            <CredentialRoute>
+              <Login />
+            </CredentialRoute>
+          } />
+
+          <Route path="/Profile" element={
+            <SellerRoute>
+              <Vendedor />
+            </SellerRoute>
+          } />
+
           {/* Provisorio */}
-          <Route path="/orderHistory" element={<HistoryHome />} />
+          <Route path="/orderHistory" element={
+            <SellerRoute>
+              <HistoryHome />
+            </SellerRoute>
+          } />
+
           {/* Provisorio */}
-          <Route path="/User" element={<Comprador />} />
+          <Route path="/User" element={
+            <BuyerRoute>
+              <Comprador />
+            </BuyerRoute>
+          } />
+
           <Route 
           path="/sellerForm" 
           element={
-            <PrivateRoute>
+            <SellerRoute>
               <SellerForm />
-            </PrivateRoute>
+            </SellerRoute>
           } 
           />
+
           <Route path="/buyerForm" element={
-            <PrivateRoute>
+            <BuyerRoute>
               <BuyerForm />
-            </PrivateRoute>
+            </BuyerRoute>
           } />
+
           <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />

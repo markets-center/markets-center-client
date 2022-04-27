@@ -12,6 +12,7 @@ import Detail from './Detail/Detail'
 import { addOrderCar } from '../../redux/actions/a.order.js'
 import Tooltip from '@mui/material/Tooltip';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
+import accounting from 'accounting'
 
 const style = {
     position: 'absolute',
@@ -45,10 +46,10 @@ export default function Card({ name, price, image, description, stock, category,
         setHover(false)
     }
 
-    const findItem = items.find((f) => f.id === id)
+    const findItem = product.find((f) => f.id === id)
 
-    function addToCar(id, price, name, image) {
-        const obj = { id, name, price, image, quanty: 1, amount: price }
+    function addToCar(id, price, name, image, stock) {
+        const obj = { id, name, price, image, quanty: 1, amount: price, stock}
         if (findItem) {
             return setTooltip(true)
         }
@@ -74,11 +75,11 @@ export default function Card({ name, price, image, description, stock, category,
                         <Button variant="outlined" size="small" color="info" onClick={handleOpen} >más info</Button>
                     </div> :
                         <Typography variant="subtitle1" className={s.price}>
-                            ${price}
+                            {accounting.formatMoney(price, '$')}
                         </Typography>}
                     <div className={s.icons}>
                         {stock > 0 ? <IconButton color="primary" size="small" onClick={() => {
-                            addToCar(id, price, name, image)
+                            addToCar(id, price, name, image, stock)
                         }} >
                             <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
                                 <AddShoppingCartIcon fontSize="medium" variant="contained" />

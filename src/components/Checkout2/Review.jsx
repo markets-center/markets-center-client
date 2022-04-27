@@ -1,12 +1,9 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Grid from '@mui/material/Grid';
-import { Elements, CardElements, useStripe, useElements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js';
+import { ListItem, ListItemText, List, Divider} from '@mui/material';
+
+import accounting from 'accounting'
 
 
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
@@ -28,14 +25,14 @@ export default function Review({ amount }) {
         {products?.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={product.name}/>
-            <Typography variant="body2">{product.price}</Typography>
+            <Typography variant="body2">{accounting.formatMoney(product.price, '$')}</Typography>
           </ListItem>
         ))}
-
+        <Divider />
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-             ${amount}
+             {accounting.formatMoney(amount, '$')}
           </Typography>
         </ListItem>
       </List>

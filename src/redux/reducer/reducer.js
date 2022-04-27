@@ -31,7 +31,8 @@ import {
     POST_REVIEW,
     UDPATE_ORDER,
     EMPTY_CART,
-    GET_OR_UPDATE_CART
+    GET_OR_UPDATE_CART,
+    DEL_ONE_USER
 
 } from '../actions/ctes'
 
@@ -148,6 +149,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 oneUser: {...action.payload}
+            }
+        case DEL_ONE_USER:
+            return {
+                ...state,
+                oneUser:''
             }
         case POST_ORDER:
             return {
