@@ -1,0 +1,139 @@
+.svg {
+    width: 110px;
+    display: block;
+    margin: auto;
+  }
+
+  .containerError{
+    width: 99vw;
+    height: 93vh;
+    background-color: rgb(208,96,121);
+    display: flex;
+  }
+
+  .pathCircle {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+    -webkit-animation: dash .9s ease-in-out;
+    animation: dash .9s ease-in-out;
+  }
+  .pathLine {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards;
+  }
+  .container{
+    background-color: #F8F9FA;
+    margin: auto;
+    width: 50vw;
+    height: 60vh;
+    border-radius: 30px;
+    box-shadow: 0px 0px 40px -30px rgb(83, 83, 83);
+    display: flex;
+    flex-direction: column;
+
+}
+.title{
+    text-align: center;
+}
+.text{
+    text-align: center;
+    margin-top: 2vh;
+    padding-top: 20px;
+}
+.NavbarError{
+    height: 100px;
+}
+.textMarket{
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+    padding-top: 5px;
+
+}
+.textMarket img{
+
+    margin-bottom: -4.3px;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.invisible{
+    height: 7.8vh
+}
+.containerButton{
+  position: absolute;
+  margin-left: 385px;
+  padding-top: 300px;
+}
+.imgCarritoThanks{
+  margin-left: 3px;
+  padding-bottom: 2px;
+}
+
+
+
+
+
+.containerX{
+  display: grid;
+  height: 20vh;
+  place-items: center;
+  background: transparent;
+  margin-top: 2vh;
+}
+.label{
+    margin-top: 30px;
+  position: relative;
+  height: 105px;
+  width: 105px;
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  border-left-color: #5cb85c;
+  animation: rotate 1.2s linear infinite;
+}
+  
+
+  
+  
+  @-webkit-keyframes dash {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @-webkit-keyframes dash-check {
+    0% {
+      stroke-dashoffset: -100;
+    }
+    100% {
+      stroke-dashoffset: 900;
+    }
+  }
+  
+  @keyframes dash-check {
+    0% {
+      stroke-dashoffset: -100;
+    }
+    100% {
+      stroke-dashoffset: 900;
+    }
+  }
+  
