@@ -104,7 +104,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 productsBySeller: action.payload,
+                searchedProducts: action.payload,
+                filteredByPrice: [],
+                loading: false
                 searchedProducts: action.payload
+
             }
         case GET_ALL_CATEGORIES:
             return {
