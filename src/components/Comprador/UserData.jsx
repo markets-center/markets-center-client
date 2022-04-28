@@ -78,7 +78,7 @@ export default function UserData() {
               <img
                 src={oneUser.image}
                 alt=""
-                tyle={{width: "150px",borderRadius: "50%"}}
+                style={{width: "150px",borderRadius: "50%"}}
               />
             </Box>
           </Container>

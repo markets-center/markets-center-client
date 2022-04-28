@@ -28,7 +28,12 @@ export function AuthProvider({ children }) {
   async function login(email, password) {
     try {
       const user = await auth.signInWithEmailAndPassword(email, password);
-      const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`)
+      const token = await user.user.getIdToken()
+      const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
       localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
       return user
@@ -59,12 +64,12 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      currentUser?.uid && dispatch(userById(currentUser.uid))
+      currentUser?.uid && dispatch(userById(currentUser.uid, currentUser))
       setLoading(false);
     });
     
     return unsubscribe;
-  }, [currentUser?.uid, dispatch]);
+  }, [currentUser?.uid, dispatch, currentUser]);
   const value = {
     currentUser,
     login,
