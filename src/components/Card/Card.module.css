@@ -60,7 +60,7 @@
     word-wrap: break-word;
 }
 .sinStock{
-    filter: blur(2px) grayscale(0.9);
+    filter: blur(1px) grayscale(1);
 
 }
 .containerSinStock{
