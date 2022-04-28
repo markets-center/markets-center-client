@@ -40,7 +40,7 @@ export default function NavBar(){
             <Stack spacing={1} direction="row" size="large">
                 <Paper
                     component="form"
-                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 700 }}
+                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}
                 >
                 <StyledTextField  
                     onChange={onImputChange}

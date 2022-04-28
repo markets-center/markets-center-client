@@ -23,7 +23,8 @@ function SellersFilter() {
             wordWrap: 'break-word',
             overflowX: 'auto',
             whiteSpace: 'nowrap'
-        }} className={s.containerSellers}>
+        }}>
+
             {allSellers && allSellers.map(d => <SellerCard key={d._id} name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
             }
         </Container>

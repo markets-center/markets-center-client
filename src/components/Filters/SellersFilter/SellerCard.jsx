@@ -29,7 +29,8 @@ const SellerCard = ({ image, name, id }) => {
                 alignItem: 'center',
                 justifyContent: 'space-around',
                 cursor: 'pointer',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                maxWidth: '100%'
             }}
             className={s.container}>
                 <Avatar
