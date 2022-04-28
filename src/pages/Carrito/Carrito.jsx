@@ -118,7 +118,7 @@ export default function Carrito() {
               <Typography variant="body1">Total:</Typography>
             </div>
             <div className="lb-content">
-              <Typography variant="body2">{accounting.formatMoney(subtotal, '$')}</Typography>
+              <Typography variant="body2">{accounting.formatMoney(subTotal, '$')}</Typography>
               <Typography variant="body2">{accounting.formatMoney(iva, '$')}</Typography>
               <Typography variant="body2">{accounting.formatMoney(total, '$')}</Typography>
             </div>

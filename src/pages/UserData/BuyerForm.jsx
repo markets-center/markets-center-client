@@ -42,7 +42,7 @@ function BuyerForm() {
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
     let flagDisable = true
-    data.name!=='' && currentUser.displayName!=='' ? flagDisable=true : flagDisable=false
+    data.name!=='' && currentUser?.displayName!=='' ? flagDisable=true : flagDisable=false
     data.phone===''?flagDisable=true:flagDisable=false
     data.IdDocument===''?flagDisable=true:flagDisable=false
     data.address===''?flagDisable=true:flagDisable=false
@@ -69,7 +69,7 @@ function BuyerForm() {
       isAdmin: false,
       isSeller: false,
       uploadImg,
-      name: currentUser.displayName || data.name,
+      name: currentUser?.displayName || data.name,
       userId: currentUser.uid,
       phone: data.phone,
       email: currentUser.email,
@@ -96,7 +96,7 @@ function BuyerForm() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Bienvenido {currentUser.displayName}!
+            Bienvenido {currentUser?.displayName}!
           </Typography>
           <Typography component="h3" variant="h5">
             Por favor, completa tus datos.
@@ -107,7 +107,7 @@ function BuyerForm() {
             noValidate
             sx={{ mt: 1 }}
           >
-              {!currentUser.displayName && <TextField
+              {!currentUser?.displayName && <TextField
               margin="normal"
               required
               fullWidth
@@ -147,7 +147,7 @@ function BuyerForm() {
               name="address"
               autoFocus
             />
-            {!currentUser.photoURL && (
+            {!currentUser?.photoURL && (
               <>
                 <label htmlFor="contained-button-file">
                   <Input

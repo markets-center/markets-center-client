@@ -40,7 +40,8 @@ export const ADD_ORDER_CAR = 'ADD_ORDER_CAR';
 export const DELETE_ORDER_CAR = 'DELETE_ORDER_CAR';
 
 export const POST_REVIEW = 'POST_REVIEW';
-export const LOADING = 'LOADING';
+export const LOADING_ON = 'LOADING_ON';
+export const LOADING_OFF = 'LOADING_OFF';
 export const UDPATE_ORDER = 'UDPATE_ORDER';
 export const EMPTY_CART = 'EMPTY_CART';
 export const GET_OR_UPDATE_CART = 'GET_OR_UPDATE_CART';

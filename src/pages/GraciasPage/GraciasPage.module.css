@@ -1,7 +1,7 @@
 .supremeContainer{
     width: 99vw;
     height: 93vh;
-    background-color: #dfdfdf;
+    background-color: #7fc778;
     display: flex;
 
 }
@@ -21,7 +21,7 @@
 }
 .text{
     text-align: center;
-    margin-top: 2vh;
+    padding-top: 2vh;
 }
 .textMarket{
     display: flex;
@@ -40,11 +40,12 @@
     align-items: flex-end;
 }
 .invisible{
-    height: 7.8vh
+    height: 6vh
 }
 .containerButton{
-
-  margin-top: 20%;
+  position: absolute;
+  margin-left: 385px;
+  padding-top: 320px;
 }
 .imgCarritoThanks{
   margin-left: 3px;

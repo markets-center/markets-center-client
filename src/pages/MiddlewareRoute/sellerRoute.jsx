@@ -5,9 +5,9 @@ import {useAuth} from '../../context/AuthContext';
 
 export default function SellerRoute ({children}) {
     const { currentUser} = useAuth();
-
+    console.log('current user',currentUser)
     if(!currentUser){
-        <Navigate to='/Login' replace />
+        return <Navigate to='/Login' replace />
     }else {
         if(localStorage.getItem('isAdmin')==='true'){
             return <Navigate to='/Admin' replace />
