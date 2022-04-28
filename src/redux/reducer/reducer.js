@@ -106,7 +106,7 @@ export default function rootReducer(state = initialState, action) {
                 productsBySeller: action.payload,
                 searchedProducts: action.payload,
                 filteredByPrice: [],
-                loading: false
+                loading: false,
                 searchedProducts: action.payload
 
             }
