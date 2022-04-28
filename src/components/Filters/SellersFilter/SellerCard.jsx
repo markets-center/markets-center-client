@@ -35,7 +35,7 @@ const SellerCard = ({ image, name, id }) => {
                 <Avatar
                     alt=''
                     src={image? image : '/broken-image.jpg'}
-                    sx={{ width: 80, height: 80 }}
+                    sx={{ width: 100, height: 100 }}
                 />
                 <Typography variant="body2" sx={{
                         textAlign: 'center',
