@@ -13,7 +13,7 @@ import Detail from '../Card/Detail/Detail'
 function UserProfile() {
   const dispatch = useDispatch();
   const history = useSelector((state) => state.history);
-  const { oneUser } = useAuth();
+  const { oneUser, currentUser } = useAuth();
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
   const [oneProduct, setOneProduct] = useState({name:"", price:0, image:"", description:"", stock:"", category:"", id:"", rating:"", numReviews:""});
@@ -44,7 +44,7 @@ function UserProfile() {
   // const handleCloseCancel = () => setOpenDelete(false);
 
   useEffect(() => {
-    dispatch(userHistory(oneUser._id));
+    dispatch(userHistory(oneUser._id, currentUser));
   }, [dispatch, oneUser._id]);
   return (
     <div>

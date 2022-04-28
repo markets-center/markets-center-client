@@ -21,12 +21,12 @@ export default function HistoryHome(){
     const handleCloseMore = () => setOpenMore(false);
     // 
     const navigate = useNavigate()
-    const {oneUser} = useAuth()
+    const {oneUser, currentUser} = useAuth()
     const history = useSelector(state => state.history)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(ordersBySeller(oneUser._id))
-    }, [dispatch, oneUser._id])
+        dispatch(ordersBySeller(oneUser._id, currentUser))
+    }, [dispatch, oneUser._id, currentUser])
     return (
         <div>
             <NavBar />

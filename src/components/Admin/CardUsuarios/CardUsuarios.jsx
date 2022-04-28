@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/actions/a.admin.js';
+import {useAuth} from '../../../context/AuthContext'
 import { IconButton, Tooltip } from '@mui/material';
 import styles from './CardUsuarios.module.css';
 import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached } from '@mui/icons-material/';
 import defaultImage from '../../../images/defaultUser.png';
 
 export default function CardCategorias (){
+    const {currentUser} = useAuth()
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.allUsers)
     useEffect(() => {
@@ -14,13 +16,13 @@ export default function CardCategorias (){
     }, [dispatch])
     async function handlePasswordReset(event){
         event.preventDefault()
-        dispatch(blockPass(event.currentTarget.getAttribute('id')))
+        dispatch(blockPass(event.currentTarget.getAttribute('id'), currentUser))
     }
     function handleUserToAdmin(event){
-        dispatch(upgradeUser(event.currentTarget.getAttribute('id')))
+        dispatch(upgradeUser(event.currentTarget.getAttribute('id'), currentUser))
     }
     function handleUserdelete(event){
-        dispatch(deleteUser(event.currentTarget.getAttribute('id')))
+        dispatch(deleteUser(event.currentTarget.getAttribute('id'), currentUser))
     }
     
     return (
