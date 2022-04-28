@@ -33,7 +33,8 @@ import {
     UDPATE_ORDER,
     EMPTY_CART,
     GET_OR_UPDATE_CART,
-    DEL_ONE_USER
+    DEL_ONE_USER,
+    ORDER_FILTERED
 
 } from '../actions/ctes'
 
@@ -107,7 +108,6 @@ export default function rootReducer(state = initialState, action) {
                 searchedProducts: action.payload,
                 filteredByPrice: [],
                 loading: false,
-                searchedProducts: action.payload
 
             }
         case GET_ALL_CATEGORIES:
@@ -199,6 +199,12 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 searchedProducts: orden
+            }
+        case ORDER_FILTERED:
+            let ordenfiltered = order(action.payload, state.filteredByPrice);
+            return {
+                ...state,
+                filteredByPrice: ordenfiltered
             }
         case FILTER_BY_PRICE:
             let filter = filterByPrice(action.payload, state.searchedProducts)

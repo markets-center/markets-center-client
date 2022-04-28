@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory} from '../../redux/actions/a.products'
+import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered} from '../../redux/actions/a.products'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,6 +19,7 @@ import CachedIcon from '@mui/icons-material/Cached';
 function Ordenamiento() {
     const dispatch = useDispatch();
     const idSeller = useSelector(state => state.activeSeller);
+    const filtered = useSelector(state => state.filteredByPrice);
     const idCategory = useSelector(state => state.activeCategory);
     const [order, setOrder] = React.useState('')
     const [radio, setRadio] = React.useState('');
@@ -26,11 +27,21 @@ function Ordenamiento() {
  
     const handleChange = (event) => {
         event.preventDefault();
-        if(event.target.value !== '-'){
-            dispatch(ordenamientos(event.target.value));
-        }else{
-            dispatch(filterBySellerAndCategories(idSeller,""))
+        if(filtered.length === 0){
+            if(event.target.value !== '-'){
+                dispatch(ordenamientos(event.target.value));
+            }else{
+                dispatch(filterBySellerAndCategories(idSeller,""))
+            }
         }
+        else{
+            if(event.target.value !== '-'){
+                dispatch(ordenamientosFiltered(event.target.value));
+            }else{
+                dispatch(filterBySellerAndCategories(idSeller,""))
+            }
+        }
+
         
     };
 
