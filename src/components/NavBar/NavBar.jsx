@@ -69,7 +69,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     return (
         <AppBar position="static" >
             <Container maxWidth="xl">
-                <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+                <Toolbar disableGutters sx={{ justifyContent: 'space-between', maxWidth: '100%' }}>
 
                     <IconButton cursor="pointer" onClick={handleSelect}>
                         <img src={Logo} alt="Logo" className={styles.logo} />
