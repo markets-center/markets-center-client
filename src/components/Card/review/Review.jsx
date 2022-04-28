@@ -2,11 +2,11 @@ import React from 'react'
 import ReactStars from 'react-rating-stars-component'
 
 
-export default function Review({ rating, text }) {
+export default function Review({ rating, text, size }) {
     return (
         <div>
             <ReactStars
-                size={20}
+                size={size}
                 edit={false}
                 color={'#adb5bd'}
                 activeColor={'#f1c40f'}
