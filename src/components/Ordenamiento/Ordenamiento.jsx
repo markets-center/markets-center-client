@@ -78,7 +78,7 @@ function Ordenamiento() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: '35px',
+            marginTop: '70px',
             paddingTop: '10px',
             height: '350px',
         }}>

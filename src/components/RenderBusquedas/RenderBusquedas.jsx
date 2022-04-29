@@ -39,15 +39,16 @@ function RenderBusquedas() {
         },10)
     }
 
-console.log('nameCategory ==>', nameCategory)
     return (
             <div className={s.container}>
                  {
                 loading ? <Loading /> :
                 products.length || filtered.length ?
                 filtered.length > 0?
+                <div>
+                <Paginado products={filtered} setCurrent={setCurrent} current={current}/>
                 <div className={s.container2}>
-                    <Paginado products={filtered} setCurrent={setCurrent} current={current}/>
+                    
                     <div className={s.productsContainer}>
                         {currentFiltered.map(p => <Card 
                         key={p.name}
@@ -63,9 +64,12 @@ console.log('nameCategory ==>', nameCategory)
                         />)}
                     </div>
                 </div>
+                </div>
                 :
+                <div>
+                <Paginado products={products} setCurrent={setCurrent} current={current}/>  
                 <div className={s.container2}>
-                    <Paginado products={products} setCurrent={setCurrent} current={current}/>  
+
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
                         key={p.name}
@@ -81,6 +85,7 @@ console.log('nameCategory ==>', nameCategory)
                         numReviews={p.numReviews}
                         />)}
                     </div>   
+                </div>
                 </div>
                 :
                 <Error message='El vendedor no tiene productos' mistake={false} />
