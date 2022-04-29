@@ -34,8 +34,8 @@ import {
     EMPTY_CART,
     GET_OR_UPDATE_CART,
     DEL_ONE_USER,
+    GET_ALL_ORDERS,
     ORDER_FILTERED
-
 } from '../actions/ctes'
 
 import { order, filterByPrice } from '../functions/functions'
@@ -176,6 +176,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 history: action.payload,
+            }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                history: action.payload
             }
         case RESET_SLIDERS:
             return {

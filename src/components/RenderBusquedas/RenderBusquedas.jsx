@@ -51,6 +51,7 @@ function RenderBusquedas() {
                     
                     <div className={s.productsContainer}>
                         {currentFiltered.map(p => <Card 
+                        reviews={p.reviews}
                         key={p.name}
                         name={p.name}
                         price={p.price}
@@ -72,6 +73,7 @@ function RenderBusquedas() {
 
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
+                        reviews={p.reviews}
                         key={p.name}
                         name={p.name}
                         price={p.price}
@@ -89,6 +91,7 @@ function RenderBusquedas() {
                 </div>
                 :
                 <Error message='El vendedor no tiene productos' mistake={false} />
+
             }
             </div>
 
