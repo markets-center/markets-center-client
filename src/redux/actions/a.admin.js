@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE} from './ctes'
+import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE, GET_ALL_ORDERS} from './ctes'
 
 
 export function adminUpdateCategory (id, category, currentUser) {
@@ -113,6 +113,17 @@ export function blockPass(id, currentUser){
                   }
             });
             dispatch({type: SET_ALERT, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function allOrders(){
+    return async function (dispatch) {
+        try {
+            const result = await axios.get('/api/admin/allOrders');
+            dispatch({type: GET_ALL_ORDERS, payload: result.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
