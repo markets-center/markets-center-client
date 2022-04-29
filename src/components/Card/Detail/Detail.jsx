@@ -26,43 +26,42 @@ const style = {
     p: 4,
 };
 
-export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev }) {
-
-    let user = [{
-        name: 'Jorge',
-        rating: 2.5,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-        fecha: 'Jan 9, 2014'
-    },
-    {
-        name: 'Luis',
-        rating: 1,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-        fecha: "Sep 9, 2019"
-    },
-    {
-        name: 'Manuel',
-        rating: 2.5,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-        fecha: "Mar 7, 3014"
-    },
-    {
-        name: 'Lucia',
-        rating: 3,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-        fecha: "Dec 19, 2024"
-    },
-    {
-        name: 'Wanda',
-        rating: 5,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasfs simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop pu',
-        fecha: "Jul 10, 2004"
-    },{
-        name: 'Foca',
-        rating: 2,
-        review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-        fecha: "Jun 4, 2008"
-    }]
+export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews }) {
+    // let user = [{
+    //     name: 'Jorge',
+    //     rating: 2.5,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
+    //     fecha: 'Jan 9, 2014'
+    // },
+    // {
+    //     name: 'Luis',
+    //     rating: 1,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
+    //     fecha: "Sep 9, 2019"
+    // },
+    // {
+    //     name: 'Manuel',
+    //     rating: 2.5,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
+    //     fecha: "Mar 7, 3014"
+    // },
+    // {
+    //     name: 'Lucia',
+    //     rating: 3,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
+    //     fecha: "Dec 19, 2024"
+    // },
+    // {
+    //     name: 'Wanda',
+    //     rating: 5,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasfs simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop pu',
+    //     fecha: "Jul 10, 2004"
+    // },{
+    //     name: 'Foca',
+    //     rating: 2,
+    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
+    //     fecha: "Jun 4, 2008"
+    // }]
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -111,7 +110,7 @@ export default function Detail({ name, price, image, description, stock, categor
                         </div>}
                     </div>
                 </div>
-                    <Commentary user={user}/>
+                    <Commentary user={reviews}/>
             </div>
             <div className={s.buttons}>
                 {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
