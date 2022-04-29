@@ -13,8 +13,8 @@ function RenderBusquedas() {
     const filtered = useSelector(state => state.filteredByPrice)
     const [current, setCurrent] = useState(1);
 
-    const indexLast = current * 3;
-    const indexFirst = indexLast - 3;
+    const indexLast = current * 15;
+    const indexFirst = indexLast - 15;
     const currentProducts = products.slice(indexFirst, indexLast);
     const currentFiltered = filtered.slice(indexFirst, indexLast);
 
@@ -43,7 +43,7 @@ function RenderBusquedas() {
                 </div>
                 :
                 <div className={s.container2}>
-                    <Paginado products={products} setCurrent={setCurrent} current={current}/>
+                    <Paginado products={products} setCurrent={setCurrent} current={current}/>       
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
                         key={p.name}

@@ -2,3 +2,26 @@
     display: flex;
     justify-content: center;
 }
+.buttonPaginado{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #2b7ec7;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0px 3px 0px 3px;
+}
+.buttonPaginado:hover{
+    background-color: #005BAA;
+}
+.buttonNextPrev{
+    height: 30px;
+    width: 30px;
+    background-color: #2b7ec7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}

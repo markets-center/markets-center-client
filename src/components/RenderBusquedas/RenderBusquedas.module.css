@@ -23,5 +23,6 @@
     justify-content: center;
     flex-wrap: wrap;
     width: 61vw;
+    min-height: 960px;
 
 }
