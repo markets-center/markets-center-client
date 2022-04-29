@@ -2,7 +2,7 @@ import React from "react";
 import s from './Paginado.module.css'
 export default function Paginado({ products, setCurrent, current }){
   const pageNumbers = [];
-  const pageCount = Math.ceil(products.length / 15);
+  const pageCount = Math.ceil(products.length / 13);
   for (let i = 1; i < pageCount + 1; i++) {
     pageNumbers.push(i);
   }

@@ -13,8 +13,8 @@ function RenderBusquedas() {
     const filtered = useSelector(state => state.filteredByPrice)
     const [current, setCurrent] = useState(1);
 
-    const indexLast = current * 15;
-    const indexFirst = indexLast - 15;
+    const indexLast = current * 13;
+    const indexFirst = indexLast - 13;
     const currentProducts = products.slice(indexFirst, indexLast);
     const currentFiltered = filtered.slice(indexFirst, indexLast);
 
@@ -25,7 +25,6 @@ function RenderBusquedas() {
                 products.length || filtered.length ?
                 filtered.length > 0?
                 <div className={s.container2}>
-                    <Paginado products={filtered} setCurrent={setCurrent} current={current}/>
                     <div className={s.productsContainer}>
                         {currentFiltered.map(p => <Card 
                         key={p.name}
@@ -40,10 +39,10 @@ function RenderBusquedas() {
                         id={p._id}
                         />)}
                     </div>
+                    <Paginado products={filtered} setCurrent={setCurrent} current={current}/>
                 </div>
                 :
                 <div className={s.container2}>
-                    <Paginado products={products} setCurrent={setCurrent} current={current}/>       
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
                         key={p.name}
@@ -59,6 +58,7 @@ function RenderBusquedas() {
                         numReviews={p.numReviews}
                         />)}
                     </div>
+                    <Paginado products={products} setCurrent={setCurrent} current={current}/>     
                 </div>
                 :
                 <Error message='El vendedor no tiene productos' mistake={false} />

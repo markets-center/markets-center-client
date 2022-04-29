@@ -1,6 +1,7 @@
 .paginadoContainer{
     display: flex;
     justify-content: center;
+    margin-bottom: 30px;
 }
 .buttonPaginado{
     width: 30px;
@@ -15,6 +16,10 @@
 }
 .buttonPaginado:hover{
     background-color: #005BAA;
+    transform: scale(1.15);
+}
+.buttonPaginado:active{
+    transform: scale(1);
 }
 .buttonNextPrev{
     height: 30px;
@@ -24,4 +29,12 @@
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    margin: 0px 3px 0px 3px;
+}
+.buttonNextPrev:hover{
+    background-color: #005BAA;
+    transform: scale(1.15);
+}
+.buttonNextPrev:active{
+    transform: scale(1);
 }
