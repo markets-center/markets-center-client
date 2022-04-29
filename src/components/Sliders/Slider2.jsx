@@ -16,6 +16,7 @@ export default function Sliders2() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
+    console.log(products)
     useEffect(() => {
         dispatch(getAllProducts())
     }, [dispatch]);
@@ -64,6 +65,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -89,6 +91,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -114,6 +117,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -138,6 +142,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -163,6 +168,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -188,6 +194,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>

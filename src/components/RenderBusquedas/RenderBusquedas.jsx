@@ -15,6 +15,7 @@ function RenderBusquedas() {
                 loading ? <Loading /> :
                 products.length || filtered.length ?
                 filtered.length > 0?filtered.map(p => <Card 
+                reviews={p.reviews}
                 key={p.name}
                 name={p.name}
                 price={p.price}
@@ -26,14 +27,14 @@ function RenderBusquedas() {
                 category={p.category.map(c => c.name)}
                 id={p._id}
                 />):products.map(p => <Card 
+                    reviews={p.reviews}
                     key={p.name}
                     name={p.name}
                     price={p.price}
                     image={p.image}
                     description={p.description}
                     stock={p.stock}
-                    category={p.category.map(c => c.name)
-                    }
+                    category={p.category.map(c => c.name)}
                     id={p._id}
                     rating={p.rating}
                     numReviews={p.numReviews}
