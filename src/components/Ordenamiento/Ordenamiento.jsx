@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered, idActiveSeller} from '../../redux/actions/a.products'
+import {ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered, idActiveSeller} from '../../redux/actions/a.products'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,7 +21,7 @@ function Ordenamiento() {
     const idSeller = useSelector(state => state.activeSeller);
     const filtered = useSelector(state => state.filteredByPrice);
     const allCategories = useSelector(state => state.allCategories)
-    const idCategory = useSelector(state => state.activeCategory);
+/*     const idCategory = useSelector(state => state.activeCategory); */
     const [order, setOrder] = React.useState('');
     const [categoria, setCategoria] = React.useState('')
     const [radio, setRadio] = React.useState('');
@@ -128,9 +128,6 @@ function Ordenamiento() {
                 onChange={handleChange}
                 label="Ordenar"
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
                     <MenuItem value={'-'}>-</MenuItem>
                     <MenuItem value={'high'}>Mayor Precio</MenuItem>
                     <MenuItem value={'low'}>Menor Precio</MenuItem>
