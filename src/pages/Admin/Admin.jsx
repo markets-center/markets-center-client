@@ -9,6 +9,7 @@ import {delAlert} from '../../redux/actions/a.alert';
 import NavBar from '../../components/NavBar/NavBar.jsx'
 import Categorias from '../../components/Admin/Categorias/Categorias.jsx'
 import Usuarios from '../../components/Admin/Usuarios/Usuarios.jsx'
+import Ventas from '../../components/Admin/Ventas/Ventas.jsx'
 
 
 export default function Admin(){
@@ -25,6 +26,10 @@ export default function Admin(){
     return (
         <div>
             <NavBar admin={true} value={value} setValue={setValue}/>
+            {
+                value === "Ventas" &&
+                <Ventas />
+            }
             {
                 value === "Usuarios" &&
                 <Usuarios />
