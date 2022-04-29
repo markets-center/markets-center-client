@@ -12,10 +12,10 @@ function RenderBusquedas() {
     const products = useSelector(state => state.searchedProducts)
     const filtered = useSelector(state => state.filteredByPrice)
     const idSeller = useSelector(state => state.activeSeller)
-/*     const nameCategory = useSelector(state => state.activeCategory)  */
+    const nameCategory = useSelector(state => state.activeCategory) 
     const [current, setCurrent] = useState(1);
     const [seller, setSeller] = useState(idSeller);
-/*     const [category, setCategory] = useState(nameCategory); */
+    const [category, setCategory] = useState(nameCategory);
     const indexLast = current * 13;
     const indexFirst = indexLast - 13;
     const currentProducts = products.slice(indexFirst, indexLast);
@@ -25,17 +25,21 @@ function RenderBusquedas() {
         setSeller(idSeller)
         setCurrent(1);
     }
-/*     if(nameCategory !== category){
-        setCategory(nameCategory);
-        setCurrent(1);
+    if(nameCategory !== category){
+        setTimeout(function(){
+            setCategory(nameCategory);
+            setCurrent(1);
+        },10)
+
     }
- */
+
     if(filtered[0]){
         setTimeout(function(){
             setCurrent(1)
         },10)
     }
 
+console.log('nameCategory ==>', nameCategory)
     return (
             <div className={s.container}>
                  {

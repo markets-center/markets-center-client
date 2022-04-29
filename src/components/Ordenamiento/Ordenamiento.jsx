@@ -50,11 +50,11 @@ function Ordenamiento() {
     const handleChangeCategory = (e, newValue) => {
         e.preventDefault()
         setCategoria(e.target.value);
-        dispatch(idActiveCategory(e.target.textContent))
+        dispatch(idActiveCategory(e.target.value))
         if(idSeller){
-          dispatch(filterBySellerAndCategories(idSeller, e.target.textContent));
+          dispatch(filterBySellerAndCategories(idSeller, e.target.value));
         }else{
-          dispatch(filterBySellerAndCategories("", e.target.textContent));
+          dispatch(filterBySellerAndCategories("", e.target.value));
           dispatch(idActiveSeller())
         }
       };
