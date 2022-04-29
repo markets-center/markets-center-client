@@ -58,7 +58,7 @@ export default function Card({ name, price, image, description, stock, category,
 
     useEffect(() => {
         return items.length? setProduct(items) : product
-    }, [items])
+    }, [items,product,setProduct])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
