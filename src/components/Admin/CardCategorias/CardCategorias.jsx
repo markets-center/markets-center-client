@@ -1,23 +1,41 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from "sweetalert2";
 
 import { adminDeleteCategory } from '../../../redux/actions/a.admin.js'
 
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'
+import { useAuth } from '../../../context/AuthContext'
 
 import styles from './CardCategorias.module.css';
 import { IconButton, Tooltip } from '@mui/material'
 import { Delete, BorderColor } from '@mui/icons-material/';
 
-export default function CardCategorias ({categories, handleOpen, handleClose, input, setInput, id, setId, handleSubmit}){
+export default function CardCategorias({ categories, handleOpen, handleClose, input, setInput, id, setId, handleSubmit }) {
     // const categories = useSelector(state => state.allCategories)
     const dispatch = useDispatch();
+    const { currentUser } = useAuth()
     // useEffect(() => {
     //     dispatch(getAllCategories());
     // }, [dispatch])
-    function handleDelete(e){
-        dispatch(adminDeleteCategory(e.currentTarget.value))
+    function handleDelete(id) {
+        Swal.fire({
+            title: `¿Estás seguro de eliminar la categoría seleccionado?`,
+            text: "Ésta acción no se puede deshacer!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#005BAA",
+            cancelButtonColor: "#E2001A",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Sí, Eliminalo!",
+        }).then(result => {
+            if (result.isConfirmed) {
+                dispatch(adminDeleteCategory(id, currentUser))
+            }
+        })
     }
+
+
     const handleUpdate = (event) => {
         const name = event.currentTarget.getAttribute('name')
         const image = event.currentTarget.getAttribute('image')
@@ -28,7 +46,7 @@ export default function CardCategorias ({categories, handleOpen, handleClose, in
         })
         handleOpen();
     }
-    
+
     return (
         <div className={styles.mainDiv}>
             {
@@ -36,7 +54,7 @@ export default function CardCategorias ({categories, handleOpen, handleClose, in
                     return (
                         <div key={category._id} className={styles.item} value={category.name} image={category.image}>
                             <div className={styles.left}>
-                                <img src={category.image} alt="Imagen de categoria"/>
+                                <img src={category.image} alt="Imagen de categoria" />
                                 <h4>{category.name}</h4>
                             </div>
                             <div className={styles.right}>
@@ -46,12 +64,12 @@ export default function CardCategorias ({categories, handleOpen, handleClose, in
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar" arrow>
-                                    <IconButton value={category._id} onClick={(e) => handleDelete(e)}>
-                                        <Delete />
+                                    <IconButton onClick={() => handleDelete(category._id)}>
+                                        <Delete sx={{ color: '#E2001A' }} />
                                     </IconButton>
                                 </Tooltip>
                             </div>
-                            <AddCategorie handleClose={handleClose} input={input} setInput={setInput} id={id} handleSubmit={handleSubmit}/>
+                            <AddCategorie handleClose={handleClose} input={input} setInput={setInput} id={id} handleSubmit={handleSubmit} />
                         </div>
                     )
                 })

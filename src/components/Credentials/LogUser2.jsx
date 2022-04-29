@@ -20,7 +20,7 @@ export default function LogUser2() {
     const [error, setError] = useState("");
     const [errorMail, setErrorMail] = useState("");
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, currentUser } = useAuth();
     const navigate = useNavigate();
 
     function handleChange(e) {
@@ -55,8 +55,12 @@ export default function LogUser2() {
     async function regWithGoogle() {
         try {
             const user = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-            const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`)
-            console.log(userDB)
+            const token = user.user.auth.currentUser.accessToken
+            const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
             localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
             if(userDB.data.success){

@@ -54,10 +54,10 @@ export default function Vendedor(){
     function handleSubmit(e){
         e.preventDefault();
         if(prodId === null){
-            dispatch(postProduct(input))
+            dispatch(postProduct(input, currentUser))
             handleClose()
         }else{
-            dispatch(updateProduct(input, prodId))
+            dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
         }
         // prodId === null ?
@@ -77,7 +77,7 @@ export default function Vendedor(){
     },[oneUser,dispatch])
     let products = useSelector(state => state.productsBySeller)
     const removeProduct = (id) => {
-        dispatch(deleteProduct(id))
+        dispatch(deleteProduct(id, currentUser))
         dispatch(filterBySellerAndCategories(oneUser._id))
         return products = products.filter(product => product._id !== id)
     }

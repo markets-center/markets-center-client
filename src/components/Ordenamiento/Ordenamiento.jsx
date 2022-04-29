@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory} from '../../redux/actions/a.products'
+import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered, idActiveSeller} from '../../redux/actions/a.products'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,20 +19,45 @@ import CachedIcon from '@mui/icons-material/Cached';
 function Ordenamiento() {
     const dispatch = useDispatch();
     const idSeller = useSelector(state => state.activeSeller);
+    const filtered = useSelector(state => state.filteredByPrice);
+    const allCategories = useSelector(state => state.allCategories)
     const idCategory = useSelector(state => state.activeCategory);
-    const [order, setOrder] = React.useState('')
+    const [order, setOrder] = React.useState('');
+    const [categoria, setCategoria] = React.useState('')
     const [radio, setRadio] = React.useState('');
 
  
     const handleChange = (event) => {
         event.preventDefault();
-        if(event.target.value !== '-'){
-            dispatch(ordenamientos(event.target.value));
-        }else{
-            dispatch(filterBySellerAndCategories(idSeller,""))
+        setOrder(event.target.value);
+        if(filtered.length === 0){
+            if(event.target.value !== '-'){
+                dispatch(ordenamientos(event.target.value));
+            }else{
+                dispatch(filterBySellerAndCategories(idSeller,""))
+            }
         }
+        else{
+            if(event.target.value !== '-'){
+                dispatch(ordenamientosFiltered(event.target.value));
+            }else{
+                dispatch(filterBySellerAndCategories(idSeller,""))
+            }
+        }
+
         
     };
+    const handleChangeCategory = (e, newValue) => {
+        e.preventDefault()
+        setCategoria(e.target.value);
+        dispatch(idActiveCategory(e.target.textContent))
+        if(idSeller){
+          dispatch(filterBySellerAndCategories(idSeller, e.target.textContent));
+        }else{
+          dispatch(filterBySellerAndCategories("", e.target.textContent));
+          dispatch(idActiveSeller())
+        }
+      };
 
     const handleChangeRadio = (event) => {
       setRadio(event.target.value);
@@ -58,9 +83,12 @@ function Ordenamiento() {
             height: '350px',
         }}>
 
-            <Box sx={{ width: 200}}>
+            <Box sx={{ width: 200,  
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",}}>
             <FormControl>
-            <FormLabel >Precio</FormLabel>
+            <FormLabel sx={{color: 'black'}}>Precio</FormLabel>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue=""
@@ -68,10 +96,10 @@ function Ordenamiento() {
                     value={radio}
                     onChange={handleChangeRadio}
                 >
-                    <FormControlLabel value="0-500" control={<Radio />} label="$0-$5" />
-                    <FormControlLabel value="500-1500" control={<Radio />} label="$5-$15" />
-                    <FormControlLabel value="1500-3000" control={<Radio />} label="$15-$30" />
-                    <FormControlLabel value=">3000" control={<Radio />} label=">$30" />
+                    <FormControlLabel value="0-500" control={<Radio size="small"/>} label="$0-$5" />
+                    <FormControlLabel value="500-1500" control={<Radio size="small"/>} label="$5-$15" />
+                    <FormControlLabel value="1500-3000" control={<Radio size="small"/>} label="$15-$30" />
+                    <FormControlLabel value=">3000" control={<Radio size="small"/>} label=">$30" />
                 </RadioGroup>
             </FormControl>
             <Button variant="outlined" size='small' startIcon={<CachedIcon />} sx={{marginTop: "10px"}} onClick={handleReset}>
@@ -79,12 +107,30 @@ function Ordenamiento() {
             </Button>
             </Box>
             <FormControl variant="standard" sx={{ m: 2, minWidth: 190 }}>
+                <InputLabel>Categoría</InputLabel>
+                <Select
+                value={categoria}
+                onChange={handleChangeCategory}
+                label="Categoria"
+                >
+                    {
+                        allCategories?.map(element => {
+                          return (<MenuItem key={element._id} onClick={handleChangeCategory} value={element.name}>{element.name}</MenuItem>)
+                        })
+                      }
+                </Select>
+            </FormControl>
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 190 }}>
                 <InputLabel>Ordenar</InputLabel>
                 <Select
+
                 value={order}
                 onChange={handleChange}
                 label="Ordenar"
                 >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
                     <MenuItem value={'-'}>-</MenuItem>
                     <MenuItem value={'high'}>Mayor Precio</MenuItem>
                     <MenuItem value={'low'}>Menor Precio</MenuItem>

@@ -80,7 +80,7 @@ function SellerForm() {
       dateOfBirth: selectedDate
     };
     console.log(userData);
-    dispatch(postNewUser(userData));
+    dispatch(postNewUser(userData, currentUser));
     navigate('/');
   }
 
