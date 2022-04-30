@@ -20,7 +20,7 @@ export default function LogUser2() {
     const [error, setError] = useState("");
     const [errorMail, setErrorMail] = useState("");
     const [loading, setLoading] = useState(false);
-    const { login, currentUser } = useAuth();
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     function handleChange(e) {
