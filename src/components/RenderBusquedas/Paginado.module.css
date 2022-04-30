@@ -2,39 +2,134 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
+    align-items: center;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: arial;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+
 }
 .buttonPaginado{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
+    float: left;
+    display: block;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    background-color:  #5194cf;
     cursor: pointer;
-    background-color: #2b7ec7;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    margin: 0px 3px 0px 3px;
+    
 }
-.buttonPaginado:hover{
+/* .buttonPaginado:hover{
     background-color: #005BAA;
     transform: scale(1.15);
-}
+} */
 .buttonPaginado:active{
-    transform: scale(1);
+    transform: scale(.9);
+    cursor: default;
+    outline: none;
 }
 .buttonNextPrev{
-    height: 30px;
-    width: 30px;
-    background-color: #2b7ec7;
-    color: white;
-    border: none;
-    border-radius: 50%;
+    float: left;
+    display: block;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    background-color: #5194cf;
     cursor: pointer;
-    margin: 0px 3px 0px 3px;
 }
-.buttonNextPrev:hover{
+/* .buttonNextPrev:hover{
     background-color: #005BAA;
     transform: scale(1.15);
-}
+} */
 .buttonNextPrev:active{
-    transform: scale(1);
+    transform: scale(.9);
+    cursor: default;
+    outline: none;
 }
+.buttonPaginadoSelect{
+    float: left;
+    display: block;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #fff;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+    background-color:  #184063;
+    cursor: pointer;
+}
+.buttonPaginadoSelect:active{
+    transform: scale(.9);
+    cursor: default;
+    outline: none;
+}
+.divs{
+    display: inline;
+    text-align: center;
+}
+.paginadoContainer .buttonNextPrev {
+    margin-left: 3px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .paginadoContainer .buttonNextPrev:hover {
+    background-color: #005BAA;
+  }
+  .paginadoContainer .buttonNextPrev.active, .paginadoContainer .buttonNextPrev:active {
+    background-color: #a4ade0;
+  }
+
+
+
+
+  .paginadoContainer .buttonPaginado {
+    margin-left: 3px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .paginadoContainer .buttonPaginado:hover {
+    background-color: #005BAA;
+  }
+  .paginadoContainer .buttonPaginado.active, .paginadoContainer .buttonPaginado:active {
+    background-color: #a4ade0;
+  }
+
+
+  .paginadoContainer .buttonPaginadoSelect {
+    margin-left: 3px;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .paginadoContainer .buttonPaginadoSelect:hover {
+    background-color: #005BAA;
+  }
+  .paginadoContainer .buttonPaginadoSelect.active, .paginadoContainer .buttonPaginadoSelect:active {
+    background-color: #a4ade0;
+  }
