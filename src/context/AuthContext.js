@@ -3,8 +3,9 @@ import { auth } from "../firebase";
 import axios from 'axios'
 
 import { useDispatch, useSelector } from "react-redux";
-import {userById} from '../redux/actions/a.users'
-import {delOneUser} from '../redux/actions/a.users'
+import { userById } from '../redux/actions/a.users'
+import { delOneUser } from '../redux/actions/a.users'
+
 
 const AuthContext = React.createContext();
 
@@ -26,48 +27,46 @@ export function AuthProvider({ children }) {
   }
 
   async function login(email, password) {
-    try {
-      const user = await auth.signInWithEmailAndPassword(email, password);
-      const token = await user.user.getIdToken()
-      const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+    return auth.signInWithEmailAndPassword(email, password)
+      .then(userCredencials => {
+        const token = userCredencials.user.auth.currentUser.accessToken
+        axios.get(`/api/private/users/byid/${userCredencials.user.uid}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }).then(userDB => {
+          localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
+          localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+        })
       })
-      localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
-      localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-      return user
-    } catch (error) {
-      console.log(error)
-    }
   }
-  
+
   function logout() {
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('isSeller')
     dispatch(delOneUser())
     return auth.signOut();
   }
-  
+
   function updateEmail(email) {
     return currentUser.updateEmail(email);
   }
-  
+
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email);
   }
-  
+
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
-  
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       currentUser?.uid && dispatch(userById(currentUser.uid, currentUser))
       setLoading(false);
     });
-    
+
     return unsubscribe;
   }, [currentUser?.uid, dispatch, currentUser]);
   const value = {
