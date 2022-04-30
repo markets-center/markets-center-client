@@ -29,14 +29,14 @@ function RenderBusquedas() {
         setTimeout(function(){
             setCategory(nameCategory);
             setCurrent(1);
-        },10)
+        },1)
 
     }
 
     if(filtered[0]){
         setTimeout(function(){
             setCurrent(1)
-        },10)
+        },1)
     }
 
     return (

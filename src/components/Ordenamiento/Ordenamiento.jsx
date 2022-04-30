@@ -61,7 +61,6 @@ function Ordenamiento() {
 
     const handleChangeRadio = (event) => {
       setRadio(event.target.value);
-      console.log(event.target.value)
       dispatch(filterByPrice(event.target.value))
     };
     const handleReset = () => {
@@ -74,13 +73,16 @@ function Ordenamiento() {
   
     return (
         <Container  sx={{
-            width: "10vw",
+            width: "12vw",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             marginTop: '70px',
             paddingTop: '10px',
-            height: '350px',
+            height: '400px',
+            border: '1px solid #d8d8d8',
+            borderRadius: '5px',
+            boxShadow: '0px 5px 10px -6px rgb(83, 83, 83)',
         }}>
 
             <Box sx={{ width: 200,  

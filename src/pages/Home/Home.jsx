@@ -31,7 +31,7 @@ export default function Home (){
         if(productsSearched.length === initialProducts.length){
             setRender(false)
         }
-    }, 1000);
+    }, 1);
     
 
     return (

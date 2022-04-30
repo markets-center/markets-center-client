@@ -15,14 +15,14 @@ function SellersFilter() {
     return (
         <Container sx={{
             marginTop: '40px',
-            height: '160px',
-            maxWidth: '1000px',
+            height: 'auto',
             display: 'flex',
             alignItem: 'center',
             justifyContent: 'space-around',
             wordWrap: 'break-word',
-            overflowX: 'auto',
-            whiteSpace: 'nowrap'
+            overflowX: 'scroll',
+            overflowY: 'hidden',
+            whiteSpace: 'normal',
         }}>
 
             {allSellers && allSellers.map(d => <SellerCard key={d._id} name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
