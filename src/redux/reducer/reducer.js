@@ -96,6 +96,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 addedProduct: action.payload,
+                productsBySeller: action.payload
             }
         case GET_PROTUCT_BY_NAME:
             return {
