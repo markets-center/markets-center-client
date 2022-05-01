@@ -46,7 +46,7 @@ export default function Home({history}) {
                         tickFormatter={(number) => `$${number.toFixed(1)}`}
                     />
                 
-                    // <Tooltip content={<CustomTooltip />} />
+                    {/* <Tooltip content={<CustomTooltip />} /> */}
                         
                     <CartesianGrid opacity={0.1} vertical={false} />
                     </AreaChart>
