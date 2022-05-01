@@ -4,7 +4,7 @@ import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/
 import { useAuth } from '../../../context/AuthContext'
 import { IconButton, Tooltip } from '@mui/material';
 import styles from './CardUsuarios.module.css';
-import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached } from '@mui/icons-material/';
+import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached, Block } from '@mui/icons-material/';
 import defaultImage from '../../../images/defaultUser.png';
 import Swal from "sweetalert2";
 
@@ -54,8 +54,9 @@ export default function CardCategorias() {
                                     }} />
                                 <h4>{category.name}</h4>
                                 {
-                                    category.isAdmin ? <AdminPanelSettings /> : (
-                                        category.isSeller ? <Storefront /> : <PersonOutline />
+                                    category.isAdmin ? <Tooltip title="Admin" arrow><AdminPanelSettings /></Tooltip> : (
+                                        category.isSeller ? <Tooltip title="Vendedor" arrow><Storefront /></Tooltip> : 
+                                        <Tooltip title="Comprador" arrow><PersonOutline /></Tooltip>
                                     )
                                 }
                             </div>
@@ -74,6 +75,13 @@ export default function CardCategorias() {
                                         onClick={handleUserToAdmin}
                                     >
                                         <SupervisorAccount />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Suspender Usuario" arrow>
+                                    <IconButton
+                                        // onClick={() => handleUserdelete(category.userId)} // Modificar action !!
+                                    >
+                                        <Block sx={{ color: '#E2001A' }} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar Usuario" arrow>
