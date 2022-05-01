@@ -36,9 +36,9 @@ import {
     DEL_ONE_USER,
     ORDER_FILTERED,
     GET_FAVS,
-    GET_FAV_DETAIL
+    GET_FAV_DETAIL,
     GET_ALL_ORDERS,
-    ORDER_FILTERED
+
 
 } from '../actions/ctes'
 
