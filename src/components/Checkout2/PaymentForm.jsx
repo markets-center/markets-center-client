@@ -6,6 +6,7 @@ import Review from './Review';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js';
 import { useNavigate } from "react-router-dom";
+import {useAuth} from '../../context/AuthContext';
 
 
 const stripePromise = loadStripe("pk_test_51KsQsmK6Zz3L3Hm35H035USbURUpt7MaZrexNPhwHd3AMdHVtLA3gThyv87ep5gv8YM5xb3puFiSpsxxQaVixFqe00vqibvweT")
@@ -32,11 +33,12 @@ const CARD_ELEMENTS_OPTIONS = {
 }
 
 
-const CheckoutForm = ({ back, next, amount }) => {
+const CheckoutForm = ({ currentUser, back, next, amount }) => {
   
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate();
+  const token= currentUser.auth.currentUser.accessToken;
 
 
   const handleSubmit = async(event) => {
@@ -52,6 +54,11 @@ const CheckoutForm = ({ back, next, amount }) => {
           const { data } = await axios.post("/api/private/payment", {
               id: paymentMethod.id,
               amount: amount * 100,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           })
     
           elements.getElement(CardElement).clear()
@@ -78,7 +85,7 @@ const CheckoutForm = ({ back, next, amount }) => {
 
 export function PaymentForm({ back, next, amount }) {
   const { input , paymentMethod } = useSelector(state => state.payment)
-  
+  const {currentUser} = useAuth();
   return (
     <>
       <Elements stripe={stripePromise}>
@@ -86,7 +93,7 @@ export function PaymentForm({ back, next, amount }) {
       <Typography variant="h6" gutterBottom style={{margin: '20px 0'}}>
         Payment method
       </Typography>
-        <CheckoutForm back={back} next={next} amount={amount}/>
+        <CheckoutForm currentUser={currentUser} back={back} next={next} amount={amount}/>
       </Elements>
       {/* <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
