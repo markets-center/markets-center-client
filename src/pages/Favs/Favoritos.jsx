@@ -4,7 +4,7 @@ import {useAuth} from '../../context/AuthContext'
 import NavBar from "../../components/NavBar/NavBar";
 import { getFavsDetails } from "../../redux/actions/a.favs";
 import FavCard from "../../components/Favoritos/FavCard";
-import { List } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import Style from './Favoritos.module.css';
 import {delFavDetail} from '../../redux/actions/a.favs'
 import {setAlert, delAlert} from '../../redux/actions/a.alert';
@@ -40,7 +40,16 @@ function Favoritos() {
         <List
           sx={{ width: "100%", maxWidth: 700, bgcolor: "background.paper" }}
         >
-          {favsDetail &&
+          {favsDetail.length<1 ? 
+          <div className={Style.noFav}>
+            <Typography
+            sx={{ mt: 4, mb: 2, display: "block" }}
+            variant="h4"
+            component="div"
+            color="secondary"
+          >
+            Aún no tienes Favoritos
+          </Typography></div> :
             favsDetail.map((d) => (
               <FavCard
                 key={d._id}
