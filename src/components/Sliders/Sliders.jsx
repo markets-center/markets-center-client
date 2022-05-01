@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useAuth} from '../../context/AuthContext'
+import {getFavs} from '../../redux/actions/a.favs';
 import { Container, Typography, Button } from '@mui/material';
 import Card from '../../components/Card/Card.jsx';
 import NavigateNext from '@mui/icons-material/NavigateNext';
@@ -12,10 +14,13 @@ import { getAllProducts } from '../../redux/actions/a.products.js';
 
 export default function Sliders() {
     const dispatch = useDispatch()
+    const favs = useSelector(state => state.favs)
+    const {currentUser} = useAuth();
     const products = useSelector(state => state.allProducts.data)
     useEffect(() => {
         dispatch(getAllProducts())
-    }, [dispatch]);
+        dispatch(getFavs(currentUser))
+    }, [dispatch, currentUser]);
 
 
 
@@ -65,6 +70,7 @@ export default function Sliders() {
                                                 price={producto.price}
                                                 image={producto.image}
                                                 description={producto.description}
+                                                favs={favs}
                                                 stock={producto.stock}
                                                 id={producto._id}
                                                 />) : <Typography variant='h5' sx={{margin: 'auto'}}>

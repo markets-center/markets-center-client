@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useAuth} from '../../context/AuthContext'
+import {getFavs} from '../../redux/actions/a.favs';
 import { Container } from '@mui/material';
 import Carousel from 'react-elastic-carousel'
 import Card from '../Card/Card.jsx';
@@ -12,12 +14,16 @@ import Error from '../Error/Error'
 import Loading from '../../components/Loading/Loading';
 
 
+
 export default function Sliders2() {
     const dispatch = useDispatch();
+    const {currentUser} = useAuth();
     const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
     useEffect(() => {
+        currentUser && dispatch(getFavs(currentUser))
         dispatch(getAllProducts())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const breakPoints = [

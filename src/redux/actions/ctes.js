@@ -46,4 +46,10 @@ export const LOADING_OFF = 'LOADING_OFF';
 export const UDPATE_ORDER = 'UDPATE_ORDER';
 export const EMPTY_CART = 'EMPTY_CART';
 export const GET_OR_UPDATE_CART = 'GET_OR_UPDATE_CART';
+
+export const GET_FAVS = 'GET_FAVS';
+export const ADD_FAV = 'ADD_FAV';
+export const DEL_FAV = 'DEL_FAV';
+export const GET_FAV_DETAIL = 'GET_FAV_DETAIL'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
+

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
+import {setAlert} from '../../redux/actions/a.alert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { IconButton } from "@mui/material";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
@@ -10,9 +11,14 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
 import { addOrderCar } from '../../redux/actions/a.order.js'
+import {addFav, delFav} from '../../redux/actions/a.favs'
 import Tooltip from '@mui/material/Tooltip';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
 import accounting from 'accounting'
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import {useAuth} from '../../context/AuthContext';
+
 
 const style = {
     position: 'absolute',
@@ -27,14 +33,17 @@ const style = {
     p: 4,
 };
 
-export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, reviews }) { //deberia recibir props para renderizar segun los productos
-    
+
+export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, isFav, reviews }) { //deberia recibir props para renderizar segun los productos
+
     const [hover, setHover] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [tooltip, setTooltip] = useState(false);
-
+    const {currentUser} = useAuth()
+    const favs = useSelector(state => state.favs)
+    const [favorito, setFavorito] = useState(favs.includes(id));
     const dispatch = useDispatch();
     const items = useSelector((state) => state.addOrdercar);
     const [product, setProduct] = useLocalStorage("products", '');
@@ -56,12 +65,30 @@ export default function Card({ name, price, image, description, stock, category,
         dispatch(addOrderCar(obj))
     }
 
+    function addFavs() {
+        if(currentUser) {
+            dispatch(addFav(id, currentUser))
+            dispatch(setAlert('Agregado a favorito'))
+            setFavorito(true)
+        } else {
+            dispatch(setAlert('Debes estar logueado para agregar favoritos'))
+        }
+    }
+
+    function delFavs() {
+        dispatch(delFav(id, currentUser))
+        dispatch(setAlert('Producto eliminado de favoritos'))
+        setFavorito(false)
+    }
+
     useEffect(() => {
         return items.length? setProduct(items) : product
-    }, [items,product,setProduct])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [items, product, setProduct])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
+            <div>{favorito?<Button onClick={delFavs}><Favorite  color="primary"/></Button>:<Button onClick={addFavs}><FavoriteBorder  color="primary"/></Button>}</div>
             <div className={s.img}>
                 {stock > 0 ? <img src={image} width="200px" height="200px" alt="producto" /> :
                     <img src={image} width="200px" height="200px" alt="producto" className={s.sinStock} />}

@@ -26,6 +26,7 @@ import HistoryHome from "./components/Vendedor/HistorialVentas/HistoryHome";
 import Comprador from './pages/Comprador/Comprador'
 import GraciasPage from './pages/GraciasPage/GraciasPage'
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Favoritos from './pages/Favs/Favoritos'
 
 function App() {
   return (
@@ -55,6 +56,13 @@ function App() {
               <GraciasPage />
             </BuyerRoute>
           } />
+
+          <Route path="/favoritos" element={
+            <BuyerRoute>
+              <Favoritos />
+            </BuyerRoute>
+          } />
+
           <Route path="/Error" element={
             <BuyerRoute>
               <ErrorPage />
