@@ -44,8 +44,12 @@ export default function LogUser2() {
             setError("");
             setErrorMail("");
             setLoading(true);
-            await login(user.email, user.password);
-            navigate("/");
+            login(user.email, user.password)
+            .then((userDB)=>{
+                userDB.data.data[0].isAdmin && navigate('/Admin')
+                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+            })
         } catch (error) {
             setError("Credenciales invalidas");
         }
@@ -64,7 +68,9 @@ export default function LogUser2() {
             localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
             localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
             if(userDB.data.success){
-                navigate("/User")
+                userDB.data.data[0].isAdmin && navigate('/Admin')
+                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
             }else {
                 navigate("/buyerForm");
             }

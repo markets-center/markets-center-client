@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
 import axios from 'axios'
-
 import { useDispatch, useSelector } from "react-redux";
 import { userById } from '../redux/actions/a.users'
 import { delOneUser } from '../redux/actions/a.users'
@@ -30,14 +29,15 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password)
       .then(userCredencials => {
         const token = userCredencials.user.auth.currentUser.accessToken
-        axios.get(`/api/private/users/byid/${userCredencials.user.uid}`, {
+        return axios.get(`/api/private/users/byid/${userCredencials.user.uid}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
-        }).then(userDB => {
-          localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-          localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
         })
+      }).then(userDB => {
+        localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
+        localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+        return userDB
       })
   }
 
