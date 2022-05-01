@@ -14,7 +14,7 @@ export default function Commentary({ user }) {
   console.log(user)
   return (
     <div>
-      {user.length > 0 ?
+      {user?.length > 0 ?
       (<List className={s.container}>
         {
           user?.map(element => {

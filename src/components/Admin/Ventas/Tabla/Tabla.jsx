@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
     Paper,
     Table,
@@ -17,8 +17,8 @@ const columns = [
         minWidth: 100 
     },
     { 
-        id: "local", 
-        label: "Local", 
+        id: "vendedores", 
+        label: "Vendedores", 
         minWidth: 170 
     },
     { 
@@ -48,38 +48,8 @@ const columns = [
     }
 ];
 
-// function createData(id, local, comprador, estado, monto) {
-//     const comisión = monto / 2;
-//     return { id, local, comprador, estado, monto, comisión };
-// }
-
-const history = [
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-    {id: 1, local: 'null', comprador: 'null2', estado: 'pending', monto: 10, comisión: 12},
-]
+    export default function ColumnGroupingTable({history}) {
     
-    export default function ColumnGroupingTable() {
-    // const [rows, setRows] = useState([])
-    // useEffect(() => {
-        // history.map( (order) => {
-        //     const comisión = order.amount / 2;
-        //     // order.userId &&
-        //     setRows([...rows, {id: order._id, local: 'null', comprador: 'null2', estados: order.status, monto: order.amount, comisión: comisión}])
-        //     console.log(rows)
-        // })
-    // }, [])
-    // console.log(history2)
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
