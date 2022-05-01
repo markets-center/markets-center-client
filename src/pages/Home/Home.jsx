@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import NavBar from '../../components/NavBar/NavBar.jsx'
 import {delAlert} from '../../redux/actions/a.alert'
@@ -8,10 +8,6 @@ import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter
 import Shop from '../../components/Shop/Shop';
 import {Snackbar} from '@mui/material';
 import {SnackbarAlert} from '../../components/Alert/success';
-
-
-
-
 
 export default function Home (){
     const [render, setRender] = useState(false)
@@ -33,6 +29,11 @@ export default function Home (){
         }
     }, 1);
     
+    useEffect(() => {
+        if(!localStorage.getItem('productsTemp')){
+            localStorage.setItem('productsTemp', '[]')
+        }
+    },[])
 
     return (
         <div>

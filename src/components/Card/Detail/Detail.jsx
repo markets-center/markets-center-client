@@ -5,14 +5,15 @@ import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import s from './Detail.module.css'
-import { addOrderCar } from '../../../redux/actions/a.order.js';
 import Tooltip from '@mui/material/Tooltip';
 import Review from "../review/Review";
 import Commentary from "../review/Commentary/Commentary"
 import { Box, Modal } from "@mui/material";
 import AddReview from '../review/AddReview';
 import useLocalStorage from '../../../pages/Carrito/useLocalStorage.js';
-import accounting from 'accounting'
+import accounting from 'accounting';
+import { useAuth } from '../../../context/AuthContext.js';
+import { getOrUpdateCart } from '../../../redux/actions/a.cart.js';
 
 const style = {
     position: 'absolute',
@@ -27,41 +28,6 @@ const style = {
 };
 
 export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews }) {
-    // let user = [{
-    //     name: 'Jorge',
-    //     rating: 2.5,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-    //     fecha: 'Jan 9, 2014'
-    // },
-    // {
-    //     name: 'Luis',
-    //     rating: 1,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-    //     fecha: "Sep 9, 2019"
-    // },
-    // {
-    //     name: 'Manuel',
-    //     rating: 2.5,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-    //     fecha: "Mar 7, 3014"
-    // },
-    // {
-    //     name: 'Lucia',
-    //     rating: 3,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-    //     fecha: "Dec 19, 2024"
-    // },
-    // {
-    //     name: 'Wanda',
-    //     rating: 5,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasfs simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop pu',
-    //     fecha: "Jul 10, 2004"
-    // },{
-    //     name: 'Foca',
-    //     rating: 2,
-    //     review: 'Buenardo fasdfasdfsfafsfdasdfasfsafdsfsafsafasfasf',
-    //     fecha: "Jun 4, 2008"
-    // }]
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -69,23 +35,55 @@ export default function Detail({ name, price, image, description, stock, categor
 
     const [tooltip, setTooltip] = useState(false);
 
-    const items = useSelector((state) => state.addOrdercar);
     const dispatch = useDispatch();
-    const [product, setProduct] = useLocalStorage("products", '');
-
-    const findItem = product.find((f) => f.id === id);
+    const { currentUser } = useAuth();
+    const idCarUser = currentUser && currentUser.uid;
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
+    const allProducts = useSelector((state) => state.allProducts);
+    const dataCarUser  = useSelector((state) => state.addOrdercar);
 
     function addToCar(id, price, name, image, stock) {
-        const obj = { id, name, price, image, quanty: 1, amount: price, stock };
-        if (findItem) {
-            return setTooltip(true);
+        const findProduct = allProducts.filter((f) => f._id === id);
+        
+        const objCarTemp = findProduct.map((i) => {
+            return {
+                productId: i._id,
+                name: i.name,
+                image: i.image,
+                price: i.price,
+                stock: i.stock,
+                quantity: 1,
+                amount: i.price
+            }
+        }) 
+        
+        if(currentUser){
+            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
+            if(findRepeatItems) return setTooltip(true);
+            const oldProducts = dataCarUser.products.map((old) => {
+                return {
+                    productId: old.productId._id,
+                    quantity: 1,
+                }
+            })
+            const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
+            const obj = {
+                idUser: currentUser._delegate.uid,
+                products: [...oldProducts, ...objCarTemp],
+                amount: dataCarUser.amount + newAmount
+            }
+            dispatch(getOrUpdateCart(obj, currentUser));
+        }else{
+            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
+            const findrepeat = objTemp.find((f) => f.productId === id);
+            if(findrepeat) return setTooltip(true);
+            setProductsTemp([...objTemp, ...objCarTemp]);
         }
-        dispatch(addOrderCar(obj));
     }
 
     useEffect(() => {
-        return items.length ? setProduct(items) : product
-    }, [items])
+        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
+    }, [])
 
     return (
         <div className={s.container}>
