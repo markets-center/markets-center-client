@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ERRORS, MESSAGE, SET_ALERT, DEL_ALERT, EMPTY_CART, GET_OR_UPDATE_CART } from './ctes'
+import { ERRORS, EMPTY_CART, GET_OR_UPDATE_CART } from './ctes'
 
 export function getOrUpdateCart(cart, currentUser) {
     const token = currentUser.auth.currentUser.accessToken

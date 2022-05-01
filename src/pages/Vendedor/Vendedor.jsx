@@ -68,6 +68,9 @@ export default function Vendedor(){
         dispatch(delAlert())
     }
 
+
+
+
     // Products by User
     useEffect(() => {
         dispatch(filterBySellerAndCategories(oneUser?._id))
@@ -82,7 +85,7 @@ export default function Vendedor(){
         dispatch(filterBySellerAndCategories(oneUser._id))
         // return products = products.filter(product => product._id !== id)
     }
-
+//ACOMODAR ESTO 
     return (
         <>
         <NavBar />
