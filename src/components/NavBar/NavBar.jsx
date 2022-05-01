@@ -25,6 +25,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
+import Favorite from '@mui/icons-material/Favorite';
 import Stack from '@mui/material/Stack';
 import { Person } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
@@ -41,6 +42,10 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     async function logoutHandler() {
         await logout();
         navigate('/')
+    }
+
+    function favsHandler(){
+        navigate('/favoritos')
     }
 
     function handleSelect() {
@@ -155,12 +160,20 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                         (
                                             <div>
                                                 <Divider />
+                                                <MenuItem onClick={favsHandler}>
+                                                    <ListItemIcon>
+                                                        <Favorite />
+                                                    </ListItemIcon>Favoritos
+
+                                                </MenuItem>
+                                                <Divider />
                                                 <MenuItem onClick={logoutHandler}>
                                                     <ListItemIcon>
                                                         <Logout />
                                                     </ListItemIcon>Cerrar sesión
 
                                                 </MenuItem>
+                                                
                                             </div>
                                         )
                                 }
