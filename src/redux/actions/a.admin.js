@@ -119,10 +119,15 @@ export function blockPass(id, currentUser){
     }
 }
 
-export function allOrders(){
+export function allOrders(currentUser){
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.get('/api/admin/allOrders');
+            const result = await axios.get('/api/admin/allOrders', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: GET_ALL_ORDERS, payload: result.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
