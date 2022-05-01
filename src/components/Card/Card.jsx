@@ -33,7 +33,9 @@ const style = {
     p: 4,
 };
 
-export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, isFav }) { //deberia recibir props para renderizar segun los productos
+
+export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, isFav, reviews }) { //deberia recibir props para renderizar segun los productos
+
     const [hover, setHover] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -135,7 +137,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} />
+                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews}/>
                     </Box>
                 </Modal>
             </div>

@@ -51,3 +51,5 @@ export const GET_FAVS = 'GET_FAVS';
 export const ADD_FAV = 'ADD_FAV';
 export const DEL_FAV = 'DEL_FAV';
 export const GET_FAV_DETAIL = 'GET_FAV_DETAIL'
+export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
+

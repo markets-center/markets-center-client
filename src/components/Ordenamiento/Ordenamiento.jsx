@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import { useDispatch } from 'react-redux';
-import { orderByPrice, ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered, idActiveSeller} from '../../redux/actions/a.products'
+import {ordenamientos, filterByPrice, resetFilterByPrice, filterBySellerAndCategories, idActiveCategory, ordenamientosFiltered, idActiveSeller} from '../../redux/actions/a.products'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,7 +21,7 @@ function Ordenamiento() {
     const idSeller = useSelector(state => state.activeSeller);
     const filtered = useSelector(state => state.filteredByPrice);
     const allCategories = useSelector(state => state.allCategories)
-    const idCategory = useSelector(state => state.activeCategory);
+/*     const idCategory = useSelector(state => state.activeCategory); */
     const [order, setOrder] = React.useState('');
     const [categoria, setCategoria] = React.useState('')
     const [radio, setRadio] = React.useState('');
@@ -50,18 +50,17 @@ function Ordenamiento() {
     const handleChangeCategory = (e, newValue) => {
         e.preventDefault()
         setCategoria(e.target.value);
-        dispatch(idActiveCategory(e.target.textContent))
+        dispatch(idActiveCategory(e.target.value))
         if(idSeller){
-          dispatch(filterBySellerAndCategories(idSeller, e.target.textContent));
+          dispatch(filterBySellerAndCategories(idSeller, e.target.value));
         }else{
-          dispatch(filterBySellerAndCategories("", e.target.textContent));
+          dispatch(filterBySellerAndCategories("", e.target.value));
           dispatch(idActiveSeller())
         }
       };
 
     const handleChangeRadio = (event) => {
       setRadio(event.target.value);
-      console.log(event.target.value)
       dispatch(filterByPrice(event.target.value))
     };
     const handleReset = () => {
@@ -74,13 +73,16 @@ function Ordenamiento() {
   
     return (
         <Container  sx={{
-            width: "10vw",
+            width: "12vw",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: '35px',
+            marginTop: '70px',
             paddingTop: '10px',
-            height: '350px',
+            height: '400px',
+            border: '1px solid #d8d8d8',
+            borderRadius: '5px',
+            boxShadow: '0px 5px 10px -6px rgb(83, 83, 83)',
         }}>
 
             <Box sx={{ width: 200,  
@@ -128,9 +130,6 @@ function Ordenamiento() {
                 onChange={handleChange}
                 label="Ordenar"
                 >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
                     <MenuItem value={'-'}>-</MenuItem>
                     <MenuItem value={'high'}>Mayor Precio</MenuItem>
                     <MenuItem value={'low'}>Menor Precio</MenuItem>

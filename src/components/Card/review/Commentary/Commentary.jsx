@@ -11,9 +11,10 @@ import s from './Commentary.module.css'
 import Chip from '@mui/material/Chip';
 
 export default function Commentary({ user }) {
+  console.log(user)
   return (
     <div>
-      {user.length > 0 ?
+      {user?.length > 0 ?
       (<List className={s.container}>
         {
           user?.map(element => {
@@ -21,12 +22,15 @@ export default function Commentary({ user }) {
               <div className={s.commentary}>
                 <ListItem>
                   <ListItemAvatar>
-                    <Avatar></Avatar>
+                    <Avatar
+                    alt=''
+                    src={element.user ? element.user.image : ''}
+                    />
                   </ListItemAvatar>
-                  <ListItemText primary={element.name} secondary={element.fecha} />
+                  <ListItemText primary={element.user?.name} secondary={element.createdAt} />
                   <Review rating={element.rating} size={10}/>
                 </ListItem>
-                <Typography>{element.review}</Typography>
+                <Typography>{element.comment}</Typography>
                 <Divider className={s.divider}/>
               </div>
             )

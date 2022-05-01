@@ -37,6 +37,8 @@ import {
     ORDER_FILTERED,
     GET_FAVS,
     GET_FAV_DETAIL
+    GET_ALL_ORDERS,
+    ORDER_FILTERED
 
 } from '../actions/ctes'
 
@@ -180,6 +182,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 history: action.payload,
+            }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                history: action.payload
             }
         case RESET_SLIDERS:
             return {

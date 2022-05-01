@@ -6,12 +6,12 @@ import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
+import { useAuth } from '../../context/AuthContext';
+import { Navigate } from 'react-router';
 
 
 const steps = ['Datos personales', 'Detalle del pago'];
@@ -20,12 +20,13 @@ const steps = ['Datos personales', 'Detalle del pago'];
 const theme = createTheme();
 
 export default function Checkout({ amount }) {
+  const { currentUser } = useAuth()
   const [activeStep, setActiveStep] = React.useState(0);
-  
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
-  
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -33,14 +34,18 @@ export default function Checkout({ amount }) {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <AddressForm next={handleNext}/>;
+        return <AddressForm next={handleNext} />;
       case 1:
-        return <PaymentForm back={handleBack} next={handleNext} amount={amount}/>;
+        return <PaymentForm back={handleBack} next={handleNext} amount={amount} />;
       default:
         throw new Error('Unknown step');
     }
   }
-  
+  if (!currentUser) {
+    return <Navigate to='/Login' replace />;
+  }
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,18 +74,18 @@ export default function Checkout({ amount }) {
                   shipped.
                 </Typography>
                */}
-               </>
+              </>
             ) : (
               <>
                 {getStepContent(activeStep)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                 {/*  {activeStep !== 0 && (
+                  {/*  {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                       Back
                     </Button>
                   )} */}
 
-                 {/*  {activeStep === steps.length - 1 ? <Button
+                  {/*  {activeStep === steps.length - 1 ? <Button
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}

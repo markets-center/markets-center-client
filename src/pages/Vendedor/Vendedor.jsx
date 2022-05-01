@@ -74,15 +74,15 @@ export default function Vendedor(){
         setTimeout(() => {
             setLoading(false)
         }, 500);
-    },[oneUser,dispatch])
+    },[dispatch,oneUser])
+
     let products = useSelector(state => state.productsBySeller)
     const removeProduct = (id) => {
         dispatch(deleteProduct(id, currentUser))
         dispatch(filterBySellerAndCategories(oneUser._id))
-        return products = products.filter(product => product._id !== id)
+        // return products = products.filter(product => product._id !== id)
     }
-    console.log(input)
-    console.log(prodId)
+
     return (
         <>
         <NavBar />

@@ -70,6 +70,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -95,6 +96,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -120,6 +122,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -144,6 +147,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -169,6 +173,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
@@ -194,6 +199,7 @@ export default function Sliders2() {
                                         id={producto._id}
                                         rating={producto.rating}
                                         numReviews={producto.numReviews}
+                                        reviews={producto.reviews}
                                     />
                                 )): <Loading/>}
                             </Carousel>
