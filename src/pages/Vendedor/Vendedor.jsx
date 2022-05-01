@@ -52,13 +52,13 @@ export default function Vendedor(){
         })
         setOpen(false)
     }
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         if(prodId === null){
             dispatch(postProduct(input, currentUser))
             handleClose()
         }else{
-            dispatch(updateProduct(input, prodId, currentUser))
+            await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
         }
         // prodId === null ?
