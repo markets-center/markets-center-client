@@ -46,7 +46,7 @@ export default function Home({history}) {
                         tickFormatter={(number) => `$${number.toFixed(1)}`}
                     />
                 
-                    <Tooltip content={<CustomTooltip />} />
+                    // <Tooltip content={<CustomTooltip />} />
                         
                     <CartesianGrid opacity={0.1} vertical={false} />
                     </AreaChart>
@@ -58,14 +58,14 @@ export default function Home({history}) {
 }
 
 
-function CustomTooltip({ active, payload, label }) {
-    if (active) {
-    return (
-        <div className="tooltip">
-        <h4>{`ID ${label}`}</h4>
-        <p>Total: U${payload[0].value.toFixed(1)}</p>
-        </div>
-    );
-    }
-    return null;
-}
+// function CustomTooltip({ active, payload, label }) {
+//     if (active) {
+//     return (
+//         <div className="tooltip">
+//         <h4>{`ID ${label}`}</h4>
+//         <p>Total: U${payload[0].value.toFixed(1)}</p>
+//         </div>
+//     );
+//     }
+//     return null;
+// }
