@@ -57,6 +57,7 @@ export default function Home({history}) {
     );
 }
 
+
 function CustomTooltip({ active, payload, label }) {
     if (active) {
     return (
