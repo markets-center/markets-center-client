@@ -16,7 +16,6 @@ export default function Sliders2() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
-    console.log(products)
     useEffect(() => {
         dispatch(getAllProducts())
     }, [dispatch]);

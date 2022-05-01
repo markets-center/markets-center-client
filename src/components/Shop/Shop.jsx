@@ -14,7 +14,7 @@ function Shop(props) {
         if(firstProduct !== productsSearched[0]._id){
             setChange(change + 1)
         }
-    }, 10)
+    }, 1)
     return (
         <div>
             <Container maxWidth="xl" sx={{
