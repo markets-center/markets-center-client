@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
 import {delAlert} from '../../redux/actions/a.alert'
@@ -21,6 +21,7 @@ import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
     const alert = useSelector(state => state.alert)
+    const products = useSelector(state => state.productsBySeller, shallowEqual)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
@@ -76,9 +77,8 @@ export default function Vendedor(){
         }, 500);
     },[dispatch,oneUser])
 
-    let products = useSelector(state => state.productsBySeller)
-    const removeProduct = (id) => {
-        dispatch(deleteProduct(id, currentUser))
+    const removeProduct = async (id) => {
+        await dispatch(deleteProduct(id, currentUser))
         dispatch(filterBySellerAndCategories(oneUser._id))
         // return products = products.filter(product => product._id !== id)
     }
