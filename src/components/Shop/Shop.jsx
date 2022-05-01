@@ -11,7 +11,7 @@ function Shop(props) {
     let firstProduct;
 
     setTimeout(function(){
-        if(firstProduct !== productsSearched[0]._id){
+        if(firstProduct !== productsSearched[0]?._id){
             setChange(change + 1)
         }
     }, 1)

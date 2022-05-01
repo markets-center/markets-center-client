@@ -45,6 +45,7 @@ function UserProfile() {
 
   useEffect(() => {
     dispatch(userHistory(oneUser._id, currentUser));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, oneUser._id]);
   return (
     <div>
