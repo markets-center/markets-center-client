@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
-import { addOrderCar } from '../../redux/actions/a.order.js'
 import {addFav, delFav} from '../../redux/actions/a.favs'
 import Tooltip from '@mui/material/Tooltip';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
@@ -18,7 +17,7 @@ import accounting from 'accounting'
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {useAuth} from '../../context/AuthContext';
-
+import { getOrUpdateCart } from '../../redux/actions/a.cart.js';
 
 const style = {
     position: 'absolute',
@@ -45,8 +44,10 @@ export default function Card({ name, price, image, description, stock, category,
     const favs = useSelector(state => state.favs)
     const [favorito, setFavorito] = useState(favs.includes(id));
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.addOrdercar);
-    const [product, setProduct] = useLocalStorage("products", '');
+    const idCarUser = currentUser && currentUser.uid;
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
+    const allProducts = useSelector((state) => state.allProducts);
+    const dataCarUser  = useSelector((state) => state.addOrdercar);
 
     function moreInfo(e) {
         setHover(true)
@@ -55,14 +56,44 @@ export default function Card({ name, price, image, description, stock, category,
         setHover(false)
     }
 
-    const findItem = product.find((f) => f.id === id)
-
     function addToCar(id, price, name, image, stock) {
-        const obj = { id, name, price, image, quanty: 1, amount: price, stock}
-        if (findItem) {
-            return setTooltip(true)
+        const findProduct = allProducts.filter((f) => f._id === id);
+        
+        const objCarTemp = findProduct.map((i) => {
+            return {
+                productId: i._id,
+                name: i.name,
+                image: i.image,
+                price: i.price,
+                stock: i.stock,
+                quantity: 1,
+                amount: i.price
+            }
+        }) 
+        
+        if(currentUser){
+            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
+            if(findRepeatItems) return setTooltip(true);
+            const oldProducts = dataCarUser.products.map((old) => {
+                return {
+                    productId: old.productId._id,
+                    quantity: 1,
+                }
+            })
+            const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
+            const obj = {
+                idUser: currentUser._delegate.uid,
+                products: [...oldProducts, ...objCarTemp],
+                amount: dataCarUser.amount + newAmount
+            }
+            dispatch(getOrUpdateCart(obj, currentUser));
+            console.log("funciono?: ", obj)
+        }else{
+            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
+            const findrepeat = objTemp.find((f) => f.productId === id);
+            if(findrepeat) return setTooltip(true);
+            setProductsTemp([...objTemp, ...objCarTemp]);
         }
-        dispatch(addOrderCar(obj))
     }
 
     function addFavs() {
@@ -82,9 +113,25 @@ export default function Card({ name, price, image, description, stock, category,
     }
 
     useEffect(() => {
-        return items.length? setProduct(items) : product
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [items, product, setProduct])
+        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
+        else return false
+    }, [])
+
+    useEffect(() => {
+        if(currentUser){
+            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
+            if(objTemp.length){
+                dispatch(getOrUpdateCart({
+                    idUser: idCarUser,
+                    products: objTemp,
+                    amount: objTemp.reduce((sum, value) => sum+value.amount, 0)
+                }, currentUser));
+                setProductsTemp([]);
+            }
+        }else{
+            return false
+        }
+    }, [])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>

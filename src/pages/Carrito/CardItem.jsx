@@ -9,15 +9,15 @@ import {
 } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
-const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem, id, quanty, stock}) => {
+const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, eventClickCountRes, eventClickRemoveItem}) => {
 
   const [active, setActive] = useState(true);
   const [activeStock, setActiveStock] = useState(false);
   
   useEffect(() => {
-    quanty >= stock ? setActiveStock(true) : setActiveStock(false)
-    quanty > 1 ? setActive(false) : setActive(true)  
-  }, [quanty])
+    quantity >= stock ? setActiveStock(true) : setActiveStock(false)
+    quantity > 1 ? setActive(false) : setActive(true)  
+  }, [quantity])
   
   return (
     <div>
@@ -27,7 +27,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
             <div className="item content-img">
               <Avatar
                 alt="Remy Sharp"
-                src={item.image}
+                src={image}
                 sx={{ width: 56, height: 56 }}
               />
             </div>
@@ -35,10 +35,10 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
           <Grid item xs={8}>
             <div className="item content-detail">
               <div className="detail item-tittle">
-                <Typography variant="subtitle1">{item.name}</Typography>
+                <Typography variant="subtitle1">{name}</Typography>
                 <div className="desc-item">
-                  <Typography variant="caption">{accounting.formatMoney(item.price, '$')}</Typography>
-                  <Typography variant="caption">Stock: {item.stock}</Typography>
+                  <Typography variant="caption">{accounting.formatMoney(price, '$')}</Typography>
+                  <Typography variant="caption">Stock: {stock}</Typography>
                 </div>
               </div>
               <div className="detail item-count">
@@ -46,7 +46,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   disabled={active}
                   className="btn btn-add"
                   onClick={() => {
-                    eventClickCountRes(item.price, id, (quanty - 1))
+                    eventClickCountRes(price, id, (quantity - 1))
                   }}
                 >
                   -
@@ -55,14 +55,14 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
                   type="numer"
                   className="btn lb-count"
                   onChange={() =>{}}
-                  value={quanty}
+                  value={quantity}
                   disabled={true}
                 />
                 <button
                   disabled={activeStock}
                   className="btn btn-res"
                   onClick={() => {
-                    eventClickCountAdd(item.price, id, (quanty + 1))
+                    eventClickCountAdd(price, id, (quantity + 1))
                   }}
                 >
                   +
@@ -73,7 +73,7 @@ const CardItem = ({item, eventClickCountAdd, eventClickCountRes, eventClickRemov
           <Grid item xs={2}>
             <div className="item btn-remove">
               <IconButton edge="end" onClick={() => {
-                eventClickRemoveItem(item.id);
+                eventClickRemoveItem(id);
               }}>
                 <DeleteForeverRoundedIcon color="error"/>
               </IconButton>
