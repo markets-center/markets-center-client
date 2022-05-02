@@ -65,7 +65,7 @@ export function deleteProduct(id, currentUser) {
     return async function (dispatch) {
         try {
             dispatch({type: LOADING_ON});
-            const result = await axios.put(`/api/private/product/deleted/${id}`, {
+            const result = await axios.put(`/api/private/product/deleted/${id}`,{hola: 'holis'}, {
                 headers:{
                     Authorization: `Bearer ${token}`
                   }
