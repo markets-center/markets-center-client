@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE, GET_ALL_ORDERS} from './ctes'
+import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE, GET_ALL_ORDERS, GET_ALL_CATEGORIES_ADMIN} from './ctes'
 
 
 export function adminUpdateCategory (id, category, currentUser) {
@@ -199,7 +199,7 @@ export function getAllAdminCategories(currentUser) {
                 }
             });
             dispatch({type: MESSAGE, payload: categories.data.msg})
-            dispatch({type: GET_ALL_CATEGORIES, payload: categories.data.data})
+            dispatch({type: GET_ALL_CATEGORIES_ADMIN, payload: categories.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

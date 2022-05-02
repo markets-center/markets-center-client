@@ -38,7 +38,8 @@ import {
     GET_FAVS,
     GET_FAV_DETAIL,
     GET_ALL_ORDERS,
-
+    GET_ALL_CATEGORIES_ADMIN,
+    GET_PRODUCTS_OF_SELLER
 
 } from '../actions/ctes'
 
@@ -50,8 +51,10 @@ const initialState = {
     addedProduct: {},
     searchedProducts: [], //no se si lo prefieren aqui o que lo guarde en allProducts
     productsBySeller: [],
+    allProductsSeller: [],
     filteredByPrice: [],
     allCategories: [],
+    adminCategories: [],
     newCategory: {},
     allSellers: [],
     allUsers: [],
@@ -87,6 +90,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 allProducts: action.payload,
             }
+        case GET_PRODUCTS_OF_SELLER:
+            return {
+                ...state,
+                allProductsSeller: action.payload
+            }
         case POST_PRODUCT:
             return {
                 ...state,
@@ -121,6 +129,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 allCategories: action.payload,
+            }
+        case GET_ALL_CATEGORIES_ADMIN:
+            return {
+                ...state,
+                adminCategories: action.payload
             }
         case GET_ALL_SELLERS:
             return {
