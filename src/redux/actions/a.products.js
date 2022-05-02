@@ -223,10 +223,10 @@ export function createProductReview(productId, review, currentUser) {
 }
 
 export function GetAllProductsOfSeller(id, currentUser) {
+    console.log(`GetAllProductsOfSeller`,id, currentUser)
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            dispatch()
             const response = await axios.get(`/api/private/productSeller/${id}`, {
                 headers:{
                     Authorization: `Bearer ${token}`
