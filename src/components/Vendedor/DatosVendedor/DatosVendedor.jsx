@@ -31,13 +31,7 @@ export default function DatosVendedor() {
                     marginTop: '10px',
                     borderBottom: '2px solid black'
                 }}>
-                    <Container sx={{
-                        width: '200px',
-                        height: '200px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}>
+                    <Box>
                         <Typography variant='h6' sx={{
                             fontWeight: 'bold'
                         }}>
