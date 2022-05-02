@@ -1,0 +1,133 @@
+/* FORMULARIO */
+.containerForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 24px;
+    padding: 32px;
+}
+
+.boxForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerPic {
+    display: flex;
+    align-items: flex-end
+}
+
+.containerPass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 32px
+}
+
+/* USERDATA */
+
+.containerData {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerInfo {
+    width: 1400px;
+    height: 200px;
+    margin: 0;
+    display: flex !important;
+    align-items: center;
+}
+
+.title {
+    width: 100px !important;
+    height: 200px;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.botones {
+    height: 60px;
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 34px;
+}
+
+@media all and (max-width: 500px) {
+    .containerForm{
+        width: 350px;
+    }
+
+    .containerPass {
+        width: 350px;
+        height: 500px;
+    }
+
+    .formPass {
+        align-items: stretch !important;
+    }
+
+    .pic {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0 !important;
+    }
+
+    .containerPic {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+    }
+
+    .btnPic{
+        width: 180px;
+        height: 50px;
+    }
+
+    /* USERDATA */
+
+    .containerData {
+        height: 250px;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .containerInfo {
+        height: 230px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title h3 {
+        font-size: 30px;
+    }
+
+    .botones button {
+        width: 150px;
+        font-size: small;
+        line-height: 1.5;
+    }
+
+    .title {
+        width: initial !important;
+    }
+}

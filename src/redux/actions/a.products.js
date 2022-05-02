@@ -65,9 +65,47 @@ export function deleteProduct(id, currentUser) {
     return async function (dispatch) {
         try {
             dispatch({type: LOADING_ON});
-            const result = await axios.put(`/api/private/product/deleted/${id}`, {
+            const result = await axios.put(`/api/private/product/deleted/${id}`,null, {
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch({ type: SET_ALERT, payload: result.data.msg })
+            dispatch({type: LOADING_OFF});
+        } catch (err) {
+            dispatch({ type: ERRORS, payload: err.msg })
+        }
+    }
+}
+
+export function disableProduct(id, currentUser) {
+    console.log(id, currentUser)
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            dispatch({type: LOADING_ON});
+            const result = await axios.put(`/api/private/product/disable/${id}`,null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch({ type: SET_ALERT, payload: result.data.msg })
+            dispatch({type: LOADING_OFF});
+        } catch (err) {
+            dispatch({ type: ERRORS, payload: err.msg })
+        }
+    }
+}
+
+export function enableProduct(id, currentUser) {
+    console.log(id, currentUser)
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            dispatch({type: LOADING_ON});
+            const result = await axios.put(`/api/private/product/enable/${id}`,null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
                   }
             });
             dispatch({ type: SET_ALERT, payload: result.data.msg })
@@ -185,10 +223,10 @@ export function createProductReview(productId, review, currentUser) {
 }
 
 export function GetAllProductsOfSeller(id, currentUser) {
+    console.log(`GetAllProductsOfSeller`,id, currentUser)
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            dispatch()
             const response = await axios.get(`/api/private/productSeller/${id}`, {
                 headers:{
                     Authorization: `Bearer ${token}`

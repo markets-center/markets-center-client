@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import { Container, Box, Typography, Button,TextField } from "@mui/material";
+import { Container, Box, Typography, Button, TextField } from "@mui/material";
 import {useAuth} from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
+import style from './Style/User.module.css'
 
 
 function ResetPass({ name, email, image, handleClosePass }) {
@@ -27,17 +28,14 @@ function ResetPass({ name, email, image, handleClosePass }) {
     }
 
   return (
-    <div>
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: '400px'
-          }}
-        >
+      <Container component="main" maxWidth="xs" className={style.formPass}
+      sx={{
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        padding: '10px', 
+        textAlign: 'center'
+        }}>
           <Typography component="h1" variant="h4">
             Cambio de contraseña
           </Typography>
@@ -47,7 +45,7 @@ function ResetPass({ name, email, image, handleClosePass }) {
             noValidate
             sx={{ mt: 1 }}
           >
-            <Container
+            <Container className={style.pic}
               sx={{
                 display: "flex",
                 alignItems: "flex-end",
@@ -99,9 +97,7 @@ function ResetPass({ name, email, image, handleClosePass }) {
               Cambiar Contraseña
             </Button>
           </Box>
-        </Box>
       </Container>
-    </div>
   );
 }
 

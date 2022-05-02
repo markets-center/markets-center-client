@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {postNewUser} from '../../redux/actions/a.users';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { postNewUser } from '../../redux/actions/a.users';
 import {
   Container,
   Box,
@@ -21,14 +21,14 @@ const Input = styled("input")({
 });
 
 function BuyerForm() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const theme = createTheme();
   const { currentUser } = useAuth();
   const [disableForm, setDisableForm] = useState(true);
   const [fileInputState, setFileInputState] = useState('');
   const [selectedDate, handleDateChange] = useState(new Date());
-  const [data, setData] = useState({ name:'', phone: "", IdDocument: "", address: "" });
+  const [data, setData] = useState({ name: '', phone: "", IdDocument: "", address: "" });
 
   function handleImageChange(e) {
     const reader = new FileReader();
@@ -42,25 +42,25 @@ function BuyerForm() {
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
     let flagDisable = true
-    data.name!=='' && currentUser?.displayName!=='' ? flagDisable=true : flagDisable=false
-    data.phone===''?flagDisable=true:flagDisable=false
-    data.IdDocument===''?flagDisable=true:flagDisable=false
-    data.address===''?flagDisable=true:flagDisable=false
-    setDisableForm(()=>flagDisable)
+    data.name !== '' && currentUser?.displayName !== '' ? flagDisable = true : flagDisable = false
+    data.phone === '' ? flagDisable = true : flagDisable = false
+    data.IdDocument === '' ? flagDisable = true : flagDisable = false
+    data.address === '' ? flagDisable = true : flagDisable = false
+    setDisableForm(flagDisable)
   }
 
-  function validateForm(user){
+  function validateForm(user) {
   }
 
   function handleSubmit(e) {
     e.preventDefault()
     let uploadImg;
     let img
-    if(currentUser.photoURL){
-        uploadImg= false
-        img=currentUser.photoURL
+    if (currentUser.photoURL) {
+      uploadImg = false
+      img = currentUser.photoURL
     } else {
-      if(fileInputState){
+      if (fileInputState) {
         uploadImg = true
         img = fileInputState
       }
@@ -107,7 +107,7 @@ function BuyerForm() {
             noValidate
             sx={{ mt: 1 }}
           >
-              {!currentUser?.displayName && <TextField
+            {!currentUser?.displayName && <TextField
               margin="normal"
               required
               fullWidth
@@ -169,22 +169,22 @@ function BuyerForm() {
               </>
             )}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              autoOk
-              variant="inline"
-              inputVariant="outlined"
-              label="Fecha de Nacimiento"
-              inputFormat="dd/MM/yyyy"
-              value={selectedDate}
-              renderInput={(props) => (
-                <TextField {...props} />
-              )}
-              InputAdornmentProps={{ position: "start" }}
-              onChange={(date) => handleDateChange(date)}
-            />
+              <DatePicker
+                autoOk
+                variant="inline"
+                inputVariant="outlined"
+                label="Fecha de Nacimiento"
+                inputFormat="dd/MM/yyyy"
+                value={selectedDate}
+                renderInput={(props) => (
+                  <TextField {...props} />
+                )}
+                InputAdornmentProps={{ position: "start" }}
+                onChange={(date) => handleDateChange(date)}
+              />
             </LocalizationProvider>
-          <Button
-          disabled={disableForm}
+            <Button
+              disabled={disableForm}
               type="submit"
               fullWidth
               variant="contained"

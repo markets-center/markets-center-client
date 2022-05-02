@@ -62,9 +62,9 @@ export default function AddCategorie({open, handleClose, banObj, setBanObj, hand
         <Box sx={{ ...style}} component="form">
         <div>
             <Typography variant="h4" gutterBottom component="div">
-                Agregar una categoria:
+                Motivo de baneo:
             </Typography>
-                <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={banObj.reason} style={{ width: "300px", margin: "5px" }} />
+                <TextField error={error.name ? true : false} id="name" label="Motivo" variant="standard" onChange={handleChange} value={banObj.reason} style={{ width: "300px", margin: "5px" }} />
             <Button 
                 onClick={handleUserBan}
                 disabled={disabled}
@@ -72,7 +72,7 @@ export default function AddCategorie({open, handleClose, banObj, setBanObj, hand
                 component="span" 
                 style={{ width: "70%", margin: "5px" }}
                 startIcon={<Publish />}
-                >Publicar</Button>
+                >Banear</Button>
         </div>
         </Box>
     </Modal>
