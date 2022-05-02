@@ -1,24 +1,24 @@
-import { Input, Button, TextField, Container } from '@mui/material';
+import { Button, Container, createTheme, FormControlLabel, Input, Switch, TextField, ThemeProvider } from '@mui/material';
+import css from '../../components/Credentials/SignUp.module.css'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import css from '../../components/Credentials/SignUp.module.css'
 import { useAuth } from '../../context/AuthContext';
-import logo from '../../images/Markets Center.svg'
 import { postNewUser } from '../../redux/actions/a.users';
-import { AddAPhoto } from "@mui/icons-material/";
+import logo from '../../images/Markets Center.svg'
+import { AddAPhoto } from '@mui/icons-material';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { LocalizationProvider, DatePicker } from '@mui/lab';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import image from '../../images/signup.svg'
 
-export default function BuyerForm2() {
+export default function SellerForm2() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const theme = createTheme();
     const { currentUser } = useAuth();
+    const [fileInputState, setFileInputState] = useState();
+    const [delivery, setDelivery] = useState(false);
     const [disableForm, setDisableForm] = useState(true);
-    const [fileInputState, setFileInputState] = useState('');
     const [selectedDate, handleDateChange] = useState(new Date());
     const [data, setData] = useState({ name: '', phone: "", IdDocument: "", address: "" });
 
@@ -30,18 +30,18 @@ export default function BuyerForm2() {
         };
     }
 
+    function handleDeliveryType() {
+        setDelivery((prevState) => !prevState);
+    }
 
     function handleChange(e) {
         setData({ ...data, [e.target.name]: e.target.value });
         let flagDisable = true
-        data.name !== '' && currentUser?.displayName !== '' ? flagDisable = true : flagDisable = false
+        data.name !== '' && currentUser.displayName !== '' ? flagDisable = true : flagDisable = false
         data.phone === '' ? flagDisable = true : flagDisable = false
         data.IdDocument === '' ? flagDisable = true : flagDisable = false
         data.address === '' ? flagDisable = true : flagDisable = false
         setDisableForm(() => flagDisable)
-    }
-
-    function validateForm(user) {
     }
 
     function handleSubmit(e) {
@@ -52,30 +52,27 @@ export default function BuyerForm2() {
             uploadImg = false
             img = currentUser.photoURL
         } else {
-            if (fileInputState) {
-                uploadImg = true
-                img = fileInputState
-            }
+            uploadImg = true
+            img = fileInputState
         }
         let userData = {
             isAdmin: false,
-            isSeller: false,
+            isSeller: true,
             uploadImg,
-            name: currentUser?.displayName || data.name,
+            name: currentUser.displayName || data.name,
             userId: currentUser.uid,
             phone: data.phone,
             email: currentUser.email,
             IdDocument: data.IdDocument,
             address: data.address,
-            delivery: false,
+            delivery: delivery,
             image: img,
             dateOfBirth: selectedDate
         };
-        validateForm(userData)
+        console.log(userData);
         dispatch(postNewUser(userData, currentUser));
         navigate('/');
     }
-
 
     return (
         <ThemeProvider theme={theme}>
@@ -85,8 +82,7 @@ export default function BuyerForm2() {
                         <img src={logo} alt="Logo MC" className={css.loguito} />
                         <h1 className={css.tittle}>Bienvenido{currentUser?.displayName && `, ${currentUser?.displayName}`}!</h1>
                         <h2 className={css.subtitle}>Por favor, completa los siguientes datos</h2>
-                        <form onSubmit={handleSubmit} autoComplete="on">
-
+                        <form onSubmit={handleSubmit} autoComplete='on'>
                             {
                                 !currentUser?.displayName &&
                                 (<>
@@ -105,13 +101,14 @@ export default function BuyerForm2() {
                                     />
                                 </>)
                             }
+
                             <label className={css.label}>Número de teléfono</label>
                             <Input
                                 className={css.input}
-                                autoComplete='tel'
                                 type="number"
                                 margin="normal"
                                 required
+                                autoComplete='tel'
                                 fullWidth
                                 id="phone"
                                 label="Número de teléfono"
@@ -122,9 +119,9 @@ export default function BuyerForm2() {
                             <label className={css.label}>DNI</label>
                             <Input
                                 className={css.input}
-                                autoComplete='number'
                                 type="number"
                                 margin="normal"
+                                autoComplete='number'
                                 required
                                 fullWidth
                                 id="IdDocument"
@@ -135,8 +132,8 @@ export default function BuyerForm2() {
                             />
                             <label className={css.label}>Dirección</label>
                             <Input
-                                className={css.input}
                                 autoComplete='off'
+                                className={css.input}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -171,6 +168,7 @@ export default function BuyerForm2() {
                             )}
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
                                 <DatePicker
+                                    className={css.input}
                                     autoOk
                                     variant="inline"
                                     inputVariant="outlined"
@@ -184,6 +182,16 @@ export default function BuyerForm2() {
                                     onChange={(date) => handleDateChange(date)}
                                 />
                             </LocalizationProvider>
+                            <FormControlLabel
+                                label="Delivery:  "
+                                labelPlacement="start"
+                                control={
+                                    <Switch
+                                        onChange={handleDeliveryType}
+                                        inputProps={{ "aria-label": "controlled" }}
+                                    />
+                                }
+                            />
                             <Button
                                 className={css.btn}
                                 disabled={disableForm}
@@ -197,7 +205,7 @@ export default function BuyerForm2() {
                         </form>
                     </div>
                     <div className={css.content_image}>
-                        <img className={css.image} src={image} alt='' />
+                        <img className={css.image} src={image} alt='Img' />
                     </div>
                 </div>
             </Container>

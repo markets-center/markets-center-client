@@ -47,11 +47,11 @@ export default function LogUser2() {
             setLoading(true);
             login(user.email, user.password)
                 .then((userDB) => {
-                    console.log(userDB);
+
                     userDB.data.data[0].isAdmin && navigate('/Admin')
                     !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
                     !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
-                })
+                }).catch(() => setError("Credenciales invalidas"))
         } catch (error) {
             setError("Credenciales invalidas");
         }
@@ -95,7 +95,7 @@ export default function LogUser2() {
                 <img src={logo} alt='logo MC' className={css.loguito} />
                 <h1 className={css.tittle}>INICIAR SESIÓN</h1>
                 {/* <p className={css.text}>Ingrese al sistema si ya está registrado.</p> */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autocomplete="on">
                     <label className={css.label} htmlFor="">Correo electrónico</label>
                     <Input
                         className={css.input}
@@ -104,6 +104,7 @@ export default function LogUser2() {
                         label="Email"
                         name="email"
                         autoComplete="email"
+                        required
                         autoFocus
                         onChange={handleChange}
                     />
@@ -115,8 +116,10 @@ export default function LogUser2() {
                     <label className={css.label} htmlFor="">Contraseña</label>
                     <Input
                         type="password"
+                        autoComplete="current-password"
                         className={css.input}
                         name="password"
+                        required
                         label="Contraseña"
                         id="password"
                         onChange={handleChange}
@@ -127,7 +130,7 @@ export default function LogUser2() {
                         </Typography>
                     )}
                     <span className={css.olvidePass}>
-                        <Link to="/OlvidoPass" variant="body2">Olvidé mi contraseña</Link>
+                        <Link to="/OlvidoPass" variant="body2">¿Olvidaste tu contraseña?</Link>
                     </span>
                     <Button variant="contained" sx={{ mt: 3, mb: 2, color: 'white' }} className={css.btn} type="submit" disabled={loading} >Iniciar Sesión</Button>
                     <Button variant="contained" sx={{ mt: 3, mb: 2, color: 'black' }} className={css.btnGoogle} onClick={regWithGoogle} type="submit" disabled={loading}><GoogleIcon fontSize="small" />&nbsp; Ingresar con Google</Button>

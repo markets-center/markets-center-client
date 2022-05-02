@@ -18,7 +18,7 @@ import Register from "../src/pages/Register/Register";
 import Error from "../src/components/Error/Error";
 import Footer from "../src/components/Footer/Footer";
 import Vendedor from "../src/pages/Vendedor/Vendedor";
-import SellerForm from './pages/UserData/SellerForm'
+import SellerForm from './pages/UserData/SellerForm2'
 import BuyerForm from './pages/UserData/BuyerForm2'
 import Login from './pages/Login/Login';
 import OlvidoPass from './pages/ForgotPass/OlvidoPass'
