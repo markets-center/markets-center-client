@@ -97,9 +97,9 @@ export default function CardVendedor({
               <Delete sx={{ color: "#E2001A" }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Deshabilitar" arrow>
+          <Tooltip title={banned ? "Habilitar" : "Deshabilitar"} arrow>
             <IconButton onClick={() => handleDisable(id, banned)} >
-              <Block sx={{ color: "#E2001A" }} />
+              <Block sx={!banned ? { color: "#E2001A" } : { color: '#6bf178' }} />
             </IconButton>
           </Tooltip>
         </div>
