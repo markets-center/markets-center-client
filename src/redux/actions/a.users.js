@@ -70,7 +70,7 @@ export function userHistory(id, currentUser){
     }
 }
 
-// export function delOneUser() {
-//     return {type: DEL_ONE_USER, payload:''}
-// }
+export function delOneUser() {
+    return {type: DEL_ONE_USER, payload:''}
+}
 
