@@ -1,7 +1,8 @@
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, Tooltip, IconButton } from "@mui/material";
 import AddProduct from "../AddProduct/AddProduct.jsx";
-import { Tooltip, IconButton } from "@mui/material";
 import { Delete, Edit, Block } from "@mui/icons-material/";
+import style from './CardVendedor.module.css'
+
 
 export default function CardVendedor({
   nombre,
@@ -34,18 +35,7 @@ export default function CardVendedor({
   }
 
   return (
-    <Container
-      sx={{
-        height: "100px",
-        width: "500px",
-        border: "2px solid gray",
-        margin: "5px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderRadius: "10px",
-      }}
-    >
+    <Container className={style.container}>
       <Box
         sx={{
           height: "max-content",
