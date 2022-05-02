@@ -8,6 +8,7 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const GET_ALL_ORDERS_OF_SELLER = 'GET_ALL_ORDERS_OF_SELLER';
 
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
+export const GET_ALL_CATEGORIES_ADMIN = 'GET_ALL_CATEGORIES_ADMIN';
 
 export const ERRORS = 'ERRORS';
 export const MESSAGE = 'MESSAGE';
@@ -52,4 +53,4 @@ export const ADD_FAV = 'ADD_FAV';
 export const DEL_FAV = 'DEL_FAV';
 export const GET_FAV_DETAIL = 'GET_FAV_DETAIL'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-
+export const GET_PRODUCTS_OF_SELLER = 'GET_PRODUCTS_OF_SELLER'
