@@ -22,7 +22,7 @@ export default function Review({ amount }) {
         Order summary
       </Typography>
       <List disablePadding>
-        {products?.map((product) => (
+        {products.products?.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={product.name}/>
             <Typography variant="body2">{accounting.formatMoney(product.price, '$')}</Typography>
