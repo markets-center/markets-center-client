@@ -1,7 +1,8 @@
 import * as React from 'react';
 import axios from 'axios'
 import {Button, Grid, Typography} from '@mui/material';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import {postOrder} from '../../redux/actions/a.order'
 import Review from './Review';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js';
@@ -34,7 +35,7 @@ const CARD_ELEMENTS_OPTIONS = {
 
 
 const CheckoutForm = ({ currentUser, back, next, amount }) => {
-  
+  const dispatch = useDispatch()
   const stripe = useStripe()
   const elements = useElements()
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const CheckoutForm = ({ currentUser, back, next, amount }) => {
 
   const handleSubmit = async(event) => {
     event.preventDefault()
-
+      await dispatch(postOrder(currentUser))
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: elements.getElement(CardElement)
