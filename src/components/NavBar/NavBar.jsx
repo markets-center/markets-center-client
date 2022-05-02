@@ -153,12 +153,15 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
-                                <MenuItem onClick={() => navigate('/Login')}>
-                                    <ListItemIcon>
-                                        <Person />
-                                    </ListItemIcon>
-                                    Profile
-                                </MenuItem>
+                                {
+                                    !oneUser.isAdmin && <MenuItem onClick={() => navigate('/Login')}>
+                                        <ListItemIcon>
+                                            <Person />
+                                        </ListItemIcon>
+                                        Profile
+                                    </MenuItem>
+                                }
+
                                 {
                                     currentUser === null ? undefined :
                                         (
@@ -173,9 +176,10 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
                                                                 </ListItemIcon>Favoritos
 
                                                             </MenuItem>
+                                                            <Divider />
                                                         </div>
                                                 }
-                                                <Divider />
+
                                                 <MenuItem onClick={logoutHandler}>
                                                     <ListItemIcon>
                                                         <Logout />
@@ -191,7 +195,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
                     </Stack>
                 </Toolbar>
             </Container>
-            {home && <Filters home={home} admin={admin} value={value} setValue={setValue} />}
+            <Filters home={home} admin={admin} value={value} setValue={setValue} carrito={carrito} />
         </AppBar>
     )
 }
