@@ -55,8 +55,12 @@ export default function SignUp2() {
       setError("");
       setErrorMail("");
       setLoading(true);
-      await signup(user.email, user.password, seller);
-      seller ? navigate("/sellerForm") : navigate("/buyerForm");
+      signup(user.email, user.password, seller)
+      .then(()=>{
+        seller ? navigate("/sellerForm") : navigate("/buyerForm");
+      }).catch(()=>{
+        setError("Error al crear una cuenta")
+      })
     } catch (error) {
       setError("Error al crear una cuenta");
     }
@@ -186,7 +190,7 @@ export default function SignUp2() {
       >
         <SnackbarAlert
           onClose={handleClose}
-          color="primary"
+          color="error"
           variant="filled"
           severity="error"
         >
@@ -204,7 +208,7 @@ export default function SignUp2() {
       >
         <SnackbarAlert
           onClose={handleClose}
-          color="primary"
+          color="error"
           variant="filled"
           severity="error"
         >
