@@ -7,9 +7,44 @@ export function adminUpdateCategory (id, category, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const allCategories = await axios.put(`/api/admin/categories/${id}`, category, {
+            const allCategories = await axios.put(`/api/admin/categories/update/${id}`, category, {
                 headers:{
                     Authorization: `Bearer ${token}`
+                  }
+            });
+            dispatch({type: SET_ALERT, payload: allCategories.data.msg});
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function adminDisabledCategory (id, currentUser) {
+    const token = currentUser?.auth.currentUser.accessToken
+    console.log(token)
+    return async function (dispatch) {
+        try {
+            const allCategories = await axios.put(`/api/admin/categories/disabled/${id}`, null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch({type: SET_ALERT, payload: allCategories.data.msg});
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function adminEnabledCategory (id, currentUser) {
+    const token = currentUser?.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const allCategories = await axios.put(`/api/admin/categories/enabled/${id}`, null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
                   }
             });
             dispatch({type: SET_ALERT, payload: allCategories.data.msg});
@@ -41,11 +76,9 @@ export function adminDeleteCategory (id, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const response = await axios.delete(
-                `/api/admin/categories/${id}`, 
-                {
+            const response = await axios.put(`/api/admin/categories/delete/${id}`, null, {
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`
                   }
             });
             dispatch({type:GET_ALL_CATEGORIES, payload:response.data.data})
@@ -56,10 +89,15 @@ export function adminDeleteCategory (id, currentUser) {
     }
 }
 
-export function getAllUsers(){
+export function getAllUsers(currentUser){
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const users = await axios.get('/api/private/users');
+            const users = await axios.get('/api/admin/users', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: MESSAGE, payload: users.data.msg})
             dispatch({type: GET_ALL_USERS, payload: users.data.data})
         } catch (err) {
@@ -69,13 +107,13 @@ export function getAllUsers(){
 }
 
 
-export function deleteUser(id, currentUser) {
+export function deleteUser(id, hola, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`/api/admin/userDelete/${id}`, {
+            const result = await axios.put(`/api/admin/userDelete/${id}`, hola, {
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`
                   }
             });
             dispatch({type: SET_ALERT, payload: result.data.msg})
@@ -86,14 +124,14 @@ export function deleteUser(id, currentUser) {
     }
 }
 
-export function upgradeUser(id, currentUser){
+export function upgradeUser(id, hola, currentUser){
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.put(`/api/admin/userAdmin/${id}`,null, {
+            const result = await axios.put(`/api/admin/userAdmin/${id}`,hola, {
                 headers:{
-                    Authorization: `Bearer ${token}`
-                  }
+                    'Authorization': `Bearer ${token}`
+                }
             });
             dispatch({type: SET_ALERT, payload: result.data.msg})
             dispatch({type: GET_ALL_USERS, payload: result.data.data})
@@ -129,6 +167,39 @@ export function allOrders(currentUser){
                   }
             });
             dispatch({type: GET_ALL_ORDERS, payload: result.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function banned(id, motivo, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const result = await axios.put(`/api/admin/banned/${id}`, motivo,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            dispatch({type: SET_ALERT, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function getAllAdminCategories(currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const categories = await axios.get('/api/admin/categories', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            dispatch({type: MESSAGE, payload: categories.data.msg})
+            dispatch({type: GET_ALL_CATEGORIES, payload: categories.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
