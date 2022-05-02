@@ -31,29 +31,14 @@ export default function CardVendedor({
       price: event.currentTarget.getAttribute("price"),
     });
     handleOpen();
-  }
-
-  return (
-    <Container
-      sx={{
-        height: "100px",
-        width: "500px",
-        border: "2px solid gray",
-        margin: "5px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderRadius: "10px",
-      }}
-    >
-      <Box
-        sx={{
-          height: "max-content",
-        }}
-      >
-        <img src={image} alt="pic" width="60px" />
-      </Box>
-
+  } 
+ return (
+        <Container className={style.container}>
+            <Box sx={{
+                height: 'max-content',
+            }}>
+                <img src={image} alt="pic" width='60px'/>
+            </Box>
       <Box
         sx={{
           width: "250px",

@@ -24,13 +24,19 @@ export default function DatosVendedor() {
                 borderBottom: '2px solid black'
             }}>
                 <Container sx={{
-                    width: '200px',
-                    height: '200px',
+                    height: '250px',
                     display: 'flex',
-                    flexDirection: 'column',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '10px',
+                    borderBottom: '2px solid black'
                 }}>
-                    <Box sx={{
+                    <Container sx={{
+                        width: '200px',
+                        height: '200px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                     }}>
                         <Typography variant='h6' sx={{
                             fontWeight: 'bold'

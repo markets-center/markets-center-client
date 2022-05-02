@@ -26,9 +26,10 @@ function SellersFilter() {
         }}>
 
             {allSellers && allSellers.map(d => <SellerCard key={d._id} name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
+
             }
         </Container>
-    );
+    )
 }
 
 export default SellersFilter;
