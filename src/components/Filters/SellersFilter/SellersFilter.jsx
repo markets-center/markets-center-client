@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import SellerCard from './SellerCard';
 import { Container } from '@mui/material';
 import { getAllSellers } from '../../../redux/actions/a.seller';
-import style from './SellersFilter.module.css'
 
 function SellersFilter() {
     const dispatch = useDispatch();
@@ -14,7 +13,17 @@ function SellersFilter() {
     },[dispatch])
 
     return (
-        <Container className={style.container}/>
+        <Container sx={{
+            marginTop: '40px',
+            height: 'auto',
+            display: 'flex',
+            alignItem: 'center',
+            justifyContent: 'space-around',
+            wordWrap: 'break-word',
+            overflowX: 'scroll',
+            overflowY: 'hidden',
+            whiteSpace: 'normal',
+        }}>
 
             {allSellers && allSellers.map(d => <SellerCard key={d._id} name={d.name.slice(0,10)} image={d.image} id={d._id}/>)
             }

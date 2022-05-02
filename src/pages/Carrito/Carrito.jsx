@@ -246,7 +246,7 @@ export default function Carrito() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box class="checkout">
+        <Box sx={{width: '500px', margin: 'auto'}}>
           <CheckoutComp amount={total||totalApi}/>
         </Box>
       </Modal>

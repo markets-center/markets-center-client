@@ -2,11 +2,11 @@ import React from "react";
 import { Box, Container, Avatar } from "@mui/material";
 import { IconButton, Typography } from "@mui/material";
 import { ShoppingBasket, ExpandMore } from "@mui/icons-material";
-import style from './Style/HistoryItems.module.css'
 
 function HistoryItems({ item, handleOpenMore, handleOpenCancel }) {
   const fecha = `${item.createdAt[8]}${item.createdAt[9]}/${item.createdAt[5]}${item.createdAt[6]}/${item.createdAt[0]}${item.createdAt[1]}${item.createdAt[2]}${item.createdAt[3]}`
   return (
+    <div>
       <Container
         sx={{
           height: "60px",
@@ -69,6 +69,7 @@ function HistoryItems({ item, handleOpenMore, handleOpenCancel }) {
             </IconButton>
         </Box>
       </Container>
+    </div>
   );
 }
 

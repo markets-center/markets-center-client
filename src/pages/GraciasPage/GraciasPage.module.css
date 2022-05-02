@@ -43,8 +43,9 @@
     height: 6vh
 }
 .containerButton{
-  position: relative;
-  margin-top: 50px;
+  position: absolute;
+  margin-left: 385px;
+  padding-top: 320px;
 }
 .imgCarritoThanks{
   margin-left: 3px;
@@ -132,10 +133,4 @@
   animation: none;
   border-color: #5cb85c;
   transition: border 0.5s ease-out;
-}
-
-@media all and (max-width: 500px) {
-  .container {
-    width: 90vw !important;
-  }  
 }

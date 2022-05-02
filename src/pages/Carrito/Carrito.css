@@ -145,16 +145,11 @@ hr {
   width: 100%;
 }
 
-.checkout {
-  width: 500px;
-  margin: auto
-}
-
 @media (max-width: 500px) {
   .car-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     margin-top: 100px;
     margin-bottom: 100px;
   }
@@ -162,12 +157,6 @@ hr {
   .pay-container {
     width: 68%;
     min-width: 340px;
-    margin: 20px 0
-  }
-
-  .checkout {
-    width: 400px;
-    height: 600px;
   }
 }
 

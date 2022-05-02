@@ -20,7 +20,9 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
   }, [quantity])
   
   return (
-        <Grid container visibility={true} sx={{padding: '10px'}}>
+    <div>
+      {
+        <Grid container visibility={true} >
           <Grid item xs={2}>
             <div className="item content-img">
               <Avatar
@@ -78,6 +80,8 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
             </div>
           </Grid>
         </Grid>
+      }
+    </div>
   );
 };
 
