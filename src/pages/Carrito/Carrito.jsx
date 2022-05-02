@@ -155,6 +155,7 @@ export default function Carrito() {
 
   useEffect(() => {
     return currentUser && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
