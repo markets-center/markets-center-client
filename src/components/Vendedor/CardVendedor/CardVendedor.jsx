@@ -20,6 +20,8 @@ export default function CardVendedor({
   handleClose,
   handleOpen,
   handleSubmit,
+  handleDisable,
+  banned
 }) {
   function handleUpdate(event) {
     setProdId(event.currentTarget.getAttribute("id"));
@@ -96,9 +98,7 @@ export default function CardVendedor({
             </IconButton>
           </Tooltip>
           <Tooltip title="Deshabilitar" arrow>
-            <IconButton
-            // onClick={() => handleUserdelete(category.userId)} // Modificar action !!
-            >
+            <IconButton onClick={() => handleDisable(id, banned)} >
               <Block sx={{ color: "#E2001A" }} />
             </IconButton>
           </Tooltip>
