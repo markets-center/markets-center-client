@@ -15,7 +15,7 @@ function SellersFilter() {
     return (
         <Container sx={{
             marginTop: '40px',
-            height: 'auto',
+            height: '170px',
             display: 'flex',
             alignItem: 'center',
             justifyContent: 'space-around',
