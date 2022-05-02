@@ -35,6 +35,41 @@ export default function CardVendedor({
     });
     handleOpen();
   }
+
+  return (
+    <Container
+      sx={{
+        height: "100px",
+        width: "500px",
+        border: "2px solid gray",
+        margin: "5px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderRadius: "10px",
+      }}
+    >
+      <Box
+        sx={{
+          height: "max-content",
+        }}
+      >
+        <img src={image} alt="pic" width="60px" />
+      </Box>
+
+
+    function handleUpdate(event){
+        setProdId(event.currentTarget.getAttribute("id"))
+        setInput({
+            name: event.currentTarget.getAttribute('name'),
+            description: event.currentTarget.getAttribute('description'),
+            image: event.currentTarget.getAttribute('image'),
+            stock: event.currentTarget.getAttribute('stock'),
+            category: event.currentTarget.getAttribute('category').split(','),
+            price: event.currentTarget.getAttribute('price'),
+        })
+        handleOpen()
+    }
     
     return (
         <Container className={style.container}>
