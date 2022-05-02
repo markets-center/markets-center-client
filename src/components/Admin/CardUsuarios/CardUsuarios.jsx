@@ -27,13 +27,17 @@ export default function CardCategorias() {
     const [banObj, setBanObj] = useState({reason: '', banned: false})
     const [id, setId] = useState('')
     const [open, setOpen] = useState(false);
-    const handleOpen = (event) => {
+    const handleOpen = (id, ban) => {
         setOpen(true)
-        setId(event.currentTarget.getAttribute('id'))
-        let ban = event.currentTarget.getAttribute('value')
+        setId(id)
+        ban ?
         setBanObj({
             ...banObj,
-            banned: !ban
+            banned: false
+        }) :
+        setBanObj({
+            ...banObj,
+            banned: true
         })
     };
     const handleClose = () => {
@@ -103,9 +107,7 @@ export default function CardCategorias() {
                                 </Tooltip>
                                 <Tooltip title={category.banned ? "Habilitar Usuario" : "Suspender Usuario"}arrow>
                                     <IconButton
-                                        id={category._id}
-                                        value={category.banned}
-                                        onClick={handleOpen} // Modificar action !!
+                                        onClick={() => handleOpen(category._id, category.banned)} // Modificar action !!
                                     >
                                         <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
                                     </IconButton>
