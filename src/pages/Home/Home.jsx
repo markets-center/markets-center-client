@@ -34,7 +34,7 @@ export default function Home() {
             localStorage.setItem('productsTemp', '[]')
         }
     }, [])
-
+    console.log(productsSearched)
     return (
         <div>
             <NavBar searchBar={true} home={true} carrito={true} />
