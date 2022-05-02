@@ -21,7 +21,7 @@ import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
     const alert = useSelector(state => state.alert)
-    const products = useSelector(state => state.productsBySeller, shallowEqual)
+    const products = useSelector(state => state.allProductsSeller)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
