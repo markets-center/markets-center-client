@@ -134,7 +134,7 @@ export default function Card({ name, price, image, description, stock, category,
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
-            <div>{favorito?<Button onClick={delFavs}><Favorite  color="primary"/></Button>:<Button onClick={addFavs}><FavoriteBorder  color="primary"/></Button>}</div>
+            <div>{favorito?<IconButton onClick={delFavs}><Favorite  color="primary"/></IconButton>:<IconButton onClick={addFavs}><FavoriteBorder  color="primary"/></IconButton>}</div>
             <div className={s.img}>
                 {stock > 0 ? <img src={image} width="200px" height="200px" alt="producto" /> :
                     <img src={image} width="200px" height="200px" alt="producto" className={s.sinStock} />}
