@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SET_ALERT, GET_ALL_PRODUCTS, LOADING_ON, LOADING_OFF, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW, ORDER_FILTERED } from "./ctes";
+import { SET_ALERT, GET_ALL_PRODUCTS, LOADING_ON, LOADING_OFF, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW, ORDER_FILTERED, GET_PRODUCTS_OF_SELLER } from "./ctes";
 
 
 export function getAllProducts() {
@@ -65,7 +65,7 @@ export function deleteProduct(id, currentUser) {
     return async function (dispatch) {
         try {
             dispatch({type: LOADING_ON});
-            const result = await axios.delete(`/api/public/product/${id}`, {
+            const result = await axios.put(`/api/private/product/deleted/${id}`, {
                 headers:{
                     Authorization: `Bearer ${token}`
                   }
@@ -181,5 +181,24 @@ export function createProductReview(productId, review, currentUser) {
             dispatch({ type: ERRORS, payload: err.msg })
         }
 
+    }
+}
+
+export function GetAllProductsOfSeller(id, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            dispatch()
+            const response = await axios.get(`/api/private/productSeller/${id}`, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
+            dispatch({ type: MESSAGE, payload: response.data.msg })
+            dispatch({ type: GET_PRODUCTS_OF_SELLER, payload: response.data.data })
+            dispatch({type: LOADING_OFF});
+        } catch (error) {
+            dispatch({ type: ERRORS, payload: error.msg })
+        }
     }
 }
