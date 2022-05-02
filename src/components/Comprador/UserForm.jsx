@@ -3,15 +3,10 @@ import {useDispatch} from 'react-redux';
 import {updateUser} from '../../redux/actions/a.users';
 import { useNavigate } from "react-router-dom";
 import {useAuth} from '../../context/AuthContext';
+import style from './Style/User.module.css'
 
-import {
-    Container,
-    Box,
-    Button,
-    styled,
-  } from "@mui/material";
-  import { Typography, TextField } from "@mui/material";
-  import { AddAPhoto } from "@mui/icons-material/";
+import { Container, Box, Button, styled, Typography, TextField } from "@mui/material";
+import { AddAPhoto } from "@mui/icons-material/";
  
 
   const Input = styled("input")({
@@ -52,14 +47,7 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
   return (
     <div>
       <Container component="main" maxWidth="md">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+          <Box className={style.boxForm}>
             <Typography component="h1" variant="h5">
             Datos de Usuario
           </Typography>
@@ -67,14 +55,8 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
           >
-              <Container
-                sx={{
-                    display: 'flex',
-                    alignItems: 'flex-end'
-                }}
-              >
+              <Container className={style.containerPic}>  
                 <Box sx={{display: 'inline'}}>
               <img
                 src={image}
