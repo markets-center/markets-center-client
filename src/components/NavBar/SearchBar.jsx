@@ -6,6 +6,7 @@ import { getProductByName } from '../../redux/actions/a.products.js'
 import { Stack, TextField, IconButton, Paper } from '@mui/material';
 import { outlinedInputClasses, styled, FormControl } from "@mui/material";
 import { Search } from '@mui/icons-material';
+import style from './NavBar.module.css'
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -42,7 +43,8 @@ export default function NavBar(){
                     component="form"
                     sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}
                 >
-                <StyledTextField  
+                <StyledTextField
+                    className={style.place}  
                     onChange={onImputChange}
                     placeholder="Buscar por nombre..."
                     size='small' 

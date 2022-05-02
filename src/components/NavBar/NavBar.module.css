@@ -2,3 +2,9 @@
     max-width: 100px;
     max-height: auto;
 }
+
+@media all and (max-width: 500px){
+    .place div > input {
+        font-size: 15px;
+    }
+}
