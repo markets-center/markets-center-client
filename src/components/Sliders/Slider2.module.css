@@ -11,3 +11,12 @@
     margin-bottom: 4px;
     margin-left: 10px;
 }
+
+@media all and (max-width: 500px) {
+    .titleSlider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+}
