@@ -1,7 +1,10 @@
-import { Container, Box, Typography } from "@mui/material";
-import AddProduct from "../AddProduct/AddProduct.jsx";
+import { Container, Button, Box, Typography } from "@mui/material";
+import AddProduct from '../AddProduct/AddProduct.jsx'
+import style from './CardVendedor.module.css'
+
 import { Tooltip, IconButton } from "@mui/material";
 import { Delete, Edit, Block } from "@mui/icons-material/";
+
 
 export default function CardVendedor({
   nombre,
@@ -54,6 +57,28 @@ export default function CardVendedor({
         <img src={image} alt="pic" width="60px" />
       </Box>
 
+
+    function handleUpdate(event){
+        setProdId(event.currentTarget.getAttribute("id"))
+        setInput({
+            name: event.currentTarget.getAttribute('name'),
+            description: event.currentTarget.getAttribute('description'),
+            image: event.currentTarget.getAttribute('image'),
+            stock: event.currentTarget.getAttribute('stock'),
+            category: event.currentTarget.getAttribute('category').split(','),
+            price: event.currentTarget.getAttribute('price'),
+        })
+        handleOpen()
+    }
+    
+    return (
+        <Container className={style.container}>
+            <Box sx={{
+                height: 'max-content',
+            }}>
+                <img src={image} alt="pic" width='60px'/>
+            </Box>
+
       <Box
         sx={{
           width: "250px",
@@ -78,6 +103,7 @@ export default function CardVendedor({
           {`Stock: ${stock}`}
         </Typography>
       </Box>
+
 
       <Box
         sx={{
