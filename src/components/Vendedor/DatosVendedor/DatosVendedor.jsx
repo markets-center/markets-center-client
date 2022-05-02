@@ -5,6 +5,8 @@ import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import { useState } from "react";
 import { useSelector } from 'react-redux'
 import SellerForm from './SellerForm'
+import style from './DatosVendedor.module.css'
+import styleForm from '../../Comprador/Style/User.module.css'
 
 export default function DatosVendedor() {
     const oneUser = useSelector(state => state.oneUser)
@@ -15,14 +17,7 @@ export default function DatosVendedor() {
 
     return (
         <>
-            <Container sx={{
-                height: '250px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '10px',
-                borderBottom: '2px solid black'
-            }}>
+            <Container className={style.container} >
                 <Container sx={{
                     width: '200px',
                     height: '200px',
@@ -42,23 +37,14 @@ export default function DatosVendedor() {
                         <img src={oneUser.image} alt="" style={{ width: "150px", borderRadius: "50%" }} />
                     </Box>
                 </Container>
-                <Container sx={{
-                    width: '800px',
-                    height: '200px',
-                    margin: '0 50px',
-                    display: 'flex',
-                    alignItems: 'center'
-                }}>
+                <Container className={style.containerData}>
                     <Container sx={{
                         height: '160px',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-evenly'
                     }}>
-                        <Box sx={{
-                            width: '275px',
-                            marginBottom: '30px'
-                        }}>
+                        <Box className={style.boxAddress}>
                             <Typography>
                                 <span style={{ fontWeight: 'bold' }}>Dirección</span> {oneUser.address}
                             </Typography>
@@ -88,11 +74,7 @@ export default function DatosVendedor() {
                             {oneUser.delivery ? <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'green', fontSize: '40px' }} /> <PanoramaFishEyeIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'green' }} /></> : <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'red', fontSize: '40px' }} /> <BlockIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'red' }} /></>}
                         </Box>
                     </Container>
-                    <Container sx={{
-                        width: '200px',
-                        display: 'flex',
-
-                    }}>
+                    <Container className={style.actualizar}>
                         <Button
                             onClick={handleOpen}
                             variant="contained"
@@ -111,18 +93,7 @@ export default function DatosVendedor() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 800,
-                    bgcolor: 'background.paper',
-                    border: '1px solid #000',
-                    borderRadius: '10px',
-                    boxShadow: 24,
-                    p: 4,
-                }}>
+                <Box className={styleForm.containerForm}>
                     <SellerForm
                         name={oneUser.name}
                         email={oneUser.email}
