@@ -11,6 +11,15 @@ export default function CardCategorias() {
     const { currentUser } = useAuth()
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.allUsers)
+    let allUsersSort = allUsers.sort(function(a, b) {
+        if(a.isAdmin === true && b.isAdmin === false) {
+            return -1;
+        }
+        if(a.isAdmin !== true && b.isAdmin !== false) {
+            return 1;
+        }
+        return 0;
+    })
     useEffect(() => {
         dispatch(getAllUsers(currentUser));
     }, [dispatch, currentUser])
@@ -72,7 +81,7 @@ export default function CardCategorias() {
     return (
         <div className={styles.mainDiv}>
             {
-                allUsers.map(category => {
+                allUsersSort.map(category => {
                     return (
                         <User key={category._id} image={category.image} name={category.name} isAdmin={category.isAdmin} isSeller={category.isSeller} userId={category.userId} handlePasswordReset={handlePasswordReset} id={category._id} handleUserToAdmin={handleUserToAdmin} banned={category.banned} handleOpen={handleOpen} handleUserdelete={handleUserdelete} />
                     )
