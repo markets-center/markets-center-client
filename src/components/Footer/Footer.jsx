@@ -1,4 +1,4 @@
-import { Typography, Container, Link, Box } from "@mui/material/Typography";
+import { Typography, Container, Link, Box } from "@mui/material";
 
 import "./Footer.css";
 
