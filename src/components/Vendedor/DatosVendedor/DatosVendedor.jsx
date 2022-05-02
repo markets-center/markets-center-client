@@ -15,14 +15,14 @@ export default function DatosVendedor() {
 
     return (
         <>
-            <Container sx={{
-                height: '250px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '10px',
-                borderBottom: '2px solid black'
-            }}>
+//             <Container sx={{
+//                 height: '250px',
+//                 display: 'flex',
+//                 alignItems: 'center',
+//                 justifyContent: 'center',
+//                 marginTop: '10px',
+//                 borderBottom: '2px solid black'
+//             }}>
                 <Container sx={{
                     height: '250px',
                     display: 'flex',
