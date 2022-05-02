@@ -51,6 +51,7 @@ export default function CardVendedor({
           width: "250px",
           display: "flex",
           flexDirection: "column",
+          marginLeft: '20px'
         }}
       >
         <Typography
@@ -74,10 +75,9 @@ export default function CardVendedor({
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
         }}
       >
-        <div >
           <Tooltip title="Reponer" arrow>
             <IconButton
               name={nombre}
@@ -102,7 +102,6 @@ export default function CardVendedor({
               <Block sx={!banned ? { color: "#E2001A" } : { color: '#6bf178' }} />
             </IconButton>
           </Tooltip>
-        </div>
       </Box>
       <AddProduct
         prodId={prodId}
