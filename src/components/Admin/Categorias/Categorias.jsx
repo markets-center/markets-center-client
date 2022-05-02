@@ -12,7 +12,6 @@ import { getAllCategories } from '../../../redux/actions/a.category.js'
 import { adminAddCategory } from '../../../redux/actions/a.admin.js'
 import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 //
-
 export default function Categorias(){
     // READ CATEGORIES
     const {currentUser} = useAuth()
