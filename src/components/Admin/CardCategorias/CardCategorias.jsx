@@ -73,7 +73,7 @@ export default function CardCategorias({ categories, handleOpen, handleClose, in
                                         value={category.banned}
                                         onClick={() => handleCategoryStatus(category.banned, category._id)} // Modificar action !!
                                     >
-                                        <Block sx={{ color: '#E2001A' }} />
+                                        <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar" arrow>

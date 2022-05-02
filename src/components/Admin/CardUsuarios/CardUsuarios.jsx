@@ -25,6 +25,7 @@ export default function CardCategorias() {
         dispatch(upgradeUser(event.currentTarget.getAttribute('id'), hola, currentUser))
     }
     const [banObj, setBanObj] = useState({reason: '', banned: false})
+    const [render, setRender] = useState('');
     const [id, setId] = useState('')
     const [open, setOpen] = useState(false);
     const handleOpen = (id, ban) => {
@@ -39,6 +40,7 @@ export default function CardCategorias() {
             ...banObj,
             banned: true
         })
+        setRender('renderizateMierda')
     };
     const handleClose = () => {
         setBanObj({reason: '', banned: false})
@@ -107,7 +109,7 @@ export default function CardCategorias() {
                                 </Tooltip>
                                 <Tooltip title={category.banned ? "Habilitar Usuario" : "Suspender Usuario"}arrow>
                                     <IconButton
-                                        onClick={() => handleOpen(category._id, category.banned)} // Modificar action !!
+                                        onClick={() => handleOpen(category._id, category.banned)}
                                     >
                                         <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
                                     </IconButton>
