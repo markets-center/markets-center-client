@@ -16,7 +16,7 @@ function SellerForm({name, email, image, IdDocument, phone, address, userId, del
   const [state, setState] = useState({name:name, email: email, image: image, IdDocument:IdDocument, phone:phone, address: address, userId: userId, uploadImg:false, delivery: delivery})
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {updateEmail} = useAuth();
+    const {updateEmail, currentUser} = useAuth();
 
   function handleUserType(e) {
     setState({...state, delivery: !state.delivery})
@@ -39,7 +39,7 @@ function SellerForm({name, email, image, IdDocument, phone, address, userId, del
     if(email !== state.email) {
       updateEmail(state.email)
     }
-    dispatch(updateUser(state));
+    dispatch(updateUser(state, currentUser));
     handleClose()
     navigate('/Profile')
   }

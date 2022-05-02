@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
+import {setAlert} from '../../redux/actions/a.alert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { IconButton } from "@mui/material";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
@@ -9,10 +10,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Detail from './Detail/Detail'
-import { addOrderCar } from '../../redux/actions/a.order.js'
+import {addFav, delFav} from '../../redux/actions/a.favs'
 import Tooltip from '@mui/material/Tooltip';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
 import accounting from 'accounting'
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import {useAuth} from '../../context/AuthContext';
+import { getOrUpdateCart } from '../../redux/actions/a.cart.js';
 
 const style = {
     position: 'absolute',
@@ -27,17 +32,22 @@ const style = {
     p: 4,
 };
 
-export default function Card({ name, price, image, description, stock, category, id, rating, numReviews }) { //deberia recibir props para renderizar segun los productos
+
+export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, isFav, reviews }) { //deberia recibir props para renderizar segun los productos
 
     const [hover, setHover] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [tooltip, setTooltip] = useState(false);
-
+    const {currentUser} = useAuth()
+    const favs = useSelector(state => state.favs)
+    const [favorito, setFavorito] = useState(favs.includes(id));
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.addOrdercar);
-    const [product, setProduct] = useLocalStorage("products", '');
+    const idCarUser = currentUser && currentUser.uid;
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
+    const allProducts = useSelector((state) => state.allProducts);
+    const dataCarUser  = useSelector((state) => state.addOrdercar);
 
     function moreInfo(e) {
         setHover(true)
@@ -46,22 +56,86 @@ export default function Card({ name, price, image, description, stock, category,
         setHover(false)
     }
 
-    const findItem = product.find((f) => f.id === id)
-
     function addToCar(id, price, name, image, stock) {
-        const obj = { id, name, price, image, quanty: 1, amount: price, stock}
-        if (findItem) {
-            return setTooltip(true)
+        const findProduct = allProducts.filter((f) => f._id === id);
+        
+        const objCarTemp = findProduct.map((i) => {
+            return {
+                productId: i._id,
+                name: i.name,
+                image: i.image,
+                price: i.price,
+                stock: i.stock,
+                quantity: 1,
+                amount: i.price
+            }
+        }) 
+        
+        if(currentUser){
+            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
+            if(findRepeatItems) return setTooltip(true);
+            const oldProducts = dataCarUser.products.map((old) => {
+                return {
+                    productId: old.productId._id,
+                    quantity: 1,
+                }
+            })
+            const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
+            const obj = {
+                idUser: currentUser._delegate.uid,
+                products: [...oldProducts, ...objCarTemp],
+                amount: dataCarUser.amount + newAmount
+            }
+            dispatch(getOrUpdateCart(obj, currentUser));
+            console.log("funciono?: ", obj)
+        }else{
+            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
+            const findrepeat = objTemp.find((f) => f.productId === id);
+            if(findrepeat) return setTooltip(true);
+            setProductsTemp([...objTemp, ...objCarTemp]);
         }
-        dispatch(addOrderCar(obj))
+    }
+
+    function addFavs() {
+        if(currentUser) {
+            dispatch(addFav(id, currentUser))
+            dispatch(setAlert('Agregado a favorito'))
+            setFavorito(true)
+        } else {
+            dispatch(setAlert('Debes estar logueado para agregar favoritos'))
+        }
+    }
+
+    function delFavs() {
+        dispatch(delFav(id, currentUser))
+        dispatch(setAlert('Producto eliminado de favoritos'))
+        setFavorito(false)
     }
 
     useEffect(() => {
-        return items.length? setProduct(items) : product
-    }, [items])
+        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
+        else return false
+    }, [])
+
+    useEffect(() => {
+        if(currentUser){
+            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
+            if(objTemp.length){
+                dispatch(getOrUpdateCart({
+                    idUser: idCarUser,
+                    products: objTemp,
+                    amount: objTemp.reduce((sum, value) => sum+value.amount, 0)
+                }, currentUser));
+                setProductsTemp([]);
+            }
+        }else{
+            return false
+        }
+    }, [])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
+            <div>{favorito?<Button onClick={delFavs}><Favorite  color="primary"/></Button>:<Button onClick={addFavs}><FavoriteBorder  color="primary"/></Button>}</div>
             <div className={s.img}>
                 {stock > 0 ? <img src={image} width="200px" height="200px" alt="producto" /> :
                     <img src={image} width="200px" height="200px" alt="producto" className={s.sinStock} />}
@@ -110,7 +184,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} />
+                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews}/>
                     </Box>
                 </Modal>
             </div>

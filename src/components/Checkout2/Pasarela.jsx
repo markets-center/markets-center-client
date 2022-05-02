@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import {CardElement, Elements, useElements, useStripe} from '@stripe/react-stripe-js';
+import {useAuth} from '../../context/AuthContext'
 import {loadStripe} from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51KrNS9BcSGVJjPzhJcb9v599F0HLdJl9aAF87RBVZY1gIwHyC1zegNKiyvDXTjuAdH3hyn7eSsCE82Vw3blNIfx400EZ4eeSGc')
 
 console.log(stripePromise)
 const CheckoutForm = () => {
+    const {currentUser} = useAuth()
+    const token= currentUser.auth.currentUser.accessToken
     const stripe = useStripe()
     const element = useElements()
     
@@ -23,6 +26,10 @@ const CheckoutForm = () => {
                 const { data } = await axios.post("/api/public/payment", {
                     id: paymentMethod.id,
                     amount: 100
+                },{
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 })
                 console.log(data)
 

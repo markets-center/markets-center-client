@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { useDispatch } from 'react-redux';
-// import { adminAddCategory } from '../../../redux/actions/a.admin.js'
-// import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 
 import styles from './AddCategori.module.css'
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";

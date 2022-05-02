@@ -80,7 +80,7 @@ function BuyerForm() {
       dateOfBirth: selectedDate
     };
     validateForm(userData)
-    dispatch(postNewUser(userData));
+    dispatch(postNewUser(userData, currentUser));
     navigate('/');
   }
 

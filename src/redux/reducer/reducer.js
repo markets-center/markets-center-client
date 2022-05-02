@@ -34,7 +34,11 @@ import {
     EMPTY_CART,
     GET_OR_UPDATE_CART,
     DEL_ONE_USER,
-    ORDER_FILTERED
+    ORDER_FILTERED,
+    GET_FAVS,
+    GET_FAV_DETAIL,
+    GET_ALL_ORDERS,
+
 
 } from '../actions/ctes'
 
@@ -62,7 +66,9 @@ const initialState = {
     loading: false,
     alert: '',
     payment: [],
-    review: []
+    review: [],
+    favs:[],
+    favsDetail:[]
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -90,6 +96,7 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 addedProduct: action.payload,
+                productsBySeller: action.payload
             }
         case GET_PROTUCT_BY_NAME:
             return {
@@ -177,6 +184,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 history: action.payload,
             }
+        case GET_ALL_ORDERS:
+            return {
+                ...state,
+                history: action.payload
+            }
         case RESET_SLIDERS:
             return {
                 ...state,
@@ -257,6 +269,16 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 addOrdercar: action.payload
+            }
+        case GET_FAVS:
+            return {
+                ...state,
+                favs: action.payload
+            }
+        case GET_FAV_DETAIL:
+            return {
+                ...state,
+                favsDetail: action.payload
             }
         default:
             return {

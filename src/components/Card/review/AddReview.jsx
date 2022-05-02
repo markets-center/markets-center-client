@@ -47,7 +47,7 @@ export default function AddReview({id, children}) {
     }
 
     function handleSubmit(e) {
-        dispatch(createProductReview(id, input));
+        dispatch(createProductReview(id, input, currentUser));
         setInput({
             rating: 0,
             comment: ""

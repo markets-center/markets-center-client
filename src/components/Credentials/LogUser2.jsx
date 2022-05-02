@@ -44,8 +44,12 @@ export default function LogUser2() {
             setError("");
             setErrorMail("");
             setLoading(true);
-            await login(user.email, user.password);
-            navigate("/");
+            login(user.email, user.password)
+            .then((userDB)=>{
+                userDB.data.data[0].isAdmin && navigate('/Admin')
+                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+            })
         } catch (error) {
             setError("Credenciales invalidas");
         }
@@ -54,16 +58,29 @@ export default function LogUser2() {
 
     async function regWithGoogle() {
         try {
-            const user = await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-            const userDB = await axios.get(`/api/private/users/byid/${user.user.uid}`)
-            console.log(userDB)
-            localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-            localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
-            if(userDB.data.success){
-                navigate("/User")
-            }else {
+            auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            .then(user => {
+                const token = user.user.auth.currentUser.accessToken
+                return axios.get(`/api/private/users/byid/${user.user.uid}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+            })
+            .then(userDB=>{
+                if(!userDB.data.success) {
+                    
+                } else {
+                localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
+                localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+                userDB.data.data[0].isAdmin && navigate('/Admin')
+                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+                }
+            })
+            .catch(()=>{
                 navigate("/buyerForm");
-            }
+            })
             
         } catch (error) {
             setError("Credenciales invalidas");

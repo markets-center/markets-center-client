@@ -3,8 +3,8 @@ import React from 'react';
 
 import styles from './ListItem.module.css'
 import DefaultUser from '../../../images/defaultUser.png'
-import { IconButton } from '@mui/material'
-import { AddBox } from '@mui/icons-material'
+import { IconButton, Tooltip } from '@mui/material'
+import { AddBox, LocalShipping } from '@mui/icons-material'
 
 export default function ListItem({element, openMore, detail, handleOpenMore, handleCloseMore}){
     const clientName = element.userId
@@ -31,9 +31,19 @@ export default function ListItem({element, openMore, detail, handleOpenMore, han
                     <div className={styles.right}>
                         <p>{`Estado: ${element.status}`}</p>
                         <p>{`Total: $${element.amount}`}</p>
+                        
+                        <Tooltip title="Despachar" arrow>
+                        <IconButton 
+                        // onClick={()=>handleOpenMore(element)}
+                        >
+                            <LocalShipping />
+                        </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Detalle" arrow>
                         <IconButton onClick={()=>handleOpenMore(element)}>
                             <AddBox />
                         </IconButton>
+                        </Tooltip>
                     </div>
                 </div>
         }

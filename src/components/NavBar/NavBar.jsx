@@ -25,22 +25,33 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
+import Favorite from '@mui/icons-material/Favorite';
 import Stack from '@mui/material/Stack';
 import { Person } from '@mui/icons-material';
 import Badge from '@mui/material/Badge';
+
+import { getOrUpdateCart } from '../../redux/actions/a.cart.js';
 
 export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
     
-    const temp = window.localStorage.getItem('products');
-    const countItemsCarTemp = temp && JSON.parse(temp);
-    let counter = countItemsCarTemp && countItemsCarTemp.length;
+    const temp = localStorage.getItem("productsTemp");
+    const countItemCarUser = useSelector((state) => state.addOrdercar);
+    const items = countItemCarUser && countItemCarUser.products;
+    let countItem = items?.length; 
+    const idCarUser = currentUser && currentUser.uid
+    const count = temp && JSON.parse(temp);
+    const counter = count ? count.length : 0;
     
     async function logoutHandler() {
         await logout();
         navigate('/')
+    }
+
+    function favsHandler(){
+        navigate('/favoritos')
     }
 
     function handleSelect() {
@@ -61,10 +72,8 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     };
     
     useEffect(() => {
-        if(!window.localStorage.getItem('products')){
-            window.localStorage.setItem('products', '[]')
-        }
-    },[])
+        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
+    }, [])
 
     return (
         <AppBar position="static" >
@@ -90,7 +99,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                                 size="small"
                                                 sx={{ ml: 2 }}
                                                 color="white">
-                                                <Badge color="secondary" badgeContent={counter}>
+                                                <Badge color="secondary" badgeContent={counter || countItem}>
                                                     <LocalGroceryStoreOutlinedIcon />
                                                 </Badge>
                                             </IconButton>
@@ -155,12 +164,20 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                         (
                                             <div>
                                                 <Divider />
+                                                <MenuItem onClick={favsHandler}>
+                                                    <ListItemIcon>
+                                                        <Favorite />
+                                                    </ListItemIcon>Favoritos
+
+                                                </MenuItem>
+                                                <Divider />
                                                 <MenuItem onClick={logoutHandler}>
                                                     <ListItemIcon>
                                                         <Logout />
                                                     </ListItemIcon>Cerrar sesión
 
                                                 </MenuItem>
+                                                
                                             </div>
                                         )
                                 }

@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Container, Box, Typography, Button } from "@mui/material";
+
 // import { useAuth } from "../../context/AuthContext";
 import { useSelector } from "react-redux";
 import ResetPass from './ResetPass'
@@ -10,21 +11,8 @@ import style from './Style/User.module.css'
 import Modal from '@mui/material/Modal';
 import UserForm from './UserForm'
 
-  const stylePass = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '550px',
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
-    borderRadius: '10px',
-    boxShadow: 24,
-    p: 4,
-  };
-
 export default function UserData() {
-//   const { oneUser } = useAuth();
+  //   const { oneUser } = useAuth();
   const oneUser = useSelector(state => state.oneUser)
 
   const [open, setOpen] = useState(false);
@@ -54,18 +42,19 @@ export default function UserData() {
               alignItems: "center",
             }} */
           >
-            <Box
-              sx={{
-                marginBottom: "25px",
-              }}
-            >
-              <Typography variant="h3">{oneUser.name}</Typography>
+            <Box sx={{
+            }}>
+              <Typography variant='h6' sx={{
+                fontWeight: 'bold'
+              }}>
+                {oneUser.name}
+              </Typography>
             </Box>
             <Box>
               <img
                 src={oneUser.image}
                 alt=""
-                tyle={{width: "150px",borderRadius: "50%"}}
+                style={{ width: "150px", borderRadius: "50%", objectFit: 'cover' }}
               />
             </Box>
           </Container>
@@ -79,7 +68,7 @@ export default function UserData() {
                 justifyContent: "space-evenly",
               }}
             >
-              <Box sx={{display: "inline"}}>
+              <Box sx={{ display: "inline" }}>
                 <Typography component="h5" variant="h5">Dirección:</Typography>
                 <Typography >{oneUser.address}</Typography>
               </Box>
@@ -97,7 +86,7 @@ export default function UserData() {
               }}
             >
               <Box>
-                <Typography component="h5" variant="h5">e-mail: </Typography>
+                <Typography component="h5" variant="h5">E-mail: </Typography>
                 <Typography >{oneUser.email}</Typography>
               </Box>
               <Box>

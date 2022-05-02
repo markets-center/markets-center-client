@@ -60,11 +60,16 @@ export function filterBySellerAndCategories(id, idcategories) {
     }
 }
 
-export function deleteProduct(id) {
+export function deleteProduct(id, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
             dispatch({type: LOADING_ON});
-            const result = await axios.delete(`/api/public/product/${id}`);
+            const result = await axios.delete(`/api/public/product/${id}`, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({ type: SET_ALERT, payload: result.data.msg })
             dispatch({type: LOADING_OFF});
         } catch (err) {
@@ -158,11 +163,16 @@ export function idActiveCategory(id) {
     }
 }
 
-export function createProductReview(productId, review) {
+export function createProductReview(productId, review, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
             dispatch({type: LOADING_ON});
-            const response = await axios.post(`/api/public/product/${productId}/review/add`, review);
+            const response = await axios.post(`/api/public/product/${productId}/review/add`, review, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({ type: SET_ALERT, payload: response.data.msg })
             dispatch({ type: POST_REVIEW, payload: response.data.data })
             dispatch({type: GET_ALL_PRODUCTS,payload: response.data.data})

@@ -38,11 +38,11 @@ export default function Filters({ home, admin, value, setValue }) {
     e.preventDefault()
     // let category = categories.length === 0 ? e.target.textContent : '-' + e.target.textContent
     // setCategories((prev) => prev + e.target.textContent);
-    // setSelected(newValue);
+    setSelected(newValue);
     dispatch(idActiveCategory(e.target.textContent))
-    if(idSeller){
+    if (idSeller) {
       dispatch(filterBySellerAndCategories(idSeller, e.target.textContent));
-    }else{
+    } else {
       dispatch(filterBySellerAndCategories("", e.target.textContent));
       dispatch(idActiveSeller())
     }

@@ -15,10 +15,10 @@
   border: 2px solid #EEEEEE;
 }
 
-.item{
+.item {
   width: 100%;
   height: 100%;
-  
+
 }
 
 .content-img {
@@ -26,11 +26,13 @@
   justify-content: center;
   align-items: center;
 }
+
 .img-item {
   width: 100%;
   height: auto;
   border-radius: 50px;
 }
+
 @supports (object-fit: cover) {
   .img-item {
     height: 100%;
@@ -44,9 +46,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .item-tittle {
   width: 100%;
 }
+
 .desc-item {
   width: 50%;
   min-width: 110px;
@@ -55,12 +59,12 @@
   align-items: center;
 }
 
-.item-count{
+.item-count {
   display: flex;
-  
+
 }
 
-.btn{
+.btn {
   border: 1px solid #7FACD4;
   text-align: center;
   color: #005BAA;
@@ -69,19 +73,22 @@
   font-weight: bold;
   cursor: pointer;
 }
-.btn-add{
+
+.btn-add {
   font-size: 1.5rem;
 }
-.btn-res{
+
+.btn-res {
   font-size: 1.5rem;
 }
-.lb-count{
+
+.lb-count {
   width: 18px;
   height: 27px;
   cursor: auto;
 }
 
-.btn-remove{
+.btn-remove {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,16 +107,18 @@
   flex-direction: column;
   align-items: center;
 }
-.content-pay{
+
+.content-pay {
   width: 100%;
   text-align: center;
   margin: 10px;
 }
-.tittle-pay{
+
+.tittle-pay {
   display: flex;
 }
 
-.lb-content{
+.lb-content {
   display: flex;
   width: 40%;
   flex-direction: column;
@@ -118,22 +127,21 @@
   margin-top: 2px;
 }
 
-.MuiTypography-body2{
+.MuiTypography-body2 {
   padding-top: 3px;
   font-weight: bolder;
 }
 
-.MuiTypography-body1{
-  color: #005BAA;
+.MuiTypography-body1 {
   font-weight: 900;
 }
 
-hr{
+hr {
   width: 80%;
   border-color: #7FACD4;
 }
 
-.MuiDivider-root{
+.MuiDivider-root {
   width: 100%;
 }
 
@@ -151,7 +159,7 @@ hr{
     margin-bottom: 100px;
   }
 
-  .pay-container{
+  .pay-container {
     width: 68%;
     min-width: 340px;
     margin: 20px 0
@@ -164,29 +172,30 @@ hr{
 }
 
 /* ---Loader--- */
-.MuiTypography-h4{
+.MuiTypography-h4 {
   color: #005BAA;
   padding: 10px;
 }
 
-.MuiTypography-subtitle1{
+.MuiTypography-subtitle1 {
   color: #043c6d;
 }
 
-.MuiTypography-caption{
+.MuiTypography-caption {
   color: #3c3d3d;
 }
 
-.btn-return{
+.btn-return {
   padding: 10px;
 }
 
 /* ---label car--- */
 
-.lbl-removeAllCar{
+.lbl-removeAllCar {
   color: #005BAA;
 }
-.lbl-removeAllCar:hover{
+
+.lbl-removeAllCar:hover {
   color: #c5360a;
   font-size: small;
 }

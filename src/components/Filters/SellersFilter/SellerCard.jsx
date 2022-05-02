@@ -13,7 +13,6 @@ const SellerCard = ({ image, name, id }) => {
 
     function handleSelect(e){
         e.preventDefault();
-        console.log(id)
         dispatch(filterBySellerAndCategories(id,""))
         dispatch(idActiveSeller(id))
         
@@ -24,13 +23,13 @@ const SellerCard = ({ image, name, id }) => {
         <div onClick={handleSelect}>
             <Container sx={{
                 marginTop: '10px',
-                height: '100px',
+                height: 'auto',
+                paddingTop: '13px',
                 display: 'flex',
                 alignItem: 'center',
                 justifyContent: 'space-around',
                 cursor: 'pointer',
                 flexDirection: 'column',
-                maxWidth: '100%'
             }}
             className={s.container}>
                 <Avatar

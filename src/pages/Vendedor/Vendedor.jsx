@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
 import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
 import {delAlert} from '../../redux/actions/a.alert'
@@ -21,6 +21,7 @@ import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
     const alert = useSelector(state => state.alert)
+    const products = useSelector(state => state.productsBySeller, shallowEqual)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
@@ -51,13 +52,13 @@ export default function Vendedor(){
         })
         setOpen(false)
     }
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         if(prodId === null){
-            dispatch(postProduct(input))
+            dispatch(postProduct(input, currentUser))
             handleClose()
         }else{
-            dispatch(updateProduct(input, prodId))
+            await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
         }
         // prodId === null ?
@@ -68,21 +69,23 @@ export default function Vendedor(){
         dispatch(delAlert())
     }
 
+
+
+
     // Products by User
     useEffect(() => {
         dispatch(filterBySellerAndCategories(oneUser?._id))
         setTimeout(() => {
             setLoading(false)
         }, 500);
-    },[oneUser,dispatch])
-    let products = useSelector(state => state.productsBySeller)
-    const removeProduct = (id) => {
-        dispatch(deleteProduct(id))
+    },[dispatch,oneUser])
+
+    const removeProduct = async (id) => {
+        await dispatch(deleteProduct(id, currentUser))
         dispatch(filterBySellerAndCategories(oneUser._id))
-        return products = products.filter(product => product._id !== id)
+        // return products = products.filter(product => product._id !== id)
     }
-    console.log(input)
-    console.log(prodId)
+//ACOMODAR ESTO 
     return (
         <>
         <NavBar />

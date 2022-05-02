@@ -1,11 +1,17 @@
 import axios from 'axios';
 
-import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE} from './ctes'
+import {GET_ALL_CATEGORIES, GET_ALL_USERS, ERRORS, SET_ALERT, MESSAGE, GET_ALL_ORDERS} from './ctes'
 
-export function adminUpdateCategory (id, category) {
+
+export function adminUpdateCategory (id, category, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const allCategories = await axios.put(`/api/admin/categories/${id}`, category);
+            const allCategories = await axios.put(`/api/admin/categories/update/${id}`, category, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: SET_ALERT, payload: allCategories.data.msg});
             dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
@@ -14,10 +20,50 @@ export function adminUpdateCategory (id, category) {
     }
 }
 
-export function adminAddCategory (category) {
+export function adminDisabledCategory (id, currentUser) {
+    const token = currentUser?.auth.currentUser.accessToken
+    console.log(token)
     return async function (dispatch) {
         try {
-            const allCategories = await axios.post('/api/admin/category', category);
+            const allCategories = await axios.put(`/api/admin/categories/disabled/${id}`, null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch({type: SET_ALERT, payload: allCategories.data.msg});
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function adminEnabledCategory (id, currentUser) {
+    const token = currentUser?.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const allCategories = await axios.put(`/api/admin/categories/enabled/${id}`, null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
+            dispatch({type: SET_ALERT, payload: allCategories.data.msg});
+            dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function adminAddCategory (category, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const allCategories = await axios.post('/api/admin/category', category, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: SET_ALERT, payload: allCategories.data.msg})
             dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data.data})
         } catch (err) {
@@ -26,10 +72,15 @@ export function adminAddCategory (category) {
     }
 }
 
-export function adminDeleteCategory (id) {
+export function adminDeleteCategory (id, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const response = await axios.delete(`/api/admin/categories/${id}`);
+            const response = await axios.put(`/api/admin/categories/delete/${id}`, null, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
             dispatch({type:GET_ALL_CATEGORIES, payload:response.data.data})
             dispatch({type: SET_ALERT, payload: response.data.msg})
         } catch (err) {
@@ -38,10 +89,15 @@ export function adminDeleteCategory (id) {
     }
 }
 
-export function getAllUsers(){
+export function getAllUsers(currentUser){
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const users = await axios.get('/api/private/users');
+            const users = await axios.get('/api/admin/users', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: MESSAGE, payload: users.data.msg})
             dispatch({type: GET_ALL_USERS, payload: users.data.data})
         } catch (err) {
@@ -51,10 +107,15 @@ export function getAllUsers(){
 }
 
 
-export function deleteUser(id) {
+export function deleteUser(id, hola, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.delete(`/api/admin/userDelete/${id}`);
+            const result = await axios.put(`/api/admin/userDelete/${id}`, hola, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                  }
+            });
             dispatch({type: SET_ALERT, payload: result.data.msg})
             dispatch({type: GET_ALL_USERS, payload: result.data.data})
         } catch (err) {
@@ -63,10 +124,15 @@ export function deleteUser(id) {
     }
 }
 
-export function upgradeUser(id){
+export function upgradeUser(id, hola, currentUser){
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.put(`/api/admin/userAdmin/${id}`);
+            const result = await axios.put(`/api/admin/userAdmin/${id}`,hola, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             dispatch({type: SET_ALERT, payload: result.data.msg})
             dispatch({type: GET_ALL_USERS, payload: result.data.data})
         } catch (err) {
@@ -75,11 +141,65 @@ export function upgradeUser(id){
     }
 }
 
-export function blockPass(id){
+export function blockPass(id, currentUser){
+    const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.get(`/api/admin/blockPass/${id}`);
+            const result = await axios.get(`/api/admin/blockPass/${id}`, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
             dispatch({type: SET_ALERT, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function allOrders(currentUser){
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const result = await axios.get('/api/admin/allOrders', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
+            dispatch({type: GET_ALL_ORDERS, payload: result.data.data})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function banned(id, motivo, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const result = await axios.put(`/api/admin/banned/${id}`, motivo,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            dispatch({type: SET_ALERT, payload: result.data.msg})
+        } catch (err) {
+            dispatch({type: ERRORS, payload: err.msg})
+        }
+    }
+}
+
+export function getAllAdminCategories(currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const categories = await axios.get('/api/admin/categories', {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            dispatch({type: MESSAGE, payload: categories.data.msg})
+            dispatch({type: GET_ALL_CATEGORIES, payload: categories.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }
