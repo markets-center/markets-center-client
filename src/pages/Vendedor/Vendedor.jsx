@@ -2,9 +2,9 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
-import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
+import { GetAllProductsOfSeller, deleteProduct, disableProduct, enableProduct } from '../../redux/actions/a.products.js';
 import {delAlert} from '../../redux/actions/a.alert'
-import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
+import { updateProduct, postProduct, productBySeller } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
 
@@ -74,17 +74,22 @@ export default function Vendedor(){
 
     // Products by User
     useEffect(() => {
-        dispatch(filterBySellerAndCategories(oneUser?._id))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         setTimeout(() => {
             setLoading(false)
         }, 500);
-    },[dispatch,oneUser])
+    },[dispatch,currentUser])
 
+    function handleDisable(id, banned){
+        banned ? dispatch(enableProduct(id, currentUser)) : 
+            dispatch(disableProduct(id, currentUser))
+    }
     const removeProduct = async (id) => {
         await dispatch(deleteProduct(id, currentUser))
-        dispatch(filterBySellerAndCategories(oneUser._id))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         // return products = products.filter(product => product._id !== id)
     }
+    console.log(products)
 //ACOMODAR ESTO 
     return (
         <>
@@ -168,10 +173,12 @@ export default function Vendedor(){
                                             precio={producto.price}
                                             category={producto.category}
                                             description={producto.description}
+                                            banned={producto.banned}
                                             handleClose={handleClose}
                                             handleOpen={handleOpen}
                                             handleSubmit={handleSubmit}
                                             removeProduct={removeProduct}
+                                            handleDisable={handleDisable}
                                             input={input}
                                             setInput={setInput}
                                             prodId={prodId}
