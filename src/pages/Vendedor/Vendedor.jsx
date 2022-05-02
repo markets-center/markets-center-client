@@ -6,7 +6,6 @@ import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/
 import {delAlert} from '../../redux/actions/a.alert'
 import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
-import style from './Vendedor.module.css'
 // import { postProduct } from '../../../redux/actions/a.seller.js'
 
 import { useAuth } from '../../context/AuthContext'
@@ -16,7 +15,8 @@ import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 // import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
-import { Container, Typography, Button, Box, Snackbar } from '@mui/material'
+import { Container, Typography, Button } from '@mui/material'
+import {Snackbar} from '@mui/material';
 import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
@@ -103,27 +103,45 @@ export default function Vendedor(){
                         phone={oneUser.phone}
                         image={oneUser.image}
                         />
-            <Container className={style.containerMain}>
-                <Container className={style.tusProductos}>
+            <Container sx={{
+                height: '500px',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+                borderRadius: '10px',
+            }}>
+                <Container sx={{
+                    height: '70px',
+                    margin: '5px 0',
+                    display: 'flex',
+                    borderBottom: '2px solid black',
+                    alignItems: 'center',
+                }}>
                     <Typography variant="h6">
                         TUS PRODUCTOS
                     </Typography>
-                   <Box className={style.botones}>
                     <Button 
-                            onClick={() => navigate('/orderHistory')}
-                            variant="contained" 
-                            color="primary" 
+                        onClick={() => navigate('/orderHistory')}
+                        variant="contained" 
+                        color="primary" 
+                        sx={{
+                            left: '700px',
+                            fontWeight: '600',
+                        }}
                     >
-                            Ventas
-                        </Button>
-                        <Button 
-                            onClick={handleOpen}
-                            variant="contained" 
-                            color="info" 
+                        Ventas
+                    </Button>
+                    <Button 
+                        onClick={handleOpen}
+                        variant="contained" 
+                        color="info" 
+                        sx={{
+                            left: '720px',
+                            fontWeight: '600',
+                        }}
                     >
-                            Agregar
-                        </Button>
-                   </Box>
+                        Agregar
+                    </Button>
                     <AddProduct 
                         prodId={prodId}
                         input={input}
@@ -133,7 +151,14 @@ export default function Vendedor(){
                         handleSubmit={handleSubmit}
                     />
                 </Container>
-                <Container className={style.productos}>
+                <Container sx={{
+                height: '335px',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+                overflow: 'auto',
+                borderRadius: '10px'
+            }}>
                 {loading ? <img src={spinner} alt="" style={{width: '150px', height: 'max-content'}} /> : products.length ? products.map((producto, id) => <CardVendedor 
                                             key={id}
                                             id={producto._id}

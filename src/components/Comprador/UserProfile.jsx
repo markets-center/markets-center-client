@@ -51,7 +51,7 @@ function UserProfile() {
     <div>
       <Container maxWidth="md">
         <Typography
-          sx={{ mt: 2, mb: 2, display: "block" }}
+          sx={{ mt: 4, mb: 2, display: "block" }}
           variant="h4"
           component="div"
         >
@@ -78,6 +78,7 @@ function UserProfile() {
           )}
         </List>
       </Container>
+
       <Dialog
         open={openMore}
         onClose={handleCloseMore}
@@ -189,7 +190,8 @@ function UserProfile() {
       >
         <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} />
       </Dialog>
-      </div>
+
+    </div>
   );
 }
 export default UserProfile;
