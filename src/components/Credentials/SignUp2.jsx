@@ -55,8 +55,12 @@ export default function SignUp2() {
       setError("");
       setErrorMail("");
       setLoading(true);
-      await signup(user.email, user.password, seller);
-      seller ? navigate("/sellerForm") : navigate("/buyerForm");
+      signup(user.email, user.password, seller)
+        .then(() => {
+          seller ? navigate("/sellerForm") : navigate("/buyerForm");
+        }).catch(() => {
+          setError("Error al crear una cuenta")
+        })
     } catch (error) {
       setError("Error al crear una cuenta");
     }
@@ -64,12 +68,12 @@ export default function SignUp2() {
   }
 
   async function regWithGoogle() {
-      try {
-          await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-          seller ? navigate("/sellerForm") : navigate("/buyerForm"); 
-      } catch (error) {
-        setError("Error al crear una cuenta");
-      }
+    try {
+      await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      seller ? navigate("/sellerForm") : navigate("/buyerForm");
+    } catch (error) {
+      setError("Error al crear una cuenta");
+    }
   }
 
   return (
@@ -112,6 +116,7 @@ export default function SignUp2() {
             Contraseña
           </label>
           <Input
+            autoComplete="new-password"
             className={css.input}
             margin="normal"
             required
@@ -127,6 +132,7 @@ export default function SignUp2() {
             Confirmar contraseña
           </label>
           <Input
+            autoComplete="new-password"
             className={css.input}
             margin="normal"
             required
@@ -144,7 +150,7 @@ export default function SignUp2() {
           )}
           <span className={css.olvidePass}>
             <Link to="/OlvidoPass" variant="body2">
-              Olvidé mi contraseña
+              ¿Olvidaste tu contraseña?
             </Link>
           </span>
           <Button
@@ -169,7 +175,7 @@ export default function SignUp2() {
           </Button>
         </form>
         <span className={css.text_footer}>
-          ¿Ya tienes una cuenta? <Link to="/Login">Log in</Link>
+          ¿Ya tienes una cuenta? <Link to="/Login">Inicia sesión</Link>
         </span>
       </div>
       <div className={css.content_image}>
@@ -186,7 +192,7 @@ export default function SignUp2() {
       >
         <SnackbarAlert
           onClose={handleClose}
-          color="primary"
+          color="error"
           variant="filled"
           severity="error"
         >
@@ -204,7 +210,7 @@ export default function SignUp2() {
       >
         <SnackbarAlert
           onClose={handleClose}
-          color="primary"
+          color="error"
           variant="filled"
           severity="error"
         >

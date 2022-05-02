@@ -1,9 +1,11 @@
 import loading from '../../images/MarketsCenterLoading.gif'
 import Grid from '@mui/material/Grid';
+import style from './Loading.module.css'
 
 export default function Loading() {
     return (
         <Grid
+            className={style.loading}
             container
             spacing={0}
             direction="column"

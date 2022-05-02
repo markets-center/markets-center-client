@@ -22,8 +22,8 @@ function RenderBusquedas() {
     const [current, setCurrent] = useState(1);
     const [seller, setSeller] = useState(idSeller);
     const [category, setCategory] = useState(nameCategory);
-    const indexLast = current * 13;
-    const indexFirst = indexLast - 13;
+    const indexLast = current * 15;
+    const indexFirst = indexLast - 15;
     const currentProducts = products.slice(indexFirst, indexLast);
     const currentFiltered = filtered.slice(indexFirst, indexLast);
       // const favs = useSelector(state => state.favs)
@@ -65,7 +65,7 @@ function RenderBusquedas() {
                     <div className={s.productsContainer}>
                         {currentFiltered.map(p => <Card 
                         reviews={p.reviews}
-                        key={p.name}
+                        key={p._id}
                         name={p.name}
                         price={p.price}
                         image={p.image}
@@ -87,7 +87,7 @@ function RenderBusquedas() {
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
                         reviews={p.reviews}
-                        key={p.name}
+                        key={p._id}
                         name={p.name}
                         price={p.price}
                         image={p.image}

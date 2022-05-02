@@ -1,0 +1,19 @@
+.container {
+    margin-top: 10px ;
+    height: 170px ;
+    display: flex !important;
+    align-items: center ;
+    justify-content: space-around ;
+    word-wrap: break-word ;
+    overflow-x: auto ;
+    white-space: nowrap ;
+}
+
+@media all and (max-width: 500px) {
+    .container {
+        max-width: 400px !important;
+        justify-content: space-between !important;
+        padding: 0 !important;
+        margin: 20px auto
+    }
+}

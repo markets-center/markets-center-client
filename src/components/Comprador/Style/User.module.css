@@ -47,7 +47,7 @@
 .containerInfo {
     width: 1400px;
     height: 200px;
-    margin: 0 50px !important;
+    margin: 0;
     display: flex !important;
     align-items: center;
 }

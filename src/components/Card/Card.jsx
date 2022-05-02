@@ -19,7 +19,7 @@ import Favorite from '@mui/icons-material/Favorite';
 import {useAuth} from '../../context/AuthContext';
 import { getOrUpdateCart } from '../../redux/actions/a.cart.js';
 
-const style = {
+/* const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -30,7 +30,7 @@ const style = {
     borderRadius: '10px',
     boxShadow: 24,
     p: 4,
-};
+}; */
 
 
 export default function Card({ name, price, image, description, stock, category, id, rating, numReviews, isFav, reviews }) { //deberia recibir props para renderizar segun los productos
@@ -141,7 +141,7 @@ export default function Card({ name, price, image, description, stock, category,
     
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
-            <div>{favorito?<Button onClick={delFavs}><Favorite  color="primary"/></Button>:<Button onClick={addFavs}><FavoriteBorder  color="primary"/></Button>}</div>
+            <div>{favorito?<IconButton onClick={delFavs}><Favorite  color="primary"/></IconButton>:<IconButton onClick={addFavs}><FavoriteBorder  color="primary"/></IconButton>}</div>
             <div className={s.img}>
                 {stock > 0 ? <img src={image} width="200px" height="200px" alt="producto" /> :
                     <img src={image} width="200px" height="200px" alt="producto" className={s.sinStock} />}
@@ -189,7 +189,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                    <Box sx={style}>
+                    <Box className={s.detail} /* sx={style} */>
                         <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews}/>
                     </Box>
                 </Modal>

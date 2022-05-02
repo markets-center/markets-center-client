@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import logo from '../../images/Markets Center.svg'
 import css from './SignUp.module.css';
@@ -9,8 +9,8 @@ import axios from 'axios';
 
 import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../firebase";
-import {Button, Input, Typography, Snackbar} from "@mui/material";
-import {SnackbarAlert} from '../../components/Alert/success';
+import { Button, Input, Typography, Snackbar } from "@mui/material";
+import { SnackbarAlert } from '../../components/Alert/success';
 
 export default function LogUser2() {
     const [user, setUser] = useState({
@@ -27,7 +27,7 @@ export default function LogUser2() {
         setUser({ ...user, [e.target.name]: e.target.value });
     }
 
-    function handleClose(){
+    function handleClose() {
         setError('');
         setErrorMail('')
     }
@@ -40,16 +40,18 @@ export default function LogUser2() {
         if (user.password === '') {
             return setError("Se debe ingresar contraseña");
         }
+
         try {
             setError("");
             setErrorMail("");
             setLoading(true);
             login(user.email, user.password)
-            .then((userDB)=>{
-                userDB.data.data[0].isAdmin && navigate('/Admin')
-                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
-            })
+                .then((userDB) => {
+
+                    userDB.data.data[0].isAdmin && navigate('/Admin')
+                    !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                    !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+                }).catch(() => setError("Credenciales invalidas"))
         } catch (error) {
             setError("Credenciales invalidas");
         }
@@ -59,29 +61,29 @@ export default function LogUser2() {
     async function regWithGoogle() {
         try {
             auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .then(user => {
-                const token = user.user.auth.currentUser.accessToken
-                return axios.get(`/api/private/users/byid/${user.user.uid}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                .then(user => {
+                    const token = user.user.auth.currentUser.accessToken
+                    return axios.get(`/api/private/users/byid/${user.user.uid}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                })
+                .then(userDB => {
+                    if (!userDB.data.success) {
+
+                    } else {
+                        localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
+                        localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+                        userDB.data.data[0].isAdmin && navigate('/Admin')
+                        !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
+                        !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
                     }
                 })
-            })
-            .then(userDB=>{
-                if(!userDB.data.success) {
-                    
-                } else {
-                localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-                localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
-                userDB.data.data[0].isAdmin && navigate('/Admin')
-                !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
-                }
-            })
-            .catch(()=>{
-                navigate("/buyerForm");
-            })
-            
+                .catch(() => {
+                    navigate("/buyerForm");
+                })
+
         } catch (error) {
             setError("Credenciales invalidas");
         }
@@ -93,16 +95,16 @@ export default function LogUser2() {
                 <img src={logo} alt='logo MC' className={css.loguito} />
                 <h1 className={css.tittle}>INICIAR SESIÓN</h1>
                 {/* <p className={css.text}>Ingrese al sistema si ya está registrado.</p> */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autocomplete="on">
                     <label className={css.label} htmlFor="">Correo electrónico</label>
                     <Input
                         className={css.input}
                         type="email"
-                        required
                         id="email"
                         label="Email"
                         name="email"
                         autoComplete="email"
+                        required
                         autoFocus
                         onChange={handleChange}
                     />
@@ -114,9 +116,10 @@ export default function LogUser2() {
                     <label className={css.label} htmlFor="">Contraseña</label>
                     <Input
                         type="password"
+                        autoComplete="current-password"
                         className={css.input}
-                        required
                         name="password"
+                        required
                         label="Contraseña"
                         id="password"
                         onChange={handleChange}
@@ -127,7 +130,7 @@ export default function LogUser2() {
                         </Typography>
                     )}
                     <span className={css.olvidePass}>
-                        <Link to="/OlvidoPass" variant="body2">Olvidé mi contraseña</Link>
+                        <Link to="/OlvidoPass" variant="body2">¿Olvidaste tu contraseña?</Link>
                     </span>
                     <Button variant="contained" sx={{ mt: 3, mb: 2, color: 'white' }} className={css.btn} type="submit" disabled={loading} >Iniciar Sesión</Button>
                     <Button variant="contained" sx={{ mt: 3, mb: 2, color: 'black' }} className={css.btnGoogle} onClick={regWithGoogle} type="submit" disabled={loading}><GoogleIcon fontSize="small" />&nbsp; Ingresar con Google</Button>

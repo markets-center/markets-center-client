@@ -18,8 +18,8 @@ import Register from "../src/pages/Register/Register";
 import Error from "../src/components/Error/Error";
 import Footer from "../src/components/Footer/Footer";
 import Vendedor from "../src/pages/Vendedor/Vendedor";
-import SellerForm from './pages/UserData/SellerForm'
-import BuyerForm from './pages/UserData/BuyerForm'
+import SellerForm from './pages/UserData/SellerForm2'
+import BuyerForm from './pages/UserData/BuyerForm2'
 import Login from './pages/Login/Login';
 import OlvidoPass from './pages/ForgotPass/OlvidoPass'
 import HistoryHome from "./components/Vendedor/HistorialVentas/HistoryHome";
@@ -32,101 +32,101 @@ function App() {
   return (
     <div className="app-container">
       <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <GuestBuyerRoute>
-              <Home />
-            </GuestBuyerRoute>
-          } />
-          <Route path="/Carrito" element={
-            <GuestBuyerRoute>
-              <Carrito />
-            </GuestBuyerRoute>
-          } />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <GuestBuyerRoute>
+                <Home />
+              </GuestBuyerRoute>
+            } />
+            <Route path="/Carrito" element={
+              <GuestBuyerRoute>
+                <Carrito />
+              </GuestBuyerRoute>
+            } />
 
-          <Route path="/Register" element={
-            <CredentialRoute>
-              <Register />
-            </CredentialRoute>
-          } />
+            <Route path="/Register" element={
+              <CredentialRoute>
+                <Register />
+              </CredentialRoute>
+            } />
 
-          <Route path="/Thanks" element={
-            <BuyerRoute>
-              <GraciasPage />
-            </BuyerRoute>
-          } />
+            <Route path="/Thanks" element={
+              <BuyerRoute>
+                <GraciasPage />
+              </BuyerRoute>
+            } />
 
-          <Route path="/favoritos" element={
-            <BuyerRoute>
-              <Favoritos />
-            </BuyerRoute>
-          } />
+            <Route path="/favoritos" element={
+              <BuyerRoute>
+                <Favoritos />
+              </BuyerRoute>
+            } />
 
-          <Route path="/Error" element={
-            <BuyerRoute>
-              <ErrorPage />
-            </BuyerRoute>
-          } />
+            <Route path="/Error" element={
+              <BuyerRoute>
+                <ErrorPage />
+              </BuyerRoute>
+            } />
 
-          <Route path="/Admin" element={
-            <AdminRoute>
-              <Admin />
-            </AdminRoute>
-          } />
+            <Route path="/Admin" element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            } />
 
-          <Route path="/OlvidoPass" element={
-            <CredentialRoute>
-              <OlvidoPass />
-            </CredentialRoute>
-          } />
+            <Route path="/OlvidoPass" element={
+              <CredentialRoute>
+                <OlvidoPass />
+              </CredentialRoute>
+            } />
 
-          <Route path="/Login" element={
-            <CredentialRoute>
-              <Login />
-            </CredentialRoute>
-          } />
+            <Route path="/Login" element={
+              <CredentialRoute>
+                <Login />
+              </CredentialRoute>
+            } />
 
-          <Route path="/Profile" element={
-            <SellerRoute>
-              <Vendedor />
-            </SellerRoute>
-          } />
+            <Route path="/Profile" element={
+              <SellerRoute>
+                <Vendedor />
+              </SellerRoute>
+            } />
 
-          {/* Provisorio */}
-          <Route path="/orderHistory" element={
-            <SellerRoute>
-              <HistoryHome />
-            </SellerRoute>
-          } />
+            {/* Provisorio */}
+            <Route path="/orderHistory" element={
+              <SellerRoute>
+                <HistoryHome />
+              </SellerRoute>
+            } />
 
-          {/* Provisorio */}
-          <Route path="/User" element={
-            <BuyerRoute>
-              <Comprador />
-            </BuyerRoute>
-          } />
+            {/* Provisorio */}
+            <Route path="/User" element={
+              <BuyerRoute>
+                <Comprador />
+              </BuyerRoute>
+            } />
 
-          <Route 
-          path="/sellerForm" 
-          element={
-            <SellerRoute>
-              <SellerForm />
-            </SellerRoute>
-          } 
-          />
+            <Route
+              path="/sellerForm"
+              element={
+                <SellerRoute>
+                  <SellerForm />
+                </SellerRoute>
+              }
+            />
 
-          <Route path="/buyerForm" element={
-            <BuyerRoute>
-              <BuyerForm />
-            </BuyerRoute>
-          } />
+            <Route path="/buyerForm" element={
+              <BuyerRoute>
+                <BuyerForm />
+              </BuyerRoute>
+            } />
 
-          <Route path="/*" element={<Error />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </AuthProvider>
+            <Route path="/*" element={<Error />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

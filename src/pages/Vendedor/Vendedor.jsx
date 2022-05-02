@@ -2,10 +2,12 @@ import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
-import { filterBySellerAndCategories, deleteProduct } from '../../redux/actions/a.products.js';
+import { GetAllProductsOfSeller, deleteProduct, disableProduct, enableProduct } from '../../redux/actions/a.products.js';
 import {delAlert} from '../../redux/actions/a.alert'
-import { updateProduct, postProduct } from '../../redux/actions/a.seller.js'
+import { updateProduct, postProduct, productBySeller } from '../../redux/actions/a.seller.js'
 import spinner from '../../spinner.gif'
+import style from './Vendedor.module.css'
+
 // import { postProduct } from '../../../redux/actions/a.seller.js'
 
 import { useAuth } from '../../context/AuthContext'
@@ -15,13 +17,12 @@ import DatosVendedor from '../../components/Vendedor/DatosVendedor/DatosVendedor
 import CardVendedor from '../../components/Vendedor/CardVendedor/CardVendedor'
 import AddProduct from '../../components/Vendedor/AddProduct/AddProduct.jsx'
 // import HistoryHome from '../../components/Vendedor/HistorialVentas/HistoryHome.jsx'
-import { Container, Typography, Button } from '@mui/material'
-import {Snackbar} from '@mui/material';
+import { Container, Typography, Button, Box, Snackbar} from '@mui/material'
 import {SnackbarAlert} from '../../components/Alert/success';
 
 export default function Vendedor(){
     const alert = useSelector(state => state.alert)
-    const products = useSelector(state => state.productsBySeller, shallowEqual)
+    const products = useSelector(state => state.allProductsSeller)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
@@ -55,11 +56,13 @@ export default function Vendedor(){
     async function handleSubmit(e){
         e.preventDefault();
         if(prodId === null){
-            dispatch(postProduct(input, currentUser))
+            await dispatch(postProduct(input, currentUser))
             handleClose()
+            dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }else{
             await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
+            dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }
         // prodId === null ?
         // dispatch(postProduct(input))
@@ -74,15 +77,20 @@ export default function Vendedor(){
 
     // Products by User
     useEffect(() => {
-        dispatch(filterBySellerAndCategories(oneUser?._id))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         setTimeout(() => {
             setLoading(false)
         }, 500);
-    },[dispatch,oneUser])
+    },[dispatch,currentUser])
 
+    async function handleDisable(id, banned){
+        banned ? await dispatch(enableProduct(id, currentUser)) : 
+        await dispatch(disableProduct(id, currentUser))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
+    }
     const removeProduct = async (id) => {
         await dispatch(deleteProduct(id, currentUser))
-        dispatch(filterBySellerAndCategories(oneUser._id))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         // return products = products.filter(product => product._id !== id)
     }
 //ACOMODAR ESTO 
@@ -95,53 +103,28 @@ export default function Vendedor(){
             display: 'flex',
             flexDirection: 'column'
         }}>
-            <DatosVendedor 
-                        name={oneUser.name}
-                        address={oneUser.address}
-                        email={oneUser.email}
-                        delivery={oneUser.delivery}
-                        phone={oneUser.phone}
-                        image={oneUser.image}
-                        />
-            <Container sx={{
-                height: '500px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-around',
-                borderRadius: '10px',
-            }}>
-                <Container sx={{
-                    height: '70px',
-                    margin: '5px 0',
-                    display: 'flex',
-                    borderBottom: '2px solid black',
-                    alignItems: 'center',
-                }}>
+            <DatosVendedor />
+            <Container className={style.containerMain}>
+                <Container className={style.tusProductos}>
                     <Typography variant="h6">
                         TUS PRODUCTOS
                     </Typography>
+                    <Box className={style.botones}>
                     <Button 
-                        onClick={() => navigate('/orderHistory')}
-                        variant="contained" 
-                        color="primary" 
-                        sx={{
-                            left: '700px',
-                            fontWeight: '600',
-                        }}
+                            onClick={() => navigate('/orderHistory')}
+                            variant="contained" 
+                            color="primary" 
                     >
-                        Ventas
-                    </Button>
-                    <Button 
-                        onClick={handleOpen}
-                        variant="contained" 
-                        color="info" 
-                        sx={{
-                            left: '720px',
-                            fontWeight: '600',
-                        }}
+                            Ventas
+                        </Button>
+                        <Button 
+                            onClick={handleOpen}
+                            variant="contained" 
+                            color="info" 
                     >
-                        Agregar
-                    </Button>
+                            Agregar
+                        </Button>
+                   </Box>
                     <AddProduct 
                         prodId={prodId}
                         input={input}
@@ -151,14 +134,7 @@ export default function Vendedor(){
                         handleSubmit={handleSubmit}
                     />
                 </Container>
-                <Container sx={{
-                height: '335px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-around',
-                overflow: 'auto',
-                borderRadius: '10px'
-            }}>
+                <Container className={style.productos}>
                 {loading ? <img src={spinner} alt="" style={{width: '150px', height: 'max-content'}} /> : products.length ? products.map((producto, id) => <CardVendedor 
                                             key={id}
                                             id={producto._id}
@@ -168,10 +144,12 @@ export default function Vendedor(){
                                             precio={producto.price}
                                             category={producto.category}
                                             description={producto.description}
+                                            banned={producto.banned}
                                             handleClose={handleClose}
                                             handleOpen={handleOpen}
                                             handleSubmit={handleSubmit}
                                             removeProduct={removeProduct}
+                                            handleDisable={handleDisable}
                                             input={input}
                                             setInput={setInput}
                                             prodId={prodId}

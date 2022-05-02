@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 
 import { adminDeleteCategory, adminDisabledCategory, adminEnabledCategory } from '../../../redux/actions/a.admin.js'
-
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'
 import { useAuth } from '../../../context/AuthContext'
-
+import  {getAllAdminCategories } from '../../../redux/actions/a.admin.js'
 import styles from './CardCategorias.module.css';
 import { IconButton, Tooltip } from '@mui/material'
 import { Delete, BorderColor, Block } from '@mui/icons-material/';
@@ -35,9 +34,14 @@ export default function CardCategorias({ categories, handleOpen, handleClose, in
         })
     }
 
-    function handleCategoryStatus(status, id){
-        return !!status ? dispatch(adminEnabledCategory(id, currentUser)) : 
-        dispatch(adminDisabledCategory(id, currentUser))
+    async function handleCategoryStatus(status, id){
+        if(status){
+            await dispatch(adminEnabledCategory(id, currentUser))
+        }else {
+            await dispatch(adminDisabledCategory(id, currentUser))
+        }
+        await dispatch(getAllAdminCategories(currentUser))
+        
     }
 
     const handleUpdate = (event) => {
@@ -73,7 +77,7 @@ export default function CardCategorias({ categories, handleOpen, handleClose, in
                                         value={category.banned}
                                         onClick={() => handleCategoryStatus(category.banned, category._id)} // Modificar action !!
                                     >
-                                        <Block sx={{ color: '#E2001A' }} />
+                                        <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar" arrow>

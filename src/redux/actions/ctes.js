@@ -26,6 +26,7 @@ export const POST_ORDER = 'POST_ORDER'
 export const PAYMENT = 'PAYMENT'
 
 export const GET_PRODUCT_BY_SELLER_AND_CAT = 'GET_PRODUCT_BY_SELLER';
+export const GET_PRODUCTS_OF_SELLER = 'GET_PRODUCTS_OF_SELLER'
 
 export const RESET_SLIDERS = 'RESET_SLIDERS';
 export const RESET_FILTER_BY_PRICE = 'RESET_FILTER_BY_PRICE';
@@ -53,4 +54,3 @@ export const ADD_FAV = 'ADD_FAV';
 export const DEL_FAV = 'DEL_FAV';
 export const GET_FAV_DETAIL = 'GET_FAV_DETAIL'
 export const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-export const GET_PRODUCTS_OF_SELLER = 'GET_PRODUCTS_OF_SELLER'

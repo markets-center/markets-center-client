@@ -16,7 +16,7 @@ import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 export default function Categorias(){
     // READ CATEGORIES
     const {currentUser} = useAuth()
-    const categories = useSelector(state => state.allCategories)
+    const categories = useSelector(state => state.adminCategories)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllAdminCategories(currentUser));
