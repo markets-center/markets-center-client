@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
 import Logo from '../../images/MC-Full.png'
@@ -10,7 +10,7 @@ import Filters from '../Filters/Filters.jsx';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
-import { resetSliders, idActiveSeller,idActiveCategory } from '../../redux/actions/a.products'
+import { resetSliders, idActiveSeller, idActiveCategory } from '../../redux/actions/a.products'
 import { useDispatch } from 'react-redux';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import { useNavigate } from 'react-router-dom'
@@ -32,25 +32,25 @@ import Badge from '@mui/material/Badge';
 
 import { getOrUpdateCart } from '../../redux/actions/a.cart.js';
 
-export default function NavBar({ searchBar, home, admin, value, setValue }) {
+export default function NavBar({ searchBar, home, admin, value, setValue, carrito }) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
-    
+
     const temp = localStorage.getItem("productsTemp");
     const countItemCarUser = useSelector((state) => state.addOrdercar);
     const items = countItemCarUser && countItemCarUser.products;
-    let countItem = items?.length; 
+    let countItem = items?.length;
     const idCarUser = currentUser && currentUser.uid
     const count = temp && JSON.parse(temp);
     const counter = count ? count.length : 0;
-    
+
     async function logoutHandler() {
         await logout();
         navigate('/')
     }
 
-    function favsHandler(){
+    function favsHandler() {
         navigate('/favoritos')
     }
 
@@ -70,10 +70,10 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
     useEffect(() => {
-        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
-    }, [])
+        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+    }, [currentUser, dispatch, idCarUser])
 
     return (
         <AppBar position="static" >
@@ -91,8 +91,8 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                     <Stack direction="row">
                         <div>
                             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                                    {
-                                    home && (
+                                {
+                                    carrito && (
                                         <Tooltip title="Carrito de compras" >
                                             <IconButton
                                                 onClick={() => navigate('/Carrito')}
@@ -104,7 +104,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                                 </Badge>
                                             </IconButton>
                                         </Tooltip>)
-                                    }
+                                }
                                 <Tooltip title="Cuenta">
                                     <IconButton
                                         onClick={handleClick}
@@ -163,13 +163,18 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                     currentUser === null ? undefined :
                                         (
                                             <div>
-                                                <Divider />
-                                                <MenuItem onClick={favsHandler}>
-                                                    <ListItemIcon>
-                                                        <Favorite />
-                                                    </ListItemIcon>Favoritos
+                                                {
+                                                    oneUser.isAdmin || oneUser.isSeller ? undefined :
+                                                        <div>
+                                                            <Divider />
+                                                            <MenuItem onClick={favsHandler}>
+                                                                <ListItemIcon>
+                                                                    <Favorite />
+                                                                </ListItemIcon>Favoritos
 
-                                                </MenuItem>
+                                                            </MenuItem>
+                                                        </div>
+                                                }
                                                 <Divider />
                                                 <MenuItem onClick={logoutHandler}>
                                                     <ListItemIcon>
@@ -177,7 +182,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                                                     </ListItemIcon>Cerrar sesión
 
                                                 </MenuItem>
-                                                
+
                                             </div>
                                         )
                                 }
@@ -186,7 +191,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue }) {
                     </Stack>
                 </Toolbar>
             </Container>
-            <Filters home={home} admin={admin} value={value} setValue={setValue} />
+            {home && <Filters home={home} admin={admin} value={value} setValue={setValue} />}
         </AppBar>
     )
 }
