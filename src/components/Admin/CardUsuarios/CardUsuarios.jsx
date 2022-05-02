@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, upgradeUser, deleteUser, blockPass, banned } from '../../../redux/actions/a.admin.js';
 import { useAuth } from '../../../context/AuthContext'
-import { IconButton, Tooltip } from '@mui/material';
 import styles from './CardUsuarios.module.css';
 import BanModal from './BanModal.jsx'
-import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached, Block } from '@mui/icons-material/';
-import defaultImage from '../../../images/defaultUser.png';
 import Swal from "sweetalert2";
+import User from './user'
 
 export default function CardCategorias() {
     const { currentUser } = useAuth()
@@ -47,9 +45,11 @@ export default function CardCategorias() {
         setOpen(false)
     }
     
-    function handleUserBan(event){
+    async function handleUserBan(event){
         event.preventDefault();
-        dispatch(banned(id, banObj, currentUser))
+        await dispatch(banned(id, banObj, currentUser))
+        handleClose()
+        await dispatch(getAllUsers(currentUser));
     }
     const handleUserdelete = (event) => {
         Swal.fire({
@@ -74,55 +74,7 @@ export default function CardCategorias() {
             {
                 allUsers.map(category => {
                     return (
-                        <div key={category._id} className={styles.container}>
-                            <div className={styles.left}>
-                                <img src={category.image}
-                                    alt="Imagen de categoria"
-                                    onError={(e) => {
-                                        e.target.onerror = null
-                                        e.target.src = defaultImage
-                                    }} />
-                                <h4>{category.name}</h4>
-                                {
-                                    category.isAdmin ? <Tooltip title="Admin" arrow><AdminPanelSettings /></Tooltip> : (
-                                        category.isSeller ? <Tooltip title="Vendedor" arrow><Storefront /></Tooltip> : 
-                                        <Tooltip title="Comprador" arrow><PersonOutline /></Tooltip>
-                                    )
-                                }
-                            </div>
-                            <div className={styles.right}>
-                                <Tooltip title="Reset contraseña" arrow>
-                                    <IconButton
-                                        id={category.userId}
-                                        onClick={handlePasswordReset}
-                                    >
-                                        <Cached />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title="Covertir a Admin" arrow>
-                                    <IconButton
-                                        id={category._id}
-                                        onClick={handleUserToAdmin}
-                                    >
-                                        <SupervisorAccount />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title={category.banned ? "Habilitar Usuario" : "Suspender Usuario"}arrow>
-                                    <IconButton
-                                        onClick={() => handleOpen(category._id, category.banned)}
-                                    >
-                                        <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
-                                    </IconButton>
-                                </Tooltip>
-                                <Tooltip title="Eliminar Usuario" arrow>
-                                    <IconButton
-                                        onClick={() => handleUserdelete(category._id)}
-                                    >
-                                        <Delete sx={{ color: '#E2001A' }} />
-                                    </IconButton>
-                                </Tooltip>
-                            </div>
-                        </div>
+                        <User key={category._id} image={category.image} name={category.name} isAdmin={category.isAdmin} isSeller={category.isSeller} userId={category.userId} handlePasswordReset={handlePasswordReset} id={category._id} handleUserToAdmin={handleUserToAdmin} banned={category.banned} handleOpen={handleOpen} handleUserdelete={handleUserdelete} />
                     )
                 })
             }
