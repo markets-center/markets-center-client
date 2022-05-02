@@ -114,6 +114,7 @@ export default function DatosVendedor() {
             </Box>
         </Modal>
     </>
+                    <Box>
                         <Typography variant='h6' sx={{
                             fontWeight: 'bold'
                         }}>
