@@ -54,9 +54,9 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
         navigate('/favoritos')
     }
 
-    function handleSelect() {
+    async function handleSelect() {
         navigate('/');
-        dispatch(resetSliders())
+        await dispatch(resetSliders())
         dispatch(idActiveSeller())
         dispatch(idActiveCategory())
     }

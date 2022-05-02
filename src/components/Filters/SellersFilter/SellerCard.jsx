@@ -24,7 +24,7 @@ const SellerCard = ({ image, name, id }) => {
             <Container sx={{
                 marginTop: '10px',
                 height: 'auto',
-                paddingTop: '13px',
+                paddingTop: '5px',
                 display: 'flex',
                 alignItem: 'center',
                 justifyContent: 'space-around',
