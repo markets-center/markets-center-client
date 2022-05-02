@@ -17,102 +17,102 @@ export default function DatosVendedor() {
 
 
     return (
-    <>
-        <Container className={style.container} >
-            <Container sx={{
-                height: '250px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '10px',
-                borderBottom: '2px solid black'
-            }}>
+        <div>
+            <Container className={style.container} >
                 <Container sx={{
-                    width: '200px',
-                    height: '200px',
+                    height: '250px',
                     display: 'flex',
-                    flexDirection: 'column',
                     alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '10px',
+                    borderBottom: '2px solid black'
                 }}>
-                    <Box sx={{
+                    <Container sx={{
+                        width: '200px',
+                        height: '200px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                     }}>
-                        {oneUser.name}
-                    </Typography>
-                </Box>
-                <Box>
-                    <img src={oneUser.image} alt="" style={{width: "150px",borderRadius: "50%"}}/>
-                </Box>
-            </Container>
-            <Container className={style.containerData}>
-            <Container  sx={{
-                height: '160px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly'
-            }}>
-                <Box className={style.boxAddress}>
-                    <Typography>
-                        <span style={{fontWeight: 'bold'}}>Dirección</span> {oneUser.address}
-                    </Typography>
-                </Box>
-                <Box>
-                    <Typography>
-                    <span style={{fontWeight: 'bold'}}>Mail</span> {oneUser.email}
-                    </Typography>
-                </Box>
-            </Container>
-            <Container sx={{
-                height: '160px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly'
-            }}>
+                        <Box>
+                            {oneUser.name}
+                            <Typography></Typography>
+                        </Box>
+                        <Box>
+                            <img src={oneUser.image} alt="" style={{ width: "150px", borderRadius: "50%" }} />
+                        </Box>
+                    </Container>
+                    <Container className={style.containerData}>
+                        <Container sx={{
+                            height: '160px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-evenly'
+                        }}>
+                            <Box className={style.boxAddress}>
+                                <Typography>
+                                    <span style={{ fontWeight: 'bold' }}>Dirección</span> {oneUser.address}
+                                </Typography>
+                            </Box>
+                            <Box>
+                                <Typography>
+                                    <span style={{ fontWeight: 'bold' }}>Mail</span> {oneUser.email}
+                                </Typography>
+                            </Box>
+                        </Container>
+                        <Container sx={{
+                            height: '160px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-evenly'
+                        }}>
 
-                <Box>
-                    <Typography>
-                    <span style={{fontWeight: 'bold'}}>Teléfono</span> {oneUser.phone}
-                    </Typography>
-                </Box>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center'
-                }}>
-                    {oneUser.delivery ? <><DeliveryDiningIcon style={{position: 'relative',left: '10px',color: 'green', fontSize: '40px'}} /> <PanoramaFishEyeIcon style={{position: 'relative', right: '39px', fontSize: '60px', color: 'green'}} /></> : <><DeliveryDiningIcon style={{position: 'relative',left: '10px',color: 'red', fontSize: '40px'}} /> <BlockIcon style={{position: 'relative', right: '39px', fontSize: '60px', color: 'red'}}/></>}
-                </Box>
-            </Container>
-            <Container className={style.actualizar}>
-                <Button 
-                onClick={handleOpen}
-                variant="contained"
-                sx={{
-                    height: '50px'
-                }} 
+                            <Box>
+                                <Typography>
+                                    <span style={{ fontWeight: 'bold' }}>Teléfono</span> {oneUser.phone}
+                                </Typography>
+                            </Box>
+                            <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                {oneUser.delivery ? <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'green', fontSize: '40px' }} /> <PanoramaFishEyeIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'green' }} /></> : <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'red', fontSize: '40px' }} /> <BlockIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'red' }} /></>}
+                            </Box>
+                        </Container>
+                        <Container className={style.actualizar}>
+                            <Button
+                                onClick={handleOpen}
+                                variant="contained"
+                                sx={{
+                                    height: '50px'
+                                }}
+                            >
+                                Actualizar Datos
+                            </Button>
+                        </Container>
+                    </Container>
+                </Container>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                 >
-                    Actualizar Datos
-                </Button>
+                    <Box className={styleForm.containerForm}>
+                        <SellerForm
+                            name={oneUser.name}
+                            email={oneUser.email}
+                            image={oneUser.image}
+                            IdDocument={oneUser.IdDocument}
+                            phone={oneUser.phone}
+                            address={oneUser.address}
+                            delivery={oneUser.delivery}
+                            userId={oneUser.userId}
+                            handleClose={handleClose}
+                        />
+                    </Box>
+                </Modal>
             </Container>
-            </Container>
-        </Container>
-        <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        >
-            <Box className={styleForm.containerForm}>
-                <SellerForm
-                    name={oneUser.name}
-                    email={oneUser.email}
-                    image={oneUser.image}
-                    IdDocument={oneUser.IdDocument}
-                    phone={oneUser.phone}
-                    address={oneUser.address}
-                    delivery={oneUser.delivery}
-                    userId={oneUser.userId}
-                    handleClose={handleClose}
-                />
-            </Box>
-        </Modal>
-    </>
-)
+        </div>
+    )
 }
