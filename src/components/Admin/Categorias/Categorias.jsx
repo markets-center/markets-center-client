@@ -8,8 +8,8 @@ import {useAuth} from '../../../context/AuthContext'
 
 //
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCategories } from '../../../redux/actions/a.category.js'
-import { adminAddCategory } from '../../../redux/actions/a.admin.js'
+// import { getAllCategories } from '../../../redux/actions/a.category.js'
+import { adminAddCategory, getAllAdminCategories } from '../../../redux/actions/a.admin.js'
 import { adminUpdateCategory } from '../../../redux/actions/a.admin.js'
 //
 
@@ -19,8 +19,8 @@ export default function Categorias(){
     const categories = useSelector(state => state.allCategories)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllCategories());
-    }, [dispatch])
+        dispatch(getAllAdminCategories(currentUser));
+    }, [dispatch, currentUser])
     // CREATE & UPDATE CATEGORIES
     const [input, setInput] = useState({
         name: "",
@@ -36,7 +36,7 @@ export default function Categorias(){
             image: ""
         })
         setOpen(false)
-        dispatch(getAllCategories());
+        dispatch(getAllAdminCategories(currentUser));
     }
     // const dispatch = useDispatch();
     function handleSubmit(e){

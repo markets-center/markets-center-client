@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, upgradeUser, deleteUser, blockPass } from '../../../redux/actions/a.admin.js';
+import { getAllUsers, upgradeUser, deleteUser, blockPass, banned } from '../../../redux/actions/a.admin.js';
 import { useAuth } from '../../../context/AuthContext'
 import { IconButton, Tooltip } from '@mui/material';
 import styles from './CardUsuarios.module.css';
+import BanModal from './BanModal.jsx'
 import { Delete, AdminPanelSettings, Storefront, PersonOutline, SupervisorAccount, Cached, Block } from '@mui/icons-material/';
 import defaultImage from '../../../images/defaultUser.png';
 import Swal from "sweetalert2";
@@ -13,14 +14,36 @@ export default function CardCategorias() {
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.allUsers)
     useEffect(() => {
-        dispatch(getAllUsers());
-    }, [dispatch])
+        dispatch(getAllUsers(currentUser));
+    }, [dispatch, currentUser])
     async function handlePasswordReset(event) {
         event.preventDefault()
         dispatch(blockPass(event.currentTarget.getAttribute('id'), currentUser))
     }
     function handleUserToAdmin(event) {
-        dispatch(upgradeUser(event.currentTarget.getAttribute('id'), currentUser))
+        const hola = 'hola'
+        dispatch(upgradeUser(event.currentTarget.getAttribute('id'), hola, currentUser))
+    }
+    const [banObj, setBanObj] = useState({reason: '', banned: false})
+    const [id, setId] = useState('')
+    const [open, setOpen] = useState(false);
+    const handleOpen = (event) => {
+        setOpen(true)
+        setId(event.currentTarget.getAttribute('id'))
+        let ban = event.currentTarget.getAttribute('value')
+        setBanObj({
+            ...banObj,
+            banned: !ban
+        })
+    };
+    const handleClose = () => {
+        setBanObj({reason: '', banned: false})
+        setOpen(false)
+    }
+    
+    function handleUserBan(event){
+        event.preventDefault();
+        dispatch(banned(id, banObj, currentUser))
     }
     const handleUserdelete = (event) => {
         Swal.fire({
@@ -34,7 +57,8 @@ export default function CardCategorias() {
             confirmButtonText: "Sí, Eliminalo!",
         }).then(result => {
             if (result.isConfirmed) {
-                dispatch(deleteUser(event, currentUser))
+                const hola = 'hola'
+                dispatch(deleteUser(event, hola, currentUser))
             }
         })
     }
@@ -77,16 +101,18 @@ export default function CardCategorias() {
                                         <SupervisorAccount />
                                     </IconButton>
                                 </Tooltip>
-                                <Tooltip title="Suspender Usuario" arrow>
+                                <Tooltip title={category.banned ? "Habilitar Usuario" : "Suspender Usuario"}arrow>
                                     <IconButton
-                                        // onClick={() => handleUserdelete(category.userId)} // Modificar action !!
+                                        id={category._id}
+                                        value={category.banned}
+                                        onClick={handleOpen} // Modificar action !!
                                     >
-                                        <Block sx={{ color: '#E2001A' }} />
+                                        <Block sx={category.banned ? { color: '#6bf178' } : {color: '#E2001A'}} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar Usuario" arrow>
                                     <IconButton
-                                        onClick={() => handleUserdelete(category.userId)}
+                                        onClick={() => handleUserdelete(category._id)}
                                     >
                                         <Delete sx={{ color: '#E2001A' }} />
                                     </IconButton>
@@ -96,7 +122,7 @@ export default function CardCategorias() {
                     )
                 })
             }
-            {/* <Menu open={open}/> */}
+            <BanModal open={open} handleClose={handleClose} banObj={banObj} setBanObj={setBanObj} handleUserBan={handleUserBan}/>
         </div>
     )
 }

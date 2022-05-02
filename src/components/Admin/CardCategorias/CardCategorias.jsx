@@ -2,14 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 
-import { adminDeleteCategory } from '../../../redux/actions/a.admin.js'
+import { adminDeleteCategory, adminDisabledCategory, adminEnabledCategory } from '../../../redux/actions/a.admin.js'
 
 import AddCategorie from '../AddCategorie/AddCategorie.jsx'
 import { useAuth } from '../../../context/AuthContext'
 
 import styles from './CardCategorias.module.css';
 import { IconButton, Tooltip } from '@mui/material'
-import { Delete, BorderColor } from '@mui/icons-material/';
+import { Delete, BorderColor, Block } from '@mui/icons-material/';
 
 export default function CardCategorias({ categories, handleOpen, handleClose, input, setInput, id, setId, handleSubmit }) {
     // const categories = useSelector(state => state.allCategories)
@@ -35,6 +35,10 @@ export default function CardCategorias({ categories, handleOpen, handleClose, in
         })
     }
 
+    function handleCategoryStatus(status, id){
+        return !!status ? dispatch(adminEnabledCategory(id, currentUser)) : 
+        dispatch(adminDisabledCategory(id, currentUser))
+    }
 
     const handleUpdate = (event) => {
         const name = event.currentTarget.getAttribute('name')
@@ -61,6 +65,15 @@ export default function CardCategorias({ categories, handleOpen, handleClose, in
                                 <Tooltip title="Editar" arrow>
                                     <IconButton name={category.name} image={category.image} id={category._id} onClick={handleUpdate}>
                                         <BorderColor />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Deshabilitar" arrow>
+                                    <IconButton
+                                        id={category._id}
+                                        value={category.banned}
+                                        onClick={() => handleCategoryStatus(category.banned, category._id)} // Modificar action !!
+                                    >
+                                        <Block sx={{ color: '#E2001A' }} />
                                     </IconButton>
                                 </Tooltip>
                                 <Tooltip title="Eliminar" arrow>

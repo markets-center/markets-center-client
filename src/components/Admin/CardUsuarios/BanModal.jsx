@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import styles from './AddCategori.module.css'
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
 import { AddAPhoto, Publish } from '@mui/icons-material/';
 
@@ -9,7 +8,7 @@ const Input = styled('input')({
     display: 'none',
 });
 
-export default function AddCategorie({open, handleClose, input, setInput, id, handleSubmit}) {
+export default function AddCategorie({open, handleClose, banObj, setBanObj, handleUserBan}) {
     
     const style = {
         position: 'absolute',
@@ -27,19 +26,18 @@ export default function AddCategorie({open, handleClose, input, setInput, id, ha
         flexDirection: 'row',
     };
     
-    // const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     const [error, setError] = useState({
         name: "Error"
     })
 
     const handleChange = (e) => {
-        setInput({
-            ...input,
-            [e.target.id]: e.target.value
+        setBanObj({
+            ...banObj,
+            reason: e.target.value
         });
         setError(Validation({
-            ...input,
+            ...banObj,
             [e.target.id]: e.target.value
         }))
     }
@@ -52,24 +50,9 @@ export default function AddCategorie({open, handleClose, input, setInput, id, ha
         return errorData;
     }
 
-    function handleImageChange(e) {
-        const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onloadend = () => {
-            setInput({
-                ...input,
-                image: reader.result
-            });
-        };
-    }
     useEffect(()=>{
         Object.keys(error).length > 0 ? setDisabled( true ) : setDisabled( false )
     }, [error])
-    // function handleSubmit(e){
-    //     e.preventDefault();
-    //     id ? dispatch(adminUpdateCategory(id, input)) :
-    //     dispatch(adminAddCategory(input))
-    // }
     
     return (
     <Modal
@@ -77,25 +60,13 @@ export default function AddCategorie({open, handleClose, input, setInput, id, ha
         onClose={handleClose}
     >
         <Box sx={{ ...style}} component="form">
-        <div className={styles.mainDiv} >
+        <div>
             <Typography variant="h4" gutterBottom component="div">
                 Agregar una categoria:
             </Typography>
-                <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={input.name} style={{ width: "300px", margin: "5px" }} />
-                    {
-                        input.image ? <img src={input.image} alt='prueba' /> : <img src='https://www.gfpropiedades.com.ar/themes/inmokey_t1/img/nophoto.png' alt='prueba' />
-                    }
-                <label htmlFor="contained-button-file">
-                    <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleImageChange}/>
-                    <Button 
-                        variant="contained" 
-                        component="span" 
-                        style={{ width: "200px", margin: "5px" }}
-                        startIcon={<AddAPhoto />}
-                    >Imagen</Button>
-                </label>
+                <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={banObj.reason} style={{ width: "300px", margin: "5px" }} />
             <Button 
-                onClick={handleSubmit}
+                onClick={handleUserBan}
                 disabled={disabled}
                 variant="contained" 
                 component="span" 
