@@ -37,11 +37,11 @@ export function getOrderById (id, currentUser) {
     }
 }
 
-export function addOrderCar (item) {
-    return {   
-        type: ADD_ORDER_CAR,
-        payload: item
-    } 
+// export function addOrderCar (item) {
+//     return {   
+//         type: ADD_ORDER_CAR,
+//         payload: item
+//     } 
     // async function (dispatch){
     //     try {
     //         const orderCar = await axios.get(``);
@@ -51,12 +51,12 @@ export function addOrderCar (item) {
     //         dispatch({type: ERRORS, payload: err.msg})
     //     }
     // }
-}
-export function deleteOrderCar (id) {
-    return {   
-        type: DELETE_ORDER_CAR,
-        payload: id
-    } 
+// }
+// export function deleteOrderCar (id) {
+//     return {   
+//         type: DELETE_ORDER_CAR,
+//         payload: id
+//     } 
     // async function (dispatch){
     //     try {
     //         const orderCar = await axios.get(``);
@@ -66,7 +66,7 @@ export function deleteOrderCar (id) {
     //         dispatch({type: ERRORS, payload: err.msg})
     //     }
     // }
-}
+// }
 
 export function payment(data){
     return {

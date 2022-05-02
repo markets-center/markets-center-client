@@ -82,7 +82,7 @@ export default function Card({ name, price, image, description, stock, category,
             })
             const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
             const obj = {
-                idUser: currentUser._delegate.uid,
+                idUser: idCarUser,
                 products: [...oldProducts, ...objCarTemp],
                 amount: dataCarUser.amount + newAmount
             }
@@ -114,7 +114,7 @@ export default function Card({ name, price, image, description, stock, category,
 
     useEffect(() => {
         if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
-        else return false
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -128,9 +128,8 @@ export default function Card({ name, price, image, description, stock, category,
                 }, currentUser));
                 setProductsTemp([]);
             }
-        }else{
-            return false
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
