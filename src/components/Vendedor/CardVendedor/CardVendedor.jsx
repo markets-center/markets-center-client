@@ -49,6 +49,7 @@ export default function CardVendedor({
           width: "250px",
           display: "flex",
           flexDirection: "column",
+          marginLeft: '20px'
         }}
       >
         <Typography
@@ -72,10 +73,9 @@ export default function CardVendedor({
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
         }}
       >
-        <div >
           <Tooltip title="Reponer" arrow>
             <IconButton
               name={nombre}
@@ -102,7 +102,6 @@ export default function CardVendedor({
               <Block sx={{ color: "#E2001A" }} />
             </IconButton>
           </Tooltip>
-        </div>
       </Box>
       <AddProduct
         prodId={prodId}
