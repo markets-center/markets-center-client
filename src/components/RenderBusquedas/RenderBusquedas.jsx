@@ -65,7 +65,7 @@ function RenderBusquedas() {
                     <div className={s.productsContainer}>
                         {currentFiltered.map(p => <Card 
                         reviews={p.reviews}
-                        key={p.name}
+                        key={p._id}
                         name={p.name}
                         price={p.price}
                         image={p.image}
@@ -87,7 +87,7 @@ function RenderBusquedas() {
                     <div className={s.productsContainer}>
                         {currentProducts.map(p => <Card 
                         reviews={p.reviews}
-                        key={p.name}
+                        key={p._id}
                         name={p.name}
                         price={p.price}
                         image={p.image}
