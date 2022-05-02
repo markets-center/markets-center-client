@@ -56,11 +56,13 @@ export default function Vendedor(){
     async function handleSubmit(e){
         e.preventDefault();
         if(prodId === null){
-            dispatch(postProduct(input, currentUser))
+            await dispatch(postProduct(input, currentUser))
             handleClose()
+            dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }else{
             await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
+            dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }
         // prodId === null ?
         // dispatch(postProduct(input))
@@ -81,16 +83,16 @@ export default function Vendedor(){
         }, 500);
     },[dispatch,currentUser])
 
-    function handleDisable(id, banned){
-        banned ? dispatch(enableProduct(id, currentUser)) : 
-            dispatch(disableProduct(id, currentUser))
+    async function handleDisable(id, banned){
+        banned ? await dispatch(enableProduct(id, currentUser)) : 
+        await dispatch(disableProduct(id, currentUser))
+        dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
     }
     const removeProduct = async (id) => {
         await dispatch(deleteProduct(id, currentUser))
         dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         // return products = products.filter(product => product._id !== id)
     }
-    console.log(products)
 //ACOMODAR ESTO 
     return (
         <>
