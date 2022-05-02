@@ -1,5 +1,6 @@
 import { Container, Button, Box, Typography } from "@mui/material";
 import AddProduct from '../AddProduct/AddProduct.jsx'
+import style from './CardVendedor.module.css'
 
 
 export default function CardVendedor({ nombre, id, image, stock, precio, category, description, removeProduct, input, setInput, prodId, setProdId, handleClose, handleOpen, handleSubmit }){
@@ -18,16 +19,7 @@ export default function CardVendedor({ nombre, id, image, stock, precio, categor
     }
     
     return (
-        <Container sx={{
-            height: '100px',
-            width: '500px',
-            border: '2px solid gray',
-            margin: '5px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderRadius: '10px',
-        }}>
+        <Container className={style.container}>
             <Box sx={{
                 height: 'max-content',
             }}>

@@ -3,23 +3,13 @@ import { Container, Box, Typography, Button } from "@mui/material";
 // import { useAuth } from "../../context/AuthContext";
 import { useSelector } from "react-redux";
 import ResetPass from './ResetPass'
+import style from './Style/User.module.css'
+
 
 // import { useNavigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import UserForm from './UserForm'
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 800,
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
-    borderRadius: '10px',
-    boxShadow: 24,
-    p: 4,
-  };
   const stylePass = {
     position: 'absolute',
     top: '50%',
@@ -50,22 +40,19 @@ export default function UserData() {
   return (
     <>
       <Container sx={{ borderBottom: "2px solid black" }}>
-        <Container
+        <Container className={style.containerData}
           sx={{
-            height: "250px",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          <Container
-            sx={{
+          <Container className={style.title}
+            /* sx={{
               width: "100px",
               height: "200px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}
+            }} */
           >
             <Box
               sx={{
@@ -82,14 +69,7 @@ export default function UserData() {
               />
             </Box>
           </Container>
-          <Container
-            sx={{
-              width: "1400px",
-              height: "200px",
-              margin: "0 50px",
-              display: "flex",
-              alignItems: "center",
-            }}
+          <Container className={style.containerInfo}
           >
             <Container
               sx={{
@@ -127,14 +107,14 @@ export default function UserData() {
             </Container>
           </Container>
         </Container>
-        <Container
-          sx={{
+        <Container className={style.botones}
+          /* sx={{
             height: "60px",
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
             mb: 4,
-          }}
+          }} */
         >
           <Button
             onClick={handleOpen}
@@ -160,7 +140,7 @@ export default function UserData() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className={style.containerForm}>
           <UserForm
             name={oneUser.name}
             email={oneUser.email}
@@ -179,7 +159,7 @@ export default function UserData() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={stylePass}>
+        <Box className={style.containerPass}>
           <ResetPass
             name={oneUser.name}
             email={oneUser.email}

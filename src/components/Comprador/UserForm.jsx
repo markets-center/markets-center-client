@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import {updateUser} from '../../redux/actions/a.users';
 import { useNavigate } from "react-router-dom";
 import {useAuth} from '../../context/AuthContext';
+import style from './Style/User.module.css'
 
 import {
     Container,
@@ -52,14 +53,7 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
   return (
     <div>
       <Container component="main" maxWidth="md">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <Box className={style.boxForm}>
             <Typography component="h1" variant="h5">
             Datos de Usuario
           </Typography>
@@ -67,21 +61,15 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
           >
-              <Container
-                sx={{
-                    display: 'flex',
-                    alignItems: 'flex-end'
-                }}
-              >
+              <Container className={style.containerPic}>
                 <Box sx={{display: 'inline'}}>
-              <img
-                src={image}
-                alt=""
-                style={{ padding: "10px", width: "100px" }}
-                />
-            </Box>
+                  <img
+                    src={image}
+                    alt=""
+                    style={{ padding: "10px", width: "100px" }}
+                    />
+                </Box>
                 <label sx={{display: 'inline'}}
                 htmlFor="contained-button-file">
                   <Input
@@ -96,6 +84,7 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
                     component="span"
                     // style={{ width: "200px", margin: "5px" }}
                     startIcon={<AddAPhoto />}
+                    className={style.btnPic}
                     >
                         Cambiar Foto de Perfil
                   </Button>

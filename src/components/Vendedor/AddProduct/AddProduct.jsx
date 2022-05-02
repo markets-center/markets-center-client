@@ -14,7 +14,7 @@ const Input = styled('input')({
 });
 
 export default function AddProduct({ input, setInput, handleClose, open, prodId, handleSubmit }) {
-    const style = {
+   /*  const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -28,7 +28,7 @@ export default function AddProduct({ input, setInput, handleClose, open, prodId,
         p: 4,
         display: "flex",
         flexDirection: 'row',
-    };
+    }; */
     // const { currentUser } = useAuth();
 
     const dispatch = useDispatch();
@@ -114,7 +114,7 @@ export default function AddProduct({ input, setInput, handleClose, open, prodId,
             open={open}
             onClose={handleClose}
         >
-            <Box sx={{ ...style }} component="form">
+            <Box className={styles.container} component="form">
                 <div className={styles.mainDiv}>
                     <Typography variant="h4" gutterBottom component="div">
                         Agregar un producto:
@@ -124,7 +124,7 @@ export default function AddProduct({ input, setInput, handleClose, open, prodId,
                             <TextField error={error.name ? true : false} id="name" label="Nombre" variant="standard" onChange={handleChange} value={input.name} style={{ width: "300px", margin: "5px" }} />
                             <TextField error={error.price ? true : false} id="price" label="Precio" variant="standard" onChange={handleChange} value={input.price} style={{ width: "300px", margin: "5px" }} />
                             <TextField error={error.stock ? true : false} id="stock" label="Stock" variant="standard" onChange={handleChange} value={input.stock} style={{ width: "300px", margin: "5px" }} />
-                            <Categories Validation={Validation} setError={setError} error={error} setInput={setInput} input={input} />
+                            <Categories className={styles.categories} Validation={Validation} setError={setError} error={error} setInput={setInput} input={input} />
                         </div>
                         <div className={styles.modalRight}>
                             <TextField error={error.description ? true : false} id="description" label="Descripción" variant="standard" onChange={handleChange} value={input.description} style={{ width: "300px", margin: "5px" }} multiline rows={4} />
