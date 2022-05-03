@@ -58,6 +58,13 @@
   display: flex;
   align-items: center;
 }
+.content-detail-empty{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 7vh;
+  margin-bottom: 10vh;
+}
 
 .item-tittle {
   width: 100%;
