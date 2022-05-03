@@ -24,17 +24,20 @@ function ErrorPage() {
                 </svg>
             </div>    
                 {checked?<div>
+                    <div>
                     <Typography variant="h3" className={s.title}>¡Error!</Typography>
                     <Typography variant="h6" className={s.text}>
                         Hubo un problema con el pago
                     </Typography>
-                    </div>:<div className={s.invisible} />}
-                    <div className={s.containerButton} style={{marginTop: '180px'}}>
-                        <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/">Volver</Button></div>
-                        <Typography variant="body2" className={s.textMarket}>
-                            Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc" className={s.imgCarritoThanks}/>
-                        </Typography>
                     </div>
+                    <div className={s.containerButton} style={{marginTop: '180px'}}>
+                    <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/">Volver</Button></div>
+                    <Typography variant="body2" className={s.textMarket}>
+                        Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc" className={s.imgCarritoThanks}/>
+                    </Typography>
+                </div>
+                </div>:""}
+                    
 
             </div>
            
