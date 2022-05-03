@@ -9,10 +9,12 @@ import HistoryItems from './HistoryItems';
 import logo from '../../images/MarketsCenter.png'
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import Detail from '../Card/Detail/Detail'
+import Loading from '../Loading/Loading'
 
 function UserProfile() {
   const dispatch = useDispatch();
   const history = useSelector((state) => state.history);
+  const loading = useSelector((state) => state.loading);
   const { oneUser, currentUser } = useAuth();
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
@@ -57,7 +59,7 @@ function UserProfile() {
         >
           Historial de Compras
         </Typography>
-        <List sx={{ display: "block" }} dense={false}>
+        {loading? <Loading/> : <List sx={{ display: "block" }} dense={false}>
           {!history.length ? (
             <Typography
               sx={{ mt: 4, mb: 2, display: "block" }}
@@ -76,7 +78,7 @@ function UserProfile() {
               />
             ))
           )}
-        </List>
+        </List>}
       </Container>
 
       <Dialog

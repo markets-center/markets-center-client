@@ -10,12 +10,14 @@ import { delFavDetail } from '../../redux/actions/a.favs'
 import { setAlert, delAlert } from '../../redux/actions/a.alert';
 import { Snackbar } from '@mui/material';
 import { SnackbarAlert } from '../../components/Alert/success';
+import Loading from '../../components/Loading/Loading'
 
 
 function Favoritos() {
   const dispatch = useDispatch();
   const { currentUser } = useAuth();
   const favsDetail = useSelector((state) => state.favsDetail, shallowEqual);
+  const loading = useSelector((state) => state.loading);
   const alert = useSelector((state) => state.alert);
 
 
@@ -39,7 +41,7 @@ function Favoritos() {
         <List
           sx={{ width: "100%", maxWidth: 700, bgcolor: "background.paper" }}
         >
-          {favsDetail.length < 1 ?
+          {loading?<Loading/>:favsDetail.length < 1 ?
             <div className={Style.noFav}>
               <Typography
                 sx={{ mt: 4, mb: 2, display: "block" }}

@@ -72,7 +72,8 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
     };
 
     useEffect(() => {
-        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+        if (currentUser && !countItemCarUser.userId) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser, dispatch, idCarUser])
 
     return (

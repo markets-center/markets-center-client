@@ -18,6 +18,7 @@ export default function Home ({ value, setValue }){
             <Tab value="Ventas" label="Ventas" />
             <Tab value="Categorias" label="Categorias" />
             <Tab value="Usuarios" label="Usuarios" />
+            <Tab value="Ordenes" label="Ordenes" />
         </Tabs>
     )
 }

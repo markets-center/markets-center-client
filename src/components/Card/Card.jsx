@@ -113,12 +113,12 @@ export default function Card({ name, price, image, description, stock, category,
     }
 
     useEffect(() => {
-        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+        if (currentUser && !dataCarUser.userId) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (currentUser) {
+        if (currentUser && !dataCarUser.userId) {
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
             if (objTemp.length) {
                 dispatch(getOrUpdateCart({

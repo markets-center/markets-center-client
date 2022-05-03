@@ -1,0 +1,21 @@
+.container {
+    height: 100px;
+    width: 800px !important;
+    border: 2px solid gray;
+    margin: 5px;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+@media all and (max-width: 500px){
+    .container {
+        width: 330px !important;
+        padding: 0 !important;
+    }
+
+    .container img {
+        margin-left: 10px;
+    }
+}

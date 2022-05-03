@@ -157,7 +157,7 @@ export default function Carrito() {
   const iva = total - subTotal;
 
   useEffect(() => {
-    return currentUser && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+    return currentUser && !productsApi.userId && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -240,7 +240,7 @@ export default function Carrito() {
               </Button>
             </div>
             <div className="content-pay btn-empty">
-              <label htmlFor="" className="lbl-removeAllCar" onClick={removeAllCar}>
+              <label htmlFor="" className="lbl-removeAllCar" onClick={()=>removeAllCar()}>
                 Vaciar el Carrito
               </label>
             </div>
