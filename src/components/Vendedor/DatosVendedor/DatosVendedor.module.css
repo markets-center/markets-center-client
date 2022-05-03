@@ -31,6 +31,11 @@
         height: 230px;
         flex-direction: column;
         margin: 0 0 0 10px;
+        padding: 0 !important;
+    }
+
+    .containerData div {
+        padding-right: 0 !important;
     }
 
     .boxAddress {

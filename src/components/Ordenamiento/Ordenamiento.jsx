@@ -14,6 +14,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import CachedIcon from '@mui/icons-material/Cached';
+import style from './Ordenamiento.module.css'
 
 
 function Ordenamiento() {
@@ -72,23 +73,9 @@ function Ordenamiento() {
   
   
     return (
-        <Container  sx={{
-            width: "12vw",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop: '70px',
-            paddingTop: '10px',
-            height: '400px',
-            border: '1px solid #d8d8d8',
-            borderRadius: '5px',
-            boxShadow: '0px 5px 10px -6px rgb(83, 83, 83)',
-        }}>
+        <Container className={style.container}>
 
-            <Box sx={{ width: 200,  
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",}}>
+            <Box className={style.boxPrecio}>
             <FormControl>
             <FormLabel sx={{color: 'black'}}>Precio</FormLabel>
                 <RadioGroup
@@ -108,7 +95,7 @@ function Ordenamiento() {
                 reset
             </Button>
             </Box>
-            <FormControl variant="standard" sx={{ m: 2, minWidth: 190 }}>
+            <FormControl variant="standard" className={style.form}>
                 <InputLabel>Categoría</InputLabel>
                 <Select
                 value={categoria}
@@ -122,7 +109,7 @@ function Ordenamiento() {
                       }
                 </Select>
             </FormControl>
-            <FormControl variant="standard" sx={{ m: 2, minWidth: 190 }}>
+            <FormControl variant="standard" className={style.form} >
                 <InputLabel>Ordenar</InputLabel>
                 <Select
 
