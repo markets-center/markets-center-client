@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import Ordenamiento from '../Ordenamiento/Ordenamiento';
 import RenderBusquedas from '../RenderBusquedas/RenderBusquedas';
 import Container from '@mui/material/Container';
+import s from './Shop.module.css'
 
-
-function Shop(props) {
+function Shop() {
     const [change, setChange] = useState(0);
     const productsSearched = useSelector(state => state.searchedProducts);
     let firstProduct;
@@ -17,7 +17,7 @@ function Shop(props) {
     }, 1)
     return (
         <div>
-            <Container maxWidth="xl" sx={{
+            <Container maxWidth="xl" className={s.containerShop} sx={{
 
                 display: "flex",
                 marginTop: '50px',

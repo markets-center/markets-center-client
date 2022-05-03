@@ -95,7 +95,7 @@ function Ordenamiento() {
                 reset
             </Button>
             </Box>
-            <FormControl variant="standard" className={style.form}>
+            <FormControl variant="standard" className={style.formcategory}>
                 <InputLabel>Categoría</InputLabel>
                 <Select
                 value={categoria}

@@ -23,3 +23,22 @@
 .form {
     min-width: 162px !important;
 }
+.formcategory{
+    min-width: 162px !important;
+}
+
+@media (max-width: 500px){
+    .formcategory{
+        visibility: hidden;
+    }
+    .form{
+        margin-top: -50px;
+    }
+    .container{
+        height: 340px !important;
+        margin-top: 0px;
+    }
+    .boxPrecio{
+        margin-bottom: 0;
+    }
+}
