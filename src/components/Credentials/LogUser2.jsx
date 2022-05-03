@@ -50,7 +50,10 @@ export default function LogUser2() {
 
                     userDB.data.data[0].isAdmin && navigate('/Admin')
                     !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                    !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+                    if(!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller){
+                        localStorage.setItem('key', true);
+                        navigate('/')
+                    }
                 }).catch(() => setError("Credenciales invalidas"))
         } catch (error) {
             setError("Credenciales invalidas");
@@ -77,7 +80,10 @@ export default function LogUser2() {
                         localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
                         userDB.data.data[0].isAdmin && navigate('/Admin')
                         !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                        !userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller && navigate('/')
+                        if(!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller){
+                            localStorage.setItem('key', true);
+                            navigate('/')
+                        }
                     }
                 })
                 .catch(() => {
