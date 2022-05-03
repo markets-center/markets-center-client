@@ -10,6 +10,7 @@ import NavBar from '../../components/NavBar/NavBar.jsx'
 import Categorias from '../../components/Admin/Categorias/Categorias.jsx'
 import Usuarios from '../../components/Admin/Usuarios/Usuarios.jsx'
 import Ventas from '../../components/Admin/Ventas/Ventas.jsx'
+import Orden from '../../components/Admin/Orden/orden'
 
 
 export default function Admin() {
@@ -37,6 +38,10 @@ export default function Admin() {
             {
                 value === "Categorias" &&
                 <Categorias />
+            }
+            {
+                value === "Ordenes" &&
+                <Orden />
             }
             <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',
