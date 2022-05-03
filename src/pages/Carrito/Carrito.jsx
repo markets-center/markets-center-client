@@ -42,6 +42,7 @@ export default function Carrito() {
   const idCarUser = currentUser && currentUser.uid;
   const [productsTemp, setProductsTemp] = useLocalStorage("productsTemp");
   const [activePay, setActivePay] = useState(false);
+  
 
   const eventClickCountAdd = (price, id, counter) => {
     if (currentUser) {
@@ -234,7 +235,7 @@ export default function Carrito() {
             </div>
 
             <div className="content-pay btn-pay">
-              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={activePay}  
+              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={productsApi.products.length || productsTemp.length? false: true}  
                 onClick={currentUser ? handleOpen : handleValidate} sx={{  width:'23%'}}>
                 PAGAR
               </Button>
