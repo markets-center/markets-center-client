@@ -77,7 +77,7 @@ export default function Card({ name, price, image, description, stock, category,
             const oldProducts = dataCarUser.products.map((old) => {
                 return {
                     productId: old.productId._id,
-                    quantity: 1,
+                    quantity: old.quantity
                 }
             })
             const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
@@ -121,17 +121,24 @@ export default function Card({ name, price, image, description, stock, category,
         if(currentUser){
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
             if(objTemp.length){
+                const productsUser = dataCarUser && dataCarUser.products?.map((pu) => {
+                    return {
+                        productId: pu.productId._id,
+                        quantity: pu.quantity
+                    }
+                })
+                const newAmount = objTemp.reduce((sum, value) => sum+value.amount, 0);
                 dispatch(getOrUpdateCart({
                     idUser: idCarUser,
-                    products: objTemp,
-                    amount: objTemp.reduce((sum, value) => sum+value.amount, 0)
+                    products: [...productsUser, ...objTemp],
+                    amount: dataCarUser.amount + newAmount
                 }, currentUser));
                 setProductsTemp([]);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
             <div>{favorito?<IconButton onClick={delFavs}><Favorite  color="primary"/></IconButton>:<IconButton onClick={addFavs}><FavoriteBorder  color="primary"/></IconButton>}</div>
