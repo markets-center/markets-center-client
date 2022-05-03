@@ -20,7 +20,7 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
   }, [quantity])
   
   return (
-    <div>
+    <div className="card-item-container">
       {
         <Grid container visibility={true} sx={{padding: '10px'}}>
           <Grid item xs={2}>
@@ -28,14 +28,14 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
               <Avatar
                 alt="Remy Sharp"
                 src={image}
-                sx={{ width: 110, height: 110 }}
+                sx={{ width: 100, height: 100 }}
               />
             </div>
           </Grid>
           <Grid item xs={8} >
             <div className="item content-detail">
               <div className="detail item-tittle">
-                <Typography variant="h5" gutterBottom='true'>{name}</Typography>
+                <Typography variant="h5" gutterBottom='true' className="info-prod">{name}</Typography>
                 <div className="desc-item">
                   <Typography variant="caption">Stock: {stock}
                     <IconButton edge="end"  size='small'onClick={() => {
@@ -70,7 +70,7 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
             </div>
           </Grid>
           <Grid item xs={2} sx={{display: 'flex', justifyContent: 'center', paddingTop:'17px'}}> {/* el boton para borrar prod */}
-            <Typography variant="h5">{accounting.formatMoney(price, '$')}</Typography>
+            <Typography variant="h5" className="info-prod">{accounting.formatMoney(price, '$')}</Typography>
 
           </Grid>
         </Grid>
