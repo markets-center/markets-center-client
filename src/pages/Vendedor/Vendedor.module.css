@@ -36,11 +36,13 @@
     }
     .tusProductos h6 {
         font-size: 15px;
+        margin-left: 10px;
     }
 
     .botones {
         justify-content: flex-end;
         width: auto;
+        margin-right: 10px;
     }
 
     .botones button {

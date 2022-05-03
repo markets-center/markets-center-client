@@ -41,6 +41,7 @@ export default function Carrito() {
   const productsApi = useSelector((state) => state.addOrdercar);
   const idCarUser = currentUser && currentUser.uid;
   const [productsTemp, setProductsTemp] = useLocalStorage("productsTemp");
+  const [activePay, setActivePay] = useState(false);
 
   const eventClickCountAdd = (price, id, counter) => {
     if (currentUser) {
@@ -107,6 +108,7 @@ export default function Carrito() {
   }
 
   const eventClickRemoveItem = (id) => {
+    
     if (currentUser) {
       const removeItem = productsApi.products.filter(
         (f) => f.productId._id !== id
@@ -120,6 +122,7 @@ export default function Carrito() {
       };
       dispatch(getOrUpdateCart(obj, currentUser));
     } else {
+      if(!productsApi.products.length)setActivePay(true)
       const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
       const filter = getProductsTemp.filter((f) => f.productId !== id);
       setProductsTemp(filter);
@@ -240,6 +243,18 @@ export default function Carrito() {
                 Vaciar el Carrito
               </label>
             </div>
+          </div>
+          <div className="content-pay btn-pay">
+            <Button variant="outlined" size="small"
+            disabled={activePay} 
+            onClick={currentUser ? handleOpen : handleValidate}>
+              PAGAR
+            </Button>
+          </div>
+          <div className="content-pay btn-pay">
+            <label htmlFor="" className="lbl-removeAllCar" onClick={removeAllCar}>
+              Vaciar el Carrito
+            </label>
           </div>
         </div>
       </div>
