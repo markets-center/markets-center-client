@@ -40,14 +40,15 @@ export default function HistoryHome(){
         <div>
             <NavBar />
             <Button 
+                        className={styleH.btn}
                         onClick={() => navigate('/Login')}
                         variant="contained" 
                         color="primary" 
-                        sx={{
+                        /* sx={{
                             m: 2,
                             left: '1240px',
                             fontWeight: '600',
-                        }}
+                        }} */
                     >
                         Volver
                     </Button>
