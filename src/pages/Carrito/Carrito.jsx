@@ -234,7 +234,8 @@ export default function Carrito() {
             </div>
 
             <div className="content-pay btn-pay">
-              <Button variant="contained" size="small" color='buttonGracias' disableElevation onClick={currentUser ? handleOpen : handleValidate} sx={{  width:'23%'}}>
+              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={activePay}  
+                onClick={currentUser ? handleOpen : handleValidate} sx={{  width:'23%'}}>
                 PAGAR
               </Button>
             </div>
@@ -243,18 +244,6 @@ export default function Carrito() {
                 Vaciar el Carrito
               </label>
             </div>
-          </div>
-          <div className="content-pay btn-pay">
-            <Button variant="outlined" size="small"
-            disabled={activePay} 
-            onClick={currentUser ? handleOpen : handleValidate}>
-              PAGAR
-            </Button>
-          </div>
-          <div className="content-pay btn-pay">
-            <label htmlFor="" className="lbl-removeAllCar" onClick={removeAllCar}>
-              Vaciar el Carrito
-            </label>
           </div>
         </div>
       </div>
