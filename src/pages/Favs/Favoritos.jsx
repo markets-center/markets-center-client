@@ -57,6 +57,10 @@ function Favoritos() {
                 image={d.image}
                 rating={d.rating}
                 id={d._id}
+                stock={d.stock}
+                price={d.price}
+                category ={d.category}
+                numReviews={d.numReviews}
                 delF={delFavs}
               />
             ))}
