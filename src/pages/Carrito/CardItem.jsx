@@ -69,7 +69,7 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
               </div>
             </div>
           </Grid>
-          <Grid item xs={2} sx={{display: 'flex', justifyContent: 'center', paddingTop:'23px'}}> {/* el boton para borrar prod */}
+          <Grid item xs={2} sx={{display: 'flex', justifyContent: 'center', paddingTop:'30px'}}> {/* el boton para borrar prod */}
             <Typography variant="h5" className="info-prod">{accounting.formatMoney(price, '$')}</Typography>
 
           </Grid>
