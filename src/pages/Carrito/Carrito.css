@@ -83,7 +83,6 @@
   width: fit-content;
   display: flex;
   margin-right: 4vw;
-  margin-bottom: 1vw;
   border: 1px solid rgb(223, 223, 223);
 }
 
@@ -189,6 +188,9 @@ hr {
   width: 500px;
   margin: auto
 }
+.btn-pagar{
+  width: 23%;
+}
 
 
 @media (max-width: 500px) {
@@ -196,8 +198,9 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 0px;
     margin-bottom: 100px;
+    width: 100vw !important;
   }
   .content-detail{
     display: flex;
@@ -213,20 +216,27 @@ hr {
   }
 
   .pay-container{
-    width: 68%;
-    min-width: 340px;
-    margin: 20px 0
+    margin: 20px 0;
+    width: 98% !important;
   }
 
   .checkout {
     width: 400px;
     height: 600px;
   }
-
   .checkout main {
     display: flex !important;
     align-items: center;
     justify-content: center;
+  .lb-content{
+    width: fit-content !important;
+    padding-left: 25px;
+  }
+  .btn-pay{
+    width: 90%;
+  }
+  .btn-pagar{
+    min-width: 160px !important;
   }
 }
 @media (max-width: 570px){
@@ -239,6 +249,19 @@ hr {
   .item-count{
     margin-right: 15vw;
   }
+  .pay-container{
+    width: 90vw;
+  }
+  .tittle-pay{
+    width: 100%;
+  }
+  .lb-content{
+    align-items: center;
+  }
+  
+  .btn-pagar{
+    width: 40% !important;
+  }
 }
 
 @media (max-width: 800px){
@@ -247,21 +270,33 @@ hr {
     flex-direction: column;
     padding-left: 5vw;
   }
+  .lb-content{
+    width: fit-content !important;
+  }
+  
 }
 @media (max-width: 1100px){
   .items-content{
     width: 100%;
   }
+  .tittle-pay{
+    width: 94%;
+  }
   .lb-content{
-    width: 200px;
+    width: 100%;
     align-items: center;
     margin-left: 2vw;
     margin-right: 2vw;
+    width: fit-content !important;
 
   }
   .btn-pay{
-    width: 100vw;
+    justify-content: flex-end;
   }
+  .btn-pagar{
+    width: 28% !important;
+  }
+
 /*   .content-detail{
     display: flex;
     flex-direction: column;
@@ -273,9 +308,8 @@ hr {
 
   }
   .lb-content{
-    width: fit-content;
-    align-items:end;
-
+    width: 10%;
+    align-items:flex-end;
     margin-left: 2vw;
     margin-right: 2vw;
 
@@ -287,10 +321,14 @@ hr {
     width: 90vw;
   }
   .tittle-pay{
-    justify-content: center;
+    justify-content: flex-end;
+    width: 94%;
   }
   .btn-pay{
-    justify-content: center;
+    justify-content: flex-end;
+  }
+  .btn-pagar{
+    width: 24%;
   }
 }
 
