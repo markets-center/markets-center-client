@@ -33,8 +33,9 @@ export default function Home() {
         if (!localStorage.getItem('productsTemp')) {
             localStorage.setItem('productsTemp', '[]')
         }
-    }, [])
-    console.log(productsSearched)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
     return (
         <div>
             <NavBar searchBar={true} home={true} carrito={true} />
