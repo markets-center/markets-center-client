@@ -2,7 +2,7 @@
 .supreme-container{
   display: flex;
   justify-content: center;
-  background-color: #DAE7F2;
+  background-color: #eeeeee;
 }
 .car-container {
   display: flex;
@@ -57,6 +57,13 @@
 .content-detail {
   display: flex;
   align-items: center;
+}
+.content-detail-empty{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 7vh;
+  margin-bottom: 10vh;
 }
 
 .item-tittle {

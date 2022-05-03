@@ -188,7 +188,7 @@ export default function Carrito() {
                   );
                 })
               ) : (
-                <CarLoader msg={"Tu carrito esta vacío...!!!"} />
+                <CarLoader/>
               )
             ) : productsApi.products?.length ? (
               productsApi.products.map((item) => {
@@ -210,7 +210,7 @@ export default function Carrito() {
                 );
               })
             ) : (
-              <CarLoader msg={"Tu carrito esta vacío...!!!"} />
+              <CarLoader/>
             )}
           </div>
           <div className="pay-container">
