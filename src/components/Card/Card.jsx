@@ -88,12 +88,12 @@ export default function Card({ name, price, image, description, stock, category,
             }
             dispatch(getOrUpdateCart(obj, currentUser));
             dispatch(setAlert('Producto agregado al carrito'));
+
         } else {
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
             const findrepeat = objTemp.find((f) => f.productId === id);
             if (findrepeat) return setTooltip(true);
             setProductsTemp([...objTemp, ...objCarTemp]);
-            dispatch(setAlert('El producto ya se encuentra en el carrito'));
         }
     }
 
