@@ -2,3 +2,15 @@
     display: flex;
     justify-content: center;
 }
+
+.btn {
+    margin: 16px;
+    left: 1240px;
+    font-weight: 600;
+}
+
+@media all and (max-width: 500px){
+    .btn {
+        left: 70% !important;
+    }
+}
