@@ -74,7 +74,7 @@ export default function Detail({ name, price, image, description, stock, categor
                 amount: dataCarUser.amount + newAmount
             }
             dispatch(getOrUpdateCart(obj, currentUser));
-            dispatch(setAlert('Producto agregado al carrito'));
+            dispatch(setAlert('Producto agregado al carrito de compras'))
         } else {
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
             const findrepeat = objTemp.find((f) => f.productId === id);
@@ -85,7 +85,7 @@ export default function Detail({ name, price, image, description, stock, categor
 
     useEffect(() => {
         if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-    }, [currentUser, dispatch, idCarUser])
+    }, [])
 
     return (
         <div className={s.container}>
