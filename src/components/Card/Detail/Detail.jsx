@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Typography from '@mui/material/Typography';
+import { Box, Modal, Typography, Button, Tooltip } from "@mui/material";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Button from '@mui/material/Button';
 import s from './Detail.module.css'
-import Tooltip from '@mui/material/Tooltip';
 import Review from "../review/Review";
 import Commentary from "../review/Commentary/Commentary"
-import { Box, Modal } from "@mui/material";
 import AddReview from '../review/AddReview';
 import useLocalStorage from '../../../pages/Carrito/useLocalStorage.js';
 import accounting from 'accounting';
 import { useAuth } from '../../../context/AuthContext.js';
 import { getOrUpdateCart } from '../../../redux/actions/a.cart.js';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const style = {
     position: 'absolute',
@@ -27,7 +25,7 @@ const style = {
     p: 4,
 };
 
-export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews }) {
+export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews, onClose }) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -87,6 +85,7 @@ export default function Detail({ name, price, image, description, stock, categor
 
     return (
         <div className={s.container}>
+            <CancelIcon color="primary" className={s.back} onClick={onClose} />
             <div className={s.image}>
                 {stock > 0 ? <img src={image} alt="producto" className={s.img} /> :
                     <img src={image} alt="producto" className={s.imgSinStock} />}

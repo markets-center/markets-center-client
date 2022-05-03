@@ -27,3 +27,18 @@
 .right p{
     margin: 0px 10px 0px 10px
 }
+
+@media all and (max-width: 500px){
+    .container {
+        flex-direction: column;
+    }
+
+    .right {
+        margin: 0 !important;
+    }
+
+    .image {
+        margin: 0px 20px !important;
+
+    }
+}

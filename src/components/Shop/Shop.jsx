@@ -21,6 +21,7 @@ function Shop(props) {
 
                 display: "flex",
                 marginTop: '50px',
+                justifyContent: 'center'
                 
             }}>
                 <Ordenamiento />

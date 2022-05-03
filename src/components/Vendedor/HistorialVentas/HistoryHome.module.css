@@ -4,9 +4,9 @@
 }
 
 .btn {
-    margin: 16px;
-    left: 1240px;
-    font-weight: 600;
+    margin: 16px !important;
+    left: 88%;
+    font-weight: 600 !important;
 }
 
 @media all and (max-width: 500px){
