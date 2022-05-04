@@ -67,6 +67,10 @@ function Ordenamiento() {
     const handleReset = () => {
         dispatch(resetFilterByPrice())
         dispatch(filterBySellerAndCategories(idSeller,""))
+        dispatch(idActiveCategory(''))
+        setRadio('')
+        setCategoria('')
+        setOrder('')
 
     }
   
@@ -91,9 +95,6 @@ function Ordenamiento() {
                     <FormControlLabel value=">3000" control={<Radio size="small"/>} label=">$30" />
                 </RadioGroup>
             </FormControl>
-            <Button variant="outlined" size='small' startIcon={<CachedIcon />} sx={{marginTop: "10px"}} onClick={handleReset}>
-                reset
-            </Button>
             </Box>
             <FormControl variant="standard" className={style.formcategory}>
                 <InputLabel>Categoría</InputLabel>
@@ -124,6 +125,9 @@ function Ordenamiento() {
                     <MenuItem value={'z-a'}>Z-A</MenuItem>
                 </Select>
             </FormControl>
+            <Button variant="outlined" size='small' sx={{marginTop: "20px", width: '100%' }} onClick={handleReset}>
+                <CachedIcon />
+            </Button>
         </Container>
     );
 }

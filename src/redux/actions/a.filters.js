@@ -10,7 +10,7 @@ export function productByCategory(query) {
             dispatch({ type: GET_PRODUCT_BY_CATEGORY, payload: result.data.data })
             dispatch({type: LOADING_OFF});
         } catch (err) {
-            dispatch({ type: ERRORS, payload: err.msg })
+            dispatch({ type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: [] })
         }
     }
 }
