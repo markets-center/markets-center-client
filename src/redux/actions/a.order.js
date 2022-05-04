@@ -92,3 +92,20 @@ export function UpdateOrder(cart, status, currentUser) {
 
     }
 }
+
+export function updateDispatches(data, currentUser) {
+    const token = currentUser.auth.currentUser.accessToken
+    return async function (dispatch) {
+        try {
+            const response = await axios.put(`api/private/updateOrder`, data, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                  }
+            });
+            dispatch({ type: UPDATE_DISPATCH, payload: response.data.data })
+        } catch (err) {
+            dispatch({ type: ERRORS, payload: err.msg })
+        }
+
+    }
+}
