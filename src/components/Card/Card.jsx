@@ -45,9 +45,10 @@ export default function Card({ name, price, image, description, stock, category,
     const [favorito, setFavorito] = useState(favs.includes(id));
     const dispatch = useDispatch();
     const idCarUser = currentUser && currentUser.uid;
-    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
-    const allProducts = useSelector((state) => state.allProducts);
-    const dataCarUser = useSelector((state) => state.addOrdercar);
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    const allProductsDb = useSelector((state) => state.allProducts);
+    const orderCarUser = useSelector((state) => state.addOrdercar);
 
     function moreInfo(e) {
         setHover(true)
@@ -56,10 +57,12 @@ export default function Card({ name, price, image, description, stock, category,
         setHover(false)
     }
 
-    function addToCar(id, price, name, image, stock) {
-        const findProduct = allProducts.filter((f) => f._id === id);
+    const itemTemp = JSON.parse(localStorage.getItem("productsTemp"));
+    const itemUser = JSON.parse(localStorage.getItem("productsUser"));
 
-        const objCarTemp = findProduct.map((i) => {
+    function addToCar(id, price, name, image, stock) {
+        const findProductDb = allProductsDb.filter((f) => f._id === id);
+        const items = findProductDb.map((i) => {
             return {
                 productId: i._id,
                 name: i.name,
@@ -70,29 +73,14 @@ export default function Card({ name, price, image, description, stock, category,
                 amount: i.price
             }
         })
-
-        if (currentUser) {
-            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
-            if (findRepeatItems) return setTooltip(true);
-            const oldProducts = dataCarUser.products.map((old) => {
-                return {
-                    productId: old.productId._id,
-                    quantity: 1,
-                }
-            })
-            const newAmount = objCarTemp.reduce((sum, value) => sum + value.amount, 0);
-            const obj = {
-                idUser: idCarUser,
-                products: [...oldProducts, ...objCarTemp],
-                amount: dataCarUser.amount + newAmount
-            }
-            dispatch(getOrUpdateCart(obj, currentUser));
-            dispatch(setAlert('Producto agregado al carrito de compras'))
-        } else {
-            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
-            const findrepeat = objTemp.find((f) => f.productId === id);
-            if (findrepeat) return setTooltip(true);
-            setProductsTemp([...objTemp, ...objCarTemp]);
+        if(!idCarUser){
+            const repeatItemTemp = itemTemp.find((f) => f.productId === id);
+            if (repeatItemTemp) return setTooltip(true);
+            setProductsTemp([...itemTemp, ...items]);
+        }else{
+            const repeatItemUser = orderCarUser.products.find((f) => f.productId._id === id);
+            if (repeatItemUser) return setTooltip(true);
+            setProductsUser([...itemUser, ...items]);
         }
     }
 
@@ -113,24 +101,28 @@ export default function Card({ name, price, image, description, stock, category,
     }
 
     useEffect(() => {
-        if (currentUser && !dataCarUser.userId) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
-    useEffect(() => {
-        if (currentUser && !dataCarUser.userId) {
-            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
-            if (objTemp?.length) {
-                dispatch(getOrUpdateCart({
+        if (currentUser && itemUser.length){
+            if(orderCarUser.hasOwnProperty('products')){
+                const newAmount = itemUser.reduce((sum, val) => sum+(val.price*val.quantity), 0)
+                dispatch(getOrUpdateCart({ 
                     idUser: idCarUser,
-                    products: objTemp,
-                    amount: objTemp.reduce((sum, value) => sum + value.amount, 0)
+                    products: [...orderCarUser.products,...itemUser],
+                    amount: orderCarUser.amount + newAmount
                 }, currentUser));
-                setProductsTemp([]);
+                setProductsUser([]);
+            }else{
+                dispatch(getOrUpdateCart({ 
+                    idUser: idCarUser,
+                    products: itemUser,
+                    amount: itemUser.reduce((sum, val) => sum+(val.price*val.quantity), 0)
+                }, currentUser));
+                setProductsUser([]);
             }
+            
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [productsTemp,productsUser])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
@@ -163,10 +155,9 @@ export default function Card({ name, price, image, description, stock, category,
                             </IconButton>
 
                         }
-                        {stock > 0 ? <IconButton color="info" size="small">
-
-                            <DeliveryDiningIcon fontSize="" />
-                        </IconButton> :
+                        {stock > 0 ?
+                            <DeliveryDiningIcon fontSize="" color="info" size="small" sx={{paddingBottom: '.3vh'}}/>
+                                 :
                             <IconButton color="disable" size="small">
                                 <DeliveryDiningIcon fontSize="" />
                             </IconButton>

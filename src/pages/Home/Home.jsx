@@ -11,6 +11,7 @@ import { filterBySellerAndCategories } from '../../redux/actions/a.products.js';
 import Shop from '../../components/Shop/Shop';
 import { Snackbar } from '@mui/material';
 import { SnackbarAlert } from '../../components/Alert/success';
+import useLocalStorage from '../../pages/Carrito/useLocalStorage';
 
 export default function Home() {
     // Seller of the day modal
@@ -31,6 +32,9 @@ export default function Home() {
     const initialProducts = useSelector(state => state.allProducts);
     const alert = useSelector((state) => state.alert);
     
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    
     function handleClose() {
         dispatch(delAlert())
     }
@@ -45,15 +49,17 @@ export default function Home() {
     }, 1);
     
     useEffect(() => {
-        if (!localStorage.getItem('productsTemp')) {
-            localStorage.setItem('productsTemp', '[]')
+        if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
+            setProductsTemp([]);
+            setProductsUser([]);
+            console.log("las veces que entro al home: ")
         }
         firstTime && handleOpenModal()
         dispatch(getAllSellers())
         setSelected(allSellers[Math.floor(Math.random() * allSellers.length)])
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-
+    },[productsUser,productsTemp])
+    
     return (
         <div>
             <NavBar searchBar={true} home={true} carrito={true} handleOpenModal={handleOpenModal}/>

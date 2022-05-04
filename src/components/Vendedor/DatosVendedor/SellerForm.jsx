@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {useAuth} from '../../../context/AuthContext';
 import { Container, Box, Button, styled, FormControlLabel, Switch, Typography, TextField } from "@mui/material";
 import { AddAPhoto } from "@mui/icons-material/";
+import CancelIcon from '@mui/icons-material/Cancel';
 import style from '../../Comprador/Style/User.module.css'
  
 
@@ -47,10 +48,11 @@ function SellerForm({name, email, image, IdDocument, phone, address, userId, del
   return (
     <div>
       <Container component="main" maxWidth="md">
+            <CancelIcon color="primary" className={style.back} onClick={handleClose} />
           <Box className={style.boxForm}>
             <Typography component="h1" variant="h5">
             Datos de Usuario
-          </Typography>
+            </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}

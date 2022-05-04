@@ -72,12 +72,7 @@ export default function CardVendedor({
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
+      <Box className={style.iconos}>
           <Tooltip title="Reponer" arrow>
             <IconButton
               name={nombre}

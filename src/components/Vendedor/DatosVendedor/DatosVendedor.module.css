@@ -7,6 +7,16 @@
     border-bottom: 2px solid black;
 }
 
+.containerPic {
+    width: 200px;
+    height: 200px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
 .containerData {
     width: 800px !important;
     height: 200px;
@@ -27,15 +37,47 @@
 
 
 @media all and (max-width: 500px) {
-    .containerData {
-        height: 230px;
-        flex-direction: column;
-        margin: 0 0 0 10px;
+    .container {
+        height: 50% !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        margin: 0 !important;
         padding: 0 !important;
+        flex-direction: column;
+    }
+
+    .containerData {
+        height: 40%;
+        width: inherit !important;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-items: flex-start;
     }
 
     .containerData div {
-        padding-right: 0 !important;
+        width: max-content !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .containerData p {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .containerPic {
+        flex-direction: row-reverse !important;
+        justify-content: space-evenly;
+        padding: 0 !important;
+        height: 40% !important;
+        
+    }
+
+    .containerPic img {
+        width: 100px !important;
     }
 
     .boxAddress {
@@ -44,7 +86,9 @@
     }
 
     .actualizar {
-        width: initial !important;
+        display: flex !important;
+        justify-content: center;
+        margin: 20px 0 !important;
     }
 
     .actualizar button {

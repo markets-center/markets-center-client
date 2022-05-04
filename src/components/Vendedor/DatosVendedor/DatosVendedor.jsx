@@ -18,13 +18,7 @@ export default function DatosVendedor() {
     return (
         <>
             <Container className={style.container} >
-                <Container sx={{
-                    width: '200px',
-                    height: '200px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}>
+                <Container className={style.containerPic}>
                     <Box sx={{
                     }}>
                         <Typography variant='h6' sx={{
@@ -74,7 +68,8 @@ export default function DatosVendedor() {
                             {oneUser.delivery ? <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'green', fontSize: '40px' }} /> <PanoramaFishEyeIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'green' }} /></> : <><DeliveryDiningIcon style={{ position: 'relative', left: '10px', color: 'red', fontSize: '40px' }} /> <BlockIcon style={{ position: 'relative', right: '39px', fontSize: '60px', color: 'red' }} /></>}
                         </Box>
                     </Container>
-                    <Container className={style.actualizar}>
+                </Container>
+                <Container className={style.actualizar}>
                         <Button
                             onClick={handleOpen}
                             variant="contained"
@@ -85,7 +80,6 @@ export default function DatosVendedor() {
                             Actualizar Datos
                         </Button>
                     </Container>
-                </Container>
             </Container>
             <Modal
                 open={open}
