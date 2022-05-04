@@ -9,6 +9,11 @@
     border-radius: 10px;
 }
 
+.iconos {
+    display: flex !important;
+    flex-direction: row;
+}
+
 @media all and (max-width: 500px){
     .container {
         width: 330px !important;
@@ -17,5 +22,9 @@
 
     .container img {
         margin-left: 10px;
+    }
+
+    .iconos button {
+        position: inherit !important;
     }
 }

@@ -73,10 +73,15 @@
     background-color: transparent;
 }
 
+.back {
+    position: absolute;
+}
+
 @media all and (max-width: 500px){
     .container {
-        width: 400px !important;
-        height: 700px !important; 
+        width: 80% !important;
+        height: 90% !important; 
+        align-items: center;
     }
     .middleDiv{
         flex-direction: column !important;
@@ -90,5 +95,10 @@
     }
     .modalLeft div {
         max-width: 300px;
+    }
+    .back {
+        position: absolute;
+        top: 30px;
+        right: 30px;
     }
 }
