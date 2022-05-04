@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Typography from '@mui/material/Typography';
+import { Box, Modal, Typography, Button, Tooltip } from "@mui/material";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Button from '@mui/material/Button';
 import s from './Detail.module.css'
-import Tooltip from '@mui/material/Tooltip';
 import Review from "../review/Review";
 import Commentary from "../review/Commentary/Commentary"
-import { Box, Modal } from "@mui/material";
 import AddReview from '../review/AddReview';
 import useLocalStorage from '../../../pages/Carrito/useLocalStorage.js';
 import accounting from 'accounting';
 import { useAuth } from '../../../context/AuthContext.js';
 import { getOrUpdateCart } from '../../../redux/actions/a.cart.js';
+import CancelIcon from '@mui/icons-material/Cancel';
 import { setAlert } from "../../../redux/actions/a.alert";
 
 const style = {
@@ -28,8 +26,8 @@ const style = {
     p: 4,
 };
 
-export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews }) {
-
+export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews, onClose }) {
+    const countItemCarUser = useSelector((state) => state.addOrdercar);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -39,14 +37,18 @@ export default function Detail({ name, price, image, description, stock, categor
     const dispatch = useDispatch();
     const { currentUser } = useAuth();
     const idCarUser = currentUser && currentUser.uid;
-    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
-    const allProducts = useSelector((state) => state.allProducts);
-    const dataCarUser = useSelector((state) => state.addOrdercar);
+
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    const allProductsDb = useSelector((state) => state.allProducts);
+    const orderCarUser = useSelector((state) => state.addOrdercar);
+
+    const itemTemp = JSON.parse(localStorage.getItem("productsTemp"));
+    const itemUser = JSON.parse(localStorage.getItem("productsUser"));
 
     function addToCar(id, price, name, image, stock) {
-        const findProduct = allProducts.filter((f) => f._id === id);
-
-        const objCarTemp = findProduct.map((i) => {
+        const findProductDb = allProductsDb.filter((f) => f._id === id);
+        const items = findProductDb.map((i) => {
             return {
                 productId: i._id,
                 name: i.name,
@@ -57,38 +59,20 @@ export default function Detail({ name, price, image, description, stock, categor
                 amount: i.price
             }
         })
-
-        if (currentUser) {
-            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
-            if (findRepeatItems) return setTooltip(true);
-            const oldProducts = dataCarUser.products.map((old) => {
-                return {
-                    productId: old.productId._id,
-                    quantity: 1,
-                }
-            })
-            const newAmount = objCarTemp.reduce((sum, value) => sum + value.amount, 0);
-            const obj = {
-                idUser: currentUser._delegate.uid,
-                products: [...oldProducts, ...objCarTemp],
-                amount: dataCarUser.amount + newAmount
-            }
-            dispatch(getOrUpdateCart(obj, currentUser));
-            dispatch(setAlert('Producto agregado al carrito de compras'))
-        } else {
-            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
-            const findrepeat = objTemp.find((f) => f.productId === id);
-            if (findrepeat) return setTooltip(true);
-            setProductsTemp([...objTemp, ...objCarTemp]);
+        if(!idCarUser){
+            const repeatItemTemp = itemTemp.find((f) => f.productId === id);
+            if (repeatItemTemp) return setTooltip(true);
+            setProductsTemp([...itemTemp, ...items]);
+        }else{
+            const repeatItemUser = orderCarUser.products.find((f) => f.productId._id === id);
+            if (repeatItemUser) return setTooltip(true);
+            setProductsUser([...itemUser, ...items]);
         }
     }
 
-    useEffect(() => {
-        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-    }, [])
-
     return (
         <div className={s.container}>
+            <CancelIcon color="primary" className={s.back} onClick={onClose} />
             <div className={s.image}>
                 {stock > 0 ? <img src={image} alt="producto" className={s.img} /> :
                     <img src={image} alt="producto" className={s.imgSinStock} />}
@@ -105,19 +89,20 @@ export default function Detail({ name, price, image, description, stock, categor
                 </div>
                 <div className={viewRev && s.ratingAndReview}>
                     <div>
-                        {viewRev && <div className={s.description}>
+                        {viewRev && <div className={s.review}>
                             <Button variant="outlined" size="small" color="info" onClick={handleOpen} >Escribe una reseña</Button>
                         </div>}
                     </div>
                 </div>
                 <Commentary user={reviews} />
+                <div className={s.buttons}>
+                    {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
+                        <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image, stock)}> agregar</Button>
+                    </Tooltip> :
+                        !viewRev && <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button>
+                    }</div>
             </div>
-            <div className={s.buttons}>
-                {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
-                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image, stock)}> agregar</Button>
-                </Tooltip> :
-                    !viewRev && <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button>
-                }</div>
+
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -125,7 +110,7 @@ export default function Detail({ name, price, image, description, stock, categor
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <AddReview id={id} />
+                    <AddReview id={id} setOpen={setOpen} user={reviews} />
                 </Box>
             </Modal>
         </div>

@@ -103,7 +103,7 @@ function RenderBusquedas() {
                 </div>
                 </div>
                 :
-                <Error message='El vendedor no tiene productos' mistake={false} />
+                <Error message='No se encuentran disponibles los productos' mistake={false} />
 
             }
             </div>

@@ -1,3 +1,18 @@
+.containerMain {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px !important;
+    height: 500px !important;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 24px;
+    padding: 32px;
+    display: flex !important;
+    flex-direction: row;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -53,10 +68,38 @@
     width: 40%;
     /* border: 1px solid yellow; */
 }
-.Total{
+.total{
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     height: 10%;
     /* border: 1px solid orange; */
+}
+
+@media all and (max-width: 500px){
+    .containerMain {
+        width: 95% !important;
+        align-items: center;
+        padding: 0 !important;
+    }
+
+    .listItemContainer{
+        height: 235px !important;
+    }
+    
+    .listItemRight {
+        width: inherit !important;
+    }
+
+    .listItemRight p {
+        text-align: center;
+    }
+
+    .total {
+        justify-content: center;
+    }
+
+    .infoLeft {
+        align-items: center;
+    }
 }

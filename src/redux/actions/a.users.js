@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {DEL_ONE_USER, SET_ALERT, ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY} from './ctes';
+import {DEL_ONE_USER, SET_ALERT, ERRORS, MESSAGE, UPDATE_USER, GET_USER_HISTORY, LOADING_OFF, LOADING_ON} from './ctes';
 
 export function postNewUser (user, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
@@ -57,6 +57,7 @@ export function userHistory(id, currentUser){
     const token = currentUser.auth.currentUser.accessToken
     return async function(dispatch) {
         try {
+            dispatch({type: LOADING_ON})
             const history = await axios.get(`/api/private/users/history/${id}`, {
                 headers:{
                     Authorization: `Bearer ${token}`
@@ -64,6 +65,7 @@ export function userHistory(id, currentUser){
             })
             dispatch({type: GET_USER_HISTORY, payload:history.data.data});
             dispatch({type:MESSAGE, payload: history.data.msg})
+            dispatch({LOADING_OFF})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

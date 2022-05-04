@@ -1,25 +1,25 @@
-import React, {useState} from 'react'
-import {ListItemIcon, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Button, Dialog} from '@mui/material';
+import React, { useState } from 'react'
+import { ListItemIcon, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Button, Dialog } from '@mui/material';
 import Style from './FavCard.module.css';
 import Favorite from '@mui/icons-material/Favorite';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Detail from '../Card/Detail/Detail'
 
-function FavCard({stock, price, name, description, category, numReviews, image, rating, id, delF}) {
+function FavCard({ stock, price, name, description, category, numReviews, image, rating, id, delF, reviews }) {
   const [detail, setDetail] = useState(false)
-  function handleCloseDet(){
+  function handleCloseDet() {
     setDetail(false)
   }
-  function handleOpen () {
+  function handleOpen() {
     setDetail(true)
   }
   return (
-      <div >
+    <div >
       <ListItem alignItems="flex-start">
         <div className={Style.image}>
-        <ListItemAvatar>
-          <Avatar alt={name} src={image} />
-        </ListItemAvatar>
+          <ListItemAvatar>
+            <Avatar alt={name} src={image} />
+          </ListItemAvatar>
         </div>
         <ListItemText
           primary={name}
@@ -39,12 +39,12 @@ function FavCard({stock, price, name, description, category, numReviews, image, 
         />
         <ListItemIcon>
           <Button>
-          <MoreHoriz color='primary' onClick={()=>handleOpen()} />
+            <MoreHoriz color='primary' onClick={() => handleOpen()} />
           </Button>
         </ListItemIcon>
         <ListItemIcon>
           <Button>
-          <Favorite color='primary' onClick={()=>delF(id)} />
+            <Favorite color='primary' onClick={() => delF(id)} />
           </Button>
         </ListItemIcon>
       </ListItem>
@@ -59,9 +59,9 @@ function FavCard({stock, price, name, description, category, numReviews, image, 
           }
         }}
       >
-        <Detail viewRev={false} name={name} price={price} image={image} description={description} stock={stock} category={category} id={id} rating={rating} numReviews={numReviews} />
+        <Detail viewRev={false} name={name} price={price} image={image} description={description} stock={stock} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews} onClose={handleCloseDet}/>
       </Dialog>
-      </div>
+    </div>
   )
 }
 

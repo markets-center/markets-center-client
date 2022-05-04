@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 70px;
+    margin: 50px 0;
     padding-top: 0 !important;
     height: 400px !important;
     border: 1px solid #d8d8d8;
@@ -23,23 +23,30 @@
 .form {
     min-width: 162px !important;
 }
+
 .formcategory{
     min-width: 162px !important;
-    
 }
 
-@media (max-width: 500px){
-    .formcategory{
-        visibility: hidden;
-    }
-    .form{
-        margin-top: -50px;
-    }
-    .container{
+
+@media all and (max-width: 500px){
+    .container {
+        width: 150px !important;
         height: 340px !important;
         margin-top: 0px;
     }
-    .boxPrecio{
+
+    .boxPrecio {
+        margin-right: 0 !important;
         margin-bottom: 0;
     }
+
+    .form {
+        min-width: 120px !important;
+      margin-top: -50px;
+    }
+    .formcategory{
+      min-width: 162px !important;
+      visibility: hidden;
+    } 
 }

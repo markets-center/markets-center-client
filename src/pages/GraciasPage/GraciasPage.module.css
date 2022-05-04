@@ -1,5 +1,5 @@
 .supremeContainer{
-    width: 99vw;
+    width: 100vw;
     height: 93vh;
     background-color: #7fc778;
     display: flex;
@@ -144,4 +144,10 @@
   .container {
     width: 90vw !important;
   }  
+
+  .containerButton {
+    margin: 50px 0 0 0 !important;
+    padding: 0 !important;
+    position: initial !important;
+  }
 }

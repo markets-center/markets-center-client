@@ -22,7 +22,7 @@ export default function AddressForm({ next }) {
           dispatch(payment(data))
           next()
         })}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             <AddressInput required name="firtName" label="Firstname" value={firtName} />
             <AddressInput required name="lastName" label="Lastname" value={lastName} />
             <AddressInput required name="address" label="Address" value={user.address} />

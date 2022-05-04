@@ -1,24 +1,15 @@
 import React from "react";
-import { Box, Container, Avatar } from "@mui/material";
-import { IconButton, Typography } from "@mui/material";
-import { ShoppingBasket, ExpandMore } from "@mui/icons-material";
+import { Box, Container, Avatar, IconButton, Typography } from "@mui/material";
+import { ShoppingBasket, ExpandMore, Info } from "@mui/icons-material";
+//import InfoIcon from '@mui/icons-material/Info';
+import style from './Style/HistoryItems.module.css'
+
 
 function HistoryItems({ item, handleOpenMore, handleOpenCancel }) {
   const fecha = `${item.createdAt[8]}${item.createdAt[9]}/${item.createdAt[5]}${item.createdAt[6]}/${item.createdAt[0]}${item.createdAt[1]}${item.createdAt[2]}${item.createdAt[3]}`
   return (
     <div>
-      <Container
-        sx={{
-          height: "60px",
-          width: "850px",
-          border: "2px solid gray",
-          margin: "5px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderRadius: "10px",
-        }}
-      >
+      <Container className={style.container}>
         <Box
           sx={{
             height: "max-content",
@@ -65,7 +56,7 @@ function HistoryItems({ item, handleOpenMore, handleOpenCancel }) {
               edge="end"
               aria-label="delete"
             >
-              <ExpandMore />
+              <Info />
             </IconButton>
         </Box>
       </Container>

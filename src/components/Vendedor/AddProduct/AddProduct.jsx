@@ -6,6 +6,8 @@ import { getAllCategories } from '../../../redux/actions/a.category.js'
 import styles from "./AddProduct.module.css";
 import { Modal, Typography, TextField, Box, Button, styled } from "@mui/material";
 import { AddAPhoto, Publish } from '@mui/icons-material/';
+import CancelIcon from '@mui/icons-material/Cancel';
+
 
 import Categories from './Categories.jsx'
 
@@ -100,6 +102,7 @@ export default function AddProduct({ input, setInput, handleClose, open, prodId,
             onClose={handleClose}
         >
             <Box className={styles.container} component="form">
+            <CancelIcon color="primary" className={styles.back} onClick={handleClose} />
                 <div className={styles.mainDiv}>
                     <Typography variant="h4" gutterBottom component="div">
                         Agregar un producto:

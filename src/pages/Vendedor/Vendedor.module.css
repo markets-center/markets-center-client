@@ -31,8 +31,14 @@
 }
 
 @media all and (max-width: 500px){
+    .containerMain{
+        height: 50% !important;
+        align-content: flex-start;
+    }
+    
     .tusProductos{
         height: 50px;
+        padding: 0 !important;
     }
     .tusProductos h6 {
         font-size: 15px;
@@ -52,7 +58,7 @@
     }
 
     .productos{
-        height: 440px;
+        height: 89% !important;
         justify-content: space-evenly;
         padding: 0 !important;
     }
