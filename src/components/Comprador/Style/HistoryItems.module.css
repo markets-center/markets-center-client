@@ -17,8 +17,16 @@
     background-color: aqua !important;
 }
 
-.containerItems {
-    padding: 20px 15px !important
+.containerItem {
+    height: 60px;
+    width: 400px !important;
+    margin: 5px;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    /* width: initial !important;
+    padding: 20px 15px !important */
 }
 
 .items {
@@ -31,12 +39,16 @@
     border-radius: 10px;
 }
 
-.cardDetalle:first-child {
-    justify-content: center;
-    min-width: 900px;
-    min-height: 450px;
-    margin: 10px !important
-    
+.cardDetalle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px !important;
+    background: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 32px;
 }
 
 @media all and (max-width: 500px){
@@ -56,8 +68,14 @@
     }
 
     .cardDetalle {
-        width: 400px !important;
-        right: 27% !important;
-        height: 700px !important;
+        width: 330px !important;
+        height: 90%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerItem {
+        width: inherit !important;
     }
 }

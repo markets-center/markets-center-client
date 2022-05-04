@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import {useAuth} from '../../context/AuthContext';
 import {userHistory} from '../../redux/actions/a.users';
 import {useDispatch, useSelector} from 'react-redux';
-import { Typography, Container, List, DialogActions, Button } from "@mui/material";
+import { Typography, Container, List, DialogActions, Button, Modal } from "@mui/material";
 import {Dialog, DialogTitle, DialogContent, DialogContentText} from '@mui/material';
 import {Box, IconButton} from '@mui/material';
 import HistoryItems from './HistoryItems';
 import logo from '../../images/MarketsCenter.png'
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import Detail from '../Card/Detail/Detail'
+import style from './Style/HistoryItems.module.css'
 
 function UserProfile() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ function UserProfile() {
   }, [dispatch, oneUser._id]);
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={style.containerHistory}>
         <Typography
           sx={{ mt: 4, mb: 2, display: "block" }}
           variant="h4"
@@ -105,17 +106,7 @@ function UserProfile() {
                 sx={{ display: "block" }}
                 id="alert-dialog-description"
               >
-                <Container
-                  sx={{
-                    height: "60px",
-                    width: "400px",
-                    margin: "5px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    borderRadius: "10px",
-                  }}
-                >
+                <Container className={style.containerItem}>
                   <Box
                     sx={{
                       height: "max-content",
@@ -178,18 +169,16 @@ function UserProfile() {
         </DialogActions>
       </Dialog>
 
-      <Dialog
+      <Modal
         open={openProd}
         onClose={handleCloseProd}
-        PaperProps={{
-          sx: {
-            minWidth: 900,
-            minHeight: 450
-          }
-        }}
-      >
-        <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} />
-      </Dialog>
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+       >
+        <Box className={style.cardDetalle}>
+          <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} onClose={handleCloseProd}/>
+        </Box>
+      </Modal>
 
     </div>
   );
