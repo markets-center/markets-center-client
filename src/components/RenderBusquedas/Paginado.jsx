@@ -6,7 +6,8 @@ export default function Paginado({ products, setCurrent, current }){
 
   const idSeller = useSelector(state => state.activeSeller)
   const pageNumbers = [];
-  const pageCount = Math.ceil(products.length / 13);
+  const pageCount = Math.ceil(products.length / 15);
+  
   for (let i = 1; i < pageCount + 1; i++) {
     pageNumbers.push(i);
   }
