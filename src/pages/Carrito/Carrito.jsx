@@ -40,9 +40,10 @@ export default function Carrito() {
 
   const productsApi = useSelector((state) => state.addOrdercar);
   const idCarUser = currentUser && currentUser.uid;
-  const [productsTemp, setProductsTemp] = useLocalStorage("productsTemp");
-  const [activePay, setActivePay] = useState(false);
+
+  const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
   
+  const [activePay, setActivePay] = useState(true);
 
   const eventClickCountAdd = (price, id, counter) => {
     if (currentUser) {
@@ -122,12 +123,14 @@ export default function Carrito() {
         }, 0)
       };
       dispatch(getOrUpdateCart(obj, currentUser));
+      if(!removeItem.length)setActivePay(true)
     } else {
-      if(!productsApi.products.length)setActivePay(true)
       const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
       const filter = getProductsTemp.filter((f) => f.productId !== id);
+      console.log("que tiene filter ELSE: ", filter)
       setProductsTemp(filter);
       handleOpenAlert("Producto eliminado");
+      if(!filter.length)setActivePay(true)
     }
   }
 
@@ -143,6 +146,7 @@ export default function Carrito() {
       const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
       if (getProductsTemp.length) setProductsTemp([]);
     }
+    setActivePay(true)
   };
 
   const handleValidate = () => {
@@ -157,10 +161,13 @@ export default function Carrito() {
   const subTotal = total / 1.18;
   const iva = total - subTotal;
 
-  // useEffect(() => {
-  //   return currentUser && !productsApi.userId && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    if(productsApi.hasOwnProperty("products")){
+      if(productsApi.products.length)setActivePay(false)
+    }
+    const temp = JSON.parse(localStorage.getItem("productsTemp"));
+    if(temp.length)setActivePay(false)   
+  }, []);
 
   return (
     <div>
@@ -235,7 +242,7 @@ export default function Carrito() {
             </div>
 
             <div className="content-pay btn-pay">
-              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={false}  
+              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={activePay}  
                 onClick={currentUser ? handleOpen : handleValidate} className="btn-pagar">
                 PAGAR
               </Button>
