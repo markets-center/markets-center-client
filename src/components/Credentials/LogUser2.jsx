@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
 import firebase from "firebase/compat/app";
 import logo from '../../images/Markets Center.svg'
 import css from './SignUp.module.css';
 import GoogleIcon from '@mui/icons-material/Google';
 import image from '../../images/signIn.svg'
 import axios from 'axios';
-
+import {delAlert} from '../../redux/actions/a.alert'
 import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../firebase";
 import { Button, Input, Typography, Snackbar } from "@mui/material";
@@ -17,11 +19,13 @@ export default function LogUser2() {
         email: "",
         password: "",
     });
+    const alert = useSelector(state=>state.alert)
     const [error, setError] = useState("");
     const [errorMail, setErrorMail] = useState("");
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function handleChange(e) {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -30,6 +34,7 @@ export default function LogUser2() {
     function handleClose() {
         setError('');
         setErrorMail('')
+        dispatch(delAlert())
     }
 
     async function handleSubmit(e) {
@@ -45,7 +50,7 @@ export default function LogUser2() {
             setError("");
             setErrorMail("");
             setLoading(true);
-            login(user.email, user.password)
+            const errorfb = login(user.email, user.password)
                 .then((userDB) => {
 
                     userDB.data.data[0].isAdmin && navigate('/Admin')
@@ -54,8 +59,13 @@ export default function LogUser2() {
                         localStorage.setItem('key', true);
                         navigate('/')
                     }
-                }).catch(() => setError("Credenciales invalidas"))
+                }).catch((error) => {
+                    console.log('holis2',error)
+                    setError("No existe usuario con el email")
+                })
+                console.log('pppp',errorfb)
         } catch (error) {
+            console.log('holis1',error)
             setError("Credenciales invalidas");
         }
         setLoading(false);
@@ -91,6 +101,7 @@ export default function LogUser2() {
                 })
 
         } catch (error) {
+            console.log(error)
             setError("Credenciales invalidas");
         }
     }
@@ -164,7 +175,14 @@ export default function LogUser2() {
                     {errorMail}
                 </SnackbarAlert>
             </Snackbar>
-
+            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}>
+                <SnackbarAlert onClose={handleClose} variant='filled' severity='error'>
+                    {alert}
+                </SnackbarAlert>
+            </Snackbar>
 
         </div>
     )
