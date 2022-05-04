@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import { Container } from '@mui/material';
+import { useSelector } from 'react-redux';
 import s from './SellerCard.module.css'
 import { useDispatch } from 'react-redux';
 import { filterBySellerAndCategories, idActiveSeller} from '../../../redux/actions/a.products';
@@ -10,14 +11,23 @@ const SellerCard = ({ image, name, id }) => {
 
 
     const dispatch = useDispatch()
+    const category = useSelector(state => state.activeCategory)
 
     function handleSelect(e){
         e.preventDefault();
-        dispatch(filterBySellerAndCategories(id,""))
-        dispatch(idActiveSeller(id))
+        if(category === ''){
+            dispatch(filterBySellerAndCategories(id,""))
+            dispatch(idActiveSeller(id))
+            
+        }
+        else{
+            dispatch(filterBySellerAndCategories(id,category));
+            dispatch(idActiveSeller(id))
+        }
         
 
     }
+    console.log(category)
 
     return (
         <div onClick={handleSelect}>
