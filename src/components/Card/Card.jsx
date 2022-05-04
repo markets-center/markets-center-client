@@ -120,7 +120,7 @@ export default function Card({ name, price, image, description, stock, category,
     useEffect(() => {
         if (currentUser && !dataCarUser.userId) {
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
-            if (objTemp.length) {
+            if (objTemp?.length) {
                 dispatch(getOrUpdateCart({
                     idUser: idCarUser,
                     products: objTemp,
