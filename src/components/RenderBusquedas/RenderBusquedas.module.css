@@ -25,17 +25,18 @@
 
 }
 @media (max-width: 500px){
-    .container{
+    /* .container{
         width: 90vw;
-    }
+    } */
     .productsContainer{
-        width: 94vw;
+        align-items: center;
+        flex-direction: column;
         justify-content: center;
     }
-    .container2{
+    /* .container2{
         width: 94vw;
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-    }
+    } */
 }

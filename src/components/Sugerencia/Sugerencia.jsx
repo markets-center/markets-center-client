@@ -7,19 +7,7 @@ import Modal from '@mui/material/Modal';
 import styles from './Sugerencia.module.css'
 import CardSugerencia from './CardSugerencias.jsx'
 import { filterBySeller } from '../../redux/actions/a.products.js'
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
-    borderRadius: 5,
-    boxShadow: 24,
-    p: 4,
-};
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function Sugerencia({open, setOpen, handleOpenModal, handleCloseModal, selected}) {
     const dispatch = useDispatch();
@@ -37,9 +25,9 @@ return (
         open={open}
         onClose={handleCloseModal}
         >
-            <Box sx={style}>
+            <Box className={styles.box}>
                 <div className={styles.closeButton}>
-                    <Button onClick={() => handleCloseModal(false)}>X</Button>
+                    <CancelIcon color="primary" className={styles.back} onClick={handleCloseModal} />
                 </div>
                 <Typography variant="h6" component="h2">
                     {`Vendedor sugerido: ${selected.name}`}
