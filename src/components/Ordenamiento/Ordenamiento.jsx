@@ -88,6 +88,7 @@ function Ordenamiento() {
                     name="precio"
                     value={radio}
                     onChange={handleChangeRadio}
+                    row
                 >
                     <FormControlLabel value="0-500" control={<Radio size="small"/>} label="$0-$5" />
                     <FormControlLabel value="500-1500" control={<Radio size="small"/>} label="$5-$15" />
