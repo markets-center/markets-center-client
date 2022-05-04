@@ -24,6 +24,11 @@
     min-width: 162px !important;
 }
 
+.formcategory{
+    min-width: 162px !important;
+}
+
+
 @media all and (max-width: 500px){
     .container {
         width: 150px !important;
