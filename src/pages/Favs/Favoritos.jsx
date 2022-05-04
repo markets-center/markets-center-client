@@ -63,6 +63,7 @@ function Favoritos() {
                 price={d.price}
                 category ={d.category}
                 numReviews={d.numReviews}
+                reviews={d.reviews}
                 delF={delFavs}
               />
             ))}
