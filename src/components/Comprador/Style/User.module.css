@@ -75,12 +75,13 @@
 
 @media all and (max-width: 500px) {
     .containerForm{
-        width: 350px;
+        width: 80% !important;
+        height: 90% !important;
     }
 
     .containerPass {
-        width: 350px;
-        height: 500px;
+        width: 80%;
+        height: 50%;
     }
 
     .formPass {
@@ -95,10 +96,15 @@
     }
 
     .containerPic {
-        display: flex;
+        display: flex !important;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         padding: 0;
+    }
+
+    .containerPic img {
+        border-radius: 50%;
     }
 
     .btnPic{
@@ -113,13 +119,14 @@
         display: flex !important;
         align-items: center;
         justify-content: space-between;
-        padding: 0 !important
+        padding: 0 !important;
+        flex-direction: column;
     }
 
     .containerInfo {
-        height: 230px;
+        height: 150px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
     }
 
@@ -133,11 +140,17 @@
         line-height: 1.5;
     }
 
+    .botones {
+        height: inherit !important;
+        margin: 16px 0 !important;
+    }
+
     .title {
-        width: 100px !important;
+        width: 100% !important;
         padding: 0 !important;
-        margin-left: 15px !important;
-        margin-right: 15px !important;
+        margin-top: 10px !important;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
     }
 
     .title img {

@@ -15,17 +15,17 @@ const payments = [
 ];
 
 export default function Review({ amount }) {
-  const products = useSelector(state => state.addOrdercar)
+  const products = useSelector(state => state.addOrdercar.products)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.products?.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name}/>
-            <Typography variant="body2">{accounting.formatMoney(product.price, '$')}</Typography>
+        {products?.map((product) => (
+          <ListItem key={product.productId._id} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={product.productId.name}/>
+            <Typography variant="body2">{accounting.formatMoney(product.productId.price, '$')}</Typography>
           </ListItem>
         ))}
         <Divider />

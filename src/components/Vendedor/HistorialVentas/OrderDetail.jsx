@@ -1,31 +1,17 @@
 import React from 'react';
-import { Modal, Box } from '@mui/material'
+import { Modal, Container } from '@mui/material'
 import styles from './OrderDetail.module.css'
+import accounting from 'accounting'
 
 
 export default function OrderDetail({input, openMore, handleOpenMore, handleCloseMore}){
     const clientInfo = input.userId
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 1000,
-        height: 500,
-        bgcolor: 'background.paper',
-        border: '1px solid #000',
-        borderRadius: 6,
-        boxShadow: 24,
-        p: 4,
-        display: "flex",
-        flexDirection: 'row',
-    };
     return (
         <Modal
             open={openMore}
             onClose={handleCloseMore}
         >
-            <Box sx={{ ...style }}>
+            <Container className={styles.containerMain}>
                 <div className={styles.container}>
                     <div className={styles.info}>
                         <div className={styles.infoLeft}>
@@ -54,9 +40,9 @@ export default function OrderDetail({input, openMore, handleOpenMore, handleClos
                                             <h4>{product.productId.name}</h4>
                                         </div>
                                         <div className={styles.listItemRight}>
-                                            <p>{`Cantidad: ${product.quantity}`}</p>
-                                            <p>{`Precio: U$D${product.productId.price}`}</p>
-                                            <p>{`Total: U$D${product.productId.price*product.quantity}`}</p>
+                                            <p>{`Cantidad: ${product.quantity} u.`}</p>
+                                            <p>{`Precio:  ${accounting.formatMoney(product.productId.price, "U$D")}`}</p>
+                                            <p>{`Total: ${accounting.formatMoney(product.productId.price*product.quantity, "U$D")}`}</p>
                                         </div>
                                     </div>
                                 )
@@ -64,10 +50,10 @@ export default function OrderDetail({input, openMore, handleOpenMore, handleClos
                         }
                     </div>
                     <div>
-                        <h3 className={styles.Total}>{`Total: U$D ${input.amount}`}</h3>                            
+                        <h3 className={styles.total}>{`Total: ${accounting.formatMoney(input.amount, "U$D ")}`}</h3>                            
                     </div>
                 </div>
-            </Box>
+            </Container>
         </Modal>
     )
 }
