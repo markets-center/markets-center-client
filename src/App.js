@@ -122,7 +122,7 @@ function App() {
               </BuyerRoute>
             } />
 
-            <Route path="/*" element={<Error />} />
+            <Route path="/*" element={<Error message='Esa pagina no existe' mistake={true} />} />
           </Routes>
           <Footer />
         </BrowserRouter>

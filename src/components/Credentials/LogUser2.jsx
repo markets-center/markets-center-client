@@ -47,10 +47,9 @@ export default function LogUser2() {
             setLoading(true);
             login(user.email, user.password)
                 .then((userDB) => {
-
                     userDB.data.data[0].isAdmin && navigate('/Admin')
                     !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                    if(!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller){
+                    if (!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller) {
                         localStorage.setItem('key', true);
                         navigate('/')
                     }
@@ -62,10 +61,14 @@ export default function LogUser2() {
     }
 
     async function regWithGoogle() {
+        let uid;
+        let token;
         try {
             auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                 .then(user => {
-                    const token = user.user.auth.currentUser.accessToken
+                    console.log('user =>',user.user)
+                    token = user.user.auth.currentUser.accessToken
+                    uid = user.user.uid
                     return axios.get(`/api/private/users/byid/${user.user.uid}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -73,6 +76,7 @@ export default function LogUser2() {
                     })
                 })
                 .then(userDB => {
+                    console.log('userDB =>',userDB)
                     if (!userDB.data.success) {
 
                     } else {
@@ -80,14 +84,20 @@ export default function LogUser2() {
                         localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
                         userDB.data.data[0].isAdmin && navigate('/Admin')
                         !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                        if(!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller){
+                        if (!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller) {
                             localStorage.setItem('key', true);
                             navigate('/')
                         }
                     }
                 })
-                .catch(() => {
-                    navigate("/buyerForm");
+                .catch(async () => {
+                    console.log('hoola1')
+                    await axios.delete(`/api/admin/deleteUid/${uid}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                    navigate("/Register");
                 })
 
         } catch (error) {
