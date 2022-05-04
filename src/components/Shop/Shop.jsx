@@ -8,11 +8,8 @@ import s from './Shop.module.css'
 function Shop() {
     const [change, setChange] = useState(0);
     const productsSearched = useSelector(state => state.searchedProducts);
-    let firstProduct;
 
 
-    console.log('searchedproducts =>', productsSearched);
-    console.log('firstProduct =>', firstProduct);
     return (
         <div>
             <Container maxWidth="xl" className={s.containerShop} sx={{
