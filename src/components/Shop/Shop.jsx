@@ -10,17 +10,16 @@ function Shop() {
     const productsSearched = useSelector(state => state.searchedProducts);
     let firstProduct;
 
-    setTimeout(function(){
-        if(firstProduct !== productsSearched[0]?._id){
-            setChange(change + 1)
-        }
-    }, 1)
+
+    console.log('searchedproducts =>', productsSearched);
+    console.log('firstProduct =>', firstProduct);
     return (
         <div>
             <Container maxWidth="xl" className={s.containerShop} sx={{
 
                 display: "flex",
                 marginTop: '50px',
+                justifyContent: 'center'
                 
             }}>
                 <Ordenamiento />

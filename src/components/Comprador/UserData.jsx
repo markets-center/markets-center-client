@@ -33,9 +33,7 @@ export default function UserData() {
           }}
         >
           <Container className={style.title}>
-            <Box sx={{
-              marginBottom: "25px"
-            }}>
+            <Box className={style.boxName}>
               <Typography variant='h6' sx={{
                 fontWeight: 'bold'
               }}>

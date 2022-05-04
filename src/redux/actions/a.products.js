@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SET_ALERT, GET_ALL_PRODUCTS, LOADING_ON, LOADING_OFF, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW, ORDER_FILTERED, GET_PRODUCTS_OF_SELLER } from "./ctes";
+import { SET_ALERT, GET_ALL_PRODUCTS, LOADING_ON, LOADING_OFF, ERRORS, MESSAGE, GET_PROTUCT_BY_NAME, GET_PRODUCT_BY_ID, GET_PRODUCT_BY_SELLER_AND_CAT, RESET_SLIDERS, ORDER, FILTER_BY_PRICE, RESET_FILTER_BY_PRICE, ACTIVE_SELLER, ACTIVE_CATEGORY, POST_REVIEW, ORDER_FILTERED, GET_PRODUCTS_OF_SELLER, GET_PRODUCT_BY_SELLER } from "./ctes";
 
 
 export function getAllProducts() {
@@ -53,6 +53,20 @@ export function filterBySellerAndCategories(id, idcategories) {
                 result = await axios.get(`/api/public/filter?id=${id}`);
             dispatch({ type: MESSAGE, payload: result.data.msg })
             dispatch({ type: GET_PRODUCT_BY_SELLER_AND_CAT, payload: result.data.data })
+            dispatch({type: LOADING_OFF});
+        } catch (err) {
+            dispatch({ type: ERRORS, payload: err.msg })
+        }
+    }
+}
+
+export function filterBySeller(id) {
+    return async function (dispatch) {
+        try {
+            dispatch({type: LOADING_ON});
+            let result = await axios.get(`/api/public/filter?id=${id}`);
+            dispatch({ type: MESSAGE, payload: result.data.msg })
+            dispatch({ type: GET_PRODUCT_BY_SELLER, payload: result.data.data })
             dispatch({type: LOADING_OFF});
         } catch (err) {
             dispatch({ type: ERRORS, payload: err.msg })
