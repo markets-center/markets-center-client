@@ -67,6 +67,7 @@
     height: 7.8vh
 }
 .containerButton{
+  margin: 0 !important
 }
 .imgCarritoThanks{
   margin-left: 3px;
