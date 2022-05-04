@@ -101,6 +101,7 @@ export default function Card({ name, price, image, description, stock, category,
     }
 
     useEffect(() => {
+
         if (currentUser && itemUser.length){
             if(orderCarUser.hasOwnProperty('products')){
                 const newAmount = itemUser.reduce((sum, val) => sum+(val.price*val.quantity), 0)
