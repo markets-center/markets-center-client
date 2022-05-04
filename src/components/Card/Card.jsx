@@ -183,7 +183,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-describedby="modal-modal-description"
                 >
                     <Box className={s.detail} /* sx={style} */>
-                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews} />
+                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews} onClose={handleClose}/>
                     </Box>
                 </Modal>
             </div>
