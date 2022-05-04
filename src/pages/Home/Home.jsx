@@ -8,6 +8,7 @@ import SellerFilter from './../../components/Filters/SellersFilter/SellersFilter
 import Shop from '../../components/Shop/Shop';
 import { Snackbar } from '@mui/material';
 import { SnackbarAlert } from '../../components/Alert/success';
+import useLocalStorage from '../../pages/Carrito/useLocalStorage';
 
 export default function Home() {
     const [render, setRender] = useState(false)
@@ -15,6 +16,8 @@ export default function Home() {
     const productsSearched = useSelector(state => state.searchedProducts);
     const initialProducts = useSelector(state => state.allProducts);
     const alert = useSelector((state) => state.alert);
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
 
     function handleClose() {
         dispatch(delAlert())
@@ -30,8 +33,9 @@ export default function Home() {
     }, 1);
 
     useEffect(() => {
-        if (!localStorage.getItem('productsTemp')) {
-            localStorage.setItem('productsTemp', '[]')
+        if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
+            setProductsTemp([]);
+            setProductsUser([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
