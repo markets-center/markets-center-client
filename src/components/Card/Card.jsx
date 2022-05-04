@@ -82,6 +82,7 @@ export default function Card({ name, price, image, description, stock, category,
             if (repeatItemUser) return setTooltip(true);
             setProductsUser([...itemUser, ...items]);
         }
+        dispatch(setAlert('Agregado al carrito'))
     }
 
     function addFavs() {

@@ -12,13 +12,7 @@ function Shop() {
 
     return (
         <div>
-            <Container maxWidth="xl" className={s.containerShop} sx={{
-
-                display: "flex",
-                marginTop: '50px',
-                justifyContent: 'center'
-                
-            }}>
+            <Container maxWidth="xl" className={s.containerShop}>
                 <Ordenamiento />
                 <RenderBusquedas />
             </Container>

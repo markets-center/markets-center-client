@@ -13,7 +13,8 @@ export default function AddressForm({ next }) {
   const dispatch = useDispatch()
   const methods = useForm()
   
-  const [firtName, lastName ] = currentUser.displayName.split(' ')
+  const user = useSelector(state => state.oneUser)
+  const [firtName, lastName ] = user.name.split(' ')
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -27,7 +28,7 @@ export default function AddressForm({ next }) {
           <Grid container spacing={1}>
             <AddressInput required name="firtName" label="Firstname" value={firtName} />
             <AddressInput required name="lastName" label="Lastname" value={lastName} />
-            <AddressInput required name="address" label="Address"/>
+            <AddressInput required name="address" label="Address" value={user.address}/>
             <AddressInput required name="city" label="City" />
             <AddressInput required name="country" label="Country" />
             <AddressInput required name="state" label="State/Province/Region" />

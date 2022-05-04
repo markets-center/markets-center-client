@@ -72,7 +72,7 @@ export default function Detail({ name, price, image, description, stock, categor
 
     return (
         <div className={s.container}>
-            <CancelIcon color="primary" className={s.back} onClick={onClose} />
+            <CancelIcon color="secondary" className={s.back} onClick={onClose} />
             <div className={s.image}>
                 {stock > 0 ? <img src={image} alt="producto" className={s.img} /> :
                     <img src={image} alt="producto" className={s.imgSinStock} />}

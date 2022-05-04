@@ -23,7 +23,7 @@ function RenderBusquedas() {
     const [seller, setSeller] = useState(idSeller);
     const [category, setCategory] = useState(nameCategory);
     const indexLast = current * 15;
-    const indexFirst = indexLast - 15;
+    const indexFirst = indexLast - 15; 
     const currentProducts = products.slice(indexFirst, indexLast);
     const currentFiltered = filtered.slice(indexFirst, indexLast);
     // const favs = useSelector(state => state.favs)
