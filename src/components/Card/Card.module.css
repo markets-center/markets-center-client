@@ -89,7 +89,8 @@
     }
     .container{
         transform: scale(.8);
-        
+        margin-left: 2px;
+        margin-right: 2px;
     }
     .container:hover {
         transform: scale(.85); 
