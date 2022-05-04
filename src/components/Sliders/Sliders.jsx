@@ -72,7 +72,8 @@ export default function Sliders() {
                                                 description={producto.description}
                                                 favs={favs}
                                                 stock={producto.stock}
-                                                id={producto._id}
+                id={producto._id}
+                reviews={producto.reviews}
                                                 />) : <Typography variant='h5' sx={{margin: 'auto'}}>
                                                         NO HAY PRODUCTOS
                                                     </Typography>}

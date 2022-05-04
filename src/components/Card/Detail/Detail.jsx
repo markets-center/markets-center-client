@@ -27,7 +27,7 @@ const style = {
 };
 
 export default function Detail({ name, price, image, description, stock, category, id, rating, numReviews, viewRev, reviews, onClose }) {
-
+    const countItemCarUser = useSelector((state) => state.addOrdercar);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -82,7 +82,7 @@ export default function Detail({ name, price, image, description, stock, categor
     }
 
     useEffect(() => {
-        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+        if (currentUser & !countItemCarUser.userId) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
     }, [])
 
     return (
@@ -104,19 +104,20 @@ export default function Detail({ name, price, image, description, stock, categor
                 </div>
                 <div className={viewRev && s.ratingAndReview}>
                     <div>
-                        {viewRev && <div className={s.description}>
+                        {viewRev && <div className={s.review}>
                             <Button variant="outlined" size="small" color="info" onClick={handleOpen} >Escribe una reseña</Button>
                         </div>}
                     </div>
                 </div>
                 <Commentary user={reviews} />
+                <div className={s.buttons}>
+                    {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
+                        <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image, stock)}> agregar</Button>
+                    </Tooltip> :
+                        !viewRev && <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button>
+                    }</div>
             </div>
-            <div className={s.buttons}>
-                {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">
-                    <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} onClick={() => addToCar(id, price, name, image, stock)}> agregar</Button>
-                </Tooltip> :
-                    !viewRev && <Button variant="contained" color="info" endIcon={<AddShoppingCartIcon />} disabled> agregar</Button>
-                }</div>
+
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -124,7 +125,7 @@ export default function Detail({ name, price, image, description, stock, categor
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <AddReview id={id} />
+                    <AddReview id={id} setOpen={setOpen} user={reviews} />
                 </Box>
             </Modal>
         </div>
