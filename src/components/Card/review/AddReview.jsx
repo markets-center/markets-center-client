@@ -1,11 +1,11 @@
 import { TextField } from "@material-ui/core";
-import { Box, Button, Rating, Snackbar } from "@mui/material";
+import { Box, Button, Rating, } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useAuth } from "../../../context/AuthContext";
 import { createProductReview } from "../../../redux/actions/a.products";
 import { Navigate } from "react-router-dom";
-import { SnackbarAlert } from "../../Alert/success";
+import { } from "../../Alert/success";
 import { delAlert, setAlert } from "../../../redux/actions/a.alert";
 
 function validate(input) {
@@ -14,12 +14,12 @@ function validate(input) {
     return errors;
 }
 
-export default function AddReview({ id, setOpen, user }) {
+export default function AddReview({ id, setOpen, reviews }) {
     const { oneUser, currentUser } = useAuth();
-
+    console.log(reviews);
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
-    const alert = useSelector((state) => state.alert);
+    // const alert = useSelector((state) => state.alert);
 
     const [input, setInput] = useState({
         user: oneUser._id,
@@ -53,21 +53,21 @@ export default function AddReview({ id, setOpen, user }) {
 
     function handleSubmit(e) {
         // eslint-disable-next-line array-callback-return
-        let prueba = user.map(u => {
+        /* let prueba = user.map(u => {
             if (u.user === oneUser._id) {
                 handleClose();
                 return dispatch(setAlert('Ya has realizado una reseña'))
             }
         })
-        if (!prueba) {
-            dispatch(createProductReview(id, input, currentUser));
-            handleClose();
-            setInput({
-                rating: 0,
-                comment: ""
-            });
-            dispatch(setAlert('Reseña creada correctamente'))
-        }
+        if (!prueba) { */
+        dispatch(createProductReview(id, input, currentUser));
+        handleClose();
+        setInput({
+            rating: 0,
+            comment: ""
+        });
+        dispatch(setAlert('Reseña creada correctamente'))
+        // }
     }
 
     return (

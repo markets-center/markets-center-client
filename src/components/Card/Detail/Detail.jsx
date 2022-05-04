@@ -31,15 +31,15 @@ export default function Detail({ name, price, image, description, stock, categor
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+    console.log(reviews);
     const [tooltip, setTooltip] = useState(false);
 
     const dispatch = useDispatch();
     const { currentUser } = useAuth();
     const idCarUser = currentUser && currentUser.uid;
 
-    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
-    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp', '');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser', '');
     const allProductsDb = useSelector((state) => state.allProducts);
     const orderCarUser = useSelector((state) => state.addOrdercar);
 
@@ -59,11 +59,11 @@ export default function Detail({ name, price, image, description, stock, categor
                 amount: i.price
             }
         })
-        if(!idCarUser){
+        if (!idCarUser) {
             const repeatItemTemp = itemTemp.find((f) => f.productId === id);
             if (repeatItemTemp) return setTooltip(true);
             setProductsTemp([...itemTemp, ...items]);
-        }else{
+        } else {
             const repeatItemUser = orderCarUser.products.find((f) => f.productId._id === id);
             if (repeatItemUser) return setTooltip(true);
             setProductsUser([...itemUser, ...items]);
@@ -110,7 +110,7 @@ export default function Detail({ name, price, image, description, stock, categor
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <AddReview id={id} setOpen={setOpen} user={reviews} />
+                    <AddReview id={id} setOpen={setOpen} reviews={reviews} />
                 </Box>
             </Modal>
         </div>
