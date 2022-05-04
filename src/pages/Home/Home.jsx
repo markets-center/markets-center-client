@@ -36,10 +36,11 @@ export default function Home() {
         if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
             setProductsTemp([]);
             setProductsUser([]);
+            console.log("las veces que entro al home: ")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-
+    },[productsUser,productsTemp])
+    
     return (
         <div>
             <NavBar searchBar={true} home={true} carrito={true} />

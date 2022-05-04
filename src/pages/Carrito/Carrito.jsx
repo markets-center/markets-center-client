@@ -157,10 +157,10 @@ export default function Carrito() {
   const subTotal = total / 1.18;
   const iva = total - subTotal;
 
-  useEffect(() => {
-    return currentUser && !productsApi.userId && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   return currentUser && !productsApi.userId && dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <div>
@@ -235,7 +235,7 @@ export default function Carrito() {
             </div>
 
             <div className="content-pay btn-pay">
-              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={productsApi.products.length || productsTemp.length? false: true}  
+              <Button variant="contained" size="small" color='buttonGracias' disableElevation  disabled={false}  
                 onClick={currentUser ? handleOpen : handleValidate} className="btn-pagar">
                 PAGAR
               </Button>

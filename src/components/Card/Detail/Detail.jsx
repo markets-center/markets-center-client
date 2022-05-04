@@ -39,14 +39,18 @@ export default function Detail({ name, price, image, description, stock, categor
     const dispatch = useDispatch();
     const { currentUser } = useAuth();
     const idCarUser = currentUser && currentUser.uid;
-    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
-    const allProducts = useSelector((state) => state.allProducts);
-    const dataCarUser = useSelector((state) => state.addOrdercar);
+
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    const allProductsDb = useSelector((state) => state.allProducts);
+    const orderCarUser = useSelector((state) => state.addOrdercar);
+
+    const itemTemp = JSON.parse(localStorage.getItem("productsTemp"));
+    const itemUser = JSON.parse(localStorage.getItem("productsUser"));
 
     function addToCar(id, price, name, image, stock) {
-        const findProduct = allProducts.filter((f) => f._id === id);
-
-        const objCarTemp = findProduct.map((i) => {
+        const findProductDb = allProductsDb.filter((f) => f._id === id);
+        const items = findProductDb.map((i) => {
             return {
                 productId: i._id,
                 name: i.name,
@@ -57,35 +61,16 @@ export default function Detail({ name, price, image, description, stock, categor
                 amount: i.price
             }
         })
-
-        if (currentUser) {
-            const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
-            if (findRepeatItems) return setTooltip(true);
-            const oldProducts = dataCarUser.products.map((old) => {
-                return {
-                    productId: old.productId._id,
-                    quantity: 1,
-                }
-            })
-            const newAmount = objCarTemp.reduce((sum, value) => sum + value.amount, 0);
-            const obj = {
-                idUser: currentUser._delegate.uid,
-                products: [...oldProducts, ...objCarTemp],
-                amount: dataCarUser.amount + newAmount
-            }
-            dispatch(getOrUpdateCart(obj, currentUser));
-            dispatch(setAlert('Producto agregado al carrito de compras'))
-        } else {
-            const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
-            const findrepeat = objTemp.find((f) => f.productId === id);
-            if (findrepeat) return setTooltip(true);
-            setProductsTemp([...objTemp, ...objCarTemp]);
+        if(!idCarUser){
+            const repeatItemTemp = itemTemp.find((f) => f.productId === id);
+            if (repeatItemTemp) return setTooltip(true);
+            setProductsTemp([...itemTemp, ...items]);
+        }else{
+            const repeatItemUser = orderCarUser.products.find((f) => f.productId._id === id);
+            if (repeatItemUser) return setTooltip(true);
+            setProductsUser([...itemUser, ...items]);
         }
     }
-
-    useEffect(() => {
-        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
-    }, [])
 
     return (
         <div className={s.container}>
