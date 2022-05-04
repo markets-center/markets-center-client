@@ -166,7 +166,8 @@ export default function Carrito() {
       if(productsApi.products.length)setActivePay(false)
     }
     const temp = JSON.parse(localStorage.getItem("productsTemp"));
-    if(temp.length)setActivePay(false)   
+    if(temp.length)setActivePay(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps   
   }, []);
 
   return (

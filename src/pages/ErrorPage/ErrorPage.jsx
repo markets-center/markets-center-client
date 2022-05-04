@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './ErrorPage.module.css'
 import Typography from '@mui/material/Typography';
 import Mc from '../../images/MarketsCenter.png';
 import Button from '@mui/material/Button';
+import { useAuth } from '../../context/AuthContext';
+import { useDispatch, useSelector } from "react-redux";
+import {UpdateOrder} from '../../redux/actions/a.order';
 
 function ErrorPage() {
     const [checked,setChecked] = useState(false);
+    const {currentUser} = useAuth();
+    const dispatch = useDispatch()
+    const newOrder = useSelector(state=> state.newOrder)
+    useEffect(()=>{
+        dispatch(UpdateOrder(newOrder, "Rechazada", currentUser))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
 
     setTimeout(function(){

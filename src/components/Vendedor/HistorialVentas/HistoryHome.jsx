@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext.js'
 import ListItem from './ListItem.jsx'
 import styleH from './HistoryHome.module.css';
+import Loading from '../../Loading/Loading'
 
 import NavBar from '../../NavBar/NavBar.jsx'
 import {Button, Typography} from '@mui/material'
@@ -27,6 +28,7 @@ export default function HistoryHome(){
     const navigate = useNavigate()
     const {oneUser, currentUser} = useAuth()
     const history = useSelector(state => state.history)
+    const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(ordersBySeller(oneUser._id, currentUser))
@@ -52,7 +54,7 @@ export default function HistoryHome(){
                     >
                         Volver
                     </Button>
-            { history.length<1 ? (<div className={styleH.nohay}><Typography
+            { loading? <Loading /> : history?.length<1 ? (<div className={styleH.nohay}><Typography
               sx={{ mt: 4, mb: 2, display: "block" }}
               variant="h4"
               component="div"

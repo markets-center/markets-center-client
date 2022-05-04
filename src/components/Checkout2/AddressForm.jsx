@@ -4,14 +4,17 @@ import { Typography, FormControlLabel, Checkbox, Button } from '@mui/material';
 import AddressInput from './AddressInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm, FormProvider } from 'react-hook-form';
+import { useAuth } from '../../context/AuthContext';
 import { payment } from '../../redux/actions/a.order'
+import { userById } from '../../redux/actions/a.users';
 
 export default function AddressForm({ next }) {
+  const {currentUser} = useAuth()
   const dispatch = useDispatch()
   const methods = useForm()
+  
   const user = useSelector(state => state.oneUser)
   const [firtName, lastName ] = user.name.split(' ')
-  
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -25,7 +28,7 @@ export default function AddressForm({ next }) {
           <Grid container spacing={1}>
             <AddressInput required name="firtName" label="Firstname" value={firtName} />
             <AddressInput required name="lastName" label="Lastname" value={lastName} />
-            <AddressInput required name="address" label="Address" value={user.address} />
+            <AddressInput required name="address" label="Address" value={user.address}/>
             <AddressInput required name="city" label="City" />
             <AddressInput required name="country" label="Country" />
             <AddressInput required name="state" label="State/Province/Region" />

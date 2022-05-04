@@ -63,7 +63,8 @@ const CheckoutForm = ({ currentUser, back, next, amount }) => {
           })
     
           elements.getElement(CardElement).clear()
-          if(data.success) navigate('/Thanks')
+          data.success ? navigate('/Thanks') : navigate('/Error')
+          
       } catch (error) {
           console.log(error)
       }
