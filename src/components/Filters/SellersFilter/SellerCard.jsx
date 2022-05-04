@@ -12,7 +12,7 @@ const SellerCard = ({ image, name, id }) => {
 
     const dispatch = useDispatch()
     const category = useSelector(state => state.activeCategory)
-
+    const idSeller = useSelector(state => state.activeSeller)
     function handleSelect(e){
         e.preventDefault();
         if(category === ''){
@@ -41,11 +41,12 @@ const SellerCard = ({ image, name, id }) => {
                 cursor: 'pointer',
                 flexDirection: 'column',
             }}
-            className={s.container}>
+            className={idSeller === id?s.containerSelected : s.container}>
                 <Avatar
                     alt=''
                     src={image? image : '/broken-image.jpg'}
                     sx={{ width: 100, height: 100 }}
+                    className={idSeller === id?s.avatarSelected : ''}
                 />
                 <Typography variant="body2" sx={{
                         textAlign: 'center',
