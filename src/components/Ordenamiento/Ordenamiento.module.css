@@ -32,7 +32,7 @@
 @media all and (max-width: 500px) {
     .container {
         width: 90vw !important;
-        height: 340px !important;
+        height: 220px !important;
         margin-top: 80px !important;
     }
 
