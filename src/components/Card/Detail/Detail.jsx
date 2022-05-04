@@ -12,6 +12,7 @@ import accounting from 'accounting';
 import { useAuth } from '../../../context/AuthContext.js';
 import { getOrUpdateCart } from '../../../redux/actions/a.cart.js';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { setAlert } from "../../../redux/actions/a.alert";
 
 const style = {
     position: 'absolute',
@@ -38,11 +39,11 @@ export default function Detail({ name, price, image, description, stock, categor
     const idCarUser = currentUser && currentUser.uid;
     const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp');
     const allProducts = useSelector((state) => state.allProducts);
-    const dataCarUser  = useSelector((state) => state.addOrdercar);
+    const dataCarUser = useSelector((state) => state.addOrdercar);
 
     function addToCar(id, price, name, image, stock) {
         const findProduct = allProducts.filter((f) => f._id === id);
-        
+
         const objCarTemp = findProduct.map((i) => {
             return {
                 productId: i._id,
@@ -53,34 +54,35 @@ export default function Detail({ name, price, image, description, stock, categor
                 quantity: 1,
                 amount: i.price
             }
-        }) 
-        
-        if(currentUser){
+        })
+
+        if (currentUser) {
             const findRepeatItems = dataCarUser.products.find((f) => f.productId._id === id);
-            if(findRepeatItems) return setTooltip(true);
+            if (findRepeatItems) return setTooltip(true);
             const oldProducts = dataCarUser.products.map((old) => {
                 return {
                     productId: old.productId._id,
                     quantity: 1,
                 }
             })
-            const newAmount = objCarTemp.reduce((sum, value) => sum+value.amount, 0);
+            const newAmount = objCarTemp.reduce((sum, value) => sum + value.amount, 0);
             const obj = {
                 idUser: currentUser._delegate.uid,
                 products: [...oldProducts, ...objCarTemp],
                 amount: dataCarUser.amount + newAmount
             }
             dispatch(getOrUpdateCart(obj, currentUser));
-        }else{
+            dispatch(setAlert('Producto agregado al carrito de compras'))
+        } else {
             const objTemp = JSON.parse(localStorage.getItem("productsTemp"));
             const findrepeat = objTemp.find((f) => f.productId === id);
-            if(findrepeat) return setTooltip(true);
+            if (findrepeat) return setTooltip(true);
             setProductsTemp([...objTemp, ...objCarTemp]);
         }
     }
 
     useEffect(() => {
-        if(currentUser) return dispatch(getOrUpdateCart({idUser: idCarUser}, currentUser));
+        if (currentUser) return dispatch(getOrUpdateCart({ idUser: idCarUser }, currentUser));
     }, [])
 
     return (
@@ -94,7 +96,7 @@ export default function Detail({ name, price, image, description, stock, categor
                 <Typography variant="h5" className={s.name}>{name}{stock > 0 ? <DeliveryDiningIcon fontSize="medium" color="info" className={s.delivery} /> : <DeliveryDiningIcon fontSize="medium" color="disable" className={s.delivery} />}</Typography>
                 <Typography variant="h6" className={s.price}>{accounting.formatMoney(price, '$')}</Typography>
 
-                {stock > 0 ? <Typography variant="body2" className={s.stock}> Stock: {stock}ud. <Review rating={rating} size={15}/></Typography> :
+                {stock > 0 ? <Typography variant="body2" className={s.stock}> Stock: {stock}ud. <Review rating={rating} size={15} /></Typography> :
                     <Typography variant="body2" className={s.stock} color="secondary" sx={{ fontWeight: '600' }}> SIN STOCK</Typography>}
 
                 <div className={s.description}>
@@ -107,7 +109,7 @@ export default function Detail({ name, price, image, description, stock, categor
                         </div>}
                     </div>
                 </div>
-                    <Commentary user={reviews}/>
+                <Commentary user={reviews} />
             </div>
             <div className={s.buttons}>
                 {stock > 0 ? !viewRev && <Tooltip title={!tooltip ? "Add" : "Added to cart"} arrow placement="top">

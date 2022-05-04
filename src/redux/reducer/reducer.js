@@ -65,7 +65,7 @@ const initialState = {
     activeCategory: '',
     errors: '',
     message: '',
-    addOrdercar: [],
+    addOrdercar: {},
     loading: false,
     alert: '',
     payment: [],

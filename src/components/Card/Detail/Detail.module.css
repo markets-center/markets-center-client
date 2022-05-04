@@ -105,4 +105,9 @@
         top: 10px;
         font-size: 40px;
     }
+
+    .buttons {
+        position: inherit !important;
+        margin: 0 !important;
+    }
 }

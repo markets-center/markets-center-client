@@ -33,6 +33,7 @@
     box-shadow: 0px 0px 40px -30px rgb(83, 83, 83);
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
 }
 .title{
@@ -66,9 +67,6 @@
     height: 7.8vh
 }
 .containerButton{
-  position: absolute;
-  margin-left: 385px;
-  padding-top: 300px;
 }
 .imgCarritoThanks{
   margin-left: 3px;
@@ -99,7 +97,21 @@
 }
   
 
-  
+@media (max-width: 1000px){
+  .container{
+    width: 90vw;
+    height: 74vh;
+  }
+
+}
+@media (max-width: 500px){
+  .containerButton{
+    padding-top: 9vh;
+    margin: 0 !important;
+  }
+
+}
+
   
   @-webkit-keyframes dash {
     0% {

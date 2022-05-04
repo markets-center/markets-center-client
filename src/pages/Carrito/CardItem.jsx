@@ -20,7 +20,7 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
   }, [quantity])
   
   return (
-    <div>
+    <div className="card-item-container">
       {
         <Grid container visibility={true} sx={{padding: '10px'}}>
           <Grid item xs={2}>
@@ -28,20 +28,25 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
               <Avatar
                 alt="Remy Sharp"
                 src={image}
-                sx={{ width: 56, height: 56 }}
+                sx={{ width: 100, height: 100 }}
               />
             </div>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={8} >
             <div className="item content-detail">
               <div className="detail item-tittle">
-                <Typography variant="subtitle1">{name}</Typography>
+                <Typography variant="h5" gutterBottom='true' className="info-prod">{name}</Typography>
                 <div className="desc-item">
-                  <Typography variant="caption">{accounting.formatMoney(price, '$')}</Typography>
-                  <Typography variant="caption">Stock: {stock}</Typography>
+                  <Typography variant="caption">Stock: {stock}
+                    <IconButton edge="end"  size='small'onClick={() => {
+                       eventClickRemoveItem(id);
+                    }} sx={{marginLeft:'15px'}}>
+                      <DeleteForeverRoundedIcon color="error" size='small'/>
+                    </IconButton>
+                  </Typography>
                 </div>
               </div>
-              <div className="detail item-count">
+            <div className="detail item-count"> {/* botones para agregar/quitar */}
                 <button
                   disabled={active}
                   className="btn btn-add"
@@ -51,13 +56,7 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
                 >
                   -
                 </button>
-                <input
-                  type="numer"
-                  className="btn lb-count"
-                  onChange={() =>{}}
-                  value={quantity}
-                  disabled={true}
-                />
+                <button className="btn btn-number">{quantity}</button>
                 <button
                   disabled={activeStock}
                   className="btn btn-res"
@@ -70,14 +69,9 @@ const CardItem = ({id, name, image, price, stock, quantity, eventClickCountAdd, 
               </div>
             </div>
           </Grid>
-          <Grid item xs={2}>
-            <div className="item btn-remove">
-              <IconButton edge="end" onClick={() => {
-                eventClickRemoveItem(id);
-              }}>
-                <DeleteForeverRoundedIcon color="error"/>
-              </IconButton>
-            </div>
+          <Grid item xs={2} sx={{display: 'flex', justifyContent: 'center', paddingTop:'30px'}}> {/* el boton para borrar prod */}
+            <Typography variant="h5" className="info-prod">{accounting.formatMoney(price, '$')}</Typography>
+
           </Grid>
         </Grid>
       }
