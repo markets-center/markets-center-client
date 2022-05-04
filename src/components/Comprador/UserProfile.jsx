@@ -1,21 +1,25 @@
-import React, {useEffect, useState} from "react";
-import {useAuth} from '../../context/AuthContext';
-import {userHistory} from '../../redux/actions/a.users';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useAuth } from '../../context/AuthContext';
+import { userHistory } from '../../redux/actions/a.users';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Container, List, DialogActions, Button, Modal } from "@mui/material";
-import {Dialog, DialogTitle, DialogContent, DialogContentText} from '@mui/material';
-import {Box, IconButton} from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import HistoryItems from './HistoryItems';
 import logo from '../../images/MarketsCenter.png'
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import Detail from '../Card/Detail/Detail'
 import style from './Style/HistoryItems.module.css'
 import Loading from '../Loading/Loading'
+import { SnackbarAlert } from "../Alert/success";
+import { Snackbar } from "@material-ui/core";
+import { delAlert } from "../../redux/actions/a.alert";
 
 function UserProfile() {
   const dispatch = useDispatch();
   const history = useSelector((state) => state.history);
   const loading = useSelector((state) => state.loading);
+  const alert = useSelector(state => state.alert)
   const { oneUser, currentUser } = useAuth();
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
@@ -34,6 +38,9 @@ function UserProfile() {
     setOpenProd(true)
   }
 
+  function handleClose() {
+    dispatch(delAlert())
+  }
   // function handleOpenCancel(item){
   //   if(item.status === 'Pendiente') {
   //     setDelMsg('Su orden será cancelada. Recibirá un aviso por mail')
@@ -176,11 +183,19 @@ function UserProfile() {
         onClose={handleCloseProd}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-       >
+      >
         <Box className={style.cardDetalle}>
-          <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} onClose={handleCloseProd}/>
+          <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} reviews={oneProduct.reviews} onClose={handleCloseProd} />
         </Box>
       </Modal>
+      <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}>
+        <SnackbarAlert onClose={handleClose} color='primary' variant='filled' severity='success'>
+          {alert}
+        </SnackbarAlert>
+      </Snackbar>
     </div>
   );
 }
