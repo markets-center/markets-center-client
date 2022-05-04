@@ -19,11 +19,11 @@ function UserProfile() {
   const { oneUser, currentUser } = useAuth();
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
-  const [oneProduct, setOneProduct] = useState({name:"", price:0, image:"", description:"", stock:"", category:"", id:"", rating:"", numReviews:""});
+  const [oneProduct, setOneProduct] = useState({ name: "", price: 0, image: "", description: "", stock: "", category: "", id: "", rating: "", numReviews: "", reviews: [] });
   // const [delMsg, setDelMsg] = useState('');
   // const [openDelete, setOpenDelete] = useState(false);
   const [detail, setDetail] = useState("");
-  function handleOpenMore(items){
+  function handleOpenMore(items) {
     setDetail(items.products)
     setOpenMore(true)
   }
@@ -60,7 +60,7 @@ function UserProfile() {
         >
           Historial de Compras
         </Typography>
-        {loading? <Loading/> : <List sx={{ display: "block" }} dense={false}>
+        {loading ? <Loading /> : <List sx={{ display: "block" }} dense={false}>
           {!history.length ? (
             <Typography
               sx={{ mt: 4, mb: 2, display: "block" }}
@@ -181,7 +181,6 @@ function UserProfile() {
           <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} onClose={handleCloseProd}/>
         </Box>
       </Modal>
-
     </div>
   );
 }

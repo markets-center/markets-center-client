@@ -13,6 +13,7 @@ import {
     UPDATE_USER,
     POST_ORDER,
     GET_PRODUCT_BY_SELLER_AND_CAT,
+    GET_PRODUCT_BY_SELLER,
     RESET_SLIDERS,
     GET_PRODUCT_BY_CATEGORY,
     GET_USER_HISTORY,
@@ -71,7 +72,8 @@ const initialState = {
     payment: [],
     review: [],
     favs:[],
-    favsDetail:[]
+    favsDetail:[],
+    offerArray: []
 }
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -121,9 +123,15 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 productsBySeller: action.payload,
                 searchedProducts: action.payload,
+                offerArray: action.payload,
                 filteredByPrice: [],
                 loading: false,
-
+            }
+        case GET_PRODUCT_BY_SELLER:
+            return {
+                ...state,
+                offerArray: action.payload,
+                loading: false,
             }
         case GET_ALL_CATEGORIES:
             return {

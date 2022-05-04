@@ -163,10 +163,9 @@ export default function Card({ name, price, image, description, stock, category,
                             </IconButton>
 
                         }
-                        {stock > 0 ? <IconButton color="info" size="small">
-
-                            <DeliveryDiningIcon fontSize="" />
-                        </IconButton> :
+                        {stock > 0 ?
+                            <DeliveryDiningIcon fontSize="" color="info" size="small" sx={{paddingBottom: '.3vh'}}/>
+                                 :
                             <IconButton color="disable" size="small">
                                 <DeliveryDiningIcon fontSize="" />
                             </IconButton>
