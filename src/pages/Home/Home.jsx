@@ -47,7 +47,6 @@ export default function Home() {
             setRender(false)
         }
     }, 1);
-    
     useEffect(() => {
         if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
             setProductsTemp([]);
