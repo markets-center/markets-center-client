@@ -56,7 +56,7 @@ function RenderBusquedas() {
             {
                 loading ? <Loading /> :
                     products.length || filtered.length ?
-                        filtered.length > 0 && products.length === 0 ?
+                        filtered.length > 0 ?
                             <div>
                                 <Paginado products={filtered} setCurrent={setCurrent} current={current} />
                                 <div className={s.container2}>
