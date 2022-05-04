@@ -1,7 +1,10 @@
-
+.containerShop {
+    display: flex !important;
+    justify-content: center
+}
 
 @media (max-width: 500px){
     .containerShop{
-        flex-direction: column;
+        flex-direction: row;
     }
 }

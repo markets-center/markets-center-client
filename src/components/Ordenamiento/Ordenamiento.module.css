@@ -33,7 +33,7 @@
     .container {
         width: 150px !important;
         height: 340px !important;
-        margin-top: 0px;
+        margin-top: 80px !important;
     }
 
     .boxPrecio {
@@ -46,7 +46,6 @@
       margin-top: -50px;
     }
     .formcategory{
-      min-width: 162px !important;
-      visibility: hidden;
+      min-width: 120px !important;
     } 
 }
