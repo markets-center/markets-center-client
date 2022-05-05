@@ -45,8 +45,8 @@ export default function Card({ name, price, image, description, stock, category,
     const [favorito, setFavorito] = useState(favs.includes(id));
     const dispatch = useDispatch();
     const idCarUser = currentUser && currentUser.uid;
-    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
-    const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp', '');
+    const [productsUser, setProductsUser] = useLocalStorage('productsUser', '');
     const allProductsDb = useSelector((state) => state.allProducts);
     const orderCarUser = useSelector((state) => state.addOrdercar);
 
@@ -73,16 +73,16 @@ export default function Card({ name, price, image, description, stock, category,
                 amount: i.price
             }
         })
-        if(!idCarUser){
+        if (!idCarUser) {
             const repeatItemTemp = itemTemp.find((f) => f.productId === id);
-            if (repeatItemTemp) return setTooltip(true);
+            if (repeatItemTemp) return setTooltip(false);
             setProductsTemp([...itemTemp, ...items]);
-        }else{
+        } else {
             const repeatItemUser = orderCarUser.products.find((f) => f.productId._id === id);
             if (repeatItemUser) return setTooltip(true);
             setProductsUser([...itemUser, ...items]);
         }
-        dispatch(setAlert('Agregado al carrito'))
+        dispatch(setAlert('Producto agregado al carrito'))
     }
 
     function addFavs() {
@@ -103,27 +103,27 @@ export default function Card({ name, price, image, description, stock, category,
 
     useEffect(() => {
 
-        if (currentUser && itemUser.length){
-            if(orderCarUser.hasOwnProperty('products')){
-                const newAmount = itemUser.reduce((sum, val) => sum+(val.price*val.quantity), 0)
-                dispatch(getOrUpdateCart({ 
+        if (currentUser && itemUser.length) {
+            if (orderCarUser.hasOwnProperty('products')) {
+                const newAmount = itemUser.reduce((sum, val) => sum + (val.price * val.quantity), 0)
+                dispatch(getOrUpdateCart({
                     idUser: idCarUser,
-                    products: [...orderCarUser.products,...itemUser],
+                    products: [...orderCarUser.products, ...itemUser],
                     amount: orderCarUser.amount + newAmount
                 }, currentUser));
                 setProductsUser([]);
-            }else{
-                dispatch(getOrUpdateCart({ 
+            } else {
+                dispatch(getOrUpdateCart({
                     idUser: idCarUser,
                     products: itemUser,
-                    amount: itemUser.reduce((sum, val) => sum+(val.price*val.quantity), 0)
+                    amount: itemUser.reduce((sum, val) => sum + (val.price * val.quantity), 0)
                 }, currentUser));
                 setProductsUser([]);
             }
-            
+
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [productsTemp,productsUser])
+    }, [productsTemp, productsUser])
 
     return (
         <div onMouseEnter={moreInfo} onMouseLeave={lessInfo} className={s.container}>
@@ -157,8 +157,8 @@ export default function Card({ name, price, image, description, stock, category,
 
                         }
                         {stock > 0 ?
-                            <DeliveryDiningIcon fontSize="" color="info" size="small" sx={{paddingBottom: '.3vh'}}/>
-                                 :
+                            <DeliveryDiningIcon fontSize="" color="info" size="small" sx={{ paddingBottom: '.3vh' }} />
+                            :
                             <IconButton color="disable" size="small">
                                 <DeliveryDiningIcon fontSize="" />
                             </IconButton>
@@ -175,7 +175,7 @@ export default function Card({ name, price, image, description, stock, category,
                     aria-describedby="modal-modal-description"
                 >
                     <Box className={s.detail} /* sx={style} */>
-                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews} onClose={handleClose}/>
+                        <Detail viewRev={false} name={name} price={price} image={image} stock={stock} description={description} category={category} id={id} rating={rating} numReviews={numReviews} reviews={reviews} onClose={handleClose} />
                     </Box>
                 </Modal>
             </div>

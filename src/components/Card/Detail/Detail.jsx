@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, Modal, Typography, Button, Tooltip } from "@mui/material";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
@@ -67,8 +67,31 @@ export default function Detail({ name, price, image, description, stock, categor
             if (repeatItemUser) return setTooltip(true);
             setProductsUser([...itemUser, ...items]);
         }
+        dispatch(setAlert('Producto agregado al carrito'))
     }
 
+    useEffect(() => {
+
+        if (currentUser && itemUser.length) {
+            if (orderCarUser.hasOwnProperty('products')) {
+                const newAmount = itemUser.reduce((sum, val) => sum + (val.price * val.quantity), 0)
+                dispatch(getOrUpdateCart({
+                    idUser: idCarUser,
+                    products: [...orderCarUser.products, ...itemUser],
+                    amount: orderCarUser.amount + newAmount
+                }, currentUser));
+                setProductsUser([]);
+            } else {
+                dispatch(getOrUpdateCart({
+                    idUser: idCarUser,
+                    products: itemUser,
+                    amount: itemUser.reduce((sum, val) => sum + (val.price * val.quantity), 0)
+                }, currentUser));
+                setProductsUser([]);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [productsTemp, productsUser])
     return (
         <div className={s.container}>
             <CancelIcon color="secondary" className={s.back} onClick={onClose} />
