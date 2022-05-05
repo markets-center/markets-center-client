@@ -27,7 +27,7 @@ return (
         >
             <Box className={styles.box}>
                 <div className={styles.closeButton}>
-                    <CancelIcon color="primary" className={styles.back} onClick={handleCloseModal} />
+                    <CancelIcon color="primary" className={styles.back} onClick={() => handleCloseModal()} />
                 </div>
                 <Typography variant="h6" component="h2">
                     {`Vendedor sugerido: ${selected.name}`}
