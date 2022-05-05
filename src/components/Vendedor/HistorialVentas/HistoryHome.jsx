@@ -82,7 +82,7 @@ export default function HistoryHome(){
                 )
             }))
             }
-                    <Snackbar open={!!alerta} autoHideDuration={4000} onClose={handleCloseAlert} anchorOrigin={{
+                    <Snackbar open={!!alerta} autoHideDuration={1500} onClose={handleCloseAlert} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right'
             }}>

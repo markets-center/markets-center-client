@@ -6,6 +6,7 @@ import { Container, Box, Typography, Tooltip, IconButton } from "@mui/material";
 import LocalShipping from '@mui/icons-material/LocalShipping';
 import {UpdateOrder} from '../../../redux/actions/a.order'
 import {allOrders} from '../../../redux/actions/a.admin'
+import { formatDate } from '../../../helpers/date';
 
 function CardOrden({o, comprador, estado, vendedores, fecha, id}) {
     let accion = estado==='Aprobada'? 'Despachar' : 'No hay accion disponeble'
@@ -96,7 +97,7 @@ function CardOrden({o, comprador, estado, vendedores, fecha, id}) {
             margin: "10px 0px",
           }}
         >
-          {`${fecha}`}
+          {`${formatDate(fecha)}`}
         </Typography>
         </Box> <Box
         sx={{
