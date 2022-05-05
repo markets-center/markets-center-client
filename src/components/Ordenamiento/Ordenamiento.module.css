@@ -24,21 +24,24 @@
     min-width: 162px !important;
 }
 
-.formcategory {
-    min-width: 162px !important;
+.divMenu{
+    margin-left: -8vw;
+    margin-top: -2vh;
+    height: 65px;
 }
 
 
 @media all and (max-width: 500px) {
     .container {
         width: 90vw !important;
-        height: 220px !important;
+        height: 230px !important;
         margin-top: 80px !important;
     }
 
     .boxPrecio {
         width: 80vw !important;
         margin-left: 80px !important;
+        margin-top: -30px !important;
     }
 
     .form {
@@ -47,9 +50,7 @@
     }
 
     .formcategory {
-        min-width: 162px !important;
         visibility: hidden;
-        min-width: 120px !important;
-      margin-top: -50px !important;
+
     }
 }
