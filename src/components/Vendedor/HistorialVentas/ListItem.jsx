@@ -6,7 +6,7 @@ import DefaultUser from '../../../images/defaultUser.png'
 import { IconButton, Tooltip } from '@mui/material'
 import { AddBox, LocalShipping } from '@mui/icons-material'
 
-export default function ListItem({element, openMore, detail, handleDespachar, handleOpenMore, handleCloseMore}){
+export default function ListItem({element, id, openMore, detail, handleDespachar, handleOpenMore, handleCloseMore}){
     const clientName = element.userId
     return (
         <>
@@ -33,8 +33,8 @@ export default function ListItem({element, openMore, detail, handleDespachar, ha
                         <p>{`Total: $${element.amount}`}</p>
                         
                         <Tooltip title="Despachar" arrow>
-                        <IconButton 
-                        onClick={()=>handleDespachar(element)}
+                        <IconButton
+                        onClick={()=>handleDespachar(id)}
                         >
                             <LocalShipping />
                         </IconButton>

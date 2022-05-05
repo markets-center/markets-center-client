@@ -96,7 +96,7 @@ export function updateDispatches(data, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const response = await axios.put(`api/private/updateOrder`, data, {
+            const response = await axios.put(`api/private/updateDispatches`, data, {
                 headers:{
                     Authorization: `Bearer ${token}`
                   }
