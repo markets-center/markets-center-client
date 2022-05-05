@@ -60,7 +60,6 @@ export default function Vendedor(){
             handleClose()
             dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }else{
-            console.log(input)
             await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
             dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))

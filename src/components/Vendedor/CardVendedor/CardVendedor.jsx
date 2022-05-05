@@ -23,7 +23,6 @@ export default function CardVendedor({
   handleDisable,
   banned
 }) {
-  console.log('category',category)
   function handleUpdate(event) {
     setProdId(event.currentTarget.getAttribute("id"));
     setInput({
