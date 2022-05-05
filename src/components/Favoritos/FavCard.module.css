@@ -2,3 +2,24 @@
     width: 60px;
     height: 60px;
 }
+.cardDetalle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px !important;
+    background: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 32px;
+}
+
+@media all and (max-width: 500px){
+    .cardDetalle {
+        width: 330px !important;
+        height: 70%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+}
