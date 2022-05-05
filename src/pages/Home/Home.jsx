@@ -81,7 +81,6 @@ export default function Home() {
         if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
             setProductsTemp([]);
             setProductsUser([]);
-            console.log("las veces que entro al home: ")
         }
         firstTime && handleOpenModal()
         dispatch(getAllSellers())

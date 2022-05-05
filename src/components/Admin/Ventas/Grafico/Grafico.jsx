@@ -11,7 +11,6 @@ import {
 } from "recharts";
     
 export default function Home({history}) {
-    console.log(history);
     return (
         <>
         {

@@ -31,7 +31,6 @@ export default function Detail({ name, price, image, description, stock, categor
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    console.log(reviews);
     const [tooltip, setTooltip] = useState(false);
 
     const dispatch = useDispatch();

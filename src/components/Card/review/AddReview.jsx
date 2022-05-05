@@ -16,7 +16,6 @@ function validate(input) {
 
 export default function AddReview({ id, setOpen, reviews }) {
     const { oneUser, currentUser } = useAuth();
-    console.log(reviews);
     const dispatch = useDispatch();
     const [disabled, setDisabled] = useState(true);
     // const alert = useSelector((state) => state.alert);

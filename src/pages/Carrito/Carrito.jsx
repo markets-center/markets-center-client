@@ -127,7 +127,6 @@ export default function Carrito() {
     } else {
       const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
       const filter = getProductsTemp.filter((f) => f.productId !== id);
-      console.log("que tiene filter ELSE: ", filter)
       setProductsTemp(filter);
       handleOpenAlert("Producto eliminado");
       if(!filter.length)setActivePay(true)

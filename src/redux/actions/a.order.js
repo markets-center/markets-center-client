@@ -77,7 +77,6 @@ export function payment(data){
 
 export function UpdateOrder(cart, status, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
-    console.log(cart._id)
     return async function (dispatch) {
         try {
             const response = await axios.put(`api/private/updateOrder`, {idOrder: cart._id, status: status}, {

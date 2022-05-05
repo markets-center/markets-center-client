@@ -71,7 +71,6 @@ export default function LogUser2() {
         try {
             auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                 .then(user => {
-                    console.log('user =>',user.user)
                     token = user.user.auth.currentUser.accessToken
                     uid = user.user.uid
                     return axios.get(`/api/private/users/byid/${user.user.uid}`, {
@@ -81,7 +80,6 @@ export default function LogUser2() {
                     })
                 })
                 .then(userDB => {
-                    console.log('userDB =>',userDB)
                     if (!userDB.data.success) {
 
                     } else {
@@ -96,7 +94,6 @@ export default function LogUser2() {
                     }
                 })
                 .catch(async () => {
-                    console.log('hoola1')
                     await axios.delete(`/api/admin/deleteUid/${uid}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -106,7 +103,6 @@ export default function LogUser2() {
                 })
 
         } catch (error) {
-            console.log(error)
             setError("Credenciales invalidas");
         }
     }

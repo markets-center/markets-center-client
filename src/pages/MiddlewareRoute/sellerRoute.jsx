@@ -5,7 +5,6 @@ import {useAuth} from '../../context/AuthContext';
 
 export default function SellerRoute ({children}) {
     const { currentUser} = useAuth();
-    console.log('current user',currentUser)
     if(!currentUser){
         return <Navigate to='/Login' replace />
     }else {
