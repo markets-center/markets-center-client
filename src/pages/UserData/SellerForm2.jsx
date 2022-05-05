@@ -70,7 +70,7 @@ export default function SellerForm2() {
             dateOfBirth: selectedDate
         };
         dispatch(postNewUser(userData, currentUser));
-        navigate('/');
+        navigate('/Bienvenido');
     }
 
     return (

@@ -40,7 +40,7 @@ function ComponenteGraciasSub() {
                     </Typography>
                     </div>
                     <div className={s.containerButton} style={{marginTop: '160px'}}>
-                    <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/">Volver</Button></div>
+                    <div className={s.button}><Button variant="contained" color="buttonGracias" size="small" disableElevation href="/Profile">Ir a mi Perfil</Button></div>
                     <Typography variant="body2" className={s.textMarket}>
                         Equipo de MarketsCenter<img src={Mc} width="25px" alt="mc" className={s.imgCarritoThanks}/>
                     </Typography>
