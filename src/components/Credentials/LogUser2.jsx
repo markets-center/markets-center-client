@@ -50,21 +50,17 @@ export default function LogUser2() {
             setError("");
             setErrorMail("");
             setLoading(true);
-            const errorfb = login(user.email, user.password)
+            login(user.email, user.password)
                 .then((userDB) => {
+                    console.log('aaaaaa',userDB)
                     userDB.data.data[0].isAdmin && navigate('/Admin')
                     !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
                     if (!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller) {
                         localStorage.setItem('key', true);
                         navigate('/')
                     }
-                }).catch((error) => {
-                    console.log('holis2',error)
-                    setError("No existe usuario con el email")
-                })
-                console.log('pppp',errorfb)
+                }).catch((error) => setError("Credenciales invalidas"))
         } catch (error) {
-            console.log('holis1',error)
             setError("Credenciales invalidas");
         }
         setLoading(false);

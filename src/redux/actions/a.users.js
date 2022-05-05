@@ -46,7 +46,7 @@ export function userById (id, currentUser) {
                 }
             });
             dispatch({type: MESSAGE, payload: newUser.data.msg});
-            dispatch({type: UPDATE_USER, payload: newUser.data.data[0]})
+            dispatch({type: UPDATE_USER, payload: newUser.data.data})
         } catch (err) {
             dispatch({type: ERRORS, payload: err.msg})
         }

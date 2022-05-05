@@ -22,7 +22,7 @@ export default function Comprador(){
         <div>
             <NavBar searchBar1={true} />
             <UserData />
-            <UserProfile/>
+            <UserProfile />
             <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right'
