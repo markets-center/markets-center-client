@@ -4,7 +4,6 @@ import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
 import { userById } from '../redux/actions/a.users'
 import { delOneUser } from '../redux/actions/a.users'
-import {setAlert} from '../redux/actions/a.alert'
 
 
 const AuthContext = React.createContext();
@@ -29,6 +28,7 @@ export function AuthProvider({ children }) {
   async function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
       .then(userCredencials => {
+        console.log(userCredencials)
         const token = userCredencials.user.auth.currentUser.accessToken
         return axios.get(`/api/private/users/byid/${userCredencials.user.uid}`, {
           headers: {
@@ -36,20 +36,10 @@ export function AuthProvider({ children }) {
           }
         })
       }).then(userDB => {
-        localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-        localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
+        console.log('auth', userDB)
+        localStorage.setItem('isAdmin', userDB.data.data.isAdmin)
+        localStorage.setItem('isSeller', userDB.data.data.isSeller)
         return userDB
-      })
-      .catch(err=>{
-        let mensajito
-        const msg = err.message.split(' ')
-        console.log('mensajitoooo', msg)
-        if(msg[msg.length -1] === '(auth/wrong-password).'){
-          mensajito = 'Contraseña y/o email incorrectos'
-        } else {
-          mensajito = 'No existe usuario con el email'
-        }
-        dispatch(setAlert(mensajito))
       })
   }
 

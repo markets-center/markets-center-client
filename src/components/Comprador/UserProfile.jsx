@@ -21,6 +21,7 @@ function UserProfile() {
   const loading = useSelector((state) => state.loading);
   const alert = useSelector(state => state.alert)
   const { oneUser, currentUser } = useAuth();
+  console.log('dddd',oneUser)
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
   const [oneProduct, setOneProduct] = useState({ name: "", price: 0, image: "", description: "", stock: "", category: "", id: "", rating: "", numReviews: "", reviews: [] });
@@ -54,6 +55,7 @@ function UserProfile() {
   // const handleCloseCancel = () => setOpenDelete(false);
 
   useEffect(() => {
+    console.log('ooooo', oneUser)
     dispatch(userHistory(oneUser._id, currentUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, oneUser._id]);
@@ -67,8 +69,15 @@ function UserProfile() {
         >
           Historial de Compras
         </Typography>
-        {loading ? <Loading /> : <List sx={{ display: "block" }} dense={false}>
-          {!history.length ? (
+         <List sx={{ display: "block" }} dense={false}>
+        {history.length>0 ? (
+            <>{history.map((item) => <HistoryItems
+                handleOpenMore={handleOpenMore}
+                key={item._id}
+                item={item}
+              />
+            )}</>
+          ): (
             <Typography
               sx={{ mt: 4, mb: 2, display: "block" }}
               variant="h4"
@@ -77,16 +86,8 @@ function UserProfile() {
             >
               Historial de compras vacío
             </Typography>
-          ) : (
-            history.map((item) => (
-              <HistoryItems
-                handleOpenMore={handleOpenMore}
-                key={item._id}
-                item={item}
-              />
-            ))
-          )}
-        </List>}
+          ) }
+        </List>
       </Container>
 
       <Dialog
