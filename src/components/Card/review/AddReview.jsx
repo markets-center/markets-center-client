@@ -7,6 +7,7 @@ import { createProductReview } from "../../../redux/actions/a.products";
 import { Navigate } from "react-router-dom";
 import { } from "../../Alert/success";
 import { delAlert, setAlert } from "../../../redux/actions/a.alert";
+import { userHistory } from "../../../redux/actions/a.users";
 
 function validate(input) {
     let errors = {};
@@ -51,14 +52,10 @@ export default function AddReview({ id, setOpen, reviews }) {
     }
 
     function handleSubmit(e) {
-        // eslint-disable-next-line array-callback-return
-        /* let prueba = user.map(u => {
-            if (u.user === oneUser._id) {
-                handleClose();
-                return dispatch(setAlert('Ya has realizado una reseña'))
-            }
-        })
-        if (!prueba) { */
+        if (reviews.find(u => u.user === oneUser._id)) {
+            handleClose();
+            return dispatch(setAlert('Ya has realizado una reseña'))
+        }
         dispatch(createProductReview(id, input, currentUser));
         handleClose();
         setInput({
@@ -66,7 +63,6 @@ export default function AddReview({ id, setOpen, reviews }) {
             comment: ""
         });
         dispatch(setAlert('Reseña creada correctamente'))
-        // }
     }
 
     return (
