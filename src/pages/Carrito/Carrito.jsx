@@ -8,7 +8,7 @@ import CheckoutComp from "../../components/Checkout2/CheckoutComp"
 import {Snackbar} from '@mui/material';
 import {SnackbarAlert} from '../../components/Alert/success';
 import accounting from 'accounting';
-import { getOrUpdateCart } from "../../redux/actions/a.cart.js";
+import { getOrUpdateCart} from "../../redux/actions/a.cart.js";
 import { useAuth } from "../../context/AuthContext";
 import useLocalStorage from "../../pages/Carrito/useLocalStorage.js";
 import { useNavigate } from "react-router-dom";
@@ -63,6 +63,7 @@ export default function Carrito() {
         amount: newAmount + price 
       };
       dispatch(getOrUpdateCart(obj, currentUser));
+      
     } else {
       const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
       const updateTemp = getProductsTemp.map((p) => {
@@ -153,21 +154,32 @@ export default function Carrito() {
   };
 
   const getProductsTemp = JSON.parse(localStorage.getItem("productsTemp"));
-  const total = getProductsTemp.reduce((sum, item) => sum + item.amount, 0);
+  const totalTemp = getProductsTemp.reduce((sum, item) => sum + item.amount, 0);
   const totalApi = productsApi && productsApi.amount;
-  const subTotalApi = totalApi / 1.18;
-  const ivaApi = totalApi - subTotalApi;
-  const subTotal = total / 1.18;
-  const iva = total - subTotal;
+  const [total, setTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+  const [iva, setIva] = useState(0);
 
   useEffect(() => {
-    if(productsApi.hasOwnProperty("products")){
-      if(productsApi.products.length)setActivePay(false)
+    
+    if(currentUser){
+      productsApi.products?.length && setActivePay(false)
+      let sub = total / 1.18;
+      let i = total - subTotal;
+      setSubTotal(sub);
+      setIva(i);
+      setTotal(totalApi);
+    }else{
+      const temp = JSON.parse(localStorage.getItem("productsTemp"));
+      temp?.length && setActivePay(false);
+      let sub = totalTemp / 1.18;
+      let i = totalTemp - subTotal;
+      setSubTotal(sub);
+      setIva(i);
+      setTotal(totalTemp);
     }
-    const temp = JSON.parse(localStorage.getItem("productsTemp"));
-    if(temp.length)setActivePay(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps   
-  }, []);
+
+  }, [total,totalApi, getProductsTemp,productsApi])
 
   return (
     <div>
@@ -230,13 +242,13 @@ export default function Carrito() {
               </div>
               <div className="lb-content">
                 <Typography variant="caption">
-                  {accounting.formatMoney(subTotal||subTotalApi, "$")}
+                  {accounting.formatMoney(subTotal, "$")}
                 </Typography>
                 <Typography variant="caption">
-                  {accounting.formatMoney(iva||ivaApi, "$")}
+                  {accounting.formatMoney(iva, "$")}
                 </Typography>
                 <Typography variant="h5"  sx={{marginTop: '10px'}} >
-                  {accounting.formatMoney(total||totalApi, "$")}
+                  {accounting.formatMoney(total, "$")}
                 </Typography>
               </div>
             </div>

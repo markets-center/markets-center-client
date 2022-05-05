@@ -12,19 +12,68 @@ import Mc from '../../images/MarketsCenter.png'
 import s from './Slider2.module.css'
 import Error from '../Error/Error'
 import Loading from '../../components/Loading/Loading';
-
-
+import {getOrUpdateCart} from '../../redux/actions/a.cart.js';
+import useLocalStorage from '../../pages/Carrito/useLocalStorage.js';
 
 export default function Sliders2() {
     const dispatch = useDispatch();
     const {currentUser} = useAuth();
     const loading = useSelector(state => state.loading)
     const products = useSelector(state => state.allProducts)
+
+    const idCarUser = currentUser && currentUser.uid;
+    const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
+    const orderCarUser = useSelector((state) => state.addOrdercar);
+
+    function compareToItem(array1, array2) {
+        const compare = array1.map((val) => {
+            array2.forEach((comp, index) => {
+                if(val.productId._id === comp.productId){
+                    val.quantity = (val.quantity+comp.quantity);
+                    array2.splice(index, 1);
+                }
+            })
+            return val
+        })
+        const newItem = compare.map((c) => {
+            return {
+                productId: c.productId._id,
+                name: c.productId.name,
+                image: c.productId.image,
+                price: c.productId.price,
+                stock: c.productId.stock,
+                quantity: c.quantity,
+                amount: c.productId.price
+            }
+        })
+        return [...newItem, ...array2]
+    }
+
+    useEffect(() => {
+        if(orderCarUser.hasOwnProperty('products')){
+            const itemTemp = JSON.parse(localStorage.getItem('productsTemp'))
+            if(orderCarUser.products.length && itemTemp.length){
+                const compareToDb = compareToItem(orderCarUser.products, itemTemp)
+                const oldAmount = compareToDb.reduce((sum, val) => sum+(val.price*val.quantity), 0)
+                const newAmount = itemTemp.reduce((sum, val) => sum+(val.price*val.quantity), 0)
+                dispatch(getOrUpdateCart({ 
+                    idUser: idCarUser,
+                    products: compareToDb,
+                    amount: oldAmount
+                }, currentUser));
+                setProductsTemp([]);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     useEffect(() => {
         currentUser && dispatch(getFavs(currentUser))
         dispatch(getAllProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
+
+    
 
     const breakPoints = [
         { width: 1, itemsToShow: 1 },

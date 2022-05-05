@@ -12,8 +12,6 @@ import Shop from '../../components/Shop/Shop';
 import { Snackbar } from '@mui/material';
 import { SnackbarAlert } from '../../components/Alert/success';
 import useLocalStorage from '../../pages/Carrito/useLocalStorage';
-import {getOrUpdateCart} from '../../redux/actions/a.cart.js';
-import { useAuth } from '../../context/AuthContext';
 
 export default function Home() {
     // Seller of the day modal
@@ -33,13 +31,10 @@ export default function Home() {
     const productsSearched = useSelector(state => state.searchedProducts);
     const initialProducts = useSelector(state => state.allProducts);
     const alert = useSelector((state) => state.alert);
-    const { currentUser } = useAuth();
-
-    const idCarUser = currentUser && currentUser.uid;
+    
     const [productsTemp, setProductsTemp] = useLocalStorage('productsTemp','');
     const [productsUser, setProductsUser] = useLocalStorage('productsUser','');
-    const orderCarUser = useSelector((state) => state.addOrdercar);
-
+    
     function handleClose() {
         dispatch(delAlert())
     }
@@ -52,30 +47,6 @@ export default function Home() {
             setRender(false)
         }
     }, 1);
-
-    function compareToItem(array1, array2) {
-        const compare = array1.map((val) => {
-            array2.forEach((comp, index) => {
-                if(val.productId._id === comp.productId){
-                    val.quantity = (val.quantity+comp.quantity);
-                    array2.splice(index, 1);
-                }
-            })
-            return val
-        })
-        const newItem = compare.map((c) => {
-            return {
-                productId: c.productId._id,
-                name: c.productId.name,
-                image: c.productId.image,
-                price: c.productId.price,
-                stock: c.productId.stock,
-                quantity: c.quantity,
-                amount: c.productId.price
-            }
-        })
-        return [...newItem, ...array2]
-    }
     
     useEffect(() => {
         if (!localStorage.getItem('productsTemp')||!localStorage.getItem('productsUser')) {
@@ -87,23 +58,6 @@ export default function Home() {
         setSelected(allSellers[Math.floor(Math.random() * allSellers.length)])
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[productsUser,productsTemp])
-
-    useEffect(() => {
-        if(orderCarUser.hasOwnProperty('products')){
-            const itemTemp = JSON.parse(localStorage.getItem('productsTemp'))
-            if(orderCarUser.products.length && itemTemp.length){
-                const compareToDb = compareToItem(orderCarUser.products, itemTemp)
-                const newAmount = itemTemp.reduce((sum, val) => sum+(val.price*val.quantity), 0)
-                dispatch(getOrUpdateCart({ 
-                    idUser: idCarUser,
-                    products: compareToDb,
-                    amount: orderCarUser.amount + newAmount
-                }, currentUser));
-                setProductsTemp([]);
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
     
     return (
         <div>
