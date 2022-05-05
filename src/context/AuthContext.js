@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
   async function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
       .then(userCredencials => {
-        console.log(userCredencials)
         const token = userCredencials.user.auth.currentUser.accessToken
         return axios.get(`/api/private/users/byid/${userCredencials.user.uid}`, {
           headers: {
@@ -36,7 +35,6 @@ export function AuthProvider({ children }) {
           }
         })
       }).then(userDB => {
-        console.log('auth', userDB)
         localStorage.setItem('isAdmin', userDB.data.data.isAdmin)
         localStorage.setItem('isSeller', userDB.data.data.isSeller)
         return userDB
