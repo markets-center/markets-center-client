@@ -5,7 +5,8 @@ import { getProductByName } from '../../redux/actions/a.products.js'
 
 import { Stack, TextField, IconButton, Paper, outlinedInputClasses, styled, FormControl } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import style from './NavBar.module.css'
+import style from './NavBar.module.css';
+import { getProductByName, idActiveSeller } from '../../redux/actions/a.products.js';
 
 const StyledTextField = styled(TextField)({
     [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -24,6 +25,7 @@ export default function NavBar(){
     function onImputChange(e){
         e.preventDefault()
         setSearch(e.target.value)
+        dispatch(idActiveSeller(''))
     }
 
     function onSubmit(e){
