@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './NavBar.module.css'
 import SearchBar from './SearchBar.jsx'
@@ -36,12 +36,12 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const { logout, oneUser, currentUser } = useAuth();
+    const idCarUser = currentUser && currentUser.uid
 
     const temp = localStorage.getItem("productsTemp");
     const countItemCarUser = useSelector((state) => state.addOrdercar);
     const items = countItemCarUser && countItemCarUser.products;
     let countItem = items?.length;
-    const idCarUser = currentUser && currentUser.uid
     const count = temp && JSON.parse(temp);
     const counter = count ? count.length : 0;
 
@@ -100,7 +100,7 @@ export default function NavBar({ searchBar, home, admin, value, setValue, carrit
                                                 size="small"
                                                 sx={{ ml: 2 }}
                                                 color="white">
-                                                <Badge color="secondary" badgeContent={counter || countItem}>
+                                                <Badge color="secondary" badgeContent={currentUser?countItem:counter}>
                                                     <LocalGroceryStoreOutlinedIcon />
                                                 </Badge>
                                             </IconButton>
