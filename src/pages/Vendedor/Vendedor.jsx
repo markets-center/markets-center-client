@@ -60,6 +60,7 @@ export default function Vendedor(){
             handleClose()
             dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
         }else{
+            console.log(input)
             await dispatch(updateProduct(input, prodId, currentUser))
             handleClose()
             dispatch(GetAllProductsOfSeller(currentUser.uid, currentUser))
@@ -142,7 +143,7 @@ export default function Vendedor(){
                                             image={producto.image}
                                             stock={producto.stock || "Sin Stock"}
                                             precio={producto.price}
-                                            category={producto.category}
+                                            category={producto.category.map(c=> c._id)}
                                             description={producto.description}
                                             banned={producto.banned}
                                             handleClose={handleClose}
