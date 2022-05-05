@@ -25,6 +25,7 @@ import OlvidoPass from './pages/ForgotPass/OlvidoPass'
 import HistoryHome from "./components/Vendedor/HistorialVentas/HistoryHome";
 import Comprador from './pages/Comprador/Comprador'
 import GraciasPage from './pages/GraciasPage/GraciasPage'
+import GraciasSub from './pages/GraciasPage/GraciasSub'
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Favoritos from './pages/Favs/Favoritos'
 
@@ -60,6 +61,12 @@ function App() {
               <BuyerRoute>
                 <GraciasPage />
               </BuyerRoute>
+            } />
+
+            <Route path="/Bienvenido" element={
+              <SellerRoute>
+                <GraciasSub />
+              </SellerRoute>
             } />
 
             <Route path="/favoritos" element={
