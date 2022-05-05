@@ -26,7 +26,7 @@ function User({ image, name, isAdmin, isSeller, banned, userId, handlePasswordRe
                 <Tooltip title="Reset contraseña" arrow>
                     <IconButton
                         id={userId}
-                        onClick={() => handlePasswordReset}
+                        onClick={(e) => handlePasswordReset(e)}
                     >
                         <Cached />
                     </IconButton>
