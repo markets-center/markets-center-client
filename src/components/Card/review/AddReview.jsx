@@ -9,6 +9,7 @@ import { } from "../../Alert/success";
 import { delAlert, setAlert } from "../../../redux/actions/a.alert";
 import { userHistory } from "../../../redux/actions/a.users";
 
+
 function validate(input) {
     let errors = {};
     if (input.comment === '') errors.comment = 'Comment is required';
@@ -51,18 +52,19 @@ export default function AddReview({ id, setOpen, reviews }) {
 
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         if (reviews.find(u => u.user === oneUser._id)) {
             handleClose();
             return dispatch(setAlert('Ya has realizado una reseña'))
         }
-        dispatch(createProductReview(id, input, currentUser));
+        await dispatch(createProductReview(id, input, currentUser));
         handleClose();
         setInput({
             rating: 0,
             comment: ""
         });
         dispatch(setAlert('Reseña creada correctamente'))
+        dispatch(userHistory(oneUser._id, currentUser));
     }
 
     return (

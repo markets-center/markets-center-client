@@ -65,7 +65,7 @@ export default function Home() {
             <SellerFilter />
             {render ? <Shop /> : <Slider2 />}
 
-            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+            <Snackbar open={!!alert} autoHideDuration={1500} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right'
             }}>

@@ -43,7 +43,7 @@ export default function Admin() {
                 value === "Ordenes" &&
                 <Orden />
             }
-            <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+            <Snackbar open={!!alert} autoHideDuration={1500} onClose={handleClose} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right'
             }}>

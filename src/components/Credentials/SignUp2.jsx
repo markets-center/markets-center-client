@@ -183,7 +183,7 @@ export default function SignUp2() {
       </div>
       <Snackbar
         open={!!error}
-        autoHideDuration={4000}
+        autoHideDuration={1500}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
@@ -201,7 +201,7 @@ export default function SignUp2() {
       </Snackbar>
       <Snackbar
         open={!!errorMail}
-        autoHideDuration={4000}
+        autoHideDuration={1500}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",

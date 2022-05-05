@@ -160,7 +160,7 @@ export default function Vendedor(){
                 </Container>
             </Container>
         </Container>
-        <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleCloseAlert} anchorOrigin={{
+        <Snackbar open={!!alert} autoHideDuration={1500} onClose={handleCloseAlert} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right'
             }}>

@@ -187,7 +187,7 @@ function UserProfile() {
           <Detail viewRev={true} name={oneProduct.name} price={oneProduct.price} image={oneProduct.image} description={oneProduct.description} stock={oneProduct.stock} category={oneProduct.category} id={oneProduct._id} rating={oneProduct.rating} numReviews={oneProduct.numReviews} reviews={oneProduct.reviews} onClose={handleCloseProd} />
         </Box>
       </Modal>
-      <Snackbar open={!!alert} autoHideDuration={4000} onClose={handleClose} anchorOrigin={{
+      <Snackbar open={!!alert} autoHideDuration={1500} onClose={handleClose} anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right'
       }}>
