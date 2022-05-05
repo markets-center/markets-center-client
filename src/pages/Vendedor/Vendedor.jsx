@@ -142,7 +142,7 @@ export default function Vendedor(){
                                             image={producto.image}
                                             stock={producto.stock || "Sin Stock"}
                                             precio={producto.price}
-                                            category={producto.category}
+                                            category={producto.category.map(c=> c._id)}
                                             description={producto.description}
                                             banned={producto.banned}
                                             handleClose={handleClose}
