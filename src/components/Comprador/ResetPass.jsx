@@ -3,6 +3,8 @@ import { Container, Box, Typography, Button, TextField } from "@mui/material";
 import {useAuth} from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import style from './Style/User.module.css'
+import CancelIcon from '@mui/icons-material/Cancel';
+
 
 
 function ResetPass({ name, email, image, handleClosePass }) {
@@ -36,6 +38,7 @@ function ResetPass({ name, email, image, handleClosePass }) {
         padding: '10px', 
         textAlign: 'center'
         }}>
+          <CancelIcon color="secondary" className={style.x} onClick={handleClosePass} />
           <Typography component="h1" variant="h4">
             Cambio de contraseña
           </Typography>
