@@ -52,10 +52,9 @@ export default function LogUser2() {
             setLoading(true);
             login(user.email, user.password)
                 .then((userDB) => {
-                    console.log('aaaaaa',userDB)
-                    userDB.data.data[0].isAdmin && navigate('/Admin')
-                    !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                    if (!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller) {
+                    userDB.data.data.isAdmin && navigate('/Admin')
+                    !userDB.data.data.isAdmin && userDB.data.data.isSeller && navigate('/Profile')
+                    if (!userDB.data.data.isAdmin && !userDB.data.data.isSeller) {
                         localStorage.setItem('key', true);
                         navigate('/')
                     }
@@ -86,11 +85,11 @@ export default function LogUser2() {
                     if (!userDB.data.success) {
 
                     } else {
-                        localStorage.setItem('isAdmin', userDB.data.data[0].isAdmin)
-                        localStorage.setItem('isSeller', userDB.data.data[0].isSeller)
-                        userDB.data.data[0].isAdmin && navigate('/Admin')
-                        !userDB.data.data[0].isAdmin && userDB.data.data[0].isSeller && navigate('/Profile')
-                        if (!userDB.data.data[0].isAdmin && !userDB.data.data[0].isSeller) {
+                        localStorage.setItem('isAdmin', userDB.data.data.isAdmin)
+                        localStorage.setItem('isSeller', userDB.data.data.isSeller)
+                        userDB.data.data.isAdmin && navigate('/Admin')
+                        !userDB.data.data.isAdmin && userDB.data.data.isSeller && navigate('/Profile')
+                        if (!userDB.data.data.isAdmin && !userDB.data.data.isSeller) {
                             localStorage.setItem('key', true);
                             navigate('/')
                         }

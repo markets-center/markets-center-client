@@ -34,6 +34,11 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/Login" element={
+              <CredentialRoute>
+                <Login />
+              </CredentialRoute>
+            } />
             <Route path="/" element={
               <GuestBuyerRoute>
                 <Home />
@@ -81,11 +86,6 @@ function App() {
               </CredentialRoute>
             } />
 
-            <Route path="/Login" element={
-              <CredentialRoute>
-                <Login />
-              </CredentialRoute>
-            } />
 
             <Route path="/Profile" element={
               <SellerRoute>
