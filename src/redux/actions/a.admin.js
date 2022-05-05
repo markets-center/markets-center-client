@@ -22,7 +22,6 @@ export function adminUpdateCategory (id, category, currentUser) {
 
 export function adminDisabledCategory (id, currentUser) {
     const token = currentUser?.auth.currentUser.accessToken
-    console.log(token)
     return async function (dispatch) {
         try {
             const allCategories = await axios.put(`/api/admin/categories/disabled/${id}`, null, {

@@ -21,7 +21,6 @@ function UserProfile() {
   const loading = useSelector((state) => state.loading);
   const alert = useSelector(state => state.alert)
   const { oneUser, currentUser } = useAuth();
-  console.log('dddd',oneUser)
   const [openMore, setOpenMore] = useState(false);
   const [openProd, setOpenProd] = useState(false);
   const [oneProduct, setOneProduct] = useState({ name: "", price: 0, image: "", description: "", stock: "", category: "", id: "", rating: "", numReviews: "", reviews: [] });
@@ -55,7 +54,6 @@ function UserProfile() {
   // const handleCloseCancel = () => setOpenDelete(false);
 
   useEffect(() => {
-    console.log('ooooo', oneUser)
     dispatch(userHistory(oneUser._id, currentUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, oneUser._id]);

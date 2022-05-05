@@ -35,7 +35,6 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(email, state.email)
         if(email !== state.email) {
           updateEmail(state.email)
         }

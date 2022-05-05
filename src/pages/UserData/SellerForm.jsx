@@ -79,7 +79,6 @@ function SellerForm() {
       image: img,
       dateOfBirth: selectedDate
     };
-    console.log(userData);
     dispatch(postNewUser(userData, currentUser));
     navigate('/');
   }

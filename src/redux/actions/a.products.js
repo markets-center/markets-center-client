@@ -93,7 +93,6 @@ export function deleteProduct(id, currentUser) {
 }
 
 export function disableProduct(id, currentUser) {
-    console.log(id, currentUser)
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
@@ -112,7 +111,6 @@ export function disableProduct(id, currentUser) {
 }
 
 export function enableProduct(id, currentUser) {
-    console.log(id, currentUser)
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
@@ -237,7 +235,6 @@ export function createProductReview(productId, review, currentUser) {
 }
 
 export function GetAllProductsOfSeller(id, currentUser) {
-    console.log(`GetAllProductsOfSeller`,id, currentUser)
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {

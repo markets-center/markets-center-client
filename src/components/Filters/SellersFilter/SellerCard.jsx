@@ -27,7 +27,7 @@ const SellerCard = ({ image, name, id }) => {
         
 
     }
-    console.log(category)
+    
 
     return (
         <div onClick={handleSelect}>

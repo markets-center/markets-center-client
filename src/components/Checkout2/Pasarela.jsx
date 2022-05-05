@@ -6,7 +6,6 @@ import {loadStripe} from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_51KrNS9BcSGVJjPzhJcb9v599F0HLdJl9aAF87RBVZY1gIwHyC1zegNKiyvDXTjuAdH3hyn7eSsCE82Vw3blNIfx400EZ4eeSGc')
 
-console.log(stripePromise)
 const CheckoutForm = () => {
     const {currentUser} = useAuth()
     const token= currentUser.auth.currentUser.accessToken
@@ -31,7 +30,6 @@ const CheckoutForm = () => {
                         Authorization: `Bearer ${token}`
                     }
                 })
-                console.log(data)
 
                 element.getElement(CardElement).clear()
             } catch (error) {
