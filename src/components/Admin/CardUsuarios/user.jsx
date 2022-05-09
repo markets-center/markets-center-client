@@ -37,7 +37,7 @@ function User({ image, name, isAdmin, isSeller, banned, userId, handlePasswordRe
                         <Tooltip title="Covertir a Admin" arrow>
                             <IconButton
                                 id={id}
-                                onClick={() => handleUserToAdmin}
+                                onClick={(e) => handleUserToAdmin(e)}
                             >
                                 <SupervisorAccount />
                             </IconButton>

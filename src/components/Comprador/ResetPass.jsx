@@ -25,7 +25,7 @@ function ResetPass({ name, email, image, handleClosePass }) {
             updatePassword(state.pass);
             // dispatch(updateUser(state));
             handleClosePass()
-            navigate('/User')
+            navigate('/Buyer')
         }
     }
 

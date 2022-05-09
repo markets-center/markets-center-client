@@ -92,7 +92,7 @@ export function getAllUsers(currentUser){
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const users = await axios.get('/api/admin/users', {
+            const users = await axios.get('/api/admin/Buyers', {
                 headers:{
                     Authorization: `Bearer ${token}`
                   }
@@ -110,7 +110,7 @@ export function deleteUser(id, hola, currentUser) {
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.put(`/api/admin/userDelete/${id}`, hola, {
+            const result = await axios.put(`/api/admin/BuyerDelete/${id}`, hola, {
                 headers:{
                     'Authorization': `Bearer ${token}`
                   }
@@ -127,7 +127,7 @@ export function upgradeUser(id, hola, currentUser){
     const token = currentUser.auth.currentUser.accessToken
     return async function (dispatch) {
         try {
-            const result = await axios.put(`/api/admin/userAdmin/${id}`,hola, {
+            const result = await axios.put(`/api/admin/BuyerAdmin/${id}`,hola, {
                 headers:{
                     'Authorization': `Bearer ${token}`
                 }

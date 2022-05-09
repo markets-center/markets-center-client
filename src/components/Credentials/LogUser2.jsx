@@ -80,26 +80,17 @@ export default function LogUser2() {
                     })
                 })
                 .then(userDB => {
-                    if (!userDB.data.success) {
-
-                    } else {
-                        localStorage.setItem('isAdmin', userDB.data.data.isAdmin)
-                        localStorage.setItem('isSeller', userDB.data.data.isSeller)
-                        userDB.data.data.isAdmin && navigate('/Admin')
-                        !userDB.data.data.isAdmin && userDB.data.data.isSeller && navigate('/Profile')
-                        if (!userDB.data.data.isAdmin && !userDB.data.data.isSeller) {
-                            localStorage.setItem('key', true);
-                            navigate('/')
-                        }
+                    localStorage.setItem('isAdmin', userDB.data.data.isAdmin)
+                    localStorage.setItem('isSeller', userDB.data.data.isSeller)
+                    userDB.data.data.isAdmin && navigate('/Admin')
+                    !userDB.data.data.isAdmin && userDB.data.data.isSeller && navigate('/Profile')
+                    if (!userDB.data.data.isAdmin && !userDB.data.data.isSeller) {
+                        localStorage.setItem('key', true);
+                        navigate('/')
                     }
                 })
-                .catch(async () => {
-                    await axios.delete(`/api/admin/deleteUid/${uid}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    })
-                    navigate("/Register");
+                .catch(() => {
+                    navigate("/buyerForm");
                 })
 
         } catch (error) {
