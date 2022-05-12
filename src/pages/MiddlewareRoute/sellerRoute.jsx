@@ -12,7 +12,7 @@ export default function SellerRoute ({children}) {
             return <Navigate to='/Admin' replace />
         } else {
             if(localStorage.getItem('isSeller') === 'false'){
-             return <Navigate to='/User' replace />   
+             return <Navigate to='/Buyer' replace />   
             }
         }
     }

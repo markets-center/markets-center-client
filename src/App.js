@@ -108,7 +108,7 @@ function App() {
             } />
 
             {/* Provisorio */}
-            <Route path="/User" element={
+            <Route path="/Buyer" element={
               <BuyerRoute>
                 <Comprador />
               </BuyerRoute>

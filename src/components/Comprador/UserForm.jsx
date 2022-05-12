@@ -41,7 +41,7 @@ function UserForm({name, email, image, IdDocument, phone, address, userId, handl
         }
         dispatch(updateUser(state, currentUser));
         handleClose()
-        navigate('/User')
+        navigate('/Buyer')
     }
 
   return (

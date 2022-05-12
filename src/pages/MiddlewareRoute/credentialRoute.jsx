@@ -13,7 +13,7 @@ export default function CredentialRoute ({children}) {
             if(localStorage.getItem('isSeller')==='true'){
                 return <Navigate to='/Profile' replace />;
             }else {
-                return <Navigate to='/User' replace />;
+                return <Navigate to='/Buyer' replace />;
             }
         }
     }

@@ -73,7 +73,7 @@ export default function BuyerForm2() {
         };
         validateForm(userData)
         dispatch(postNewUser(userData, currentUser));
-        navigate('/');
+        navigate('/Buyer');
     }
 
 
