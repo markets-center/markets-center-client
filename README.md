@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+<p align='left'>
+    <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Markets Center - Client
 
-## Available Scripts
+<p align="right">
+  <img height="200" src="https://user-images.githubusercontent.com/86481813/168854600-5f78aaca-b87a-406d-813f-1095d8cd7879.png"/>
+</p>
 
-In the project directory, you can run:
+## About
+This project consists of the development of a S.P.A (Single Page Application). It is part of the Bootcamp Henry group project, in which a group of 7 developers participated. On this page, you can access as a seller and thus create, edit and delete products that are for sale and view your sales history.
+As a buyer you have access to a favorites section, shopping cart, profile with your data and purchase history, you can also make purchases using the Stripe payment gateway. Finally, the admin actor will be able to keep track of the categories, the purchases made and the users.
 
-### `npm start`
+## Objectives
+- Create a profile with your data.
+- Create, edit, delete and search products.
+- Filter by categories and sellers.
+- Sort alphabetically and by price.
+- Add products to the shopping cart and buy them.
+- Add products to the favorite list.
+- Add comments and rating to a bought product.
+- Manage users, categories, orders and see statistics graphic of seller orders in admin profile.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Stack of Technologies
+Javascript, React, Redux, Material UI, FireBase, Stripe
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Deploy](https://markets-center.vercel.app/)
+<br/>
+[Review in Youtube](https://www.youtube.com/watch?v=N0nbWDKR-Cc)
 
-### `npm test`
+## BoilerPlate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You must create an account in [firebase](https://firebase.google.com/) and create a file called: `.env` 
+that has the following form: 
 
-### `npm run build`
+```
+REACT_APP_API=localhost
+REACT_APP_FIREBASE_API_KEY=firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=firebase_auth_domain
+REACT_APP_FIREBASE_STORAGE_BUCKET=firebase_storage_bucket
+REACT_APP_FIREBASE_PROJECT_ID=firebase_project_id
+REACT_APP_FIREBASE_MESSAGING_ID=firebase_messaging_id
+REACT_APP_FIREBASE_APP_ID=firebase_app_id
+STRIPE_API_KEY=stripe_api_key
+```
+REACT_APP_API port must be the same as api.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Next 
+### _Connect the data base_
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ - Go to api of Markets Center and run it. Replace all `.env` information with database information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ ### _Install the necesary package to run it_
 
-### `npm run eject`
+- Open the project console
+    + Inside `client` folder, run the command line, `npm install`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### _Run the project_
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Open the project console    
+    + Inside `client` folder, run the command line, `npm start` and go to `http://localhost:3000/`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project Screens
+<p align="center">Home</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168861669-26076838-33c5-49cb-a8e1-21c00493d3c6.png' width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168862109-9fbcc4bc-2975-4d43-b3ac-d6551b8487fd.png' width='16.84%'/></a>
+</p>
+<p align="center">Detail</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168862498-2c85b7e8-2314-413e-a3f3-3cddc029bd85.png' width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168862566-44130477-a569-4884-95a9-151430b5b584.png' width='16.84%'/></a>
+</p>
+<p align="center">Searched products</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168863677-74c6c518-860d-4f5f-b781-cf238fb169b0.png' width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168863773-1f2c6109-3350-475f-b7b2-adbada44a38e.png' width='16.65%'/></a>
+</p>
+<p align="center">Shopping cart</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168863917-8f3c8acd-3894-4f8a-98a8-c50532905bfd.png' width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168863986-49d0fb44-8c10-4707-b5c2-b517db698251.png' width='16.52%'/></a>
+</p>
+<p align="center">Buyer profile</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168864287-2385c466-44a6-44b6-96b2-31b57ccfbd71.png' width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168864134-88569f6d-bca3-46da-8468-bae4a0f38ae0.png' width='16.75%'/></a>
+</p>
+<p align="center">Favorite list</p>
+<p align="center">
+<a href='https://markets-center.vercel.app/' width='30%'/><img src='https://user-images.githubusercontent.com/86481813/168864401-c8820c1f-3cf0-477b-a0e5-e7591da84c88.png'
+ width='75%'/></a>
+<a href="https://markets-center.vercel.app/"><img src='https://user-images.githubusercontent.com/86481813/168864513-c6540607-919b-4078-b100-1108ac054cde.png' width='16.60%'/></a>
+</p>
